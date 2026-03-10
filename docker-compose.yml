@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app_website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: eduanant-app-website:latest
+    container_name: eduanant_app_website
+    restart: always
+    ports:
+      - "127.0.0.1:3004:80"
