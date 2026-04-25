@@ -1,238 +1,301 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
-import { ArrowRight, Play, Sparkles } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, animate } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+import { ArrowRight, Sparkles, CheckCircle, GraduationCap, Users, Shield, PhoneCall } from 'lucide-react';
+import { TopBar, SideBar } from './ProductDemoSection';
+
+function CountUp({ target, suffix = '', duration = 2 }: { target: number; suffix?: string; duration?: number }) {
+    const [count, setCount] = useState(0);
+    const ref = useRef<HTMLSpanElement>(null);
+    const [started, setStarted] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting && !started) { setStarted(true); } },
+            { threshold: 0.5 }
+        );
+        if (ref.current) observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, [started]);
+
+    useEffect(() => {
+        if (!started) return;
+        const controls = animate(0, target, {
+            duration,
+            ease: 'easeOut',
+            onUpdate: (v) => setCount(Math.round(v)),
+        });
+        return controls.stop;
+    }, [started, target, duration]);
+
+    return <span ref={ref}>{count.toLocaleString('en-IN')}{suffix}</span>;
+}
+
+const SCHOOL_TYPES = [
+    'Primary Schools', 'High Schools', 'Senior Secondary', 'CBSE Schools',
+    'ICSE Schools', 'State Board Schools', 'Private Schools', 'Government Schools',
+    'Residential Schools', 'Day Schools', 'Co-Ed Schools', 'Girls Schools',
+];
+
+const PORTAL_TABS = [
+    {
+        label: 'Admin',
+        icon: Shield,
+        color: 'from-indigo-500 to-blue-600',
+        tagColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20',
+        features: ['Real-time Dashboard & KPIs', 'Fee Collection & Demand Bills', 'Student Admissions & Lifecycle', 'Staff & User Management', 'Audit Logs & Backup'],
+        mockColor: 'from-indigo-600 to-blue-700',
+    },
+    {
+        label: 'Teacher',
+        icon: GraduationCap,
+        color: 'from-emerald-500 to-teal-600',
+        tagColor: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+        features: ['Daily Attendance Marking', 'Homework & Class Tests', 'Lesson Plans', 'My Students View', 'Timetable & Schedule'],
+        mockColor: 'from-emerald-600 to-teal-700',
+    },
+    {
+        label: 'Student / Parent',
+        icon: Users,
+        color: 'from-amber-500 to-orange-600',
+        tagColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+        features: ['View Attendance & Results', 'Fee Payment Status', 'Notices & Homework', 'Timetable & Transport', 'Leave Requests'],
+        mockColor: 'from-amber-600 to-orange-700',
+    },
+];
 
 export default function HeroSection() {
-    useTheme();
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start start', 'end start'] });
+    const [activeTab, setActiveTab] = useState(0);
+    const [ticker, setTicker] = useState(0);
 
-    // Parallax values
-    const yText = useTransform(scrollYProgress, [0, 1], [0, 200]);
-    const opacityText = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-    const yMockup = useTransform(scrollYProgress, [0, 1], [0, -100]);
-    const scaleMockup = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
+    const yText = useTransform(scrollYProgress, [0, 1], [0, 180]);
+    const opacityText = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+    const yMockup = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const springX = useSpring(mouseX, { damping: 30, stiffness: 200 });
+    const springY = useSpring(mouseY, { damping: 30, stiffness: 200 });
+
+    useEffect(() => {
+        const handleMouse = (e: MouseEvent) => {
+            const { innerWidth, innerHeight } = window;
+            mouseX.set((e.clientX - innerWidth / 2) / 20);
+            mouseY.set((e.clientY - innerHeight / 2) / 20);
+        };
+        window.addEventListener('mousemove', handleMouse);
+        return () => window.removeEventListener('mousemove', handleMouse);
+    }, [mouseX, mouseY]);
+
+    // Rotate portal tab every 4s
+    useEffect(() => {
+        const id = setInterval(() => setActiveTab(t => (t + 1) % PORTAL_TABS.length), 4000);
+        return () => clearInterval(id);
+    }, []);
+
+    // Ticker
+    useEffect(() => {
+        const id = setInterval(() => setTicker(t => (t + 1) % SCHOOL_TYPES.length), 2000);
+        return () => clearInterval(id);
+    }, []);
+
+    const tab = PORTAL_TABS[activeTab];
+    const TabIcon = tab.icon;
 
     return (
-        <section ref={containerRef} id="hero" className="min-h-[100vh] flex items-center justify-center relative overflow-x-clip pt-32 pb-24 perspective-1000">
-            {/* Cinematic Background Glares */}
-            <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-primary-main/20 dark:bg-primary-main/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen dark:mix-blend-lighten" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-secondary-main/20 dark:bg-secondary-main/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen dark:mix-blend-lighten" />
+        <section ref={containerRef} id="hero" className="min-h-[100vh] flex items-center justify-center relative overflow-x-clip pt-28 pb-16 perspective-1000">
+            {/* Background orbs */}
+            <motion.div style={{ x: springX, y: springY }}
+                className="absolute top-[-15%] left-[-10%] w-[55%] h-[55%] bg-primary-main/20 dark:bg-primary-main/10 rounded-full blur-[140px] pointer-events-none" />
+            <motion.div style={{ x: useTransform(springX, v => -v), y: useTransform(springY, v => -v) }}
+                className="absolute bottom-[-15%] right-[-10%] w-[55%] h-[55%] bg-secondary-main/15 dark:bg-secondary-main/10 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%221%22%20fill%3D%22currentColor%22%20opacity%3D%220.15%22/%3E%3C/g%3E%3C/svg%3E')] opacity-30 dark:opacity-10 text-gray-400 pointer-events-none" />
 
-            {/* Dynamic Subtle Grid Pattern */}
-            <div
-                className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none z-0"
-                style={{ maskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, white 70%, transparent 100%)' }}
-            />
+            <div className="container mx-auto px-6 relative z-10 max-w-6xl">
+                <motion.div style={{ y: yText, opacity: opacityText }} className="text-center">
 
-            <div className="container mx-auto px-6 relative z-10 text-center max-w-5xl pt-10">
-
-                {/* Parallax Content Container */}
-                <motion.div style={{ y: yText, opacity: opacityText }}>
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className="inline-flex items-center gap-2 mb-10 px-5 py-2 rounded-full border border-primary-main/20 bg-primary-main/5 dark:bg-primary-main/10 text-primary-main font-bold text-xs uppercase tracking-widest backdrop-blur-md shadow-sm"
-                    >
-                        <Sparkles className="w-3.5 h-3.5" /> Building India's #1 EdTech Ecosystem
+                    {/* Badge */}
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                        className="inline-flex items-center gap-2.5 mb-8 px-5 py-2.5 rounded-full border border-primary-main/25 bg-primary-main/8 dark:bg-primary-main/10 text-primary-main font-bold text-xs uppercase tracking-widest backdrop-blur-md shadow-sm">
+                        <div className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-main opacity-75" />
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-main" />
+                        </div>
+                        Building India's #1 School Management Application
                     </motion.div>
 
-                    <motion.h1
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                    {/* Headline */}
+                    <motion.h1 initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-6xl md:text-8xl font-black tracking-tight text-text-primary mb-8"
-                        style={{ lineHeight: 1.05 }}
-                    >
-                        The Infinite Ecosystem for <br className="hidden md:block" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-main to-secondary-main filter drop-shadow-sm">Modern Education</span>
+                        className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight text-text-primary mb-6" style={{ lineHeight: 1.05 }}>
+                        Run Your Entire School<br className="hidden md:block" />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-main via-secondary-main to-primary-main animate-[gradient-shift_4s_ease_infinite] bg-[length:200%_auto]"> From One Place</span>
                     </motion.h1>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-xl md:text-2xl text-text-secondary mb-12 max-w-3xl mx-auto leading-relaxed font-medium"
-                    >
-                        More than just software—a long-term technology partner. Architected for scale, driven by data, and built to evolve perfectly alongside your growing institution.
+                    {/* Sub */}
+                    <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="text-lg md:text-xl text-text-secondary mb-4 max-w-2xl mx-auto leading-relaxed font-medium">
+                        Admissions · Fees · Attendance · Exams · Transport · Staff · and much more —
+                        built for <span className="font-bold text-text-primary">schools of all sizes — small, growing, or large.</span>
                     </motion.p>
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                    >
-                        <a href="#demo" className="btn-primary w-full sm:w-auto text-lg px-8 py-4 flex items-center justify-center gap-2 group relative overflow-hidden">
+                    {/* School type ticker */}
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+                        className="flex items-center justify-center gap-2 mb-10 text-sm text-text-secondary">
+                        <span>Perfect for</span>
+                        <div className="relative overflow-hidden h-6 w-40 inline-flex items-center">
+                            <motion.span
+                                key={ticker}
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                exit={{ y: -20, opacity: 0 }}
+                                transition={{ duration: 0.4 }}
+                                className="absolute font-bold text-primary-main whitespace-nowrap">
+                                {SCHOOL_TYPES[ticker]}
+                            </motion.span>
+                        </div>
+                    </motion.div>
+
+                    {/* CTA Buttons */}
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                        <motion.a href="#contact" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
+                            className="btn-primary w-full sm:w-auto text-base px-8 py-4 flex items-center justify-center gap-2 group relative overflow-hidden rounded-xl shadow-lg shadow-primary-main/20">
                             <span className="relative z-10 flex items-center gap-2">
-                                Try Interactive Demo
-                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                <PhoneCall className="w-4 h-4" />
+                                Book a Free Demo
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </span>
-                            <div className="absolute inset-0 bg-white/20 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 ease-out" />
-                        </a>
-                        <a href="#contact" className="btn-outline w-full sm:w-auto text-lg px-8 py-4 bg-paper/50 backdrop-blur-sm dark:text-text-primary dark:border-gray-700 dark:hover:border-primary-main flex items-center justify-center gap-2">
-                            <Play className="w-5 h-5" />
-                            Contact Sales
-                        </a>
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-secondary-main opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        </motion.a>
+                        <motion.a href="#features" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
+                            className="btn-outline w-full sm:w-auto text-base px-8 py-4 flex items-center justify-center gap-2 rounded-xl dark:text-text-primary dark:border-gray-600 dark:hover:border-primary-main">
+                            <Sparkles className="w-4 h-4" />
+                            Explore Features
+                        </motion.a>
+                    </motion.div>
+
+                    {/* Trust line */}
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+                        className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-text-secondary mb-16">
+                        {['No setup fees', 'Runs on your own server', 'Hindi & English UI', 'Works offline too', 'Free onboarding support'].map(t => (
+                            <span key={t} className="flex items-center gap-1.5">
+                                <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> {t}
+                            </span>
+                        ))}
                     </motion.div>
                 </motion.div>
 
-                {/* Floating Mockup Preview with 3D Rotate and Glowing Shadow */}
-                <motion.div
-                    style={{ y: yMockup, scale: scaleMockup }}
-                    initial={{ opacity: 0, y: 100, rotateX: 20 }}
+                {/* Portal Preview */}
+                <motion.div style={{ y: yMockup }}
+                    initial={{ opacity: 0, y: 80, rotateX: 15 }}
                     animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                    transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-20 mx-auto max-w-5xl relative perspective-[2000px]"
-                >
-                    {/* The massive theme-colored glow behind the image */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-[var(--primary-main)] blur-[100px] opacity-30 dark:opacity-40 pointer-events-none rounded-full" />
+                    transition={{ duration: 1.3, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="mx-auto max-w-5xl relative">
 
-                    <div className="relative glass-panel rounded-2xl p-2 sm:p-4 border-b-0 shadow-2xl mx-4 sm:mx-0 bg-background/80 dark:bg-black/40 ring-1 ring-white/10 dark:ring-white/5 transform-gpu">
-                        <div className="w-full flex items-center justify-between gap-2 mb-3 px-2 border-b border-gray-200/50 dark:border-white/10 pb-3">
-                            <div className="flex gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                            </div>
-                            <div className="text-[10px] font-mono text-text-secondary bg-gray-100 dark:bg-gray-800 px-3 py-1 rounded-full">
-                                www.eduananth.com
-                            </div>
-                            <div className="w-12"></div> {/* Spacer to center the URL */}
+                    {/* Glow behind mockup */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] bg-primary-main blur-[100px] opacity-20 dark:opacity-30 pointer-events-none rounded-full" />
+
+                    <div className="relative glass-panel rounded-2xl p-2 sm:p-3 shadow-2xl mx-2 sm:mx-0 bg-background/80 dark:bg-black/50 ring-1 ring-white/10 dark:ring-white/5">
+                        
+                        {/* Tab switcher */}
+                        <div className="flex gap-2 px-3 mb-3 overflow-x-auto pb-1 mt-2">
+                            {PORTAL_TABS.map((t, i) => {
+                                const TIcon = t.icon;
+                                return (
+                                    <button key={t.label} onClick={() => setActiveTab(i)}
+                                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all whitespace-nowrap ${i === activeTab ? `bg-gradient-to-r ${t.color} text-white border-transparent shadow-md` : 'text-text-secondary border-gray-200/50 dark:border-white/10 hover:border-primary-main/30'}`}>
+                                        <TIcon className="w-3.5 h-3.5" /> {t.label} Portal
+                                    </button>
+                                );
+                            })}
                         </div>
 
-                        {/* Cinematic Animated Dummy Dashboard Stack */}
-                        <div className="rounded-xl overflow-hidden border border-gray-200/50 dark:border-white/10 bg-white/40 dark:bg-black/40 relative aspect-[16/9] flex backdrop-blur-2xl transition-all duration-500">
+                        {/* Dashboard preview */}
+                        <motion.div key={activeTab}
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                            className="rounded-xl overflow-hidden border border-gray-200/80 dark:border-white/10 bg-white relative flex flex-col shadow-2xl shadow-blue-900/5">
 
-                            {/* Glass Noise Overlay specific to the dashboard */}
-                            <div className="absolute inset-0 opacity-[0.4] dark:opacity-[0.15] mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
-
-                            {/* Sidebar Mock */}
-                            <div className="w-[22%] border-r border-gray-200/50 dark:border-white/5 bg-white/30 dark:bg-white/[0.02] p-4 flex flex-col gap-3 hidden sm:flex z-10 backdrop-blur-md">
-                                <div className="w-24 h-5 rounded-md bg-gray-300/50 dark:bg-white/10 mb-6"></div>
-                                {[...Array(6)].map((_, i) => (
-                                    <div key={i} className={`h-8 rounded-lg flex items-center px-2 gap-3 transition-colors ${i === 0 ? 'bg-primary-main/10 border border-primary-main/20' : 'opacity-50 hover:opacity-100 dark:hover:bg-white/5'}`}>
-                                        <div className={`w-4 h-4 rounded-sm ${i === 0 ? 'bg-primary-main/60 shadow-[0_0_10px_var(--primary-main)]' : 'bg-gray-400 dark:bg-white/20'}`}></div>
-                                        <div className={`h-2.5 rounded-full ${i === 0 ? 'w-16 bg-primary-main/60' : 'w-12 bg-gray-400 dark:bg-white/20'}`}></div>
+                            {/* Browser Chrome */}
+                            <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-[#15181e] border-b border-gray-200 dark:border-white/10">
+                                <div className="flex gap-1.5">
+                                    <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                                    <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                                </div>
+                                <div className="ml-4 flex-1 flex justify-center">
+                                    <div className="flex items-center gap-2 bg-white dark:bg-[#1a1d24] text-gray-500 text-[10px] px-6 py-1.5 rounded-full border border-gray-200 dark:border-white/10 font-mono w-full max-w-sm">
+                                        app.eduanant.cloud/{tab.label.toLowerCase().replace(/ \/ /g, '-')}
                                     </div>
-                                ))}
+                                </div>
                             </div>
 
-                            {/* Main Canvas */}
-                            <div className="flex-1 p-4 sm:p-6 flex flex-col gap-4 sm:gap-5 relative z-10">
-                                {/* Header Mock */}
-                                <div className="flex justify-between items-center bg-white/30 dark:bg-white/[0.02] backdrop-blur-md rounded-xl p-3 border border-gray-200/50 dark:border-white/5">
-                                    <div className="w-32 h-5 rounded-md bg-gray-300/50 dark:bg-white/10"></div>
-                                    <div className="flex gap-2">
-                                        <div className="w-7 h-7 rounded-full bg-gray-300/50 dark:bg-white/10"></div>
-                                        <div className="w-7 h-7 rounded-full bg-gray-300/50 dark:bg-white/10"></div>
-                                    </div>
-                                </div>
-
-                                {/* Floating Metric Cards */}
-                                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                                    {[
-                                        { color: 'from-blue-500', glow: 'shadow-blue-500/20', delay: 0 },
-                                        { color: 'from-emerald-500', glow: 'shadow-emerald-500/20', delay: 0.1 },
-                                        { color: 'from-amber-500', glow: 'shadow-amber-500/20', delay: 0.2 },
-                                        { color: 'from-purple-500', glow: 'shadow-purple-500/20', delay: 0.3 },
-                                    ].map((style, i) => (
-                                        <motion.div
-                                            key={i}
-                                            animate={{ y: [0, -6, 0] }}
-                                            transition={{ duration: 4, repeat: Infinity, delay: style.delay, ease: 'easeInOut' }}
-                                            className="p-4 rounded-xl border border-gray-200/50 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md relative overflow-hidden group"
-                                        >
-                                            <div className={`absolute inset-0 bg-gradient-to-br ${style.color} to-transparent opacity-5 dark:opacity-10 group-hover:opacity-20 transition-opacity duration-500`}></div>
-                                            <div className={`w-8 h-8 rounded-lg mb-3 flex items-center justify-center bg-white dark:bg-black/50 border border-gray-100 dark:border-white/10 shadow-sm ${style.glow}`}>
-                                                <div className={`w-3.5 h-3.5 rounded-sm bg-gradient-to-br ${style.color} to-transparent opacity-80`}></div>
+                            {/* App Layout */}
+                            <div className="flex h-[380px]">
+                                <SideBar activeId={activeTab === 0 ? 'dashboard' : activeTab === 1 ? 'academics' : 'admissions'} />
+                                <div className="flex-1 flex flex-col min-w-0">
+                                    <TopBar />
+                                    <div className="flex-1 overflow-hidden relative bg-gray-50 dark:bg-[#111318] p-4 flex flex-col gap-4">
+                                        <div className="flex justify-between items-center">
+                                            <div className="flex items-center gap-2">
+                                                <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${tab.mockColor} opacity-90 flex items-center justify-center`}>
+                                                    <TabIcon className="w-4 h-4 text-white" />
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-bold text-gray-800 dark:text-gray-100 text-sm">{tab.label} Overview</h3>
+                                                    <p className="text-[10px] text-gray-500">Real-time data visualization</p>
+                                                </div>
                                             </div>
-                                            <div className="w-16 h-2.5 rounded-full bg-gray-300 dark:bg-white/20 mb-3"></div>
-                                            <div className="w-20 h-6 rounded-md bg-gray-800 dark:bg-white/90"></div>
-                                        </motion.div>
-                                    ))}
-                                </div>
+                                        </div>
 
-                                {/* Cinematic Charts Area */}
-                                <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
-                                    {/* Main Line Chart */}
-                                    <motion.div
-                                        animate={{ y: [0, -4, 0] }}
-                                        transition={{ duration: 5, repeat: Infinity, delay: 0.5, ease: 'easeInOut' }}
-                                        className="col-span-2 rounded-xl border border-gray-200/50 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md p-5 flex flex-col relative overflow-hidden"
-                                    >
-                                        <div className="w-40 h-4 rounded-full bg-gray-300 dark:bg-white/20 mb-8 relative z-10"></div>
-
-                                        {/* Chart Grid Lines */}
-                                        <div className="absolute inset-x-5 inset-y-16 flex flex-col justify-between z-0 opacity-20">
-                                            {[...Array(4)].map((_, i) => (
-                                                <div key={i} className="w-full h-px bg-gray-400 dark:bg-white/20 border-dashed border-b"></div>
+                                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                            {tab.features.slice(0, 3).map((f, i) => (
+                                                <div key={f} className="p-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1d24] shadow-sm">
+                                                    <p className="text-[10px] font-bold text-gray-500 uppercase mb-1">Metric {i+1}</p>
+                                                    <div className={`h-1.5 rounded-full w-8 bg-gradient-to-r ${tab.mockColor} opacity-80 mb-2`} />
+                                                    <div className="h-3 rounded-full w-full bg-gray-100 dark:bg-gray-800 mb-1.5" />
+                                                    <div className="h-2 rounded-full w-2/3 bg-gray-50 dark:bg-gray-900" />
+                                                </div>
                                             ))}
                                         </div>
 
-                                        <div className="flex-1 relative z-10 flex items-end">
-                                            {/* Glowing SVG Path */}
-                                            <svg className="w-full h-[120%] absolute bottom-[-10%] overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 100">
+                                        <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-end">
+                                            <div className="absolute top-4 left-4">
+                                                <p className="text-xs font-bold text-gray-800 dark:text-gray-200">Activity Trend</p>
+                                            </div>
+                                            <svg className="w-full h-32" viewBox="0 0 100 40" preserveAspectRatio="none">
                                                 <defs>
-                                                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                    <linearGradient id={`hg${activeTab}`} x1="0%" y1="0%" x2="100%" y2="0%">
                                                         <stop offset="0%" stopColor="var(--primary-main)" />
-                                                        <stop offset="50%" stopColor="var(--secondary-main)" />
-                                                        <stop offset="100%" stopColor="var(--primary-main)" />
+                                                        <stop offset="100%" stopColor="var(--secondary-main)" />
                                                     </linearGradient>
-                                                    <linearGradient id="fillGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <linearGradient id={`hf${activeTab}`} x1="0%" y1="0%" x2="0%" y2="100%">
                                                         <stop offset="0%" stopColor="var(--primary-main)" stopOpacity="0.4" />
                                                         <stop offset="100%" stopColor="var(--primary-main)" stopOpacity="0" />
                                                     </linearGradient>
-                                                    <filter id="glow">
-                                                        <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                                                        <feMerge>
-                                                            <feMergeNode in="coloredBlur" />
-                                                            <feMergeNode in="SourceGraphic" />
-                                                        </feMerge>
-                                                    </filter>
                                                 </defs>
-                                                {/* Filled Area under line */}
-                                                <path d="M0,80 Q10,50 30,60 T60,30 T100,50 L100,100 L0,100 Z" fill="url(#fillGrad)" style={{ animation: 'pulse 4s ease-in-out infinite alternate' }}></path>
-                                                {/* Stroke Line */}
-                                                <path d="M0,80 Q10,50 30,60 T60,30 T100,50" fill="none" stroke="url(#lineGrad)" strokeWidth="3" filter="url(#glow)" className="opacity-90"></path>
+                                                <path d="M0,35 Q15,20 30,25 T60,12 T100,20 L100,40 L0,40Z" fill={`url(#hf${activeTab})`} />
+                                                <path d="M0,35 Q15,20 30,25 T60,12 T100,20" fill="none" stroke={`url(#hg${activeTab})`} strokeWidth="2" />
                                             </svg>
                                         </div>
-
-                                        {/* Animated Scanner Laser */}
-                                        <motion.div
-                                            animate={{ left: ['-10%', '110%'] }}
-                                            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                                            className="absolute top-0 bottom-0 w-[2px] bg-white dark:bg-primary-main/80 blur-[1px] shadow-[0_0_15px_var(--primary-main)] z-20"
-                                        />
-                                    </motion.div>
-
-                                    {/* Holographic Donut Chart */}
-                                    <motion.div
-                                        animate={{ y: [0, -5, 0] }}
-                                        transition={{ duration: 4.5, repeat: Infinity, delay: 0.8, ease: 'easeInOut' }}
-                                        className="rounded-xl border border-gray-200/50 dark:border-white/5 bg-white/40 dark:bg-white/[0.02] backdrop-blur-md p-4 flex flex-col items-center justify-center relative overflow-hidden group"
-                                    >
-                                        <div className="absolute inset-0 bg-primary-main/5 blur-2xl rounded-full scale-150 group-hover:bg-primary-main/10 transition-colors duration-700"></div>
-
-                                        <div className="relative w-36 h-36 rounded-full border-[8px] border-white/50 dark:border-black/50 shadow-inner flex items-center justify-center">
-                                            {/* Spinning colored segments */}
-                                            <div className="absolute inset-[-8px] rounded-full border-[8px] border-transparent border-t-primary-main border-r-secondary-main animate-[spin_12s_linear_infinite] filter drop-shadow-[0_0_10px_var(--primary-main)] opacity-80"></div>
-                                            <div className="absolute inset-[-8px] rounded-full border-[8px] border-transparent border-b-amber-500 border-l-transparent animate-[spin_8s_linear_infinite_reverse] filter drop-shadow-[0_0_10px_theme(colors.amber.500)] opacity-60"></div>
-
-                                            {/* Center Stats */}
-                                            <div className="text-center bg-white/80 dark:bg-black/80 w-24 h-24 rounded-full flex flex-col items-center justify-center backdrop-blur-md border border-white/50 dark:border-white/10 shadow-lg">
-                                                <div className="text-2xl font-black text-gray-800 dark:text-white bg-clip-text">100%</div>
-                                                <div className="text-[9px] text-gray-500 uppercase tracking-widest font-bold">Uptime</div>
-                                            </div>
-                                        </div>
-                                    </motion.div>
+                                    </div>
                                 </div>
                             </div>
+                        </motion.div>
 
-                            {/* Massive Fade out bottom to blend seamlessly into next section */}
-                            <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none z-30" />
+                        {/* Feature badges below mockup */}
+                        <div className="flex flex-wrap gap-2 px-3 pt-3 pb-1">
+                            {tab.features.map((f) => (
+                                <motion.span key={f} layout
+                                    className={`text-[10px] font-semibold px-2.5 py-1 rounded-full border ${tab.tagColor}`}>
+                                    {f}
+                                </motion.span>
+                            ))}
                         </div>
                     </div>
                 </motion.div>

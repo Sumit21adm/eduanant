@@ -1,32 +1,38 @@
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import FeaturesSection from './components/FeaturesSection';
-import DemoSection from './components/DemoSection';
-import PricingSection from './components/PricingSection';
-import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import FeaturesPage from './pages/FeaturesPage';
+import SecurityPage from './pages/SecurityPage';
+import UpdatesPage from './pages/UpdatesPage';
+import PricingPage from './pages/PricingPage';
+import ContactPage from './pages/ContactPage';
 
 function App() {
-  return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-background transition-colors duration-300 flex flex-col relative">
-        {/* Global Cinematic Noise Overlay */}
-        <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03] dark:opacity-[0.05] mix-blend-overlay" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")', animation: 'noise-jitter 0.5s steps(2) infinite' }} />
+    return (
+        <ThemeProvider>
+            <BrowserRouter>
+                {/* Cinematic noise overlay */}
+                <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.025] dark:opacity-[0.04] mix-blend-overlay noise-overlay" />
+                {/* Brand ambient glow */}
+                <div className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-20 dark:opacity-15"
+                    style={{ background: 'radial-gradient(ellipse at 0% 0%, #17305a, transparent 70%)', filter: 'blur(60px)' }} />
+                <div className="fixed bottom-0 right-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15 dark:opacity-10"
+                    style={{ background: 'radial-gradient(ellipse at 100% 100%, #00b6d5, transparent 70%)', filter: 'blur(80px)' }} />
 
-        <Header />
-
-        <main className="flex-grow">
-          <HeroSection />
-          <FeaturesSection />
-          <DemoSection />
-
-          <PricingSection />
-        </main>
-
-        <Footer />
-      </div>
-    </ThemeProvider>
-  );
+                <Routes>
+                    <Route element={<Layout />}>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/features" element={<FeaturesPage />} />
+                        <Route path="/security" element={<SecurityPage />} />
+                        <Route path="/updates" element={<UpdatesPage />} />
+                        <Route path="/pricing" element={<PricingPage />} />
+                        <Route path="/contact" element={<ContactPage />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
 }
 
 export default App;

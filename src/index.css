@@ -1,70 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* Base Colors - Light Mode by Default */
-    --background-default: #f5f5f5;
-    --background-paper: #ffffff;
-    --text-primary: #212121;
-    --text-secondary: #757575;
+    /* ── Brand palette extracted from EduAnant logo ── */
+    /* Navy anchor: #17305a → Cyan peak: #00b6d5 → Light cyan: #63cae0 */
+    --primary-main:       #0091b8;   /* mid-range cyan-blue */
+    --primary-light:      #00b6d5;   /* bright cyan from logo centre */
+    --primary-dark:       #17305a;   /* deep navy from logo left */
+    --primary-contrast:   #ffffff;
 
-    /* Primary Color - Default (Blue) */
-    --primary-main: #1976d2;
-    --primary-light: #42a5f5;
-    --primary-dark: #1565c0;
-    --primary-contrast: #ffffff;
-
-    /* Secondary Color */
-    --secondary-main: #9c27b0;
-    --secondary-light: #ba68c8;
-    --secondary-dark: #7b1fa2;
+    --secondary-main:     #063a6e;   /* deep navy accent */
+    --secondary-light:    #1a5a8a;
+    --secondary-dark:     #0d2344;
     --secondary-contrast: #ffffff;
+
+    /* Gradient string for reuse */
+    --brand-gradient: linear-gradient(135deg, #17305a 0%, #0f6187 30%, #00b6d5 60%, #63cae0 100%);
+    --brand-gradient-text: linear-gradient(90deg, #0091b8 0%, #00b6d5 50%, #63cae0 100%);
+
+    /* Surfaces */
+    --background-default: #f0f6fa;
+    --background-paper:   #ffffff;
+    --text-primary:       #0d1f35;
+    --text-secondary:     #4a6580;
   }
 
-  /* Dark Mode Variables */
   .dark {
-    --background-default: #0f1115;
-    --background-paper: #16181d;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-  }
-
-  /* Theme Switcher Classes */
-  .theme-royal-purple {
-    --primary-main: #9c27b0;
-    --primary-light: #ba68c8;
-    --primary-dark: #7b1fa2;
-  }
-
-  .theme-teal-horizon {
-    --primary-main: #009688;
-    --primary-light: #4db6ac;
-    --primary-dark: #00796b;
-  }
-
-  .theme-midnight-command {
-    --primary-main: #3949ab;
-    --primary-light: #7986cb;
-    --primary-dark: #283593;
-  }
-
-  .theme-crimson-red {
-    --primary-main: #d32f2f;
-    --primary-light: #ef5350;
-    --primary-dark: #c62828;
-  }
-
-  .theme-golden-graphite {
-    --primary-main: #f57f17;
-    --primary-light: #ffb300;
-    --primary-dark: #f57f17;
+    --background-default: #080e17;
+    --background-paper:   #0d1721;
+    --text-primary:       #e8f4f8;
+    --text-secondary:     #6da0bb;
   }
 
   html {
     scroll-behavior: smooth;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   body {
@@ -72,90 +46,86 @@
   }
 
   ::selection {
-    background-color: var(--primary-main);
-    color: var(--primary-contrast);
+    background-color: var(--primary-light);
+    color: #fff;
   }
 }
 
 @layer components {
-
-  /* Reusable glassmorphic classes */
   .glass-panel {
     @apply bg-white/70 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-glass dark:shadow-none;
   }
 
-  /* Core MUI Button Emulation */
   .btn-primary {
-    @apply bg-[var(--primary-main)] text-white hover:bg-[var(--primary-dark)] transition-all duration-300 rounded-mui-btn px-6 py-2.5 font-medium shadow-elevation-1 hover:shadow-elevation-2 active:shadow-none;
+    @apply text-white transition-all duration-300 rounded-xl px-6 py-2.5 font-bold shadow-lg active:shadow-none;
+    background: var(--brand-gradient);
   }
 
   .btn-outline {
-    @apply border-2 border-[var(--primary-main)] text-[var(--primary-main)] hover:bg-[var(--primary-main)] hover:text-white transition-all duration-300 rounded-mui-btn px-6 py-2.5 font-medium;
+    @apply border-2 border-[var(--primary-main)] text-[var(--primary-main)] hover:text-white transition-all duration-300 rounded-xl px-6 py-2.5 font-bold;
+    &:hover { background: var(--brand-gradient); border-color: transparent; }
+  }
+
+  /* Logo glow effect matching the cyan brand */
+  .logo-glow {
+    filter: drop-shadow(0 0 20px rgba(0, 182, 213, 0.4));
+  }
+
+  .brand-text-gradient {
+    background: var(--brand-gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }
 
+/* ── Keyframes ─────────────────────────────────────────────────────── */
 @keyframes noise-jitter {
-  0% {
-    transform: translate(0, 0);
-  }
-
-  10% {
-    transform: translate(-1%, -1%);
-  }
-
-  20% {
-    transform: translate(1%, 1%);
-  }
-
-  30% {
-    transform: translate(-2%, 1%);
-  }
-
-  40% {
-    transform: translate(1%, -1%);
-  }
-
-  50% {
-    transform: translate(-1%, 2%);
-  }
-
-  60% {
-    transform: translate(2%, -1%);
-  }
-
-  70% {
-    transform: translate(-1%, -1%);
-  }
-
-  80% {
-    transform: translate(1%, 2%);
-  }
-
-  90% {
-    transform: translate(-2%, -2%);
-  }
-
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-/* Subtle, breathing cinematic ambient background for dark mode */
-.dark body {
-  background: radial-gradient(circle at 50% 0%, var(--primary-dark) 0%, transparent 40%),
-    radial-gradient(circle at 100% 100%, #111 0%, var(--background-default) 60%);
-  background-color: var(--background-default);
-  background-attachment: fixed;
-  background-size: 150% 150%;
-  animation: ambient-pulse 30s ease-in-out infinite alternate;
+  0%   { transform: translate(0, 0); }
+  10%  { transform: translate(-1%, -1%); }
+  20%  { transform: translate(1%, 1%); }
+  30%  { transform: translate(-2%, 1%); }
+  50%  { transform: translate(-1%, 2%); }
+  70%  { transform: translate(-1%, -1%); }
+  90%  { transform: translate(-2%, -2%); }
+  100% { transform: translate(0, 0); }
 }
 
 @keyframes ambient-pulse {
-  0% {
-    background-position: 0% 0%;
-  }
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
 
-  100% {
-    background-position: 100% 100%;
-  }
+@keyframes gradient-shift {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Logo shimmer — inspired by the left-to-right gradient sweep of the logo */
+@keyframes logo-shimmer {
+  0%   { filter: drop-shadow(0 0 8px rgba(0,182,213,0.3)); }
+  50%  { filter: drop-shadow(0 0 24px rgba(0,182,213,0.7)) drop-shadow(0 0 40px rgba(23,48,90,0.3)); }
+  100% { filter: drop-shadow(0 0 8px rgba(0,182,213,0.3)); }
+}
+
+/* Nav glass */
+@keyframes nav-blur-in {
+  from { backdrop-filter: blur(0px); }
+  to   { backdrop-filter: blur(20px); }
+}
+
+/* Cinematic noise for dark mode */
+.dark body {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0,182,213,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(23,48,90,0.15) 0%, transparent 50%),
+    var(--background-default);
+  background-attachment: fixed;
+}
+
+/* Global noise overlay */
+.noise-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: noise-jitter 0.5s steps(2) infinite;
 }
