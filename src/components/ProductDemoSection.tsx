@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { LayoutDashboard, Users, GraduationCap, CreditCard, Bus, UserCog, Settings, Search, Plus, Download, ChevronDown, CheckCircle2, Moon, RotateCcw, Power, Sparkles, PieChart, TrendingUp, IndianRupee, FileText } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { LayoutDashboard, Users, GraduationCap, CreditCard, Bus, UserCog, Settings, Search, Plus, Download, ChevronDown, CheckCircle2, Moon, RotateCcw, Sparkles, PieChart, TrendingUp, IndianRupee } from 'lucide-react';
 
 // ─── Shared UI Components ────────────────────────────────────────────────────
 

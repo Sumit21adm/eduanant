@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Sparkles, PhoneCall, Mail } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles, PhoneCall } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
