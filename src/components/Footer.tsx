@@ -99,6 +99,13 @@ export default function Footer() {
                     </div>
                 </div>
 
+                {/* Legal & Grievance info */}
+                <div className="mb-8 pt-4 border-t border-gray-200/20 dark:border-white/5 text-xs text-text-secondary/70">
+                    <p>
+                        <strong>Grievance Officer:</strong> In accordance with the IT Rules 2021 and DPDP Act 2023, the Grievance Officer can be contacted at <a href="mailto:contact@eduanant.com" className="text-[#00b6d5] hover:underline">contact@eduanant.com</a>.
+                    </p>
+                </div>
+
                 {/* Bottom bar */}
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-secondary">
                     <div className="flex items-center gap-3 flex-wrap justify-center sm:justify-start">
@@ -108,9 +115,10 @@ export default function Footer() {
                             Built with ❤️ for Indian schools
                         </span>
                     </div>
-                    <div className="flex items-center gap-5">
-                        <a href="#" className="hover:text-[var(--primary-main)] transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-[var(--primary-main)] transition-colors">Terms of Use</a>
+                    <div className="flex items-center gap-5 flex-wrap justify-center">
+                        <Link to="/privacy-policy" className="hover:text-[var(--primary-main)] transition-colors">Privacy Policy</Link>
+                        <Link to="/terms-of-service" className="hover:text-[var(--primary-main)] transition-colors">Terms of Service</Link>
+                        <Link to="/refund-policy" className="hover:text-[var(--primary-main)] transition-colors">Refund Policy</Link>
                         <a href="https://github.com/Sumit21adm" target="_blank" rel="noopener noreferrer"
                             className="flex items-center gap-1 hover:text-[var(--primary-main)] transition-colors">
                             GitHub <ExternalLink className="w-3 h-3" />

@@ -7,6 +7,10 @@ import SecurityPage from './pages/SecurityPage';
 import UpdatesPage from './pages/UpdatesPage';
 import PricingPage from './pages/PricingPage';
 import ContactPage from './pages/ContactPage';
+import RegistrationPage from './pages/RegistrationPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import TermsOfServicePage from './pages/TermsOfServicePage';
+import RefundPolicyPage from './pages/RefundPolicyPage';
 
 function App() {
     return (
@@ -28,6 +32,10 @@ function App() {
                         <Route path="/updates" element={<UpdatesPage />} />
                         <Route path="/pricing" element={<PricingPage />} />
                         <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/register" element={<RegistrationPage />} />
+                        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                        <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+                        <Route path="/refund-policy" element={<RefundPolicyPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

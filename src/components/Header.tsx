@@ -11,6 +11,7 @@ const NAV_LINKS = [
     { label: 'Updates', href: '/updates' },
     { label: 'Pricing', href: '/pricing' },
     { label: 'Contact', href: '/contact' },
+    { label: 'Register', href: '/register' },
 ];
 
 export default function Header() {
@@ -74,9 +75,9 @@ export default function Header() {
                             aria-label="Toggle dark mode">
                             {isDarkMode ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
                         </button>
-                        <Link to="/contact"
+                        <Link to="/register"
                             className="hidden sm:flex items-center gap-2 btn-primary text-sm px-5 py-2.5 rounded-xl font-bold">
-                            <PhoneCall className="w-4 h-4" /> Book Demo
+                            <PhoneCall className="w-4 h-4" /> Register School
                         </Link>
                         <button onClick={() => setMobileOpen(!mobileOpen)}
                             className="lg:hidden p-2 rounded-lg text-text-secondary hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
@@ -102,9 +103,9 @@ export default function Header() {
                                     </Link>
                                 </motion.div>
                             ))}
-                            <Link to="/contact"
+                            <Link to="/register"
                                 className="mt-2 flex items-center justify-center gap-2 btn-primary px-6 py-3 rounded-xl font-bold">
-                                <PhoneCall className="w-4 h-4" /> Book a Free Demo
+                                <PhoneCall className="w-4 h-4" /> Register School
                             </Link>
                         </nav>
                     </motion.div>
