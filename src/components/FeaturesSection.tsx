@@ -339,7 +339,7 @@ export default function FeaturesSection() {
                         viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-main/10 text-primary-main text-xs font-bold uppercase tracking-widest mb-6"
                     >
-                        <Sparkles className="w-3.5 h-3.5" /> 9 Modules · Fully Operational
+                        <Sparkles className="w-3.5 h-3.5" /> 14 Modules · Production Ready
                     </motion.div>
 
                     <motion.h2

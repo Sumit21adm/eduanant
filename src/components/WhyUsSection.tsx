@@ -15,10 +15,10 @@ const PILLARS = [
     },
     {
         icon: WifiOff,
-        title: 'Works Without Internet',
-        subtitle: 'No broadband? No problem.',
-        body: 'Power cuts and slow broadband won\'t disrupt your school. EduAnant syncs when online and queues all actions offline — built for real Indian infrastructure conditions.',
-        tag: 'Offline-Ready',
+        title: 'No Internet Dependency',
+        subtitle: 'Installed on your school — works on your network.',
+        body: 'EduAnant runs on a server or PC inside your school. Staff access it on the school Wi-Fi — no external broadband needed. Power cut outside? Doesn\'t matter. Your school\'s network keeps running.',
+        tag: 'LAN-Ready',
         gradient: 'from-[#0f6187] to-brand-cyan',
         glow: 'rgba(0,182,213,0.2)',
         border: 'border-[#00b6d5]/30',
@@ -71,9 +71,9 @@ const PILLARS = [
 ];
 
 const SCHOOL_SIZES = [
-    { label: 'Small School', size: '200–500 Students', icon: '🏫', suitable: true, points: ['All modules included', 'Single admin user', 'Runs on basic PC/laptop', 'Easy setup in 1 day'] },
-    { label: 'Medium School', size: '500–2000 Students', icon: '🏛️', suitable: true, highlight: true, points: ['All modules included', 'Multi-staff access', 'Role-based permissions', 'Data import from Excel'] },
-    { label: 'Large School', size: 'Unlimited Students', icon: '🏢', suitable: true, points: ['All modules included', 'VPS/server deployment', 'Priority support', 'Custom configuration'] },
+    { label: 'Essential', size: 'Up to 300 Students', icon: '🏫', suitable: true, points: ['All modules included', 'Admin, Teacher & Parent portals', 'Runs on basic PC/laptop', 'Easy setup — we handle it'] },
+    { label: 'Standard', size: '301 – 800 Students', icon: '🏛️', suitable: true, highlight: true, points: ['Everything in Essential', 'Multi-staff & role-based access', 'Transport & HR module', 'On-site staff training'] },
+    { label: 'Professional', size: '801 – 1,500 Students', icon: '🏢', suitable: true, points: ['Everything in Standard', 'Multi-branch from one dashboard', 'Dedicated account manager', 'Priority SLA support'] },
 ];
 
 export default function WhyUsSection() {

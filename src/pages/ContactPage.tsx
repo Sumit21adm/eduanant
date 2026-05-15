@@ -6,7 +6,7 @@ const INQUIRY_TYPES = [
     'Book a Free Demo', 'Get a Pricing Quote', 'Technical / Security Question',
     'Data Migration Query', 'Partnership / Reseller', 'Other',
 ];
-const SCHOOL_SIZES = ['< 200 Students', '200–500', '500–1000', '1000–2000', '2000–3000', '3000+ (Large / Multi-branch)'];
+const SCHOOL_SIZES = ['Up to 300 Students (Essential)', '301 – 800 Students (Standard)', '801 – 1,500 Students (Professional)', '1,500+ Students (Enterprise)', 'Not sure yet'];
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);

@@ -4,10 +4,10 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const FEATURES = [
-    'All 14 modules — no feature gating',
-    'Unlimited students & staff',
+    'Every module included — nothing locked',
+    'Unlimited staff accounts — no per-staff fee',
     'Hindi + English UI',
-    'Works offline (no internet required)',
+    'Runs on school LAN — no external internet dependency',
     'Self-hosted on your own server/PC',
     'PDF receipts & demand bills included',
     'Data migration from Excel included',
@@ -37,11 +37,11 @@ export default function PricingSection() {
                         <Sparkles className="w-3.5 h-3.5" /> Simple, Transparent Pricing
                     </motion.div>
                     <h2 className="text-4xl md:text-6xl font-black text-text-primary mb-5 leading-tight">
-                        Pricing that grows<br />
-                        <span className="brand-text-gradient">with your school.</span>
+                        Priced per student,<br />
+                        <span className="brand-text-gradient">not per feature.</span>
                     </h2>
                     <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        Plans based on your school size — not arbitrary feature limits. Every plan includes all 14 modules and full support.
+                        ₹10 per student, per month — less than one photocopy per child. Every module included, nothing locked.
                     </p>
                 </motion.div>
 
@@ -89,16 +89,16 @@ export default function PricingSection() {
 
                                     <div className="mb-6 p-5 rounded-2xl border"
                                         style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.05)' }}>
-                                        <div className="text-5xl font-black mb-2 brand-text-gradient">
-                                            Custom
+                                        <div className="text-4xl font-black mb-1 brand-text-gradient">
+                                            ₹10 / student
                                         </div>
-                                        <p className="text-text-secondary text-sm font-semibold">Tailored to your school size & requirements</p>
+                                        <p className="text-text-secondary text-sm font-semibold">per month · 10% off on annual payment</p>
                                     </div>
 
                                     <div className="space-y-3 mb-8">
                                         {[
-                                            { label: 'Pricing Model', value: 'Annual License (One-time per year)' },
-                                            { label: 'Per-Student Charge', value: '❌ None — ever' },
+                                            { label: 'Pricing Model', value: 'Per student · monthly or annual' },
+                                            { label: 'Annual Discount', value: '✅ 10% off vs monthly' },
                                             { label: 'Hidden Fees', value: '❌ None' },
                                             { label: 'Cloud Subscription', value: '❌ Not required' },
                                             { label: 'Setup & Onboarding', value: '✅ Included free' },
@@ -132,7 +132,8 @@ export default function PricingSection() {
                 </motion.div>
 
                 <p className="text-center text-sm text-text-secondary mt-8">
-                    💡 Early access offer — schools that sign up now get <strong className="text-text-primary">founder pricing</strong> locked in for life. <Link to="/contact" className="underline" style={{ color: '#00b6d5' }}>Contact us to know more.</Link>
+                    🏅 Founder pricing — first 25 schools get <strong className="text-text-primary">20% off, locked forever</strong>. Early Bird offer: sign before June 30 for 15% off.{' '}
+                    <Link to="/pricing" className="underline" style={{ color: '#00b6d5' }}>See all offers →</Link>
                 </p>
             </div>
         </section>

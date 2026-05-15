@@ -155,7 +155,7 @@ export default function HeroSection() {
                     {/* Trust line */}
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
                         className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-text-secondary mb-16">
-                        {['No setup fees', 'Runs on your own server', 'Hindi & English UI', 'Works offline too', 'Free onboarding support'].map(t => (
+                        {['No setup fees', 'Runs on your own server', 'Hindi & English UI', 'No internet dependency', 'Free onboarding support'].map(t => (
                             <span key={t} className="flex items-center gap-1.5">
                                 <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> {t}
                             </span>

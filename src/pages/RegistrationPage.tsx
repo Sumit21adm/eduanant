@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Building2, UserCircle, Phone, Mail, CheckCircle, ShieldCheck, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const SCHOOL_SIZES = ['< 200 Students', '200–500', '500–1000', '1000–2000', '2000+ Students'];
+const SCHOOL_SIZES = ['Up to 300 Students (Essential)', '301 – 800 Students (Standard)', '801 – 1,500 Students (Professional)', '1,500+ Students (Enterprise)', 'Not sure yet'];
 
 export default function RegistrationPage() {
     const [submitted, setSubmitted] = useState(false);
