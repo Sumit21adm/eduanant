@@ -71,7 +71,7 @@ export default function ContactPage() {
         try {
             const res = await fetch(ADMIN_PORTAL_API, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 'Content-Type': 'application/json', 'X-API-Version': '1' },
                 body: JSON.stringify({
                     name:        form.name,
                     school:      form.school,
