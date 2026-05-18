@@ -20,7 +20,7 @@ export default function RefundPolicyPage() {
 
                     <div className="bg-white/80 dark:bg-white/[0.02] border border-gray-200/50 dark:border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-sm">
                         <p className="text-sm text-text-secondary mb-10 pb-4 border-b border-gray-200 dark:border-white/10">
-                            <strong className="text-text-primary">Last updated:</strong> May 2026
+                            <strong className="text-text-primary">Last updated:</strong> May 18, 2026
                         </p>
                         
                         <div className="space-y-10 text-text-secondary leading-relaxed text-base md:text-lg">
@@ -53,7 +53,7 @@ export default function RefundPolicyPage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">4</span>
                                     Contact for Billing
                                 </h3>
-                                <p>If you have a billing dispute or wish to notify us of your intent to cancel, please contact your dedicated account manager or email our billing team at <a href="mailto:billing@eduanant.com" className="text-[#00b6d5] hover:underline font-semibold">billing@eduanant.com</a> at least 7 days before your next renewal date.</p>
+                                <p>If you have a billing dispute or wish to notify us of your intent to cancel, please contact your dedicated account manager or email our billing team at <a href="mailto:eduanant.cloud@gmail.com" className="text-[#00b6d5] hover:underline font-semibold">eduanant.cloud@gmail.com</a> at least 7 days before your next renewal date.</p>
                             </section>
                         </div>
                     </div>

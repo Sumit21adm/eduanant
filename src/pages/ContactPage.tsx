@@ -1,6 +1,19 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { PhoneCall, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { PhoneCall, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
+
+const ADMIN_PORTAL_API = 'https://admin.eduanant.cloud/api/v1/contact';
+
+function makeMathChallenge() {
+    const a = Math.floor(Math.random() * 12) + 2;   // 2–13
+    const b = Math.floor(Math.random() * 10) + 1;   // 1–10
+    const ops = ['+', '-', '×'] as const;
+    const op  = ops[Math.floor(Math.random() * ops.length)];
+    const answer = op === '+' ? a + b : op === '-' ? a - b : a * b;
+    // keep subtraction always positive
+    if (op === '-' && answer < 0) return makeMathChallenge();
+    return { a, b, op, answer };
+}
 
 const INQUIRY_TYPES = [
     'Book a Free Demo', 'Get a Pricing Quote', 'Technical / Security Question',
@@ -10,16 +23,77 @@ const SCHOOL_SIZES = ['Up to 300 Students (Essential)', '301 – 800 Students (S
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [error, setError] = useState('');
     const [form, setForm] = useState({ name: '', school: '', phone: '', email: '', size: '', inquiry: '', message: '' });
+
+    // Bot protection: record time when form first renders
+    const formLoadTime = useRef<number>(Date.now());
+    // Bot protection: honeypot field
+    const [honeypot, setHoneypot] = useState('');
+    // Bot protection: math challenge
+    const [math, setMath]           = useState(makeMathChallenge);
+    const [mathInput, setMathInput] = useState('');
+    const [mathError, setMathError] = useState(false);
+
+    const refreshMath = () => { setMath(makeMathChallenge()); setMathInput(''); setMathError(false); };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // In production: POST to backend / email service
-        setSubmitted(true);
+        setError('');
+
+        // Bot protection 1: honeypot — if filled, silently succeed (don't reveal detection)
+        if (honeypot) {
+            setSubmitted(true);
+            return;
+        }
+
+        // Bot protection 2: minimum fill time (bots submit instantly)
+        const elapsed = Date.now() - formLoadTime.current;
+        if (elapsed < 4000) {
+            setSubmitted(true);
+            return;
+        }
+
+        // Bot protection 3: math challenge
+        if (parseInt(mathInput, 10) !== math.answer) {
+            setMathError(true);
+            refreshMath();
+            setError('Incorrect answer — a new question has been generated. Please try again.');
+            return;
+        }
+
+        setSubmitting(true);
+        try {
+            const res = await fetch(ADMIN_PORTAL_API, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name:        form.name,
+                    school:      form.school,
+                    phone:       form.phone,
+                    email:       form.email || undefined,
+                    size:        form.size || undefined,
+                    inquiryType: form.inquiry || undefined,
+                    message:     form.message || undefined,
+                }),
+            });
+
+            if (res.status === 429) {
+                setError('Too many submissions from this device. Please try again in 10 minutes or call us directly.');
+                return;
+            }
+            if (!res.ok) throw new Error('Server error');
+            setSubmitted(true);
+        } catch {
+            setError('Something went wrong. Please try again or call +91 79036 12979.');
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     return (
@@ -47,7 +121,7 @@ export default function ContactPage() {
                         {[
                             { icon: PhoneCall, label: 'Call Us', value: '+91 79036 12979', href: 'tel:+917903612979', sub: 'Mon–Sat, 9 AM – 7 PM IST' },
                             { icon: MessageCircle, label: 'WhatsApp', value: 'Chat on WhatsApp', href: 'https://wa.me/917903612979', sub: 'Usually replies in 1 hour' },
-                            { icon: Mail, label: 'Email', value: 'contact@eduanant.com', href: 'mailto:contact@eduanant.com', sub: 'Response within 24 hours' },
+                            { icon: Mail, label: 'Email', value: 'eduanant.cloud@gmail.com', href: 'mailto:eduanant.cloud@gmail.com', sub: 'Response within 24 hours' },
                         ].map((c, i) => {
                             const Icon = c.icon;
                             return (
@@ -158,9 +232,53 @@ export default function ContactPage() {
                                         className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all resize-none placeholder:text-text-secondary/50" />
                                 </div>
 
-                                <motion.button type="submit" whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(0,182,213,0.25)' }} whileTap={{ scale: 0.98 }}
-                                    className="w-full btn-primary py-4 rounded-xl font-black text-base flex items-center justify-center gap-2">
-                                    <Send className="w-4 h-4" /> Submit Enquiry
+                                {/* Honeypot field — visually hidden */}
+                                <div style={{ position: 'absolute', left: '-9999px', top: '-9999px', opacity: 0, height: 0, overflow: 'hidden' }} aria-hidden="true">
+                                    <input type="text" name="website" value={honeypot}
+                                        onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
+                                </div>
+
+                                {/* Math challenge */}
+                                <div className={`flex items-center gap-3 p-4 rounded-xl border ${
+                                    mathError
+                                        ? 'border-red-400 bg-red-50 dark:bg-red-900/20'
+                                        : 'border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03]'
+                                }`}>
+                                    <span className="text-sm font-black text-text-secondary uppercase tracking-wider whitespace-nowrap">
+                                        Verify you're human:
+                                    </span>
+                                    <span className="text-base font-black text-text-primary" style={{ color: '#00b6d5' }}>
+                                        {math.a} {math.op} {math.b} =
+                                    </span>
+                                    <input
+                                        type="number"
+                                        value={mathInput}
+                                        onChange={(e) => { setMathInput(e.target.value); setMathError(false); }}
+                                        placeholder="?"
+                                        required
+                                        className="w-20 px-3 py-2 rounded-lg border border-gray-200/70 dark:border-white/15 bg-white dark:bg-white/[0.06] text-text-primary text-sm font-bold text-center focus:outline-none focus:ring-2"
+                                        style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as React.CSSProperties}
+                                    />
+                                    <button type="button" onClick={refreshMath}
+                                        className="text-xs text-text-secondary hover:text-text-primary underline ml-auto shrink-0">
+                                        New question
+                                    </button>
+                                </div>
+
+                                {error && (
+                                    <div className="flex items-start gap-2 p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-500/30 text-red-600 dark:text-red-400 text-sm">
+                                        <AlertCircle className="w-4 h-4 mt-0.5 shrink-0" />
+                                        {error}
+                                    </div>
+                                )}
+
+                                <motion.button type="submit" disabled={submitting}
+                                    whileHover={{ scale: submitting ? 1 : 1.02, boxShadow: submitting ? 'none' : '0 0 30px rgba(0,182,213,0.25)' }}
+                                    whileTap={{ scale: submitting ? 1 : 0.98 }}
+                                    className="w-full btn-primary py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                                    {submitting
+                                        ? <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Submitting...</>
+                                        : <><Send className="w-4 h-4" /> Submit Enquiry</>}
                                 </motion.button>
                                 <p className="text-center text-xs text-text-secondary">
                                     Or call us directly: <a href="tel:+917903612979" className="font-bold" style={{ color: '#00b6d5' }}>+91 79036 12979</a>

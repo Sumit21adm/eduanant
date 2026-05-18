@@ -66,13 +66,13 @@ export default function Footer() {
                         <h4 className="text-sm font-black uppercase tracking-wider text-text-primary mb-5">Get in Touch</h4>
                         <ul className="space-y-4">
                             <li>
-                                <a href="mailto:contact@eduanant.com"
+                                <a href="mailto:eduanant.cloud@gmail.com"
                                     className="flex items-center gap-3 text-text-secondary hover:text-[var(--primary-main)] transition-colors group">
                                     <div className="w-9 h-9 rounded-full flex items-center justify-center border group-hover:border-[#00b6d5] transition-colors"
                                         style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.06)' }}>
                                         <Mail className="w-4 h-4" style={{ color: '#00b6d5' }} />
                                     </div>
-                                    <span className="text-sm">contact@eduanant.com</span>
+                                    <span className="text-sm">eduanant.cloud@gmail.com</span>
                                 </a>
                             </li>
                             <li>
@@ -102,7 +102,7 @@ export default function Footer() {
                 {/* Legal & Grievance info */}
                 <div className="mb-8 pt-4 border-t border-gray-200/20 dark:border-white/5 text-xs text-text-secondary/70">
                     <p>
-                        <strong>Grievance Officer:</strong> In accordance with the IT Rules 2021 and DPDP Act 2023, the Grievance Officer can be contacted at <a href="mailto:contact@eduanant.com" className="text-[#00b6d5] hover:underline">contact@eduanant.com</a>.
+                        <strong>Grievance Officer:</strong> In accordance with the IT Rules 2021 and DPDP Act 2023, the Grievance Officer can be contacted at <a href="mailto:eduanant.cloud@gmail.com" className="text-[#00b6d5] hover:underline">eduanant.cloud@gmail.com</a>.
                     </p>
                 </div>
 
