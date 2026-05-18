@@ -184,18 +184,19 @@ export default function ContactPage() {
                                 className="p-8 rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/80 dark:bg-white/[0.02] space-y-5">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     {[
-                                        { name: 'name', label: 'Your Name', placeholder: 'Rajesh Kumar', required: true },
-                                        { name: 'school', label: 'School Name', placeholder: 'Saraswati Public School', required: true },
-                                        { name: 'phone', label: 'Mobile Number', placeholder: '+91 9876543210', required: true },
-                                        { name: 'email', label: 'Email Address', placeholder: 'principal@school.com', required: false },
+                                        { name: 'name', label: 'Your Name', placeholder: 'Rajesh Kumar', required: true, autoComplete: 'name' },
+                                        { name: 'school', label: 'School Name', placeholder: 'Saraswati Public School', required: true, autoComplete: 'organization' },
+                                        { name: 'phone', label: 'Mobile Number', placeholder: '+91 9876543210', required: true, autoComplete: 'tel' },
+                                        { name: 'email', label: 'Email Address', placeholder: 'principal@school.com', required: false, autoComplete: 'email' },
                                     ].map(field => (
                                         <div key={field.name}>
-                                            <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
+                                            <label htmlFor={field.name} className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
                                                 {field.label} {field.required && <span style={{ color: '#00b6d5' }}>*</span>}
                                             </label>
                                             <input
-                                                type="text" name={field.name} value={(form as Record<string, string>)[field.name]}
+                                                type="text" id={field.name} name={field.name} value={(form as Record<string, string>)[field.name]}
                                                 onChange={handleChange} placeholder={field.placeholder} required={field.required}
+                                                autoComplete={field.autoComplete}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all placeholder:text-text-secondary/50"
                                                 style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as React.CSSProperties} />
                                         </div>
@@ -204,20 +205,20 @@ export default function ContactPage() {
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
-                                        <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
+                                        <label htmlFor="size" className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
                                             School Size <span style={{ color: '#00b6d5' }}>*</span>
                                         </label>
-                                        <select name="size" value={form.size} onChange={handleChange} required
+                                        <select id="size" name="size" value={form.size} onChange={handleChange} required
                                             className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all">
                                             <option value="">Select student count</option>
                                             {SCHOOL_SIZES.map(s => <option key={s} value={s}>{s} students</option>)}
                                         </select>
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
+                                        <label htmlFor="inquiry" className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
                                             How can we help? <span style={{ color: '#00b6d5' }}>*</span>
                                         </label>
-                                        <select name="inquiry" value={form.inquiry} onChange={handleChange} required
+                                        <select id="inquiry" name="inquiry" value={form.inquiry} onChange={handleChange} required
                                             className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all">
                                             <option value="">Select inquiry type</option>
                                             {INQUIRY_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
@@ -226,8 +227,8 @@ export default function ContactPage() {
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Message (optional)</label>
-                                    <textarea name="message" value={form.message} onChange={handleChange} rows={3}
+                                    <label htmlFor="message" className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Message (optional)</label>
+                                    <textarea id="message" name="message" value={form.message} onChange={handleChange} rows={3}
                                         placeholder="Tell us about your current system, specific requirements, or any questions..."
                                         className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all resize-none placeholder:text-text-secondary/50" />
                                 </div>
@@ -251,11 +252,14 @@ export default function ContactPage() {
                                         {math.a} {math.op} {math.b} =
                                     </span>
                                     <input
-                                        type="number"
+                                        type="text"
+                                        inputMode="numeric"
+                                        pattern="[0-9-]*"
                                         value={mathInput}
                                         onChange={(e) => { setMathInput(e.target.value); setMathError(false); }}
                                         placeholder="?"
                                         required
+                                        autoComplete="off"
                                         className="w-20 px-3 py-2 rounded-lg border border-gray-200/70 dark:border-white/15 bg-white dark:bg-white/[0.06] text-text-primary text-sm font-bold text-center focus:outline-none focus:ring-2"
                                         style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as React.CSSProperties}
                                     />
