@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Building2, UserCircle, Phone, Mail, CheckCircle, ShieldCheck, MapPin } from 'lucide-react';
+import { Building2, UserCircle, CheckCircle, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SCHOOL_SIZES = ['Up to 300 Students (Essential)', '301 – 800 Students (Standard)', '801 – 1,500 Students (Professional)', '1,500+ Students (Enterprise)', 'Not sure yet'];
