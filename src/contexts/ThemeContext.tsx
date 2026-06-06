@@ -17,13 +17,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         return (localStorage.getItem('app-color-theme') as ThemeType) || 'default';
     });
 
-    // Initialize dark mode from localStorage or force true as default
+    // Initialize dark mode from localStorage or force false as default
     const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
         const saved = localStorage.getItem('app-dark-mode');
         if (saved !== null) {
             return saved === 'true';
         }
-        return true; // Default to Dark Mode
+        return false; // Default to Light Mode
     });
 
     const toggleDarkMode = () => {

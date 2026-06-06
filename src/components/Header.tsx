@@ -10,6 +10,7 @@ const NAV_LINKS = [
     { label: 'Security', href: '/security' },
     { label: 'Updates', href: '/updates' },
     { label: 'Pricing', href: '/pricing' },
+    { label: 'Demo', href: '/demo' },
     { label: 'Contact', href: '/contact' },
     { label: 'Register', href: '/register' },
 ];

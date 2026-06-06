@@ -11,6 +11,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
+import DemoPage from './pages/DemoPage';
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                         <Route path="/security" element={<SecurityPage />} />
                         <Route path="/updates" element={<UpdatesPage />} />
                         <Route path="/pricing" element={<PricingPage />} />
+                        <Route path="/demo" element={<DemoPage />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/register" element={<RegistrationPage />} />
                         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

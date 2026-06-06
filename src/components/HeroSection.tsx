@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'fram
 import { useRef, useEffect, useState } from 'react';
 import { ArrowRight, Sparkles, CheckCircle, GraduationCap, Users, Shield, PhoneCall } from 'lucide-react';
 import { TopBar, SideBar } from './ProductDemoSection';
+import { Link } from 'react-router-dom';
 
 
 const SCHOOL_TYPES = [
@@ -145,11 +146,13 @@ export default function HeroSection() {
                             </span>
                             <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-secondary-main opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </motion.a>
-                        <motion.a href="#features" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
-                            className="btn-outline w-full sm:w-auto text-base px-8 py-4 flex items-center justify-center gap-2 rounded-xl dark:text-text-primary dark:border-gray-600 dark:hover:border-primary-main">
-                            <Sparkles className="w-4 h-4" />
-                            Explore Features
-                        </motion.a>
+                        <Link to="/demo" className="w-full sm:w-auto">
+                            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
+                                className="btn-outline w-full text-base px-8 py-4 flex items-center justify-center gap-2 rounded-xl dark:text-text-primary dark:border-gray-600 dark:hover:border-primary-main">
+                                <Sparkles className="w-4 h-4" />
+                                Try Live Sandbox
+                            </motion.button>
+                        </Link>
                     </motion.div>
 
                     {/* Trust line */}
