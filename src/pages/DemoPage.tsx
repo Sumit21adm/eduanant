@@ -1,25 +1,26 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-    Shield, 
-    UserCheck, 
-    GraduationCap, 
-    Wallet, 
-    ClipboardList, 
-    Users, 
-    Copy, 
-    Check, 
-    ExternalLink, 
-    Info, 
-    Sparkles,
-    Lock
-} from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+// MUI Icons
+import ShieldIcon from '@mui/icons-material/Shield';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import SchoolIcon from '@mui/icons-material/School';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PeopleIcon from '@mui/icons-material/People';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import CheckIcon from '@mui/icons-material/Check';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import InfoIcon from '@mui/icons-material/Info';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import LockIcon from '@mui/icons-material/Lock';
 
 const DEMO_ROLES = [
     {
         id: 'admin',
         role: 'System Administrator',
-        icon: Shield,
+        icon: ShieldIcon,
         description: 'Complete override controls. Set up school metadata, manage academic sessions, configure system parameters, and oversee security logs.',
         username: 'admin@eduanant.cloud',
         password: 'Admin@123',
@@ -31,7 +32,7 @@ const DEMO_ROLES = [
     {
         id: 'principal',
         role: 'School Principal',
-        icon: UserCheck,
+        icon: VerifiedUserIcon,
         description: 'High-level academic and operations dashboard. Configure circular notices, view leaves requests, inspect class tests schedules, and manage PTMs.',
         username: 'principal@eduanant.cloud',
         password: 'Demo@1234',
@@ -43,7 +44,7 @@ const DEMO_ROLES = [
     {
         id: 'teacher',
         role: 'Class Teacher',
-        icon: GraduationCap,
+        icon: SchoolIcon,
         description: 'Daily teaching workflows. Mark student attendance, manage lesson plans, upload class assignments, track curriculum, and enter marks.',
         username: 'teacher.math@eduanant.cloud',
         password: 'Demo@1234',
@@ -55,7 +56,7 @@ const DEMO_ROLES = [
     {
         id: 'accountant',
         role: 'School Accountant',
-        icon: Wallet,
+        icon: AccountBalanceWalletIcon,
         description: 'Financial accounting dashboard. Manage fee categories, generate class fee demand bills, record collection payments, and issue receipts.',
         username: 'accountant@eduanant.cloud',
         password: 'Demo@1234',
@@ -67,7 +68,7 @@ const DEMO_ROLES = [
     {
         id: 'receptionist',
         role: 'Front Desk Executive',
-        icon: ClipboardList,
+        icon: AssignmentIcon,
         description: 'First point of contact. Record admission inquiries, log visitors checking, manage staff appointments, and register student gate pass checkouts.',
         username: 'receptionist@eduanant.cloud',
         password: 'Demo@1234',
@@ -79,7 +80,7 @@ const DEMO_ROLES = [
     {
         id: 'student',
         role: 'Student & Parent',
-        icon: Users,
+        icon: PeopleIcon,
         description: 'Personalized student and guardian portal. Download homework assignments, view attendance charts, examine test results, and print report cards.',
         username: 'std001@student.eduanant.cloud',
         password: 'Demo@1234',
@@ -116,14 +117,14 @@ export default function DemoPage() {
                     >
                         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
                             style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
-                            <Sparkles className="w-3.5 h-3.5" /> Experience the Platform
+                            <AutoAwesomeIcon className="w-3.5 h-3.5" /> Experience the Platform
                         </span>
                         <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-6 leading-none">
                             Live Interactive<br />
-                            <span className="brand-text-gradient">Sandbox Demo.</span>
+                            <span className="brand-text-gradient">Real-Time Demo.</span>
                         </h1>
                         <p className="text-xl text-text-secondary leading-relaxed">
-                            No setup. No installations. Launch the live demo portal and sign in with any of our pre-configured role profiles to experience EduAnant.
+                            No setup. No installations. Launch the live demo portal and sign in with any of our pre-configured role profiles to experience the latest production build of EduAnant in real time.
                         </p>
                     </motion.div>
 
@@ -140,24 +141,24 @@ export default function DemoPage() {
                             rel="noopener noreferrer"
                             className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#00b6d5]/20 group transition-all"
                         >
-                            Launch Demo Portal <ExternalLink className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            Launch Demo Portal <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
                     </motion.div>
                 </div>
 
-                {/* Sandbox Info Banner */}
+                {/* Demo Info Banner */}
                 <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="max-w-4xl mx-auto p-5 rounded-2xl border mb-16 flex items-start gap-4"
-                    style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.03)' }}
+                    className="max-w-4xl mx-auto p-5 rounded-2xl border mb-16 flex items-start gap-4 bg-white/50 dark:bg-white/[0.01]"
+                    style={{ borderColor: 'rgba(0,182,213,0.2)' }}
                 >
-                    <Info className="w-6 h-6 shrink-0 mt-0.5 text-[var(--primary-main)]" style={{ color: '#00b6d5' }} />
+                    <InfoIcon className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#00b6d5' }} />
                     <div>
-                        <h3 className="font-black text-text-primary mb-1 text-base">Self-Running Demo Environment</h3>
-                        <p className="text-sm text-text-secondary leading-relaxed">
-                            The sandbox operates at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. Any data you add, update, or delete remains active temporarily for your exploration. To keep the sandbox performant and pristine, the demo database resets automatically to default states every hour.
+                        <h3 className="font-black text-text-primary mb-1 text-base">Real-Time Production Demo Environment</h3>
+                        <p className="text-sm text-text-secondary leading-relaxed font-medium">
+                            The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. It represents a real-time production deployment containing mock academic records, permitting full write, edit, and print operations to experience the complete speed and offline capabilities of the platform.
                         </p>
                     </div>
                 </motion.div>
@@ -178,13 +179,13 @@ export default function DemoPage() {
                                 {/* Role Header */}
                                 <div className="flex items-center gap-4 mb-4">
                                     <div className="p-3 rounded-2xl border" style={{ backgroundColor: role.bgColor, borderColor: 'rgba(0,182,213,0.1)' }}>
-                                        <IconComponent className="w-6 h-6 text-[var(--primary-main)]" style={{ color: '#00b6d5' }} />
+                                        <IconComponent className="w-6 h-6 text-[#00b6d5]" />
                                     </div>
                                     <h3 className="text-xl font-black text-text-primary">{role.role}</h3>
                                 </div>
 
                                 {/* Description */}
-                                <p className="text-sm text-text-secondary mb-6 leading-relaxed flex-grow">
+                                <p className="text-sm text-text-secondary mb-6 leading-relaxed flex-grow font-medium">
                                     {role.description}
                                 </p>
 
@@ -192,7 +193,7 @@ export default function DemoPage() {
                                 <div className="mb-6 space-y-2">
                                     <span className="text-xs font-bold text-text-secondary block uppercase tracking-wider mb-2">Capabilities:</span>
                                     {role.features.map((feat) => (
-                                        <div key={feat} className="flex items-center gap-2 text-xs text-text-secondary">
+                                        <div key={feat} className="flex items-center gap-2 text-xs text-text-secondary font-medium">
                                             <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#00b6d5' }} />
                                             <span>{feat}</span>
                                         </div>
@@ -203,11 +204,11 @@ export default function DemoPage() {
                                 <div className="mt-auto p-4 rounded-2xl bg-gray-100/60 dark:bg-white/[0.02] border border-gray-200/30 dark:border-white/5 space-y-3">
                                     <div className="flex items-center justify-between text-xs">
                                         <div className="flex items-center gap-1.5">
-                                            <Lock className="w-3.5 h-3.5 text-text-secondary" />
+                                            <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
                                             <span className="font-bold text-text-primary">Demo Credentials</span>
                                         </div>
-                                        <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="text-[var(--primary-main)] hover:underline flex items-center gap-1 font-bold">
-                                            Log in <ExternalLink className="w-3 h-3" />
+                                        <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline flex items-center gap-1 font-bold">
+                                            Log in <OpenInNewIcon className="w-3 h-3" />
                                         </a>
                                     </div>
 
@@ -222,7 +223,7 @@ export default function DemoPage() {
                                             className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
                                             title="Copy Username"
                                         >
-                                            {copiedField === `${role.id}-user` ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                                            {copiedField === `${role.id}-user` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
                                         </button>
                                     </div>
 
@@ -237,7 +238,7 @@ export default function DemoPage() {
                                             className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
                                             title="Copy Password"
                                         >
-                                            {copiedField === `${role.id}-pass` ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+                                            {copiedField === `${role.id}-pass` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
                                         </button>
                                     </div>
                                 </div>
@@ -249,17 +250,17 @@ export default function DemoPage() {
                 {/* Final CTA Area */}
                 <div className="mt-20 text-center max-w-2xl mx-auto">
                     <h2 className="text-3xl font-black text-text-primary mb-4">Ready to see it in action?</h2>
-                    <p className="text-text-secondary mb-8 leading-relaxed">
+                    <p className="text-text-secondary mb-8 leading-relaxed font-medium">
                         If you have questions about custom integrations, school data import, or would like a guided demo session with our support team, we are here to help.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
                         <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
-                            Open Demo Sandbox <ExternalLink className="w-4 h-4" />
+                            Launch Live Demo <OpenInNewIcon className="w-4 h-4" />
                         </a>
                         <span className="text-text-secondary text-sm font-bold">or</span>
-                        <a href="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[var(--primary-main)] text-text-primary text-sm font-bold transition-colors">
+                        <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#00b6d5] text-text-primary text-sm font-bold transition-colors">
                             Request Guided Demo
-                        </a>
+                        </Link>
                     </div>
                 </div>
 

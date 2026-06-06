@@ -1,7 +1,12 @@
-import { ArrowRight, CheckCircle2, Sparkles, PhoneCall } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+
+// MUI Icons
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import PhoneIcon from '@mui/icons-material/Phone';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const FEATURES = [
     'Every module included — nothing locked',
@@ -34,14 +39,14 @@ export default function PricingSection() {
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
                         style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
-                        <Sparkles className="w-3.5 h-3.5" /> Simple, Transparent Pricing
+                        <AutoAwesomeIcon className="w-3.5 h-3.5" /> Simple, Transparent Pricing
                     </motion.div>
                     <h2 className="text-4xl md:text-6xl font-black text-text-primary mb-5 leading-tight">
                         Priced per student,<br />
                         <span className="brand-text-gradient">not per feature.</span>
                     </h2>
                     <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        ₹10 per student, per month — less than one photocopy per child. Every module included, nothing locked.
+                        ₹50 per student, per month — less than a cup of tea per child. Every module included, nothing locked.
                     </p>
                 </motion.div>
 
@@ -74,7 +79,7 @@ export default function PricingSection() {
                                             className="flex items-center gap-3 group/item">
                                             <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 border"
                                                 style={{ borderColor: 'rgba(0,182,213,0.3)', background: 'rgba(0,182,213,0.08)' }}>
-                                                <CheckCircle2 className="w-3 h-3" style={{ color: '#00b6d5' }} />
+                                                <CheckCircleIcon className="w-3 h-3 text-[#00b6d5]" />
                                             </div>
                                             <span className="text-sm text-text-secondary font-medium group-hover/item:text-text-primary transition-colors">{f}</span>
                                         </motion.div>
@@ -90,15 +95,15 @@ export default function PricingSection() {
                                     <div className="mb-6 p-5 rounded-2xl border"
                                         style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.05)' }}>
                                         <div className="text-4xl font-black mb-1 brand-text-gradient">
-                                            ₹10 / student
+                                            ₹50 / student
                                         </div>
-                                        <p className="text-text-secondary text-sm font-semibold">per month · 10% off on annual payment</p>
+                                        <p className="text-text-secondary text-sm font-semibold">per month · 20% off on annual payment</p>
                                     </div>
 
                                     <div className="space-y-3 mb-8">
                                         {[
                                             { label: 'Pricing Model', value: 'Per student · monthly or annual' },
-                                            { label: 'Annual Discount', value: '✅ 10% off vs monthly' },
+                                            { label: 'Annual Discount', value: '✅ 20% off vs monthly' },
                                             { label: 'Hidden Fees', value: '❌ None' },
                                             { label: 'Cloud Subscription', value: '❌ Not required' },
                                             { label: 'Setup & Onboarding', value: '✅ Included free' },
@@ -115,14 +120,14 @@ export default function PricingSection() {
                                     <Link to="/contact">
                                         <motion.button whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(0,182,213,0.3)' }} whileTap={{ scale: 0.98 }}
                                             className="w-full btn-primary text-base px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2">
-                                            <PhoneCall className="w-4 h-4" />
+                                            <PhoneIcon className="w-4 h-4" />
                                             Get a Quote for Your School
-                                            <ArrowRight className="w-4 h-4" />
+                                            <ArrowForwardIcon className="w-4 h-4" />
                                         </motion.button>
                                     </Link>
                                     <Link to="/pricing"
                                         className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-text-secondary hover:text-[var(--primary-main)] transition-colors">
-                                        <ArrowRight className="w-4 h-4" />
+                                        <ArrowForwardIcon className="w-4 h-4" />
                                         View all pricing plans
                                     </Link>
                                 </div>
@@ -132,7 +137,7 @@ export default function PricingSection() {
                 </motion.div>
 
                 <p className="text-center text-sm text-text-secondary mt-8">
-                    🏅 Founder pricing — first 25 schools get <strong className="text-text-primary">20% off, locked forever</strong>. Early Bird offer: sign before June 30 for 15% off.{' '}
+                    🏅 Founder pricing — first 25 schools get <strong className="text-text-primary">20% off, locked forever</strong>. Early Bird offer: sign before June 30 for 30% off.{' '}
                     <Link to="/pricing" className="underline" style={{ color: '#00b6d5' }}>See all offers →</Link>
                 </p>
             </div>
