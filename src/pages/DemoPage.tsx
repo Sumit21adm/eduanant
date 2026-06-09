@@ -82,7 +82,7 @@ const DEMO_ROLES = [
         role: 'Student & Parent',
         icon: PeopleIcon,
         description: 'Personalized student and guardian portal. Download homework assignments, view attendance charts, examine test results, and print report cards.',
-        username: 'std001@student.eduanant.cloud',
+        username: 'SID00001',
         password: 'Demo@1234',
         color: 'from-rose-600 to-red-600',
         textColor: 'text-rose-400 dark:text-rose-300',
@@ -207,7 +207,7 @@ export default function DemoPage() {
                                             <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
                                             <span className="font-bold text-text-primary">Demo Credentials</span>
                                         </div>
-                                        <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline flex items-center gap-1 font-bold">
+                                        <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline flex items-center gap-1 font-bold">
                                             Log in <OpenInNewIcon className="w-3 h-3" />
                                         </a>
                                     </div>
