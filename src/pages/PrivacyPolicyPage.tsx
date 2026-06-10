@@ -20,7 +20,7 @@ export default function PrivacyPolicyPage() {
 
                     <div className="bg-white/80 dark:bg-white/[0.02] border border-gray-200/50 dark:border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-sm">
                         <p className="text-sm text-text-secondary mb-10 pb-4 border-b border-gray-200 dark:border-white/10">
-                            <strong className="text-text-primary">Last updated:</strong> May 18, 2026 &nbsp;·&nbsp; Applies to: EduAnant web platform & EduAnant SMS Android app (package: <code className="text-xs bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 rounded">cloud.eduanant.app</code>)
+                            <strong className="text-text-primary">Last updated:</strong> June 10, 2026 &nbsp;·&nbsp; Applies to: EduAnant web platform & EduAnant mobile app (package: <code className="text-xs bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 rounded">cloud.eduanant.app</code>)
                         </p>
                         
                         <div className="space-y-10 text-text-secondary leading-relaxed text-base md:text-lg">
@@ -29,7 +29,7 @@ export default function PrivacyPolicyPage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">1</span>
                                     Introduction and Role
                                 </h3>
-                                <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies) collects, uses, and protects data across our web platform and our Android application ("EduAnant SMS", available on Google Play). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary">Data Processor</strong> for the schools (the <strong className="text-text-primary">Data Fiduciary</strong>) that use our platform.</p>
+                                <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary">Data Processor</strong> for the schools (the <strong className="text-text-primary">Data Fiduciary</strong>) that use our platform.</p>
                             </section>
                             
                             <section>
@@ -52,18 +52,20 @@ export default function PrivacyPolicyPage() {
                                     ))}
                                 </ul>
                             </section>
-
+                            
                             <section className="bg-blue-50 dark:bg-blue-900/10 p-6 rounded-2xl border border-blue-200/50 dark:border-blue-500/20">
                                 <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-[#00b6d5]/10 text-[#00b6d5] flex items-center justify-center text-sm font-black shrink-0">3</span>
-                                    Android App & Device Permissions
+                                     <span className="w-8 h-8 rounded-lg bg-[#00b6d5]/10 text-[#00b6d5] flex items-center justify-center text-sm font-black shrink-0">3</span>
+                                    Mobile App & Device Permissions
                                 </h3>
-                                <p className="mb-4">The EduAnant SMS Android app is a <strong className="text-text-primary">Trusted Web Activity (TWA)</strong> — it is a thin native wrapper that loads the EduAnant web service securely inside Chrome. The app itself does <strong className="text-text-primary">not collect any additional data</strong> beyond what the web service collects.</p>
-                                <p className="mb-4 font-semibold text-text-primary">Permissions used by the app:</p>
+                                <p className="mb-4">The EduAnant mobile application (package name: <strong className="text-text-primary">cloud.eduanant.app</strong>) provides access to the school portals and supports native features like push notifications. The app itself does <strong className="text-text-primary">not collect or store any personal data</strong> on our servers beyond what is required to maintain your login session and deliver notifications.</p>
+                                <p className="mb-4 font-semibold text-text-primary">Permissions requested by the app:</p>
                                 <ul className="space-y-2 list-none">
                                     {[
-                                        ['INTERNET', 'Required to load the EduAnant web service. No data is sent to any server other than app.eduanant.cloud and its school subdomains.'],
-                                        ['No camera, microphone, location, contacts, or storage permissions', 'The app does not request or use any sensitive device resources.'],
+                                        ['INTERNET', 'Required to access and load the school portal service.'],
+                                        ['CAMERA', 'Required solely to allow the school portal to perform face recognition attendance check-in. The app does not save or transmit photos/videos from your camera feed to our servers.'],
+                                        ['POST_NOTIFICATIONS', 'Required to receive push notifications for announcements, messages, and student alerts from your school.'],
+                                        ['BIOMETRICS (Face ID / Fingerprint)', 'Used exclusively for local secure login. Biometric verification is processed entirely on the user\'s device and is never sent to our servers.'],
                                     ].map(([perm, desc]) => (
                                         <li key={perm} className="flex gap-3 items-start">
                                             <span className="mt-1.5 w-2 h-2 rounded-full bg-[#00b6d5] shrink-0" />
