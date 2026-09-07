@@ -9,12 +9,15 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 const FEATURES = [
-    'Every module included — nothing locked',
+    'All 18 modules — nothing held back for a higher tier',
+    'HR, Library and Reception Counter included',
+    'Parent app with push notifications',
     'Unlimited staff accounts — no per-staff fee',
     'Hindi + English UI',
     'Runs on school LAN — no external internet dependency',
     'Self-hosted on your own server/PC',
     'PDF receipts & demand bills included',
+    'UDISE+ & CBSE Appendix-IX compliance exports',
     'Data migration from Excel included',
     'Staff training & onboarding included',
     'One-click software updates',
@@ -46,7 +49,7 @@ export default function PricingSection() {
                         <span className="brand-text-gradient">not per feature.</span>
                     </h2>
                     <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        ₹50 per student, per month — less than a cup of tea per child. Every module included, nothing locked.
+                        ₹20 per student a month, billed annually. All 18 modules, and 30 days on it before we send an invoice.
                     </p>
                 </motion.div>
 
@@ -95,18 +98,18 @@ export default function PricingSection() {
                                     <div className="mb-6 p-5 rounded-2xl border"
                                         style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.05)' }}>
                                         <div className="text-4xl font-black mb-1 brand-text-gradient">
-                                            ₹50 / student
+                                            ₹20 / student
                                         </div>
-                                        <p className="text-text-secondary text-sm font-semibold">per month · 20% off on annual payment</p>
+                                        <p className="text-text-secondary text-sm font-semibold">per month, billed annually · ₹25 if you pay monthly</p>
                                     </div>
 
                                     <div className="space-y-3 mb-8">
                                         {[
-                                            { label: 'Pricing Model', value: 'Per student · monthly or annual' },
-                                            { label: 'Annual Discount', value: '✅ 20% off vs monthly' },
-                                            { label: 'Hidden Fees', value: '❌ None' },
-                                            { label: 'Cloud Subscription', value: '❌ Not required' },
-                                            { label: 'Setup & Onboarding', value: '✅ Included free' },
+                                            { label: 'Before you pay', value: '30 days on your own data' },
+                                            { label: 'Annual billing', value: '20% below the monthly rate' },
+                                            { label: 'Smallest deal we take', value: '₹36,000 a year' },
+                                            { label: 'GST', value: '18%, shown separately' },
+                                            { label: 'Founding 10', value: 'Half price, first year' },
                                         ].map(r => (
                                             <div key={r.label} className="flex items-start justify-between gap-4 text-sm border-b border-gray-100 dark:border-white/5 pb-2">
                                                 <span className="text-text-secondary font-medium">{r.label}</span>
@@ -121,14 +124,14 @@ export default function PricingSection() {
                                         <motion.button whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(0,182,213,0.3)' }} whileTap={{ scale: 0.98 }}
                                             className="w-full btn-primary text-base px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2">
                                             <PhoneIcon className="w-4 h-4" />
-                                            Get a Quote for Your School
+                                            Get a quote for your school
                                             <ArrowForwardIcon className="w-4 h-4" />
                                         </motion.button>
                                     </Link>
                                     <Link to="/pricing"
                                         className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-text-secondary hover:text-[var(--primary-main)] transition-colors">
                                         <ArrowForwardIcon className="w-4 h-4" />
-                                        View all pricing plans
+                                        See the full pricing page
                                     </Link>
                                 </div>
                             </div>

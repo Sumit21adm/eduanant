@@ -33,7 +33,7 @@ const PORTAL_TABS = [
         icon: Users,
         color: 'from-amber-500 to-orange-600',
         tagColor: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-        features: ['View Attendance & Results', 'Fee Payment Status', 'Notices & Homework', 'Timetable & Transport', 'Leave Requests'],
+        features: ['View Attendance & Results', 'Fee Payment Status', 'Notices & Homework', 'Timetable & Transport', 'Push Alerts on the Parent App'],
         mockColor: 'from-amber-600 to-orange-700',
     },
 ];
@@ -97,7 +97,7 @@ export default function HeroSection() {
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-main opacity-75" />
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-main" />
                         </div>
-                        Building India's #1 School Management Application
+                        Built in India, for Indian schools
                     </motion.div>
 
                     {/* Headline */}
@@ -112,7 +112,7 @@ export default function HeroSection() {
                     <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-lg md:text-xl text-text-secondary mb-4 max-w-2xl mx-auto leading-relaxed font-medium">
-                        Admissions · Fees · Attendance · Exams · Transport · Staff · and much more —
+                        Admissions · Fees · Attendance · Exams · Transport · HR · Library · Reception —
                         built for <span className="font-bold text-text-primary">schools of all sizes — small, growing, or large.</span>
                     </motion.p>
 
@@ -141,7 +141,7 @@ export default function HeroSection() {
                             className="btn-primary w-full sm:w-auto text-base px-8 py-4 flex items-center justify-center gap-2 group relative overflow-hidden rounded-xl shadow-lg shadow-primary-main/20">
                             <span className="relative z-10 flex items-center gap-2">
                                 <PhoneCall className="w-4 h-4" />
-                                Book a Free Demo
+                                Book a walkthrough
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </span>
                             <div className="absolute inset-0 bg-gradient-to-r from-primary-dark to-secondary-main opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -150,7 +150,7 @@ export default function HeroSection() {
                             <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
                                 className="btn-outline w-full text-base px-8 py-4 flex items-center justify-center gap-2 rounded-xl dark:text-text-primary dark:border-gray-600 dark:hover:border-primary-main">
                                 <Sparkles className="w-4 h-4" />
-                                Try Live Sandbox
+                                Try the live demo
                             </motion.button>
                         </Link>
                     </motion.div>

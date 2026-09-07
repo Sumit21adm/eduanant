@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, Lock, Eye, Server, FileSearch, RefreshCw, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { Shield, Lock, Eye, EyeOff, Server, FileSearch, RefreshCw, Users, CheckCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SECURITY_PILLARS = [
@@ -8,20 +8,23 @@ const SECURITY_PILLARS = [
         desc: 'Every staff member in EduAnant sees only what their role allows. A teacher never sees fee records. An accountant never touches exam marks. Access boundaries are strictly enforced — at both the screen and data level.',
         points: [
             'Separate roles for Admin, Teacher, Accountant, Parent/Student',
-            'Module-level access — read, write, or no access',
+            '96 individual permissions across 22 modules',
+            'Tune any single permission per staff member, not just per role',
+            'Create custom roles for your school\'s own designations',
             'Cannot bypass restrictions via URL or direct navigation',
-            'Role changes take effect immediately across all sessions',
+            'Role and permission changes take effect immediately',
         ],
         color: 'from-[#17305a] to-[#0f6187]', border: 'border-[#17305a]/20', bg: 'bg-[#17305a]/5',
     },
     {
-        icon: Lock, title: 'Secure Login & Session Management',
-        desc: 'Every login is authenticated through a secure, industry-standard session system. Sessions expire automatically and are invalidated the moment a user logs out or their role changes.',
+        icon: Lock, title: 'Two-Factor Login & Session Management',
+        desc: 'Every login is authenticated through a secure, industry-standard session system, with optional two-factor authentication from any authenticator app. Sessions expire automatically and are invalidated the moment a user logs out or their role changes.',
         points: [
-            'Secure, time-limited login sessions',
-            'Auto logout after inactivity',
+            'Optional two-factor authentication (authenticator app)',
+            'Inactivity timeout configurable per role',
+            'Forced password reset on first login',
             'Sessions invalidated immediately on logout or role change',
-            'No shared or persistent login vulnerabilities',
+            'Rate limiting on login, OTP and password reset',
         ],
         color: 'from-[#0f6187] to-[#00b6d5]', border: 'border-[#0091b8]/20', bg: 'bg-[#0091b8]/5',
     },
@@ -81,6 +84,17 @@ const SECURITY_PILLARS = [
         color: 'from-teal-700 to-teal-500', border: 'border-teal-500/20', bg: 'bg-teal-500/5',
     },
     {
+        icon: EyeOff, title: 'Sensitive Data Encrypted & Masked',
+        desc: 'Aadhaar, PAN, and bank account numbers on staff records are encrypted in the database and masked on screen by default. Revealing one is a deliberate, permission-gated action — and every reveal is written to the audit trail with the name of whoever asked for it.',
+        points: [
+            'Aadhaar, PAN & bank details encrypted at rest',
+            'Masked on screen unless explicitly revealed',
+            'Reveal requires a separate permission',
+            'Every reveal recorded in the audit trail',
+        ],
+        color: 'from-sky-700 to-sky-500', border: 'border-sky-500/20', bg: 'bg-sky-500/5',
+    },
+    {
         icon: Users, title: 'Privacy by Design',
         desc: 'EduAnant does not collect, share, or use your school\'s data for any purpose beyond running your software. No advertising. No analytics sent out. No third-party integrations with access to your student records.',
         points: [
@@ -95,12 +109,13 @@ const SECURITY_PILLARS = [
 
 const COMPLIANCE = [
     { label: 'Data Ownership', value: '100% — Your server, your database' },
-    { label: 'Login Security', value: 'Secure, time-limited sessions' },
+    { label: 'Login Security', value: 'Secure sessions + optional 2FA' },
     { label: 'Password Protection', value: 'Industry-standard hashing' },
     { label: 'Data in Transit', value: 'Fully encrypted' },
     { label: 'Audit Logging', value: 'Immutable, full trail' },
     { label: 'Third-party Data Sharing', value: 'None — ever' },
-    { label: 'Brute-force Protection', value: 'Built-in' },
+    { label: 'Brute-force Protection', value: 'Rate-limited login, OTP & reset' },
+    { label: 'Staff ID Numbers', value: 'Encrypted at rest, masked on screen' },
     { label: 'Data Backup', value: 'Automatic before every update' },
 ];
 

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { LayoutDashboard, Users, GraduationCap, CreditCard, Bus, UserCog, Settings, Search, Plus, Download, ChevronDown, CheckCircle2, Moon, RotateCcw, Sparkles, PieChart, TrendingUp, IndianRupee } from 'lucide-react';
+import { LayoutDashboard, Users, GraduationCap, CreditCard, Bus, UserCog, Settings, Library, ConciergeBell, Search, Plus, Download, ChevronDown, CheckCircle2, Moon, RotateCcw, Sparkles, PieChart, TrendingUp, IndianRupee } from 'lucide-react';
 
 // ─── Shared UI Components ────────────────────────────────────────────────────
 
@@ -41,7 +41,9 @@ export function SideBar({ activeId }: { activeId: string }) {
         { id: 'academics', icon: GraduationCap, label: 'Academics' },
         { id: 'fees', icon: CreditCard, label: 'Finance' },
         { id: 'transport', icon: Bus, label: 'Transport' },
-        { id: 'staff', icon: UserCog, label: 'Staff Mgmt' },
+        { id: 'staff', icon: UserCog, label: 'HR & Staff' },
+        { id: 'library', icon: Library, label: 'Library' },
+        { id: 'reception', icon: ConciergeBell, label: 'Reception' },
         { id: 'settings', icon: Settings, label: 'Settings' },
     ];
 

@@ -21,73 +21,73 @@ const DEMO_ROLES = [
         id: 'admin',
         role: 'System Administrator',
         icon: ShieldIcon,
-        description: 'Complete override controls. Set up school metadata, manage academic sessions, configure system parameters, and oversee security logs.',
+        description: 'Runs the whole system. Academic sessions, school details, user roles, backups and the security log.',
         username: 'admin@eduanant.cloud',
         password: 'Admin@123',
         color: 'from-blue-600 to-indigo-600',
         textColor: 'text-indigo-400 dark:text-indigo-300',
         bgColor: 'rgba(99, 102, 241, 0.08)',
-        features: ['Manage Academic Sessions', 'System Security & Logs', 'User Role Configurations', 'Database Snapshots & backups']
+        features: ['Manage Academic Sessions', 'System Security & Logs', 'User Role Configurations', 'Backups and restore']
     },
     {
         id: 'principal',
         role: 'School Principal',
         icon: VerifiedUserIcon,
-        description: 'High-level academic and operations dashboard. Configure circular notices, view leaves requests, inspect class tests schedules, and manage PTMs.',
+        description: 'The overview a head of school wants: notices, staff leave approvals, class tests and parent meetings.',
         username: 'principal@eduanant.cloud',
         password: 'Demo@1234',
         color: 'from-purple-600 to-pink-600',
         textColor: 'text-pink-400 dark:text-pink-300',
         bgColor: 'rgba(236, 72, 153, 0.08)',
-        features: ['Circular Announcements', 'Teacher Leaves Approval', 'PTM Scheduling & Slots', 'Student Awards & Recognitions']
+        features: ['Notices to classes', 'Staff leave approvals', 'Parent meeting slots', 'Awards and recognition']
     },
     {
         id: 'teacher',
         role: 'Class Teacher',
         icon: SchoolIcon,
-        description: 'Daily teaching workflows. Mark student attendance, manage lesson plans, upload class assignments, track curriculum, and enter marks.',
+        description: 'A teacher\'s day: attendance, homework, lesson plans, curriculum progress and marks entry.',
         username: 'teacher.math@eduanant.cloud',
         password: 'Demo@1234',
         color: 'from-emerald-600 to-teal-600',
         textColor: 'text-teal-400 dark:text-teal-300',
         bgColor: 'rgba(20, 184, 166, 0.08)',
-        features: ['Attendance Grid marking', 'Lesson Planning & TIM', 'Homework Assignments', 'Quarterly/Annual Marks Entry']
+        features: ['Attendance in one screen', 'Lesson plans and diary', 'Homework posting', 'Marks entry']
     },
     {
         id: 'accountant',
         role: 'School Accountant',
         icon: AccountBalanceWalletIcon,
-        description: 'Financial accounting dashboard. Manage fee categories, generate class fee demand bills, record collection payments, and issue receipts.',
+        description: 'The fee counter: heads and structures, demand bills for a whole class, collection and receipts.',
         username: 'accountant@eduanant.cloud',
         password: 'Demo@1234',
         color: 'from-amber-600 to-orange-600',
         textColor: 'text-amber-400 dark:text-amber-300',
         bgColor: 'rgba(245, 158, 11, 0.08)',
-        features: ['Fee Structure definitions', 'Demand Bill batch generation', 'Split & advance payments', 'Printable Fee Receipts']
+        features: ['Fee structures', 'Demand bills in bulk', 'Split and advance payments', 'Printed receipts']
     },
     {
         id: 'receptionist',
         role: 'Front Desk Executive',
         icon: AssignmentIcon,
-        description: 'First point of contact. Record admission inquiries, log visitors checking, manage staff appointments, and register student gate pass checkouts.',
+        description: 'The front desk: admission enquiries, visitors, appointments and students leaving early.',
         username: 'receptionist@eduanant.cloud',
         password: 'Demo@1234',
         color: 'from-cyan-600 to-sky-600',
         textColor: 'text-cyan-400 dark:text-cyan-300',
         bgColor: 'rgba(14, 165, 233, 0.08)',
-        features: ['Enquiry Pipeline tracker', 'Visitor check-in & passes', 'Appointment Manager', 'Gate Pass movement logger']
+        features: ['Enquiry follow-ups', 'Visitor check-in', 'Appointments', 'Gate passes']
     },
     {
         id: 'student',
         role: 'Student & Parent',
         icon: PeopleIcon,
-        description: 'Personalized student and guardian portal. Download homework assignments, view attendance charts, examine test results, and print report cards.',
+        description: 'What a parent sees at home: homework, attendance, results, fees and report cards.',
         username: 'SID00001',
         password: 'Demo@1234',
         color: 'from-rose-600 to-red-600',
         textColor: 'text-rose-400 dark:text-rose-300',
         bgColor: 'rgba(244, 63, 94, 0.08)',
-        features: ['Download Homework', 'Printable Report Cards', 'View Fee Demands & History', 'PTM Meeting notifications']
+        features: ['Homework', 'Report cards', 'Fees and payment history', 'Parent meeting alerts']
     }
 ];
 
@@ -117,14 +117,14 @@ export default function DemoPage() {
                     >
                         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
                             style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
-                            <AutoAwesomeIcon className="w-3.5 h-3.5" /> Experience the Platform
+                            <AutoAwesomeIcon className="w-3.5 h-3.5" /> Open to anyone, no sign-up
                         </span>
                         <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-6 leading-none">
-                            Live Interactive<br />
-                            <span className="brand-text-gradient">Real-Time Demo.</span>
+                            Log in and<br />
+                            <span className="brand-text-gradient">have a look around.</span>
                         </h1>
                         <p className="text-xl text-text-secondary leading-relaxed">
-                            No setup. No installations. Launch the live demo portal and sign in with any of our pre-configured role profiles to experience the latest production build of EduAnant in real time.
+                            This is the current build of EduAnant, running on a school we made up. Pick a role below, sign in with the credentials shown, and use it exactly as that person would.
                         </p>
                     </motion.div>
 
@@ -141,7 +141,7 @@ export default function DemoPage() {
                             rel="noopener noreferrer"
                             className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#00b6d5]/20 group transition-all"
                         >
-                            Launch Demo Portal <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            Open the live demo <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
                     </motion.div>
                 </div>
@@ -156,9 +156,9 @@ export default function DemoPage() {
                 >
                     <InfoIcon className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#00b6d5' }} />
                     <div>
-                        <h3 className="font-black text-text-primary mb-1 text-base">Real-Time Production Demo Environment</h3>
+                        <h3 className="font-black text-text-primary mb-1 text-base">Nothing here is real, so change whatever you like</h3>
                         <p className="text-sm text-text-secondary leading-relaxed font-medium">
-                            The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. It represents a real-time production deployment containing mock academic records, permitting full write, edit, and print operations to experience the complete speed and offline capabilities of the platform.
+                            The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. Every student, fee and mark in it is invented. Add records, edit them, collect a fee, print a receipt — it resets on its own, and no real child's data is involved.
                         </p>
                     </div>
                 </motion.div>
@@ -205,7 +205,7 @@ export default function DemoPage() {
                                     <div className="flex items-center justify-between text-xs">
                                         <div className="flex items-center gap-1.5">
                                             <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
-                                            <span className="font-bold text-text-primary">Demo Credentials</span>
+                                            <span className="font-bold text-text-primary">Sign in as this role</span>
                                         </div>
                                         <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline flex items-center gap-1 font-bold">
                                             Log in <OpenInNewIcon className="w-3 h-3" />
@@ -249,17 +249,17 @@ export default function DemoPage() {
 
                 {/* Final CTA Area */}
                 <div className="mt-20 text-center max-w-2xl mx-auto">
-                    <h2 className="text-3xl font-black text-text-primary mb-4">Ready to see it in action?</h2>
+                    <h2 className="text-3xl font-black text-text-primary mb-4">Would you rather be shown around?</h2>
                     <p className="text-text-secondary mb-8 leading-relaxed font-medium">
-                        If you have questions about custom integrations, school data import, or would like a guided demo session with our support team, we are here to help.
+                        Book a walkthrough and we will take you through it on a call, using your school's own structure — your classes, your fee heads, your board — instead of ours.
                     </p>
                     <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
                         <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
-                            Launch Live Demo <OpenInNewIcon className="w-4 h-4" />
+                            Open the live demo <OpenInNewIcon className="w-4 h-4" />
                         </a>
                         <span className="text-text-secondary text-sm font-bold">or</span>
                         <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#00b6d5] text-text-primary text-sm font-bold transition-colors">
-                            Request Guided Demo
+                            Book a walkthrough
                         </Link>
                     </div>
                 </div>

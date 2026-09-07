@@ -3,7 +3,7 @@ import StatsSection from '../components/StatsSection';
 import PainPointsSection from '../components/PainPointsSection';
 import ProductDemoSection from '../components/ProductDemoSection';
 import WhyUsSection from '../components/WhyUsSection';
-import TestimonialsSection from '../components/TestimonialsSection';
+import ProofSection from '../components/ProofSection';
 import PricingSection from '../components/PricingSection';
 
 export default function HomePage() {
@@ -14,7 +14,7 @@ export default function HomePage() {
             <PainPointsSection />
             <ProductDemoSection />
             <WhyUsSection />
-            <TestimonialsSection />
+            <ProofSection />
             <PricingSection />
         </>
     );

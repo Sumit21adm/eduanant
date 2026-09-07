@@ -6,7 +6,7 @@ const PILLARS = [
         icon: Server,
         title: 'Runs On Your Own Server',
         subtitle: 'Your data, your control',
-        body: 'No cloud subscription required. EduAnant installs on a local PC or VPS. Your student data never leaves your premises — fully compliant with Indian data privacy norms.',
+        body: 'No cloud subscription required. EduAnant installs on a local PC or VPS. Your student data never leaves your premises, which is the simplest answer to almost every question a parent or board will ask about where it is kept.',
         tag: 'Self-Hosted',
         gradient: 'from-brand-navy to-brand-navyMid',
         glow: 'rgba(23,48,90,0.3)',
@@ -73,7 +73,7 @@ const PILLARS = [
 const SCHOOL_SIZES = [
     { label: 'Essential', size: 'Up to 300 Students', icon: '🏫', suitable: true, points: ['All modules included', 'Admin, Teacher & Parent portals', 'Runs on basic PC/laptop', 'Easy setup — we handle it'] },
     { label: 'Standard', size: '301 – 800 Students', icon: '🏛️', suitable: true, highlight: true, points: ['Everything in Essential', 'Multi-staff & role-based access', 'Transport & HR module', 'On-site staff training'] },
-    { label: 'Professional', size: '801 – 1,500 Students', icon: '🏢', suitable: true, points: ['Everything in Standard', 'Multi-branch from one dashboard', 'Dedicated account manager', 'Priority SLA support'] },
+    { label: 'Professional', size: '801 – 1,500 Students', icon: '🏢', suitable: true, points: ['Everything in Standard', 'Custom roles & granular permissions', 'Dedicated account manager', 'Priority SLA support'] },
 ];
 
 export default function WhyUsSection() {

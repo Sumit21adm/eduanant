@@ -16,7 +16,7 @@ function makeMathChallenge() {
 }
 
 const INQUIRY_TYPES = [
-    'Book a Free Demo', 'Get a Pricing Quote', 'Technical / Security Question',
+    'Book a walkthrough', 'Get a Pricing Quote', 'Technical / Security Question',
     'Data Migration Query', 'Partnership / Reseller', 'Other',
 ];
 const SCHOOL_SIZES = ['Up to 300 Students (Essential)', '301 – 800 Students (Standard)', '801 – 1,500 Students (Professional)', '1,500+ Students (Enterprise)', 'Not sure yet'];
@@ -150,7 +150,7 @@ export default function ContactPage() {
                                 <p className="text-xs font-black uppercase tracking-wider text-text-secondary">What happens after you submit?</p>
                             </div>
                             <ol className="space-y-3">
-                                {['Our team reviews your requirements', 'We call you within 24 hours', 'Schedule a live demo of EduAnant', 'We prepare a quote tailored to your school'].map((s, i) => (
+                                {['Our team reviews your requirements', 'We call you within 24 hours', 'Walk you through the app on a call', 'We prepare a quote tailored to your school'].map((s, i) => (
                                     <li key={s} className="flex items-start gap-2.5 text-sm text-text-secondary">
                                         <span className="w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center shrink-0 text-white"
                                             style={{ background: 'linear-gradient(135deg, #17305a, #00b6d5)' }}>{i + 1}</span>

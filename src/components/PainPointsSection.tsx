@@ -31,7 +31,7 @@ const PAIN_POINTS = [
         before: '5 different softwares for 5 different things',
         after: 'Everything in one fully integrated platform',
         beforeDetail: 'Separate software for fees, attendance, exams. Data never talks to each other.',
-        afterDetail: '14 modules that are tightly integrated. Fee dues auto-link with attendance reports.',
+        afterDetail: '18 modules that are tightly integrated. Fee dues auto-link with attendance reports.',
         icon: FileSpreadsheet,
         color: 'amber',
     },
