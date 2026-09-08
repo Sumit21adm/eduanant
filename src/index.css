@@ -283,6 +283,22 @@
 @keyframes wire-flow  { to { stroke-dashoffset: -28; } }
 @keyframes wire-breathe { 0%, 100% { opacity: .35; } 50% { opacity: .85; } }
 
+/* On a weak connection — or with Data Saver on — stand the decorative motion
+   down. It costs CPU and battery on exactly the low-end handsets that tend to be
+   on a poor network, and none of it carries meaning. Loading spinners are
+   deliberately excluded: that is the one animation that must keep running. */
+:root[data-net="slow"] .hero-node,
+:root[data-net="slow"] .hero-wire,
+:root[data-net="slow"] .marquee-track,
+:root[data-net="slow"] .security-scan,
+:root[data-net="slow"] .security-ring,
+:root[data-net="slow"] .btn-live {
+  animation: none !important;
+}
+:root[data-net="slow"] .hero-constellation {
+  opacity: .5;
+}
+
 @keyframes live-pulse {
   0%   { box-shadow: 0 0 0 0 rgba(0, 182, 213, 0.42); }
   70%  { box-shadow: 0 0 0 12px rgba(0, 182, 213, 0); }

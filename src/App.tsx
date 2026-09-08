@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
+import { useNetworkQuality } from './lib/network';
+import RouteLoader from './components/RouteLoader';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 
@@ -16,12 +18,13 @@ const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'));
 const DemoPage = lazy(() => import('./pages/DemoPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-/** Holds the page height while a route chunk arrives, so the header does not jump. */
-function RouteFallback() {
-    return <div className="min-h-[70vh]" aria-busy="true" />;
-}
+
 
 function App() {
+    // Stamps data-net on <html>; CSS uses it to stand decorative animation down
+    // on a weak connection.
+    useNetworkQuality();
+
     return (
         <ThemeProvider>
             <BrowserRouter>
@@ -33,7 +36,7 @@ function App() {
                 <div className="fixed bottom-0 right-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15 dark:opacity-10"
                     style={{ background: 'radial-gradient(ellipse at 100% 100%, #F59E0B, transparent 70%)', filter: 'blur(80px)' }} />
 
-                <Suspense fallback={<RouteFallback />}>
+                <Suspense fallback={<RouteLoader />}>
                 <Routes>
                     <Route element={<Layout />}>
                         <Route path="/" element={<HomePage />} />
