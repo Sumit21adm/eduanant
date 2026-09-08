@@ -436,9 +436,9 @@ export default function PricingPage() {
                         What the price does not cover
                     </motion.h2>
                     <p className="text-sm text-text-secondary text-center mb-8 max-w-xl mx-auto">
-                        Three things sit outside the licence. Better you read them here than meet them on an invoice.
+                        Two things sit outside the licence. Better you read them here than meet them on an invoice.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
                         {NOT_INCLUDED.map((item, i) => {
                             const Icon = item.icon;
                             return (
