@@ -11,7 +11,7 @@ import { LIVE_SINCE_LABEL, monthsSince, spell } from './timeline';
  */
 export const PAGE_SEO = {
     home: {
-        title: 'School Management Software for Indian Schools | EduAnant',
+        title: 'Home: School Management Software for Indian Schools | EduAnant',
         description:
             'Offline-ready school ERP for Indian schools. 16 modules — admissions, fees, attendance, exams, HR, library, transport — on your own server. ₹20/student.',
         path: '/',
@@ -19,15 +19,15 @@ export const PAGE_SEO = {
             'school management software India, school ERP, offline school software, fee management software, student attendance software, school administration software, CBSE school software, Hindi school software',
     },
     features: {
-        title: '16 School ERP Modules — Fees, Attendance, Exams | EduAnant',
+        title: 'Features: Admissions, Fees, Attendance & Exams | EduAnant',
         description:
-            'All 16 modules live in Release 1.4.0: admissions, fees, student and staff attendance, exams, HR, library, transport and reception. 100+ screens.',
+            'Admissions, fee collection, student and staff attendance, examinations, library, transport, HR, reception, reports and portals — all live in Release 1.4.0.',
         path: '/features',
         keywords:
             'school ERP modules, fee collection software, student attendance system, examination management software, school library software, school transport management, school HR software',
     },
     security: {
-        title: 'School Data Security & Role Permissions | EduAnant',
+        title: 'Security: Student Data Protection & Access Control | EduAnant',
         description:
             'How EduAnant protects student data: 96 permission keys, an immutable audit trail, encryption at rest, and a database that never leaves your campus.',
         path: '/security',
@@ -35,7 +35,7 @@ export const PAGE_SEO = {
             'school data security, student data privacy India, DPDP Act school software, role based access control school, school software audit trail',
     },
     pricing: {
-        title: 'School Software Pricing — ₹20 per Student | EduAnant',
+        title: 'Pricing: ₹20 per Student — School ERP Cost | EduAnant',
         description:
             '₹20 per student a month billed annually, ₹36,000 minimum. All 16 modules, both portals, the Android app, migration and training included.',
         path: '/pricing',
@@ -43,7 +43,7 @@ export const PAGE_SEO = {
             'school management software price India, school ERP cost, per student school software pricing, affordable school software, school software India cost',
     },
     demo: {
-        title: 'Free Live Demo — Try the School ERP | EduAnant',
+        title: 'Live Demo: Try the School ERP Free, No Sign-Up | EduAnant',
         description:
             'Open the running EduAnant demo and sign in as a principal, class teacher, accountant, receptionist or parent. Real screens, real data, no sign-up required.',
         path: '/demo',
@@ -51,7 +51,7 @@ export const PAGE_SEO = {
             'school management software demo, free school ERP demo, try school software online, school software trial India',
     },
     updates: {
-        title: 'Release Notes & Product Updates | EduAnant School ERP',
+        title: 'Updates: Release Notes & Version History | EduAnant',
         description:
             `${spell(RELEASE_COUNT)[0].toUpperCase()}${spell(RELEASE_COUNT).slice(1)} releases since ${LIVE_SINCE_LABEL}. See exactly what shipped in each version and how one-click updates back up your school data before anything changes.`,
         path: '/updates',
@@ -59,7 +59,7 @@ export const PAGE_SEO = {
             'EduAnant release notes, school software updates, school ERP changelog, school software version history',
     },
     contact: {
-        title: 'Book an On-Site School Demo in India | EduAnant',
+        title: 'Contact: Book an On-Site School Demo in India | EduAnant',
         description:
             'We visit your school, load your own classes and fee heads, and show the exact screens your staff would use. No obligation, no sales pressure.',
         path: '/contact',
@@ -67,26 +67,26 @@ export const PAGE_SEO = {
             'school software demo booking, school ERP consultation India, school management software Bihar, school software Patna',
     },
     register: {
-        title: 'Register Your School | EduAnant School Management System',
+        title: 'Register: Onboard Your School to EduAnant | School ERP',
         description:
             'Tell us your board, session and student count. We prepare the installation, migrate your existing Excel records and train your staff on site.',
         path: '/register',
         keywords: 'register school software, school ERP onboarding, school management system signup India',
     },
     privacy: {
-        title: 'Privacy Policy | EduAnant School Management System',
+        title: 'Privacy Policy: Student & School Data | EduAnant',
         description:
             'How EduAnant handles school, staff and student data under the DPDP Act 2023 — what is collected, who controls it, and how to raise a request.',
         path: '/privacy-policy',
     },
     terms: {
-        title: 'Terms of Service | EduAnant School Management System',
+        title: 'Terms of Service: Subscription Terms | EduAnant',
         description:
             'The subscription terms between your school and Snapx Technologies LLP for the EduAnant school management system and its Android application.',
         path: '/terms-of-service',
     },
     refund: {
-        title: 'Refund Policy | EduAnant School Management System',
+        title: 'Refund Policy: Cancellation & Refunds | EduAnant',
         description:
             'EduAnant refund and cancellation terms, including the 30-day evaluation period and how your school exports its database if you decide to leave.',
         path: '/refund-policy',
