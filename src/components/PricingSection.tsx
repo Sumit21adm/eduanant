@@ -2,11 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-// MUI Icons
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import PhoneIcon from '@mui/icons-material/Phone';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import { CheckCircle2, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
 
 const FEATURES = [
     'All 16 modules — nothing held back for a higher tier',
@@ -42,7 +38,7 @@ export default function PricingSection() {
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
                         style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
-                        <AutoAwesomeIcon className="w-3.5 h-3.5" /> Simple, Transparent Pricing
+                        <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} /> Simple, Transparent Pricing
                     </motion.div>
                     <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-5 leading-tight">
                         Priced per student,<br />
@@ -82,7 +78,7 @@ export default function PricingSection() {
                                             className="flex items-center gap-3 group/item">
                                             <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 border"
                                                 style={{ borderColor: 'rgba(245,158,11,0.3)', background: 'rgba(245,158,11,0.08)' }}>
-                                                <CheckCircleIcon className="w-3 h-3 text-[var(--accent-text)]" />
+                                                <CheckCircle2 className="w-4 h-4 shrink-0" strokeWidth={2} />
                                             </div>
                                             <span className="text-sm text-text-secondary font-medium group-hover/item:text-text-primary transition-colors">{f}</span>
                                         </motion.div>
@@ -123,14 +119,14 @@ export default function PricingSection() {
                                     <Link to="/contact">
                                         <motion.button whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(245,158,11,0.3)' }} whileTap={{ scale: 0.98 }}
                                             className="w-full btn-primary text-base px-6 py-4 rounded-xl font-bold flex items-center justify-center gap-2">
-                                            <PhoneIcon className="w-4 h-4" />
+                                            <PhoneCall className="w-4 h-4" strokeWidth={1.5} />
                                             Get a quote for your school
-                                            <ArrowForwardIcon className="w-4 h-4" />
+                                            <ArrowRight className="w-4 h-4" strokeWidth={2} />
                                         </motion.button>
                                     </Link>
                                     <Link to="/pricing"
                                         className="flex items-center justify-center gap-2 py-3 text-sm font-semibold text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-[#00b6d5] transition-colors">
-                                        <ArrowForwardIcon className="w-4 h-4" />
+                                        <ArrowRight className="w-4 h-4" strokeWidth={2} />
                                         See the full pricing page
                                     </Link>
                                 </div>
@@ -140,7 +136,7 @@ export default function PricingSection() {
                 </motion.div>
 
                 <p className="text-center text-sm text-text-secondary mt-8">
-                    <AutoAwesomeIcon sx={{ fontSize: 16, mr: 0.75, mb: '-2px', color: 'var(--accent-text)' }} />
+                    <Sparkles className="w-4 h-4 inline-block align-[-3px] mr-1.5 text-[var(--accent-text)]" strokeWidth={1.5} />
                     Founding partner pricing — our first 10 schools receive <strong className="text-text-primary">50% off Year 1, with renewal rates locked for life</strong>.{' '}
                     <Link to="/pricing" className="underline" style={{ color: 'var(--accent-text)' }}>See all offers →</Link>
                 </p>

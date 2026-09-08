@@ -1,4 +1,5 @@
 import { Mail, Phone, MessageCircle, MapPin, FileDown } from 'lucide-react';
+import { APP_VERSION, APP_COMMIT, buildDateLabel } from '../lib/version';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -128,6 +129,14 @@ export default function Footer() {
                         <span className="flex items-center gap-1">
                             Built with ❤️ for Indian schools
                         </span>
+                        <span className="hidden sm:inline opacity-30">·</span>
+                        {/* Comes from the release tag at build time, so it always
+                            matches the artefact actually deployed. */}
+                        <Link to="/updates"
+                            title={`Website ${APP_VERSION} · build ${APP_COMMIT} · ${buildDateLabel()}`}
+                            className="font-mono text-xs tabular-nums opacity-60 hover:opacity-100 hover:text-[var(--brand-cyan-deep)] transition-all">
+                            {APP_VERSION}
+                        </Link>
                     </div>
                     <div className="flex items-center gap-5 flex-wrap justify-center">
                         <Link to="/privacy-policy" className="hover:text-[var(--brand-cyan-deep)] transition-colors">Privacy Policy</Link>

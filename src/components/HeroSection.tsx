@@ -254,8 +254,8 @@ export default function HeroSection() {
                     <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="text-base sm:text-lg md:text-xl text-text-secondary mb-4 max-w-3xl mx-auto leading-relaxed font-medium">
-                        From the morning bell to the last receipt of the day —
-                        <span className="font-bold text-text-primary"> one system, no internet needed.</span>
+                        From the morning bell to the last receipt of the day
+                        <span className="font-bold text-text-primary"> at one place.</span>
                     </motion.p>
 
                     {/* School type ticker */}

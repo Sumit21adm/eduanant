@@ -97,15 +97,23 @@ try {
     for (const route of Object.keys(ROUTES)) {
         const { stdout } = await execFileAsync(chrome, [
             '--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage',
-            '--virtual-time-budget=7000', '--run-all-compositor-stages-before-draw',
+            '--virtual-time-budget=20000', '--run-all-compositor-stages-before-draw',
             '--dump-dom', `http://localhost:${PORT}${route}`,
         ], { maxBuffer: 64 * 1024 * 1024 });
 
-        // Sanity-check the render before overwriting anything.
+        // Sanity-check the render before overwriting anything. This has to assert
+        // real *content*, not just that a document came back: an un-hydrated SPA
+        // shell still has a <title> and an #root div, and an earlier, looser
+        // version of this check happily wrote 6 KB empty pages to disk.
         const title = /<title>([^<]*)<\/title>/.exec(stdout)?.[1] ?? '';
-        const hasContent = stdout.includes('<h1') || stdout.includes('id="root"');
-        if (!title || !hasContent || stdout.length < 5000) {
-            throw new Error(`route ${route} rendered no usable HTML (title="${title}", ${stdout.length} bytes)`);
+        const body = stdout.replace(/<script[\s\S]*?<\/script>/g, '');
+        const words = body.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+        const hasH1 = /<h1[\s>]/.test(stdout);
+        if (!title || !hasH1 || words < 120) {
+            throw new Error(
+                `route ${route} rendered no usable content — title="${title}", h1=${hasH1}, ${words} words. ` +
+                `The app did not finish rendering before the DOM was dumped.`
+            );
         }
 
         const out = route === '/' ? join(DIST, 'index.html') : join(DIST, route, 'index.html');

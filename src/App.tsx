@@ -1,17 +1,24 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
-import FeaturesPage from './pages/FeaturesPage';
-import SecurityPage from './pages/SecurityPage';
-import UpdatesPage from './pages/UpdatesPage';
-import PricingPage from './pages/PricingPage';
-import ContactPage from './pages/ContactPage';
-import RegistrationPage from './pages/RegistrationPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import TermsOfServicePage from './pages/TermsOfServicePage';
-import RefundPolicyPage from './pages/RefundPolicyPage';
-import DemoPage from './pages/DemoPage';
+
+const FeaturesPage = lazy(() => import('./pages/FeaturesPage'));
+const SecurityPage = lazy(() => import('./pages/SecurityPage'));
+const UpdatesPage = lazy(() => import('./pages/UpdatesPage'));
+const PricingPage = lazy(() => import('./pages/PricingPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const RegistrationPage = lazy(() => import('./pages/RegistrationPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
+const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'));
+const DemoPage = lazy(() => import('./pages/DemoPage'));
+
+/** Holds the page height while a route chunk arrives, so the header does not jump. */
+function RouteFallback() {
+    return <div className="min-h-[70vh]" aria-busy="true" />;
+}
 
 function App() {
     return (
@@ -25,6 +32,7 @@ function App() {
                 <div className="fixed bottom-0 right-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15 dark:opacity-10"
                     style={{ background: 'radial-gradient(ellipse at 100% 100%, #F59E0B, transparent 70%)', filter: 'blur(80px)' }} />
 
+                <Suspense fallback={<RouteFallback />}>
                 <Routes>
                     <Route element={<Layout />}>
                         <Route path="/" element={<HomePage />} />
@@ -40,6 +48,7 @@ function App() {
                         <Route path="/refund-policy" element={<RefundPolicyPage />} />
                     </Route>
                 </Routes>
+                </Suspense>
             </BrowserRouter>
         </ThemeProvider>
     );

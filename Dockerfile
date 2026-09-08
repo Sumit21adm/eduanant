@@ -16,6 +16,13 @@ RUN npm ci --legacy-peer-deps
 # Copy the rest of the application code
 COPY . .
 
+# Passed by the deploy workflow from the release tag; the build stamps them into
+# the bundle so the footer version matches the deployed artefact.
+ARG APP_VERSION=""
+ARG GITHUB_SHA=""
+ENV APP_VERSION=$APP_VERSION
+ENV GITHUB_SHA=$GITHUB_SHA
+
 # Build the application for production
 RUN npm run build
 

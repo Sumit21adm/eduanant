@@ -39,8 +39,9 @@ export default function FeaturesPage() {
                             <span className="brand-text-gradient">will ever need.</span>
                         </h1>
                         <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                            Every module below is live in production as of version 1.4.0 — tested, in daily use, and included. This is not a roadmap; it's what you get on Day 1.
+                            Every module below is live in production as of version 1.4.0<br /><span className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">Tested, in daily use, and included. This is not a roadmap</span>
                         </p>
+                        <span className="brand-text-gradient">it's what you get on Day 1</span>
                     </motion.div>
 
                     {/* Quick summary */}
