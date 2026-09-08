@@ -114,6 +114,29 @@
   /* The live-demo action. Cyan (the brand signature) so it reads as a distinct
      third thing next to the amber conversion CTA, with a slow halo pulse to
      pull the eye. Pauses on hover, and honours reduced-motion. */
+  .hero-constellation {
+    @apply absolute inset-0 pointer-events-none overflow-hidden;
+    /* Clearest at the edges, gone behind the headline. */
+    -webkit-mask-image: radial-gradient(ellipse 70% 62% at 50% 44%, transparent 46%, #000 88%);
+            mask-image: radial-gradient(ellipse 70% 62% at 50% 44%, transparent 46%, #000 88%);
+  }
+  .hero-node {
+    @apply absolute flex items-center rounded-xl border p-1.5 shadow-sm backdrop-blur-[2px];
+    border-color: rgb(203 213 225 / 0.65);
+    background: rgb(255 255 255 / 0.7);
+    animation: node-drift 9s ease-in-out infinite;
+    opacity: .72;
+  }
+  .dark .hero-node {
+    border-color: rgb(255 255 255 / 0.10);
+    background: rgb(255 255 255 / 0.04);
+  }
+  .hero-wire { animation: wire-flow 3.2s linear infinite, wire-breathe 6s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-node, .hero-wire { animation: none; }
+  }
+
   .btn-live {
     @apply relative border-2 border-[#00b6d5] text-[var(--brand-cyan-deep)] dark:text-[#4fd8f0]
            bg-white/80 dark:bg-[#00b6d5]/10 font-bold rounded-xl transition-all duration-300;
@@ -127,7 +150,30 @@
     box-shadow: 0 10px 26px rgba(0, 182, 213, 0.35);
   }
   @media (prefers-reduced-motion: reduce) {
-    .btn-live { animation: none; }
+    .hero-constellation {
+    @apply absolute inset-0 pointer-events-none overflow-hidden;
+    /* Clearest at the edges, gone behind the headline. */
+    -webkit-mask-image: radial-gradient(ellipse 70% 62% at 50% 44%, transparent 46%, #000 88%);
+            mask-image: radial-gradient(ellipse 70% 62% at 50% 44%, transparent 46%, #000 88%);
+  }
+  .hero-node {
+    @apply absolute flex items-center rounded-xl border p-1.5 shadow-sm backdrop-blur-[2px];
+    border-color: rgb(203 213 225 / 0.65);
+    background: rgb(255 255 255 / 0.7);
+    animation: node-drift 9s ease-in-out infinite;
+    opacity: .72;
+  }
+  .dark .hero-node {
+    border-color: rgb(255 255 255 / 0.10);
+    background: rgb(255 255 255 / 0.04);
+  }
+  .hero-wire { animation: wire-flow 3.2s linear infinite, wire-breathe 6s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-node, .hero-wire { animation: none; }
+  }
+
+  .btn-live { animation: none; }
   }
 
   /* Edge-faded rail so chips dissolve rather than getting chopped at the sides */
@@ -230,6 +276,16 @@
    the module list twice, so translating by exactly -50% loops seamlessly. */
 @keyframes marquee-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
 @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+/* Hero constellation: module chips drifting on their own cycles, with a signal
+   travelling the wires between them. Decoration only — masked away from the
+   centre so the headline never fights it, and stilled for reduced-motion. */
+@keyframes node-drift {
+  0%, 100% { transform: translate(-50%, -50%); }
+  50%      { transform: translate(-50%, calc(-50% - 9px)); }
+}
+@keyframes wire-flow  { to { stroke-dashoffset: -28; } }
+@keyframes wire-breathe { 0%, 100% { opacity: .35; } 50% { opacity: .85; } }
 
 @keyframes live-pulse {
   0%   { box-shadow: 0 0 0 0 rgba(0, 182, 213, 0.42); }

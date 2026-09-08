@@ -6,7 +6,7 @@ export default function PrivacyPolicyPage() {
     return (
         <>
             <Seo {...PAGE_SEO.privacy} schema={[]} crumbs={[{ name: 'Privacy Policy', path: '/privacy-policy' }]} />
-            <div className="pt-14 pb-24 relative">
+            <div className="pt-14 pb-24 relative overflow-x-hidden">
                 {/* Background elements */}
                 <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#F59E0B]/5 to-transparent pointer-events-none" />
             
@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
 
                         <div className="bg-white/80 dark:bg-white/[0.02] border border-gray-200/50 dark:border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-sm">
                             <p className="text-sm text-text-secondary mb-10 pb-4 border-b border-gray-200 dark:border-white/10">
-                                <strong className="text-text-primary">Last updated:</strong> June 10, 2026 &nbsp;·&nbsp; Applies to: EduAnant web platform & EduAnant mobile app (package: <code className="text-xs bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 rounded">cloud.eduanant.app</code>)
+                                <strong className="text-text-primary break-words">Last updated:</strong> June 10, 2026 &nbsp;·&nbsp; Applies to: EduAnant web platform & EduAnant mobile app (package: <code className="text-xs bg-gray-100 dark:bg-white/10 px-1.5 py-0.5 rounded">cloud.eduanant.app</code>)
                             </p>
                         
                             <div className="space-y-10 text-text-secondary leading-relaxed text-base md:text-lg">
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
                                         <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">1</span>
                                         Introduction and Role
                                     </h3>
-                                    <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies LLP) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary">Data Processor</strong> for the schools (the <strong className="text-text-primary">Data Fiduciary</strong>) that use our platform.</p>
+                                    <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies LLP) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary break-words">Data Processor</strong> for the schools (the <strong className="text-text-primary break-words">Data Fiduciary</strong>) that use our platform.</p>
                                 </section>
                             
                                 <section>
@@ -51,7 +51,7 @@ export default function PrivacyPolicyPage() {
                                         ].map(([item, desc]) => (
                                             <li key={item} className="flex gap-3 items-start">
                                                 <span className="mt-1.5 w-2 h-2 rounded-full bg-[#F59E0B] shrink-0" />
-                                                <span><strong className="text-text-primary">{item}:</strong> {desc}</span>
+                                                <span><strong className="text-text-primary break-words">{item}:</strong> {desc}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
                                          <span className="w-8 h-8 rounded-lg bg-[#F59E0B]/10 text-[var(--accent-text)] flex items-center justify-center text-sm font-black shrink-0">3</span>
                                         Mobile App & Device Permissions
                                     </h3>
-                                    <p className="mb-4">The EduAnant mobile application (package name: <strong className="text-text-primary">cloud.eduanant.app</strong>) provides access to the school portals and supports native features like push notifications. The app itself does <strong className="text-text-primary">not collect or store any personal data</strong> on our servers beyond what is required to maintain your login session and deliver notifications.</p>
+                                    <p className="mb-4">The EduAnant mobile application (package name: <strong className="text-text-primary break-words">cloud.eduanant.app</strong>) provides access to the school portals and supports native features like push notifications. The app itself does <strong className="text-text-primary break-words">not collect or store any personal data</strong> on our servers beyond what is required to maintain your login session and deliver notifications.</p>
                                     <p className="mb-4 font-semibold text-text-primary">Permissions requested by the app:</p>
                                     <ul className="space-y-2 list-none">
                                         {[
@@ -73,7 +73,7 @@ export default function PrivacyPolicyPage() {
                                         ].map(([perm, desc]) => (
                                             <li key={perm} className="flex gap-3 items-start">
                                                 <span className="mt-1.5 w-2 h-2 rounded-full bg-[#F59E0B] shrink-0" />
-                                                <span><strong className="text-text-primary">{perm}:</strong> {desc}</span>
+                                                <span><strong className="text-text-primary break-words">{perm}:</strong> {desc}</span>
                                             </li>
                                         ))}
                                     </ul>
@@ -84,7 +84,7 @@ export default function PrivacyPolicyPage() {
                                         <span className="w-8 h-8 rounded-lg bg-red-500/10 text-red-500 flex items-center justify-center text-sm font-black shrink-0">4</span>
                                         Processing of Children's Data
                                     </h3>
-                                    <p>In compliance with the DPDP Act 2023, processing data of individuals under 18 requires verifiable parental consent. <strong className="text-text-primary">It is the strict legal responsibility of the subscribing School</strong> to obtain this consent before entering any student data into the EduAnant platform. EduAnant relies entirely on the School's authorization to process this data. The EduAnant app is intended for use by school administrators and staff, not directly by children.</p>
+                                    <p>In compliance with the DPDP Act 2023, processing data of individuals under 18 requires verifiable parental consent. <strong className="text-text-primary break-words">It is the strict legal responsibility of the subscribing School</strong> to obtain this consent before entering any student data into the EduAnant platform. EduAnant relies entirely on the School's authorization to process this data. The EduAnant app is intended for use by school administrators and staff, not directly by children.</p>
                                 </section>
                             
                                 <section>

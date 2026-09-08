@@ -132,15 +132,15 @@ export default function ContactPage() {
                                     <motion.a key={c.label} href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined}
                                         rel="noopener noreferrer"
                                         initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
-                                        className="flex items-start gap-4 p-5 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#F59E0B]/40 transition-all group">
+                                        className="flex items-start gap-3 sm:gap-4 p-4 sm:p-5 min-w-0 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#F59E0B]/40 transition-all group">
                                         <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
                                             style={{ background: 'linear-gradient(135deg, #1E1B4B, #F59E0B)' }}>
                                             <Icon className="w-5 h-5 text-white" />
                                         </div>
-                                        <div>
+                                        <div className="min-w-0">
                                             <p className="text-xs font-black uppercase tracking-wider text-text-secondary mb-1">{c.label}</p>
-                                            <p className="font-black text-text-primary">{c.value}</p>
-                                            <p className="text-xs text-text-secondary mt-0.5">{c.sub}</p>
+                                            <p className="font-black text-text-primary break-words">{c.value}</p>
+                                            <p className="text-xs text-text-secondary mt-0.5 break-words">{c.sub}</p>
                                         </div>
                                     </motion.a>
                                 );
@@ -246,12 +246,12 @@ export default function ContactPage() {
                                     </div>
 
                                     {/* Math challenge */}
-                                    <div className={`flex items-center gap-3 p-4 rounded-xl border ${
+                                    <div className={`flex flex-wrap items-center gap-3 p-4 rounded-xl border ${
                                         mathError
                                             ? 'border-red-400 bg-red-50 dark:bg-red-900/20'
                                             : 'border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03]'
                                     }`}>
-                                        <span className="text-sm font-black text-text-secondary uppercase tracking-wider whitespace-nowrap">
+                                        <span className="text-xs sm:text-sm font-black text-text-secondary uppercase tracking-wider">
                                             Verify you're human:
                                         </span>
                                         <span className="text-base font-black text-text-primary" style={{ color: 'var(--accent-text)' }}>
@@ -266,11 +266,11 @@ export default function ContactPage() {
                                             placeholder="?"
                                             required
                                             autoComplete="off"
-                                            className="w-20 px-3 py-2 rounded-lg border border-gray-200/70 dark:border-white/15 bg-white dark:bg-white/[0.06] text-text-primary text-sm font-bold text-center focus:outline-none focus:ring-2"
+                                            className="w-16 sm:w-20 shrink-0 px-2 sm:px-3 py-2 rounded-lg border border-gray-200/70 dark:border-white/15 bg-white dark:bg-white/[0.06] text-text-primary text-sm font-bold text-center focus:outline-none focus:ring-2"
                                             style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as React.CSSProperties}
                                         />
                                         <button type="button" onClick={refreshMath}
-                                            className="text-xs text-text-secondary hover:text-text-primary underline ml-auto shrink-0">
+                                            className="text-xs text-text-secondary hover:text-text-primary underline sm:ml-auto shrink-0">
                                             New question
                                         </button>
                                     </div>

@@ -184,12 +184,12 @@ export default function SecurityPage() {
                             {/* Rings pulsing out from the shield in the panel's corner.
                                 Sized so a clean arc clears the panel edge instead of
                                 reading as a stray line. */}
-                            <div aria-hidden className="absolute -top-14 -left-14 w-56 h-56 pointer-events-none">
+                            <div aria-hidden className="hidden lg:block absolute -top-14 -left-14 w-56 h-56 pointer-events-none">
                                 <span className="security-ring inset-0" />
                                 <span className="security-ring inset-0" style={{ animationDelay: '1.15s' }} />
                                 <span className="security-ring inset-0" style={{ animationDelay: '2.3s' }} />
                             </div>
-                            <div aria-hidden className="absolute -bottom-16 -right-12 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                            <div aria-hidden className="hidden lg:block absolute bottom-0 right-0 w-48 h-48 rounded-full blur-3xl pointer-events-none"
                                 style={{ background: 'radial-gradient(circle, rgba(0,182,213,0.22), transparent 70%)' }} />
 
                             <div className="relative rounded-3xl border border-white/10 shadow-2xl shadow-indigo-950/30 overflow-hidden

@@ -68,7 +68,7 @@ export default function Header() {
                             const isActive = link.href === '/' ? pathname === '/' : pathname === link.href;
                             return (
                                 <Link key={link.label} to={link.href}
-                                    className={`relative px-4 py-2 text-sm font-semibold font-display tracking-tight transition-colors group ${isActive ? 'text-[var(--primary-main)] dark:text-white' : 'text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white'}`}>
+                                    className={`relative px-2.5 xl:px-4 py-2 text-sm font-semibold font-display tracking-tight transition-colors group ${isActive ? 'text-[var(--primary-main)] dark:text-white' : 'text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white'}`}>
                                     {link.label}
                                     <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 transition-all duration-300 rounded-full ${isActive ? 'w-3/4' : 'w-0 group-hover:w-3/4'}`}
                                         style={{ background: 'linear-gradient(90deg, #F59E0B, #EA580C)' }} />

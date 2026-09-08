@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from 'react';
 import { ArrowRight, CheckCircle, GraduationCap, Users, Shield, PhoneCall } from 'lucide-react';
 import { TopBar, SideBar } from './ProductDemoSection';
 import GooglePlayBadge from './GooglePlayBadge';
+import HeroConstellation from './HeroConstellation';
 import { Link } from 'react-router-dom';
 
 
@@ -215,6 +216,7 @@ export default function HeroSection() {
             <motion.div style={{ x: useTransform(springX, v => -v), y: useTransform(springY, v => -v) }}
                 className="absolute bottom-[-15%] right-[-10%] w-[55%] h-[55%] bg-secondary-main/15 dark:bg-secondary-main/10 rounded-full blur-[140px] pointer-events-none" />
             <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%221%22%20fill%3D%22currentColor%22%20opacity%3D%220.15%22/%3E%3C/g%3E%3C/svg%3E')] opacity-30 dark:opacity-10 text-gray-400 pointer-events-none" />
+            <HeroConstellation />
 
             <div className="container mx-auto px-6 relative z-10 max-w-6xl w-full min-w-0">
                 <motion.div style={{ y: yText, opacity: opacityText }} className="text-center">
@@ -251,9 +253,9 @@ export default function HeroSection() {
                     {/* Sub */}
                     <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="text-lg md:text-xl text-text-secondary mb-4 max-w-2xl mx-auto leading-relaxed font-medium">
-                        Admissions · Fees · Attendance · Exams · Transport · HR · Library · Reception —
-                        built for <span className="font-bold text-text-primary">schools of all sizes — small, growing, or large.</span>
+                        className="text-base sm:text-lg md:text-xl text-text-secondary mb-4 max-w-3xl mx-auto leading-relaxed font-medium">
+                        From the morning bell to the last receipt of the day —
+                        <span className="font-bold text-text-primary"> one system, no internet needed.</span>
                     </motion.p>
 
                     {/* School type ticker */}
