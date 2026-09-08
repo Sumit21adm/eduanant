@@ -1,7 +1,21 @@
 name: Application-Website Build and Deploy
 
 on:
+  # Tagging is the release: `git tag v1.1.0 && git push origin v1.1.0` builds,
+  # deploys, and stamps that exact version into the footer. Manual runs stay
+  # available for hotfixes and re-deploys.
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to stamp (e.g. v1.1.0). Defaults to package.json.'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
 
 jobs:
   deploy:
@@ -9,6 +23,21 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # tags and history, so the build can describe itself
+
+      - name: Resolve release version
+        id: version
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            VERSION="${GITHUB_REF_NAME}"
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="v$(node -p "require('./package.json').version")"
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Releasing $VERSION ($(git rev-parse --short HEAD))"
 
       - name: Prepare Deployment Directory on VPS
         uses: appleboy/ssh-action@v1.0.3
@@ -36,9 +65,24 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /opt/eduanant-app-website
+            # The version and commit are baked into the bundle at build time and
+            # shown in the site footer, so what is on screen always identifies
+            # the artefact actually serving it.
+            export APP_VERSION="${{ steps.version.outputs.version }}"
+            export GITHUB_SHA="${{ github.sha }}"
             # Build the new image FIRST — if this fails, old container keeps running (no 502)
-            docker compose build --no-cache
+            docker compose build --no-cache \
+              --build-arg APP_VERSION="$APP_VERSION" \
+              --build-arg GITHUB_SHA="${{ github.sha }}"
             # Only bring down old container after successful build
             docker compose down
             docker compose up -d
             docker image prune -f
+
+      - name: Publish GitHub Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: EduAnant Website ${{ steps.version.outputs.version }}
+          generate_release_notes: true

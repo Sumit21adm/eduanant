@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { LayoutDashboard, Users, GraduationCap, CreditCard, Bus, UserCog, Settings, Library, ConciergeBell, Search, Plus, Download, ChevronDown, CheckCircle2, Moon, RotateCcw, Sparkles, PieChart, TrendingUp, IndianRupee } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { LayoutDashboard, Users, GraduationCap, CreditCard, Bus, UserCog, Settings, Library, ConciergeBell, Search, Plus, Download, ArrowRight, ChevronDown, CheckCircle2, Moon, RotateCcw, Sparkles, PieChart, TrendingUp, IndianRupee } from 'lucide-react';
 
 // ─── Shared UI Components ────────────────────────────────────────────────────
 
@@ -26,7 +27,7 @@ export function TopBar() {
                 </div>
                 <div className="flex items-center gap-2 border-l border-gray-200 dark:border-gray-700 pl-3">
                     <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
-                        <Users className="w-3.5 h-3.5 text-gray-500" />
+                        <Users className="w-3.5 h-3.5 text-gray-500 dark:text-gray-400" />
                     </div>
                 </div>
             </div>
@@ -53,7 +54,7 @@ export function SideBar({ activeId }: { activeId: string }) {
                 {nav.map(n => {
                     const isActive = activeId === n.id || (activeId === 'reports' && n.id === 'fees');
                     return (
-                        <div key={n.id} title={n.label} className={`flex items-center justify-center w-10 h-10 mx-auto rounded-xl transition-colors cursor-pointer ${isActive ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                        <div key={n.id} title={n.label} className={`flex items-center justify-center w-10 h-10 mx-auto rounded-xl transition-colors cursor-pointer ${isActive ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:bg-[#15181e] dark:hover:bg-gray-800'}`}>
                             <n.icon className={`w-5 h-5 ${isActive ? 'fill-blue-500/10' : ''}`} />
                         </div>
                     );
@@ -83,7 +84,7 @@ function DashboardSim() {
                             <k.i className={`w-5 h-5 ${k.c}`} />
                         </div>
                         <div>
-                            <p className="text-[10px] text-gray-500 font-semibold">{k.l}</p>
+                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold">{k.l}</p>
                             <p className={`text-xl font-bold ${k.c}`}>{k.v}</p>
                             <p className="text-[8px] text-gray-400">{k.sub}</p>
                         </div>
@@ -97,7 +98,7 @@ function DashboardSim() {
                             <TrendingUp className="w-4 h-4 text-blue-500" />
                             <span className="text-xs font-bold text-gray-800 dark:text-gray-200">Attendance Trend</span>
                         </div>
-                        <span className="text-[10px] border px-2 py-1 rounded bg-gray-50 dark:bg-gray-800 text-gray-500">This Week ▼</span>
+                        <span className="text-[10px] border dark:border-white/10 px-2 py-1 rounded bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400">This Week ▼</span>
                     </div>
                     <div className="flex-1 border-b border-l border-gray-100 dark:border-gray-800 relative">
                         <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-blue-500" />
@@ -116,7 +117,7 @@ function DashboardSim() {
                         <div className="absolute inset-0 flex items-center justify-center flex-col">
                         </div>
                     </div>
-                    <div className="flex justify-center gap-4 text-[9px] font-semibold text-gray-500 mt-4">
+                    <div className="flex justify-center gap-4 text-[9px] font-semibold text-gray-500 dark:text-gray-400 mt-4">
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-blue-500 rounded-sm"/>Female</span>
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-emerald-400 rounded-sm"/>Male</span>
                     </div>
@@ -132,10 +133,10 @@ function AdmissionsSim() {
             <div className="flex justify-between items-center">
                 <div>
                     <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100">Student Admissions</h2>
-                    <p className="text-[10px] text-gray-500">Manage student admissions and records</p>
+                    <p className="text-[10px] text-gray-500 dark:text-gray-400">Manage student admissions and records</p>
                 </div>
                 <div className="flex gap-2">
-                    <button className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 shadow-sm"><Download className="w-3.5 h-3.5"/> Export</button>
+                    <button className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-lg text-xs font-semibold text-gray-700 dark:text-gray-300 shadow-sm"><Download className="w-3.5 h-3.5"/> Export</button>
                     <button className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold shadow-sm"><Plus className="w-3.5 h-3.5"/> New Admission</button>
                 </div>
             </div>
@@ -152,7 +153,7 @@ function AdmissionsSim() {
                             <k.i className={`w-5 h-5 ${k.c}`} />
                         </div>
                         <div>
-                            <p className="text-[10px] text-gray-500 font-semibold">{k.l}</p>
+                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold">{k.l}</p>
                             <p className={`text-xl font-bold ${k.c}`}>{k.v}</p>
                         </div>
                     </div>
@@ -160,19 +161,19 @@ function AdmissionsSim() {
             </div>
 
             <div className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-3 flex gap-2 shadow-sm">
-                <div className="flex-1 flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-lg bg-gray-50">
+                <div className="flex-1 flex items-center gap-2 px-3 py-1.5 border border-gray-200 dark:border-white/10 rounded-lg bg-gray-50 dark:bg-white/5">
                     <Search className="w-4 h-4 text-gray-400" />
                     <span className="text-xs text-gray-400">Search by name or ID...</span>
                 </div>
                 {['Class', 'Section', 'Student Type', 'Status (Active)'].map(f => (
-                    <div key={f} className="flex items-center gap-2 px-3 py-1.5 border border-gray-200 rounded-lg bg-white text-xs text-gray-600 font-medium">
+                    <div key={f} className="flex items-center gap-2 px-3 py-1.5 border border-gray-200 dark:border-white/10 rounded-lg bg-white dark:bg-[#1a1d24] text-xs text-gray-600 dark:text-gray-400 font-medium">
                         {f} <ChevronDown className="w-3 h-3 text-gray-400" />
                     </div>
                 ))}
             </div>
 
             <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden flex flex-col">
-                <div className="grid grid-cols-7 gap-2 p-3 border-b border-gray-100 bg-gray-50/50 text-[10px] font-bold text-gray-500 uppercase">
+                <div className="grid grid-cols-7 gap-2 p-3 border-b border-gray-100 dark:border-white/[0.07] bg-gray-50/50 dark:bg-white/[0.03] text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">
                     <span>Photo</span><span>Student ID</span><span className="col-span-2">Name</span><span>Class</span><span>Phone</span><span>Status</span>
                 </div>
                 <div className="flex-1 overflow-hidden">
@@ -181,10 +182,10 @@ function AdmissionsSim() {
                         { id: '1002', n: 'John Smith', c: 'XII-Science-A', p: '+1 555-0101' },
                         { id: '1003', n: 'Alex Johnson', c: 'XII-Com-A', p: '+1 555-0102' },
                     ].map(s => (
-                        <div key={s.id} className="grid grid-cols-7 gap-2 p-3 border-b border-gray-50 items-center text-xs text-gray-700">
+                        <div key={s.id} className="grid grid-cols-7 gap-2 p-3 border-b border-gray-50 dark:border-white/[0.06] items-center text-xs text-gray-700 dark:text-gray-300">
                             <div><div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">{s.n[0]}</div></div>
                             <span className="font-semibold">{s.id}</span>
-                            <span className="col-span-2 font-bold text-gray-900">{s.n}</span>
+                            <span className="col-span-2 font-bold text-gray-900 dark:text-gray-100">{s.n}</span>
                             <span>{s.c}</span>
                             <span>{s.p}</span>
                             <div><span className="px-2 py-0.5 rounded bg-green-500/10 text-green-600 font-bold text-[9px]">Active</span></div>
@@ -199,9 +200,9 @@ function AdmissionsSim() {
 function FeeCollectionSim() {
     return (
         <div className="p-4 flex flex-col gap-4 h-full bg-gray-50 dark:bg-[#111318]">
-            <div className="flex gap-4 border-b border-gray-200 pb-2">
+            <div className="flex gap-4 border-b border-gray-200 dark:border-white/10 pb-2">
                 <span className="text-sm font-bold text-blue-600 border-b-2 border-blue-600 pb-2">Fee Collection</span>
-                <span className="text-sm font-semibold text-gray-500 pb-2">Financial History</span>
+                <span className="text-sm font-semibold text-gray-500 dark:text-gray-400 pb-2">Financial History</span>
             </div>
             
             <div className="flex gap-4 flex-1">
@@ -209,16 +210,16 @@ function FeeCollectionSim() {
                     <div className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-sm">
                         <div className="flex gap-3 mb-4">
                             <div className="flex-1">
-                                <p className="text-[10px] text-gray-500 mb-1">Session</p>
-                                <div className="p-2 border rounded text-xs text-gray-700 bg-gray-50">APR 2026 - MAR 2027</div>
+                                <p className="text-[10px] text-gray-500 dark:text-gray-400 mb-1">Session</p>
+                                <div className="p-2 border dark:border-white/10 rounded text-xs text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-white/5">APR 2026 - MAR 2027</div>
                             </div>
                             <div className="flex-[2]">
-                                <p className="text-[10px] text-gray-500 mb-1">Search Student</p>
-                                <div className="p-2 border rounded text-xs text-gray-700 bg-white flex justify-between">Alex Johnson (1003) - XII-Com-A <ChevronDown className="w-4 h-4"/></div>
+                                <p className="text-[10px] text-gray-500 dark:text-gray-400 mb-1">Search Student</p>
+                                <div className="p-2 border dark:border-white/10 rounded text-xs text-gray-700 dark:text-gray-300 bg-white dark:bg-[#1a1d24] flex justify-between">Alex Johnson (1003) - XII-Com-A <ChevronDown className="w-4 h-4"/></div>
                             </div>
                         </div>
                         
-                        <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3 mb-4 flex items-start gap-2">
+                        <div className="bg-blue-50/50 border dark:border-white/10 border-blue-100 rounded-lg p-3 mb-4 flex items-start gap-2">
                             <div className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs mt-0.5">i</div>
                             <div>
                                 <p className="text-sm font-bold text-blue-900">Alex Johnson</p>
@@ -226,25 +227,25 @@ function FeeCollectionSim() {
                             </div>
                         </div>
 
-                        <div className="border border-gray-200 rounded-lg overflow-hidden">
-                            <div className="grid grid-cols-4 gap-2 bg-gray-50 p-2 text-[10px] font-bold text-gray-500 uppercase border-b">
+                        <div className="border border-gray-200 dark:border-white/10 rounded-lg overflow-hidden">
+                            <div className="grid grid-cols-4 gap-2 bg-gray-50 dark:bg-white/5 p-2 text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase border-b">
                                 <span className="col-span-2">Fee Type</span><span>Amount</span><span className="text-right">Net Amount</span>
                             </div>
                             <div className="p-2">
                                 <div className="inline-block px-2 py-0.5 bg-blue-500 text-white text-[9px] font-bold rounded mb-2">Apr 2026</div>
                                 <div className="grid grid-cols-4 gap-2 text-xs items-center mb-2">
-                                    <span className="col-span-2 font-semibold text-gray-700">Tuition Fee</span>
-                                    <div className="border rounded p-1.5 text-gray-700">₹ 3000</div>
-                                    <span className="text-right font-bold text-gray-900">₹3,000</span>
+                                    <span className="col-span-2 font-semibold text-gray-700 dark:text-gray-300">Tuition Fee</span>
+                                    <div className="border dark:border-white/10 rounded p-1.5 text-gray-700 dark:text-gray-300">₹ 3000</div>
+                                    <span className="text-right font-bold text-gray-900 dark:text-gray-100">₹3,000</span>
                                 </div>
                                 <div className="grid grid-cols-4 gap-2 text-xs items-center">
-                                    <span className="col-span-2 font-semibold text-gray-700">Development Fee</span>
-                                    <div className="border rounded p-1.5 text-gray-700">₹ 1500</div>
-                                    <span className="text-right font-bold text-gray-900">₹1,500</span>
+                                    <span className="col-span-2 font-semibold text-gray-700 dark:text-gray-300">Development Fee</span>
+                                    <div className="border dark:border-white/10 rounded p-1.5 text-gray-700 dark:text-gray-300">₹ 1500</div>
+                                    <span className="text-right font-bold text-gray-900 dark:text-gray-100">₹1,500</span>
                                 </div>
                             </div>
-                            <div className="bg-gray-50 p-3 border-t flex justify-between items-center">
-                                <span className="text-xs font-bold text-gray-700">PAYMENT MODES</span>
+                            <div className="bg-gray-50 dark:bg-white/5 p-3 border-t flex justify-between items-center">
+                                <span className="text-xs font-bold text-gray-700 dark:text-gray-300">PAYMENT MODES</span>
                                 <span className="text-sm font-black text-blue-600">Total: ₹4,500</span>
                             </div>
                         </div>
@@ -252,8 +253,8 @@ function FeeCollectionSim() {
                 </div>
                 
                 <div className="flex-1 flex flex-col gap-3">
-                    <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex flex-col gap-3">
-                        <p className="font-bold text-gray-800 mb-1">Fee Summary</p>
+                    <div className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex flex-col gap-3">
+                        <p className="font-bold text-gray-800 dark:text-gray-100 mb-1">Fee Summary</p>
                         <div className="bg-blue-500 text-white p-3 rounded-lg flex flex-col justify-center">
                             <p className="text-[10px] font-bold opacity-80 uppercase tracking-wide">Total Net Fee</p>
                             <p className="text-xl font-black">₹4,500</p>
@@ -277,15 +278,15 @@ function FeeCollectionSim() {
 function FeeReportsSim() {
     return (
         <div className="p-4 flex flex-col gap-4 h-full bg-gray-50 dark:bg-[#111318]">
-            <div className="flex gap-4 border-b border-gray-200 pb-2 overflow-x-auto">
+            <div className="flex gap-4 border-b border-gray-200 dark:border-white/10 pb-2 overflow-x-auto">
                 {['Daily Collection', 'Outstanding Dues', 'Bill Record', 'Bill Discounts', 'Fee Analysis', 'Alumni Dues'].map((t, i) => (
-                    <span key={t} className={`text-sm whitespace-nowrap ${i === 4 ? 'font-bold text-blue-600 border-b-2 border-blue-600' : 'font-semibold text-gray-500'} pb-2`}>{t}</span>
+                    <span key={t} className={`text-sm whitespace-nowrap ${i === 4 ? 'font-bold text-blue-600 border-b-2 border-blue-600' : 'font-semibold text-gray-500 dark:text-gray-400'} pb-2`}>{t}</span>
                 ))}
             </div>
             
-            <div className="bg-white border border-gray-200 rounded-xl p-3 shadow-sm flex items-center justify-between">
-                <div className="px-3 py-1.5 border border-gray-200 rounded-lg text-xs text-gray-600 bg-gray-50">Filter by Class ▼</div>
-                <button className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-blue-600"><Download className="w-3.5 h-3.5"/> Export Excel</button>
+            <div className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-3 shadow-sm flex items-center justify-between">
+                <div className="px-3 py-1.5 border border-gray-200 dark:border-white/10 rounded-lg text-xs text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-white/5">Filter by Class ▼</div>
+                <button className="flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-lg text-xs font-semibold text-blue-600"><Download className="w-3.5 h-3.5"/> Export Excel</button>
             </div>
 
             <div className="flex gap-3 overflow-x-auto pb-2">
@@ -296,7 +297,7 @@ function FeeReportsSim() {
                     { l: 'Pending (Unpaid)', v: '₹3,000,000', c: 'text-red-500' },
                     { l: 'Total Discounts', v: '₹50,000', c: 'text-orange-500' },
                 ].map(k => (
-                    <div key={k.l} className="bg-white border border-gray-200 rounded-xl p-3 min-w-[140px] shadow-sm shrink-0">
+                    <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-3 min-w-[140px] shadow-sm shrink-0">
                         <p className={`text-[10px] font-bold ${k.c} mb-1 flex items-center gap-1`}><div className={`w-1.5 h-1.5 rounded-full ${k.c.replace('text-', 'bg-')}`}/> {k.l}</p>
                         <p className={`text-sm font-black ${k.c}`}>{k.v}</p>
                     </div>
@@ -304,22 +305,22 @@ function FeeReportsSim() {
             </div>
 
             <div className="flex gap-4 flex-1 min-h-0">
-                <div className="flex-1 bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex flex-col">
-                    <p className="text-xs font-bold text-gray-800 mb-4">Collection Overview</p>
+                <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex flex-col">
+                    <p className="text-xs font-bold text-gray-800 dark:text-gray-100 mb-4">Collection Overview</p>
                     <div className="flex-1 flex items-center justify-center">
                         <div className="w-32 h-32 rounded-full border-[16px] border-red-500 border-l-green-500 border-t-green-500 relative transform -rotate-12" />
                     </div>
-                    <div className="flex justify-center gap-3 text-[8px] font-semibold text-gray-500 mt-2">
+                    <div className="flex justify-center gap-3 text-[8px] font-semibold text-gray-500 dark:text-gray-400 mt-2">
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-sm"/>Collected: ₹5.5M</span>
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-red-500 rounded-sm"/>Pending: ₹3.0M</span>
                     </div>
                 </div>
-                <div className="flex-1 bg-white border border-gray-200 rounded-xl p-4 shadow-sm flex flex-col">
-                    <p className="text-xs font-bold text-gray-800 mb-4">Fee Distribution by Frequency</p>
+                <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex flex-col">
+                    <p className="text-xs font-bold text-gray-800 dark:text-gray-100 mb-4">Fee Distribution by Frequency</p>
                     <div className="flex-1 flex items-center justify-center">
                         <div className="w-32 h-32 rounded-full border-[16px] border-green-500 border-r-orange-400 relative transform rotate-45" />
                     </div>
-                    <div className="flex justify-center gap-3 text-[8px] font-semibold text-gray-500 mt-2">
+                    <div className="flex justify-center gap-3 text-[8px] font-semibold text-gray-500 dark:text-gray-400 mt-2">
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-green-500 rounded-sm"/>Yearly: ₹4.5M</span>
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-orange-400 rounded-sm"/>Monthly: ₹1.0M</span>
                     </div>
@@ -348,31 +349,42 @@ export default function ProductDemoSection() {
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-14">
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-main/10 text-primary-main text-xs font-bold uppercase tracking-widest border border-primary-main/20 mb-5">
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary-main/10 dark:bg-white/[0.06] text-primary-main dark:text-slate-200 text-xs font-bold uppercase tracking-widest border border-primary-main/20 dark:border-white/15 mb-5">
                         <Sparkles className="w-3.5 h-3.5" /> Live Product Preview
                     </motion.div>
-                    <h2 className="text-4xl md:text-6xl font-black text-text-primary mb-4 leading-tight">
+                    <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-4 leading-tight">
                         See it working.<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-main to-secondary-main">Right here. Right now.</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B45309] via-[#EA580C] to-[#F59E0B] dark:from-[#FBBF24] dark:via-[#F59E0B] dark:to-[#FB923C]">Right here. Right now.</span>
                     </h2>
-                    <p className="text-lg text-text-secondary max-w-2xl mx-auto">These are real screens from EduAnant — not mockups. This is exactly what your admin, teachers, and students will use every day.</p>
+                    <p className="text-lg text-text-secondary max-w-2xl mx-auto">A faithful preview of the screens your staff and parents use every day. Open the live demo and click through the real thing yourself.</p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                     {/* Feature Selectors */}
-                    <div className="lg:col-span-3 flex lg:flex-col gap-3 overflow-x-auto pb-4 lg:pb-0">
+                    <div className="lg:col-span-3 flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0">
                         {SCREENS.map((s, i) => (
-                            <motion.button key={s.id} onClick={() => setActive(i)} whileHover={{ x: 4 }}
-                                className={`flex flex-col p-4 rounded-2xl border text-left transition-all duration-300 min-w-[200px] lg:min-w-0 ${i === active ? 'bg-white dark:bg-[#1a1d24] border-primary-main/50 shadow-lg ring-1 ring-primary-main/20' : 'bg-gray-50/50 dark:bg-white/[0.02] border-gray-200 dark:border-white/10 hover:border-primary-main/30'}`}>
-                                <h3 className={`font-black text-sm mb-1 ${i === active ? 'text-primary-main' : 'text-gray-800 dark:text-gray-200'}`}>{s.label}</h3>
-                                <p className="text-[11px] text-gray-500 leading-relaxed hidden sm:block">{s.desc}</p>
+                            <motion.button key={s.id} onClick={() => setActive(i)}
+                                className={`flex flex-col p-4 rounded-2xl border text-left transition-all duration-300 min-w-[200px] lg:min-w-0 lg:hover:-translate-y-1 lg:hover:shadow-lg ${i === active ? 'bg-white dark:bg-[#1a1d24] border-primary-main/50 dark:border-[#00b6d5]/50 shadow-lg ring-1 ring-primary-main/20 dark:ring-[#00b6d5]/25' : 'bg-gray-50/50 dark:bg-white/[0.02] border-gray-200 dark:border-white/10 hover:border-primary-main/30'}`}>
+                                <h3 className={`font-black text-sm mb-1 ${i === active ? 'text-primary-main dark:text-[#00b6d5]' : 'text-gray-800 dark:text-gray-200'}`}>{s.label}</h3>
+                                <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed hidden sm:block">{s.desc}</p>
                             </motion.button>
                         ))}
+
+                        <Link to="/demo" className="shrink-0 lg:mt-1">
+                            <div className="btn-live flex items-center gap-2.5 p-4 rounded-2xl min-w-[200px] lg:min-w-0 h-full lg:h-auto justify-center">
+                                <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00b6d5] opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00b6d5]" />
+                                </span>
+                                <span className="text-sm font-bold whitespace-nowrap">Experience it live</span>
+                                <ArrowRight className="w-4 h-4 shrink-0" strokeWidth={1.5} />
+                            </div>
+                        </Link>
                     </div>
 
                     {/* App Window */}
                     <motion.div key={active} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}
-                        className="lg:col-span-9 rounded-2xl overflow-hidden border border-gray-200/80 dark:border-white/10 bg-white shadow-2xl shadow-blue-900/5">
+                        className="lg:col-span-9 rounded-2xl overflow-hidden border border-gray-200/80 dark:border-white/[0.07] bg-white dark:bg-[#111318] shadow-2xl shadow-blue-900/5 dark:shadow-black/40">
                         
                         {/* Browser Chrome */}
                         <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-[#15181e] border-b border-gray-200 dark:border-white/10">
@@ -382,8 +394,8 @@ export default function ProductDemoSection() {
                                 <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
                             </div>
                             <div className="ml-4 flex-1 flex justify-center">
-                                <div className="flex items-center gap-2 bg-white dark:bg-[#1a1d24] text-gray-500 text-[10px] px-6 py-1.5 rounded-full border border-gray-200 dark:border-white/10 font-mono w-full max-w-sm">
-                                    app.eduanant.cloud/{screen.id}
+                                <div className="flex items-center gap-2 bg-white dark:bg-[#1a1d24] text-gray-500 dark:text-gray-400 text-[10px] px-6 py-1.5 rounded-full border border-gray-200 dark:border-white/10 font-mono w-full max-w-sm">
+                                    demo.eduanant.cloud
                                 </div>
                             </div>
                         </div>

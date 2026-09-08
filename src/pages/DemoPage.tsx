@@ -15,6 +15,8 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import InfoIcon from '@mui/icons-material/Info';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import LockIcon from '@mui/icons-material/Lock';
+import Seo from '../lib/seo';
+import { PAGE_SEO } from '../lib/seoConfig';
 
 const DEMO_ROLES = [
     {
@@ -101,170 +103,173 @@ export default function DemoPage() {
     };
 
     return (
-        <div className="pt-28 pb-24 relative overflow-hidden">
-            {/* Ambient Background Accents */}
-            <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-1/4 right-1/10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <>
+            <Seo {...PAGE_SEO.demo} schema={[]} crumbs={[{ name: 'Live Demo', path: '/demo' }]} />
+            <div className="pt-14 pb-24 relative overflow-hidden">
+                {/* Ambient Background Accents */}
+                <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-1/4 right-1/10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="container mx-auto px-6 max-w-7xl relative z-10">
+                <div className="container mx-auto px-6 max-w-7xl relative z-10">
                 
-                {/* Hero Header Section */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                    >
-                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                            style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
-                            <AutoAwesomeIcon className="w-3.5 h-3.5" /> Open to anyone, no sign-up
-                        </span>
-                        <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-6 leading-none">
-                            Log in and<br />
-                            <span className="brand-text-gradient">have a look around.</span>
-                        </h1>
-                        <p className="text-xl text-text-secondary leading-relaxed">
-                            This is the current build of EduAnant, running on a school we made up. Pick a role below, sign in with the credentials shown, and use it exactly as that person would.
-                        </p>
-                    </motion.div>
-
-                    {/* Launch CTA */}
-                    <motion.div 
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
-                    >
-                        <a 
-                            href="https://demo.eduanant.cloud" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#00b6d5]/20 group transition-all"
+                    {/* Hero Header Section */}
+                    <div className="text-center max-w-3xl mx-auto mb-16">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
                         >
-                            Open the live demo <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </a>
-                    </motion.div>
-                </div>
+                            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
+                                style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
+                                <AutoAwesomeIcon className="w-3.5 h-3.5" /> Open to anyone, no sign-up
+                            </span>
+                            <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-6 leading-none">
+                                Log in and<br />
+                                <span className="brand-text-gradient">have a look around.</span>
+                            </h1>
+                            <p className="text-xl text-text-secondary leading-relaxed">
+                                This is the current build of EduAnant, running on a school we made up. Pick a role below, sign in with the credentials shown, and use it exactly as that person would.
+                            </p>
+                        </motion.div>
 
-                {/* Demo Info Banner */}
-                <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="max-w-4xl mx-auto p-5 rounded-2xl border mb-16 flex items-start gap-4 bg-white/50 dark:bg-white/[0.01]"
-                    style={{ borderColor: 'rgba(0,182,213,0.2)' }}
-                >
-                    <InfoIcon className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#00b6d5' }} />
-                    <div>
-                        <h3 className="font-black text-text-primary mb-1 text-base">Nothing here is real, so change whatever you like</h3>
-                        <p className="text-sm text-text-secondary leading-relaxed font-medium">
-                            The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. Every student, fee and mark in it is invented. Add records, edit them, collect a fee, print a receipt — it resets on its own, and no real child's data is involved.
-                        </p>
-                    </div>
-                </motion.div>
-
-                {/* Demo Roles Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {DEMO_ROLES.map((role, i) => {
-                        const IconComponent = role.icon;
-                        return (
-                            <motion.div
-                                key={role.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: i * 0.05, duration: 0.5 }}
-                                className="rounded-3xl border border-gray-200/50 dark:border-white/10 p-6 flex flex-col bg-white/70 dark:bg-[#0c131e]/50 backdrop-blur-md shadow-lg shadow-black/5 hover:shadow-xl transition-all hover:scale-[1.01]"
+                        {/* Launch CTA */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.2 }}
+                            className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center"
+                        >
+                            <a 
+                                href="https://demo.eduanant.cloud" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#F59E0B]/20 group transition-all"
                             >
-                                {/* Role Header */}
-                                <div className="flex items-center gap-4 mb-4">
-                                    <div className="p-3 rounded-2xl border" style={{ backgroundColor: role.bgColor, borderColor: 'rgba(0,182,213,0.1)' }}>
-                                        <IconComponent className="w-6 h-6 text-[#00b6d5]" />
-                                    </div>
-                                    <h3 className="text-xl font-black text-text-primary">{role.role}</h3>
-                                </div>
-
-                                {/* Description */}
-                                <p className="text-sm text-text-secondary mb-6 leading-relaxed flex-grow font-medium">
-                                    {role.description}
-                                </p>
-
-                                {/* Features Checklist */}
-                                <div className="mb-6 space-y-2">
-                                    <span className="text-xs font-bold text-text-secondary block uppercase tracking-wider mb-2">Capabilities:</span>
-                                    {role.features.map((feat) => (
-                                        <div key={feat} className="flex items-center gap-2 text-xs text-text-secondary font-medium">
-                                            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#00b6d5' }} />
-                                            <span>{feat}</span>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                {/* Credentials Panel */}
-                                <div className="mt-auto p-4 rounded-2xl bg-gray-100/60 dark:bg-white/[0.02] border border-gray-200/30 dark:border-white/5 space-y-3">
-                                    <div className="flex items-center justify-between text-xs">
-                                        <div className="flex items-center gap-1.5">
-                                            <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
-                                            <span className="font-bold text-text-primary">Sign in as this role</span>
-                                        </div>
-                                        <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline flex items-center gap-1 font-bold">
-                                            Log in <OpenInNewIcon className="w-3 h-3" />
-                                        </a>
-                                    </div>
-
-                                    {/* Username field */}
-                                    <div className="flex items-center justify-between bg-white dark:bg-black/20 p-2.5 rounded-xl border border-gray-200/40 dark:border-white/5">
-                                        <div className="overflow-hidden mr-2">
-                                            <span className="text-[10px] text-text-secondary block font-bold uppercase">Username</span>
-                                            <span className="text-xs font-mono text-text-primary truncate block">{role.username}</span>
-                                        </div>
-                                        <button 
-                                            onClick={() => handleCopy(role.username, `${role.id}-user`)}
-                                            className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
-                                            title="Copy Username"
-                                        >
-                                            {copiedField === `${role.id}-user` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
-                                        </button>
-                                    </div>
-
-                                    {/* Password field */}
-                                    <div className="flex items-center justify-between bg-white dark:bg-black/20 p-2.5 rounded-xl border border-gray-200/40 dark:border-white/5">
-                                        <div className="overflow-hidden mr-2">
-                                            <span className="text-[10px] text-text-secondary block font-bold uppercase">Password</span>
-                                            <span className="text-xs font-mono text-text-primary truncate block">{role.password}</span>
-                                        </div>
-                                        <button 
-                                            onClick={() => handleCopy(role.password, `${role.id}-pass`)}
-                                            className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
-                                            title="Copy Password"
-                                        >
-                                            {copiedField === `${role.id}-pass` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
-                                        </button>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
-                </div>
-
-                {/* Final CTA Area */}
-                <div className="mt-20 text-center max-w-2xl mx-auto">
-                    <h2 className="text-3xl font-black text-text-primary mb-4">Would you rather be shown around?</h2>
-                    <p className="text-text-secondary mb-8 leading-relaxed font-medium">
-                        Book a walkthrough and we will take you through it on a call, using your school's own structure — your classes, your fee heads, your board — instead of ours.
-                    </p>
-                    <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
-                        <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
-                            Open the live demo <OpenInNewIcon className="w-4 h-4" />
-                        </a>
-                        <span className="text-text-secondary text-sm font-bold">or</span>
-                        <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#00b6d5] text-text-primary text-sm font-bold transition-colors">
-                            Book a walkthrough
-                        </Link>
+                                Open the live demo <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                            </a>
+                        </motion.div>
                     </div>
-                </div>
 
+                    {/* Demo Info Banner */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="max-w-4xl mx-auto p-5 rounded-2xl border mb-16 flex items-start gap-4 bg-white/50 dark:bg-white/[0.01]"
+                        style={{ borderColor: 'rgba(245,158,11,0.2)' }}
+                    >
+                        <InfoIcon className="w-6 h-6 shrink-0 mt-0.5" style={{ color: 'var(--accent-text)' }} />
+                        <div>
+                            <h3 className="font-black text-text-primary mb-1 text-base">Nothing here is real, so change whatever you like</h3>
+                            <p className="text-sm text-text-secondary leading-relaxed font-medium">
+                                The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] dark:text-[#00b6d5] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. Every student, fee and mark in it is invented. Add records, edit them, collect a fee, print a receipt — it resets on its own, and no real child's data is involved.
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    {/* Demo Roles Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {DEMO_ROLES.map((role, i) => {
+                            const IconComponent = role.icon;
+                            return (
+                                <motion.div
+                                    key={role.id}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: i * 0.05, duration: 0.5 }}
+                                    className="rounded-3xl border border-gray-200/50 dark:border-white/10 p-6 flex flex-col bg-white/70 dark:bg-[#0c131e]/50 backdrop-blur-md shadow-lg shadow-black/5 hover:shadow-xl transition-all hover:scale-[1.01]"
+                                >
+                                    {/* Role Header */}
+                                    <div className="flex items-center gap-4 mb-4">
+                                        <div className="p-3 rounded-2xl border" style={{ backgroundColor: role.bgColor, borderColor: 'rgba(245,158,11,0.1)' }}>
+                                            <IconComponent className="w-6 h-6 text-[var(--accent-text)]" />
+                                        </div>
+                                        <h3 className="text-xl font-black text-text-primary">{role.role}</h3>
+                                    </div>
+
+                                    {/* Description */}
+                                    <p className="text-sm text-text-secondary mb-6 leading-relaxed flex-grow font-medium">
+                                        {role.description}
+                                    </p>
+
+                                    {/* Features Checklist */}
+                                    <div className="mb-6 space-y-2">
+                                        <span className="text-xs font-bold text-text-secondary block uppercase tracking-wider mb-2">Capabilities:</span>
+                                        {role.features.map((feat) => (
+                                            <div key={feat} className="flex items-center gap-2 text-xs text-text-secondary font-medium">
+                                                <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#F59E0B' }} />
+                                                <span>{feat}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Credentials Panel */}
+                                    <div className="mt-auto p-4 rounded-2xl bg-gray-100/60 dark:bg-white/[0.02] border border-gray-200/30 dark:border-white/5 space-y-3">
+                                        <div className="flex items-center justify-between text-xs">
+                                            <div className="flex items-center gap-1.5">
+                                                <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
+                                                <span className="font-bold text-text-primary">Sign in as this role</span>
+                                            </div>
+                                            <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[var(--accent-text)] hover:underline flex items-center gap-1 font-bold">
+                                                Log in <OpenInNewIcon className="w-3 h-3" />
+                                            </a>
+                                        </div>
+
+                                        {/* Username field */}
+                                        <div className="flex items-center justify-between bg-white dark:bg-black/20 p-2.5 rounded-xl border border-gray-200/40 dark:border-white/5">
+                                            <div className="overflow-hidden mr-2">
+                                                <span className="text-[10px] text-text-secondary block font-bold uppercase">Username</span>
+                                                <span className="text-xs font-mono text-text-primary truncate block">{role.username}</span>
+                                            </div>
+                                            <button 
+                                                onClick={() => handleCopy(role.username, `${role.id}-user`)}
+                                                className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
+                                                title="Copy Username"
+                                            >
+                                                {copiedField === `${role.id}-user` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+
+                                        {/* Password field */}
+                                        <div className="flex items-center justify-between bg-white dark:bg-black/20 p-2.5 rounded-xl border border-gray-200/40 dark:border-white/5">
+                                            <div className="overflow-hidden mr-2">
+                                                <span className="text-[10px] text-text-secondary block font-bold uppercase">Password</span>
+                                                <span className="text-xs font-mono text-text-primary truncate block">{role.password}</span>
+                                            </div>
+                                            <button 
+                                                onClick={() => handleCopy(role.password, `${role.id}-pass`)}
+                                                className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
+                                                title="Copy Password"
+                                            >
+                                                {copiedField === `${role.id}-pass` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
+                    </div>
+
+                    {/* Final CTA Area */}
+                    <div className="mt-20 text-center max-w-2xl mx-auto">
+                        <h2 className="text-3xl font-black text-text-primary mb-4">Would you rather be shown around?</h2>
+                        <p className="text-text-secondary mb-8 leading-relaxed font-medium">
+                            Book a walkthrough and we will take you through it on a call, using your school's own structure — your classes, your fee heads, your board — instead of ours.
+                        </p>
+                        <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
+                            <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
+                                Open the live demo <OpenInNewIcon className="w-4 h-4" />
+                            </a>
+                            <span className="text-text-secondary text-sm font-bold">or</span>
+                            <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#F59E0B] text-text-primary text-sm font-bold transition-colors">
+                                Book a walkthrough
+                            </Link>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div>
+        </>
     );
 }

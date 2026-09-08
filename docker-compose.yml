@@ -5,6 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        # Set by the deploy workflow from the release tag; empty locally, where
+        # the build falls back to package.json + the working-tree commit.
+        APP_VERSION: ${APP_VERSION:-}
+        GITHUB_SHA: ${GITHUB_SHA:-}
     image: eduanant-app-website:latest
     container_name: eduanant_app_website
     restart: always

@@ -1,99 +1,69 @@
-import { motion, useInView, animate } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
-import { Layers, Users, ShieldCheck, Zap, BookOpen, GraduationCap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Layers, Users, KeyRound, WifiOff, Zap, GraduationCap } from 'lucide-react';
 
-function CountUp({ target, suffix = '', prefix = '', duration = 2.2 }: { target: number; suffix?: string; prefix?: string; duration?: number }) {
-    const [count, setCount] = useState(0);
-    const ref = useRef<HTMLSpanElement>(null);
-    const inView = useInView(ref, { once: true, margin: '-10% 0px' });
-
-    useEffect(() => {
-        if (!inView) return;
-        const controls = animate(0, target, {
-            duration,
-            ease: [0.16, 1, 0.3, 1],
-            onUpdate: (v) => setCount(Math.round(v)),
-        });
-        return controls.stop;
-    }, [inView, target, duration]);
-
-    return <span ref={ref}>{prefix}{count.toLocaleString('en-IN')}{suffix}</span>;
-}
-
+/**
+ * Verified against production Release 1.4.0.
+ *
+ * These figures are rendered as static text on purpose. They were previously
+ * animated count-ups that started at 0, so any hydration hiccup or a paused
+ * animation left a school director staring at "0+ Modules" during a live pitch.
+ * The number is now in the markup itself and can never render as zero.
+ */
 const STATS = [
     {
         icon: Layers,
-        value: 18,
-        suffix: '',
-        label: 'Fully Operational Modules',
-        desc: 'Admissions · Fees · Attendance · Exams · Transport · HR · Library · Reception — all live',
-        gradient: 'from-indigo-500/20 to-blue-500/10',
-        border: 'border-indigo-500/20',
-        iconColor: 'text-indigo-400',
-        iconBg: 'bg-indigo-500/10',
-        glow: 'shadow-indigo-500/10',
-    },
-    {
-        icon: GraduationCap,
-        value: 3,
-        suffix: ' Portals',
-        label: 'Portals + Android App',
-        desc: 'Admin · Teacher · Student & Parent — plus a parent app with push alerts',
-        gradient: 'from-emerald-500/20 to-teal-500/10',
-        border: 'border-emerald-500/20',
-        iconColor: 'text-emerald-400',
-        iconBg: 'bg-emerald-500/10',
-        glow: 'shadow-emerald-500/10',
-    },
-    {
-        icon: Users,
-        value: 0,
-        suffix: '',
-        displayText: '∞',
-        label: 'Unlimited Students',
-        desc: 'No student count cap — scales with your school, however large it grows',
-        gradient: 'from-amber-500/20 to-orange-500/10',
-        border: 'border-amber-500/20',
-        iconColor: 'text-amber-400',
-        iconBg: 'bg-amber-500/10',
-        glow: 'shadow-amber-500/10',
-    },
-    {
-        icon: ShieldCheck,
-        value: 0,
-        suffix: '',
-        displayText: '₹0',
-        label: 'Monthly Cloud Bill',
-        desc: 'Runs on your own server — you pay for software, not someone else\'s cloud',
-        gradient: 'from-rose-500/20 to-pink-500/10',
-        border: 'border-rose-500/20',
-        iconColor: 'text-rose-400',
-        iconBg: 'bg-rose-500/10',
-        glow: 'shadow-rose-500/10',
+        display: '16',
+        label: 'Fully Wired Modules',
+        desc: 'Admissions · Fees · Attendance · Exams · Transport · HR · Library · Front Office — every one live, end to end',
+        border: 'border-slate-200/70 dark:border-white/10',
+        iconColor: 'text-white',
+        iconBg: 'bg-gradient-to-br from-[#1E1B4B] to-[#312E81] dark:from-[#312E81] dark:to-[#4F46E5] ring-1 ring-white/10',
     },
     {
         icon: Zap,
-        value: 120,
-        suffix: '+',
-        label: 'Application Screens',
-        desc: 'A complete, deeply-built ERP — nothing half-done',
-        gradient: 'from-violet-500/20 to-purple-500/10',
-        border: 'border-violet-500/20',
-        iconColor: 'text-violet-400',
-        iconBg: 'bg-violet-500/10',
-        glow: 'shadow-violet-500/10',
+        display: '100+',
+        label: 'Production Screens',
+        desc: 'Fully navigable screens across the admin console and both portals — finished software, not prototypes',
+        border: 'border-slate-200/70 dark:border-white/10',
+        iconColor: 'text-white',
+        iconBg: 'bg-gradient-to-br from-[#1E1B4B] to-[#312E81] dark:from-[#312E81] dark:to-[#4F46E5] ring-1 ring-white/10',
     },
     {
-        icon: BookOpen,
-        value: 55,
-        suffix: '+',
-        label: 'Backend Service Modules',
-        desc: 'Deeply built API layer powering every workflow with precision',
-        gradient: 'from-cyan-500/20 to-sky-500/10',
-        border: 'border-cyan-500/20',
-        iconColor: 'text-cyan-400',
-        iconBg: 'bg-cyan-500/10',
-        glow: 'shadow-cyan-500/10',
+        icon: GraduationCap,
+        display: '2',
+        displaySuffix: ' + App',
+        label: 'Portals + Android App',
+        desc: 'A Teacher portal and a Student & Parent portal, plus a native Android app with push alerts',
+        border: 'border-slate-200/70 dark:border-white/10',
+        iconColor: 'text-white',
+        iconBg: 'bg-gradient-to-br from-[#1E1B4B] to-[#312E81] dark:from-[#312E81] dark:to-[#4F46E5] ring-1 ring-white/10',
+    },
+    {
+        icon: KeyRound,
+        display: '96',
+        label: 'Granular Permission Keys',
+        desc: 'Grant access one key at a time — the principal, the cashier and the front desk each see only their own work',
+        border: 'border-amber-300/60 dark:border-amber-500/25',
+        iconColor: 'text-white',
+        iconBg: 'bg-gradient-to-br from-[#F59E0B] to-[#EA580C] ring-1 ring-black/5',
+    },
+    {
+        icon: Users,
+        display: '∞',
+        label: 'Unlimited Students',
+        desc: 'No student count cap — scales with your school, however large it grows',
+        border: 'border-slate-200/70 dark:border-white/10',
+        iconColor: 'text-white',
+        iconBg: 'bg-gradient-to-br from-[#1E1B4B] to-[#312E81] dark:from-[#312E81] dark:to-[#4F46E5] ring-1 ring-white/10',
+    },
+    {
+        icon: WifiOff,
+        display: '₹0',
+        label: 'Monthly Cloud Bill',
+        desc: 'Runs on your own server over the school intranet — you pay for software, not someone else\'s cloud',
+        border: 'border-slate-200/70 dark:border-white/10',
+        iconColor: 'text-white',
+        iconBg: 'bg-gradient-to-br from-[#F59E0B] to-[#EA580C] ring-1 ring-black/5',
     },
 ];
 
@@ -110,9 +80,12 @@ export default function StatsSection() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-14">
                     <p className="text-xs font-black uppercase tracking-[0.3em] text-text-secondary mb-3">By the numbers</p>
-                    <h2 className="text-3xl md:text-4xl font-black text-text-primary">
-                        Everything <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-main to-secondary-main">EduAnant delivers</span> — on Day 1
+                    <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white">
+                        Everything <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B45309] via-[#EA580C] to-[#F59E0B] dark:from-[#FBBF24] dark:via-[#F59E0B] dark:to-[#FB923C]">EduAnant delivers</span> — on Day 1
                     </h2>
+                    <p className="text-sm text-text-secondary mt-3 max-w-xl mx-auto">
+                        Counted from the running Release 1.4.0 build — not a roadmap.
+                    </p>
                 </motion.div>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -125,23 +98,22 @@ export default function StatsSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                whileHover={{ y: -5 }}
-                                className={`relative rounded-2xl p-6 border ${stat.border} bg-white/80 dark:bg-white/[0.03] backdrop-blur-sm hover:shadow-xl transition-all duration-500 group overflow-hidden`}>
+                                                                className={`relative rounded-2xl p-6 border ${stat.border} bg-white dark:bg-white/[0.03] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden`}>
 
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent" />
-                                <div className={`absolute -top-8 -right-8 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 ${stat.iconBg}`} />
+                                <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-amber-400/25" />
 
-                                <div className={`w-10 h-10 rounded-xl ${stat.iconBg} flex items-center justify-center mb-4`}>
+                                <div className={`w-10 h-10 rounded-xl ${stat.iconBg} flex items-center justify-center mb-4 shadow-md`}>
                                     <Icon className={`w-5 h-5 ${stat.iconColor}`} />
                                 </div>
 
-                                <div className={`text-4xl md:text-5xl font-black ${stat.iconColor} mb-1 tabular-nums`}>
-                                    {'displayText' in stat
-                                        ? <span>{(stat as { displayText: string }).displayText}</span>
-                                        : <CountUp target={stat.value} suffix={stat.suffix} />
-                                    }
+                                <div className={`font-display text-4xl md:text-5xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-1 tabular-nums`}>
+                                    {stat.display}
+                                    {stat.displaySuffix && (
+                                        <span className="text-xl md:text-2xl font-extrabold align-middle">{stat.displaySuffix}</span>
+                                    )}
                                 </div>
-                                <p className="font-bold text-text-primary text-sm mb-1">{stat.label}</p>
+                                <p className="font-display font-bold text-text-primary text-sm mb-1">{stat.label}</p>
                                 <p className="text-text-secondary text-xs leading-relaxed">{stat.desc}</p>
                             </motion.div>
                         );

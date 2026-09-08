@@ -3,12 +3,25 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
+# Chromium powers the prerender step in scripts/prerender.mjs, which freezes each
+# route to static HTML. Without it AI crawlers (GPTBot, ClaudeBot, PerplexityBot)
+# receive an empty SPA shell for every URL.
+RUN apk add --no-cache chromium nss freetype harfbuzz ca-certificates ttf-freefont
+ENV CHROME_PATH=/usr/bin/chromium-browser
+
 # Copy package files and install dependencies
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps
 
 # Copy the rest of the application code
 COPY . .
+
+# Passed by the deploy workflow from the release tag; the build stamps them into
+# the bundle so the footer version matches the deployed artefact.
+ARG APP_VERSION=""
+ARG GITHUB_SHA=""
+ENV APP_VERSION=$APP_VERSION
+ENV GITHUB_SHA=$GITHUB_SHA
 
 # Build the application for production
 RUN npm run build
