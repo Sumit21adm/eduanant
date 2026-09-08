@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion';
+import { RELEASE_COUNT } from '../data/changelog';
+import { LIVE_SINCE_LABEL, monthsLiveLabel, monthsLiveUnit, spell } from '../lib/timeline';
 import { Link } from 'react-router-dom';
 import {
     ExternalLink,
@@ -18,7 +20,7 @@ const PROOF = [
     {
         icon: GitCommitVertical,
         title: 'Read every change we have shipped',
-        body: 'Six releases since April 2026, each one listed with its date and what actually changed. If a product is being maintained, its release history shows it. Ours is public.',
+        body: `${spell(RELEASE_COUNT)[0].toUpperCase()}${spell(RELEASE_COUNT).slice(1)} releases since ${LIVE_SINCE_LABEL}, each one listed with its date and what actually changed. If a product is being maintained, its release history shows it. Ours is public.`,
         cta: 'See the release history', to: '/updates',
         color: 'from-[#312E81] to-[#F59E0B]', border: 'border-[#D97706]/25', bg: 'bg-[#D97706]/5',
     },
@@ -93,7 +95,7 @@ export default function ProofSection() {
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
                                 </span>
                                 <span className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-400">
-                                    Live since April 2026
+                                    Live since {LIVE_SINCE_LABEL}
                                 </span>
                             </div>
                             <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-2">
@@ -102,7 +104,7 @@ export default function ProofSection() {
                             <p className="text-sm text-indigo-200 mb-4">CBSE affiliated · three campuses across Patna, Bihar</p>
                             <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
                                 Admissions, fee collection, attendance, examinations and staff records for the whole
-                                school have run on EduAnant every working day since April 2026 — through a full
+                                school have run on EduAnant every working day since {LIVE_SINCE_LABEL} — through a full
                                 admission cycle, a full fee cycle and a full exam cycle.
                             </p>
                             <a href="https://sdv-edu.in" target="_blank" rel="noopener noreferrer"
@@ -115,7 +117,7 @@ export default function ProofSection() {
                             {[
                                 { v: '1,300+', l: 'Active students' },
                                 { v: '100+', l: 'School staff' },
-                                { v: '5', l: 'Months live' },
+                                { v: monthsLiveLabel(), l: monthsLiveUnit() },
                             ].map(st => (
                                 <div key={st.l} className="rounded-2xl bg-white/[0.06] ring-1 ring-white/10 p-4 text-center">
                                     <div className="font-display text-2xl font-extrabold text-white tabular-nums leading-none">{st.v}</div>

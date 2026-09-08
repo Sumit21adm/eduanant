@@ -24,11 +24,22 @@ const execFileAsync = promisify(execFile);
 const DIST = 'dist';
 const PORT = 4477;
 
-const ROUTES = [
-    '/', '/features', '/security', '/updates', '/pricing',
-    '/demo', '/contact', '/register',
-    '/privacy-policy', '/terms-of-service', '/refund-policy',
-];
+/** Route -> [sitemap priority, changefreq]. One list drives both the prerender
+ *  and sitemap.xml, so a new page cannot be prerendered but left unlisted. */
+const ROUTES = {
+    '/':                  ['1.0', 'weekly'],
+    '/features':          ['0.9', 'monthly'],
+    '/pricing':           ['0.9', 'monthly'],
+    '/demo':              ['0.8', 'monthly'],
+    '/security':          ['0.8', 'monthly'],
+    '/contact':           ['0.7', 'monthly'],
+    '/updates':           ['0.6', 'weekly'],
+    '/register':          ['0.6', 'monthly'],
+    '/privacy-policy':    ['0.3', 'yearly'],
+    '/terms-of-service':  ['0.3', 'yearly'],
+    '/refund-policy':     ['0.3', 'yearly'],
+};
+const SITE_URL = 'https://eduanant.cloud';
 
 const MIME = {
     '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
@@ -83,7 +94,7 @@ const server = await serveDist();
 let ok = 0;
 
 try {
-    for (const route of ROUTES) {
+    for (const route of Object.keys(ROUTES)) {
         const { stdout } = await execFileAsync(chrome, [
             '--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage',
             '--virtual-time-budget=7000', '--run-all-compositor-stages-before-draw',
@@ -103,9 +114,20 @@ try {
         ok++;
         console.log(`  ✓ ${route.padEnd(20)} ${title.slice(0, 58)}`);
     }
-    console.log(`\n  prerendered ${ok}/${ROUTES.length} routes\n`);
+    // lastmod tracks the build, so the sitemap is never stale on deploy.
+    const today = new Date().toISOString().slice(0, 10);
+    const urls = Object.entries(ROUTES).map(([route, [priority, changefreq]]) => `  <url>
+    <loc>${SITE_URL}${route}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`).join('\n');
+    await writeFile(join(DIST, 'sitemap.xml'),
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
+
+    console.log(`\n  prerendered ${ok}/${Object.keys(ROUTES).length} routes · sitemap.xml written (${today})\n`);
 } finally {
     server.close();
 }
 
-if (ok !== ROUTES.length) process.exit(1);
+if (ok !== Object.keys(ROUTES).length) process.exit(1);

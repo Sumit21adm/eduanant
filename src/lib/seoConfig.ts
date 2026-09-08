@@ -1,4 +1,6 @@
 import { SITE } from './seo';
+import { RELEASE_COUNT } from '../data/changelog';
+import { LIVE_SINCE_LABEL, monthsSince, spell } from './timeline';
 
 /**
  * Per-route metadata. Titles stay under ~60 characters and descriptions under
@@ -51,7 +53,7 @@ export const PAGE_SEO = {
     updates: {
         title: 'Release Notes & Product Updates | EduAnant School ERP',
         description:
-            'Six releases since April 2026. See exactly what shipped in each version and how one-click updates back up your school data before anything changes.',
+            `${spell(RELEASE_COUNT)[0].toUpperCase()}${spell(RELEASE_COUNT).slice(1)} releases since ${LIVE_SINCE_LABEL}. See exactly what shipped in each version and how one-click updates back up your school data before anything changes.`,
         path: '/updates',
         keywords:
             'EduAnant release notes, school software updates, school ERP changelog, school software version history',
@@ -89,7 +91,7 @@ export const PAGE_SEO = {
             'EduAnant refund and cancellation terms, including the 30-day evaluation period and how your school exports its database if you decide to leave.',
         path: '/refund-policy',
     },
-} as const;
+};
 
 /* ── Reusable JSON-LD nodes ─────────────────────────────────────────────── */
 
@@ -167,7 +169,7 @@ export const homeFaqSchema = {
         },
         {
             q: 'Is any school actually using EduAnant?',
-            a: 'Yes. S.D.V. Public School in Patna, Bihar — a CBSE-affiliated school with three campuses, over 1,300 active students and more than 100 staff — has run its admissions, fee collection, attendance, examinations and staff records on EduAnant every working day since April 2026.',
+            a: `Yes. S.D.V. Public School in Patna, Bihar — a CBSE-affiliated school with three campuses, over 1,300 active students and more than 100 staff — has run its admissions, fee collection, attendance, examinations and staff records on EduAnant every working day for the past ${monthsSince()} months, since ${LIVE_SINCE_LABEL}.`,
         },
         {
             q: 'Who owns the school data?',
