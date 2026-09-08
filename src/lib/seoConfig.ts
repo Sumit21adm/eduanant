@@ -101,7 +101,7 @@ export const softwareSchema = {
     name: 'EduAnant',
     applicationCategory: 'BusinessApplication',
     applicationSubCategory: 'School Management System',
-    operatingSystem: 'Web, Android, Windows, Linux',
+    operatingSystem: 'Web, Android, Windows, MAC, Linux',
     softwareVersion: SITE.version,
     url: SITE.url,
     downloadUrl: 'https://play.google.com/store/apps/details?id=cloud.eduanant.app',
