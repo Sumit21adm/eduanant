@@ -41,6 +41,10 @@ const ROUTES = {
 };
 const SITE_URL = 'https://eduanant.cloud';
 
+/** Rendered to 404.html, which nginx serves with a real 404 status. Not in the
+ *  sitemap, and the page itself carries noindex. */
+const NOT_FOUND_ROUTE = '/__not-found__';
+
 const MIME = {
     '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
     '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp',
@@ -90,11 +94,21 @@ if (!chrome) {
     process.exit(1);
 }
 
+// A route added to the router but not to ROUTES would 404 in production, since
+// nginx only serves what was prerendered. Fail the build instead of shipping it.
+const appSrc = await readFile('src/App.tsx', 'utf8');
+const declared = [...appSrc.matchAll(/<Route path="([^"]+)"/g)].map(m => m[1]).filter(p => p !== '*');
+const missing = declared.filter(r => !(r in ROUTES));
+if (missing.length) {
+    console.error(`\n  prerender: these routes exist in App.tsx but are not in ROUTES: ${missing.join(', ')}\n`);
+    process.exit(1);
+}
+
 const server = await serveDist();
 let ok = 0;
 
 try {
-    for (const route of Object.keys(ROUTES)) {
+    for (const route of [...Object.keys(ROUTES), NOT_FOUND_ROUTE]) {
         const { stdout } = await execFileAsync(chrome, [
             '--headless', '--disable-gpu', '--no-sandbox', '--disable-dev-shm-usage',
             '--virtual-time-budget=20000', '--run-all-compositor-stages-before-draw',
@@ -116,11 +130,13 @@ try {
             );
         }
 
-        const out = route === '/' ? join(DIST, 'index.html') : join(DIST, route, 'index.html');
+        const out = route === NOT_FOUND_ROUTE ? join(DIST, '404.html')
+            : route === '/' ? join(DIST, 'index.html')
+            : join(DIST, route, 'index.html');
         await mkdir(dirname(out), { recursive: true });
         await writeFile(out, stdout);
         ok++;
-        console.log(`  ✓ ${route.padEnd(20)} ${title.slice(0, 58)}`);
+        console.log(`  ✓ ${(route === NOT_FOUND_ROUTE ? '404.html' : route).padEnd(20)} ${title.slice(0, 58)}`);
     }
     // lastmod tracks the build, so the sitemap is never stale on deploy.
     const today = new Date().toISOString().slice(0, 10);
@@ -133,9 +149,9 @@ try {
     await writeFile(join(DIST, 'sitemap.xml'),
         `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 
-    console.log(`\n  prerendered ${ok}/${Object.keys(ROUTES).length} routes · sitemap.xml written (${today})\n`);
+    console.log(`\n  prerendered ${ok - 1}/${Object.keys(ROUTES).length} routes + 404.html · sitemap.xml written (${today})\n`);
 } finally {
     server.close();
 }
 
-if (ok !== Object.keys(ROUTES).length) process.exit(1);
+if (ok !== Object.keys(ROUTES).length + 1) process.exit(1);

@@ -14,6 +14,7 @@ const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const TermsOfServicePage = lazy(() => import('./pages/TermsOfServicePage'));
 const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'));
 const DemoPage = lazy(() => import('./pages/DemoPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 /** Holds the page height while a route chunk arrives, so the header does not jump. */
 function RouteFallback() {
@@ -46,6 +47,9 @@ function App() {
                         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
                         <Route path="/terms-of-service" element={<TermsOfServicePage />} />
                         <Route path="/refund-policy" element={<RefundPolicyPage />} />
+                        {/* Anything else: a real 404 page, noindex. nginx returns a 404
+                            status for these rather than a soft 200. */}
+                        <Route path="*" element={<NotFoundPage />} />
                     </Route>
                 </Routes>
                 </Suspense>
