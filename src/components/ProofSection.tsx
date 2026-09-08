@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import {
+    ExternalLink,
     KeyRound, GitCommitVertical, ShieldCheck, Server, MessageSquare, Handshake, ArrowRight,
 } from 'lucide-react';
 
@@ -65,16 +66,64 @@ export default function ProofSection() {
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
                         style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
-                        <Handshake className="w-3.5 h-3.5" /> Onboarding our first 10 schools
+                        <Handshake className="w-3.5 h-3.5" /> Live in production · onboarding our first 10 schools
                     </motion.div>
                     <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-4 leading-tight">
-                        No testimonials yet.<br />
-                        <span className="brand-text-gradient">Evidence instead.</span>
+                        Already running a school.<br />
+                        <span className="brand-text-gradient">Check it for yourself.</span>
                     </h2>
                     <p className="text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        EduAnant is new, and we would rather say so than put words in a principal's mouth.
-                        Here is everything you can check for yourself before you trust us with your school.
+                        EduAnant is young, and we would rather show you the deployment than put words in a
+                        principal's mouth. Here is the school running it today, and everything else you can
+                        verify before you trust us with yours.
                     </p>
+                </motion.div>
+
+                {/* The live deployment. Facts only — student and staff counts, and the
+                    date it went live. No quote, because we do not have one yet. */}
+                <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="mb-8 rounded-3xl border border-white/10 shadow-xl shadow-indigo-950/20 overflow-hidden
+                        bg-gradient-to-br from-[#0F172A] via-[#1E1B4B] to-[#312E81]">
+                    <div className="p-7 sm:p-9 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div className="lg:col-span-7">
+                            <div className="flex items-center gap-2 mb-4">
+                                <span className="relative flex h-2 w-2" aria-hidden>
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+                                </span>
+                                <span className="text-[10px] font-black uppercase tracking-[0.18em] text-emerald-400">
+                                    Live since April 2026
+                                </span>
+                            </div>
+                            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-2">
+                                S.D.V. Public School, Patna
+                            </h3>
+                            <p className="text-sm text-indigo-200 mb-4">CBSE affiliated · three campuses across Patna, Bihar</p>
+                            <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
+                                Admissions, fee collection, attendance, examinations and staff records for the whole
+                                school have run on EduAnant every working day since April 2026 — through a full
+                                admission cycle, a full fee cycle and a full exam cycle.
+                            </p>
+                            <a href="https://sdv-edu.in" target="_blank" rel="noopener noreferrer"
+                                className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-[#63cae0] hover:gap-2.5 transition-all duration-300">
+                                Visit sdv-edu.in
+                                <ExternalLink className="w-3.5 h-3.5" strokeWidth={2} />
+                            </a>
+                        </div>
+                        <div className="lg:col-span-5 grid grid-cols-3 gap-3">
+                            {[
+                                { v: '1,300+', l: 'Active students' },
+                                { v: '100+', l: 'School staff' },
+                                { v: '5', l: 'Months live' },
+                            ].map(st => (
+                                <div key={st.l} className="rounded-2xl bg-white/[0.06] ring-1 ring-white/10 p-4 text-center">
+                                    <div className="font-display text-2xl font-extrabold text-white tabular-nums leading-none">{st.v}</div>
+                                    <p className="text-[10px] text-indigo-200 mt-1.5 leading-snug">{st.l}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </motion.div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -110,8 +159,8 @@ export default function ProofSection() {
 
                 <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                     className="text-center text-sm text-text-secondary mt-10 max-w-2xl mx-auto">
-                    When our first schools have been live long enough to have an opinion worth quoting,
-                    their names and their words will appear here — with their permission.
+                    More schools are onboarding now. As each one has been live long enough to have an
+                    opinion worth quoting, its words will appear here — with its permission.
                 </motion.p>
             </div>
         </section>

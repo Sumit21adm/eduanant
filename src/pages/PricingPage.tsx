@@ -22,6 +22,8 @@ import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DnsIcon from '@mui/icons-material/Dns';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import Seo from '../lib/seo';
+import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
 
 // The commercial model, in one place.
 // Rs 20 per student per month billed annually, Rs 25 billed monthly (20% saving).
@@ -264,339 +266,342 @@ export default function PricingPage() {
     const ratePerStudent = billing === 'annual' ? RATE_ANNUAL : RATE_MONTHLY;
 
     return (
-        <div className="pt-14 pb-24 relative">
-            <div className="container mx-auto px-6 max-w-7xl mb-12 text-center">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                        style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
-                        <CurrencyRupeeIcon className="w-3.5 h-3.5" /> One plan, priced by school size
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-5 leading-tight">
-                        Priced per student,<br />
-                        <span className="brand-text-gradient">not per feature.</span>
-                    </h1>
-                    <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        &#8377;20 per student a month, billed annually. All 16 modules, every portal, unlimited staff accounts.
-                        Run your school on it for 30 days before we send an invoice.
-                    </p>
-                </motion.div>
-            </div>
-
-            {/* Founding 10 — the reason to move now */}
-            <div className="container mx-auto px-6 max-w-5xl mb-16">
-                <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                    className="rounded-3xl border p-7 md:p-9"
-                    style={{ borderColor: 'rgba(251,191,36,0.3)', background: 'rgba(251,191,36,0.05)' }}>
-                    <div className="flex flex-col md:flex-row md:items-center gap-6">
-                        <div className="flex items-center gap-4 md:w-1/3">
-                            <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(251,191,36,0.15)' }}>
-                                <WorkspacePremiumIcon className="w-6 h-6" style={{ color: '#f59e0b' }} />
-                            </div>
-                            <div>
-                                <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: '#f59e0b' }}>Open now</p>
-                                <h2 className="text-2xl font-black text-text-primary leading-tight">Founding 10</h2>
-                            </div>
-                        </div>
-                        <div className="flex-1">
-                            <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                                We are looking for ten schools to build the next year of this product with. You get half price for
-                                year one and renewal rates locked for life. In return we ask for a reference call,
-                                a line we can quote once you have lived with it for two months, and your name on this website.
-                            </p>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                {[
-                                    'Half price, first year',
-                                    'Renewal rates locked for life',
-                                    'Onboarding and training free',
-                                ].map(t => (
-                                    <div key={t} className="flex items-start gap-2 text-xs font-semibold text-text-primary">
-                                        <CheckCircleIcon className="w-4 h-4 shrink-0" style={{ color: '#f59e0b' }} />
-                                        {t}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
-
-            <div className="container mx-auto px-6 max-w-6xl mb-8">
-                <div className="flex items-center justify-center gap-2">
-                    <button onClick={() => setBilling('monthly')}
-                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all border ${billing === 'monthly' ? 'btn-primary shadow-lg shadow-[#F59E0B]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
-                        Monthly
-                    </button>
-                    <button onClick={() => setBilling('annual')}
-                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 border ${billing === 'annual' ? 'btn-primary shadow-lg shadow-[#F59E0B]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
-                        Annual
-                        <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full font-sans transition-all"
-                            style={{
-                                background: billing === 'annual' ? 'rgba(255,255,255,0.25)' : 'rgba(52,211,153,0.2)',
-                                color: billing === 'annual' ? '#ffffff' : '#10b981'
-                            }}>
-                            Save 20%
+        <>
+            <Seo {...PAGE_SEO.pricing} schema={[softwareSchema]} crumbs={[{ name: 'Pricing', path: '/pricing' }]} />
+            <div className="pt-14 pb-24 relative">
+                <div className="container mx-auto px-6 max-w-7xl mb-12 text-center">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
+                            style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
+                            <CurrencyRupeeIcon className="w-3.5 h-3.5" /> One plan, priced by school size
                         </span>
-                    </button>
+                        <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-5 leading-tight">
+                            Priced per student,<br />
+                            <span className="brand-text-gradient">not per feature.</span>
+                        </h1>
+                        <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
+                            &#8377;20 per student a month, billed annually. All 16 modules, every portal, unlimited staff accounts.
+                            Run your school on it for 30 days before we send an invoice.
+                        </p>
+                    </motion.div>
                 </div>
-            </div>
 
-            <div className="container mx-auto px-6 max-w-5xl mb-14">
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                    className="relative rounded-3xl p-8 md:p-12 border border-[#F59E0B]/30 bg-white/70 dark:bg-white/[0.03] backdrop-blur-sm shadow-[0_0_60px_rgba(245,158,11,0.15)] overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#1E1B4B] via-[#F59E0B] to-purple-600" />
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-3xl pointer-events-none" />
-
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                        <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
-                            <div>
-                                <span className="inline-flex items-center gap-1.5 text-[10px] font-black px-3 py-1 rounded-full text-white bg-gradient-to-r from-[#1E1B4B] to-[#F59E0B] uppercase tracking-wider mb-4">
-                                    <AutoAwesomeIcon className="w-3 h-3" /> Full suite
-                                </span>
-                                <h2 className="text-3xl font-black text-text-primary mb-2">EduAnant Unlimited</h2>
-                                <p className="text-sm text-text-secondary">
-                                    The whole product, whatever your size. One plan, because we do not keep a better
-                                    version of it behind a paywall.
-                                </p>
-                            </div>
-
-                            <div className="p-5 rounded-2xl border border-[#F59E0B]/15 bg-[#F59E0B]/5">
-                                <p className="text-xs font-bold text-text-secondary mb-1">Rate</p>
-                                <div className="flex items-baseline gap-1.5">
-                                    <span className="text-4xl font-black brand-text-gradient">&#8377;{ratePerStudent}</span>
-                                    <span className="text-sm text-text-secondary font-semibold">/ student / month</span>
+                {/* Founding 10 — the reason to move now */}
+                <div className="container mx-auto px-6 max-w-5xl mb-16">
+                    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                        className="rounded-3xl border p-7 md:p-9"
+                        style={{ borderColor: 'rgba(251,191,36,0.3)', background: 'rgba(251,191,36,0.05)' }}>
+                        <div className="flex flex-col md:flex-row md:items-center gap-6">
+                            <div className="flex items-center gap-4 md:w-1/3">
+                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(251,191,36,0.15)' }}>
+                                    <WorkspacePremiumIcon className="w-6 h-6" style={{ color: '#f59e0b' }} />
                                 </div>
-                                <p className="text-[11px] text-text-secondary mt-1.5">
-                                    {billing === 'annual'
-                                        ? `₹${inr(RATE_ANNUAL * 12)} per student a year, paid once — a fifth less than the monthly rate.`
-                                        : `₹${inr(RATE_MONTHLY * 12)} per student a year. Switch to annual and it is ₹${inr(RATE_ANNUAL * 12)}.`}
+                                <div>
+                                    <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: '#f59e0b' }}>Open now</p>
+                                    <h2 className="text-2xl font-black text-text-primary leading-tight">Founding 10</h2>
+                                </div>
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                                    We are looking for ten schools to build the next year of this product with. You get half price for
+                                    year one and renewal rates locked for life. In return we ask for a reference call,
+                                    a line we can quote once you have lived with it for two months, and your name on this website.
                                 </p>
-                                <p className="text-[11px] text-text-secondary mt-1">
-                                    &#8377;{inr(MIN_ANNUAL)} a year minimum &middot; 18% GST extra
-                                </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    {[
+                                        'Half price, first year',
+                                        'Renewal rates locked for life',
+                                        'Onboarding and training free',
+                                    ].map(t => (
+                                        <div key={t} className="flex items-start gap-2 text-xs font-semibold text-text-primary">
+                                            <CheckCircleIcon className="w-4 h-4 shrink-0" style={{ color: '#f59e0b' }} />
+                                            {t}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-6xl mb-8">
+                    <div className="flex items-center justify-center gap-2">
+                        <button onClick={() => setBilling('monthly')}
+                            className={`px-5 py-2 rounded-xl text-sm font-bold transition-all border ${billing === 'monthly' ? 'btn-primary shadow-lg shadow-[#F59E0B]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
+                            Monthly
+                        </button>
+                        <button onClick={() => setBilling('annual')}
+                            className={`px-5 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 border ${billing === 'annual' ? 'btn-primary shadow-lg shadow-[#F59E0B]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
+                            Annual
+                            <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full font-sans transition-all"
+                                style={{
+                                    background: billing === 'annual' ? 'rgba(255,255,255,0.25)' : 'rgba(52,211,153,0.2)',
+                                    color: billing === 'annual' ? '#ffffff' : '#10b981'
+                                }}>
+                                Save 20%
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-5xl mb-14">
+                    <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
+                        className="relative rounded-3xl p-8 md:p-12 border border-[#F59E0B]/30 bg-white/70 dark:bg-white/[0.03] backdrop-blur-sm shadow-[0_0_60px_rgba(245,158,11,0.15)] overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#1E1B4B] via-[#F59E0B] to-purple-600" />
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-3xl pointer-events-none" />
+
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                            <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
+                                <div>
+                                    <span className="inline-flex items-center gap-1.5 text-[10px] font-black px-3 py-1 rounded-full text-white bg-gradient-to-r from-[#1E1B4B] to-[#F59E0B] uppercase tracking-wider mb-4">
+                                        <AutoAwesomeIcon className="w-3 h-3" /> Full suite
+                                    </span>
+                                    <h2 className="text-3xl font-black text-text-primary mb-2">EduAnant Unlimited</h2>
+                                    <p className="text-sm text-text-secondary">
+                                        The whole product, whatever your size. One plan, because we do not keep a better
+                                        version of it behind a paywall.
+                                    </p>
+                                </div>
+
+                                <div className="p-5 rounded-2xl border border-[#F59E0B]/15 bg-[#F59E0B]/5">
+                                    <p className="text-xs font-bold text-text-secondary mb-1">Rate</p>
+                                    <div className="flex items-baseline gap-1.5">
+                                        <span className="text-4xl font-black brand-text-gradient">&#8377;{ratePerStudent}</span>
+                                        <span className="text-sm text-text-secondary font-semibold">/ student / month</span>
+                                    </div>
+                                    <p className="text-[11px] text-text-secondary mt-1.5">
+                                        {billing === 'annual'
+                                            ? `₹${inr(RATE_ANNUAL * 12)} per student a year, paid once — a fifth less than the monthly rate.`
+                                            : `₹${inr(RATE_MONTHLY * 12)} per student a year. Switch to annual and it is ₹${inr(RATE_ANNUAL * 12)}.`}
+                                    </p>
+                                    <p className="text-[11px] text-text-secondary mt-1">
+                                        &#8377;{inr(MIN_ANNUAL)} a year minimum &middot; 18% GST extra
+                                    </p>
+                                </div>
+
+                                <Link to="/contact" className="block w-full">
+                                    <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                                        className="w-full btn-primary py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#F59E0B]/20">
+                                        <PhoneIcon className="w-4 h-4" /> Start your 30 days <ArrowForwardIcon className="w-4 h-4" />
+                                    </motion.button>
+                                </Link>
                             </div>
 
-                            <Link to="/contact" className="block w-full">
-                                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                                    className="w-full btn-primary py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#F59E0B]/20">
-                                    <PhoneIcon className="w-4 h-4" /> Start your 30 days <ArrowForwardIcon className="w-4 h-4" />
+                            <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-gray-200/50 dark:border-white/10 lg:pl-8 pt-8 lg:pt-0 flex flex-col justify-center">
+                                <p className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] mb-4">What you get</p>
+                                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    {SUITE_FEATURES.map((feat, i) => (
+                                        <li key={i} className="flex items-start gap-2.5 text-xs text-text-secondary">
+                                            <div className="w-4 h-4 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
+                                                <CheckIcon className="w-2.5 h-2.5 text-emerald-400 font-bold" />
+                                            </div>
+                                            <span>{feat}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                        className="mt-6 p-7 rounded-3xl border flex flex-col md:flex-row items-center justify-between gap-6"
+                        style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/10 border border-gray-200/20 shadow-sm">
+                                <BusinessIcon className="w-6 h-6 text-[var(--accent-text)]" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-black text-text-primary">Large schools, trusts and groups</h3>
+                                <p className="text-sm text-text-secondary font-medium">Above 2,000 students &middot; Several schools under one management</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4 shrink-0">
+                            <p className="text-sm text-text-secondary font-semibold">Quoted on your actual setup</p>
+                            <Link to="/contact">
+                                <motion.button whileHover={{ scale: 1.04 }} className="btn-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2">
+                                    <PhoneIcon className="w-4 h-4" /> Talk to us
                                 </motion.button>
                             </Link>
                         </div>
-
-                        <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-gray-200/50 dark:border-white/10 lg:pl-8 pt-8 lg:pt-0 flex flex-col justify-center">
-                            <p className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] mb-4">What you get</p>
-                            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                {SUITE_FEATURES.map((feat, i) => (
-                                    <li key={i} className="flex items-start gap-2.5 text-xs text-text-secondary">
-                                        <div className="w-4 h-4 rounded-full bg-emerald-500/10 flex items-center justify-center shrink-0 mt-0.5">
-                                            <CheckIcon className="w-2.5 h-2.5 text-emerald-400 font-bold" />
-                                        </div>
-                                        <span>{feat}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </motion.div>
-
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="mt-6 p-7 rounded-3xl border flex flex-col md:flex-row items-center justify-between gap-6"
-                    style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
-                    <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/10 border border-gray-200/20 shadow-sm">
-                            <BusinessIcon className="w-6 h-6 text-[var(--accent-text)]" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-black text-text-primary">Large schools, trusts and groups</h3>
-                            <p className="text-sm text-text-secondary font-medium">Above 2,000 students &middot; Several schools under one management</p>
-                        </div>
-                    </div>
-                    <div className="flex items-center gap-4 shrink-0">
-                        <p className="text-sm text-text-secondary font-semibold">Quoted on your actual setup</p>
-                        <Link to="/contact">
-                            <motion.button whileHover={{ scale: 1.04 }} className="btn-primary px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2">
-                                <PhoneIcon className="w-4 h-4" /> Talk to us
-                            </motion.button>
-                        </Link>
-                    </div>
-                </motion.div>
-            </div>
-
-            <div className="container mx-auto px-6 max-w-4xl mb-20">
-                <PricingCalculator />
-            </div>
-
-            <div className="container mx-auto px-6 max-w-5xl mb-20">
-                <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                    className="text-2xl font-black text-text-primary text-center mb-2">
-                    What the price does not cover
-                </motion.h2>
-                <p className="text-sm text-text-secondary text-center mb-8 max-w-xl mx-auto">
-                    Three things sit outside the licence. Better you read them here than meet them on an invoice.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {NOT_INCLUDED.map((item, i) => {
-                        const Icon = item.icon;
-                        return (
-                            <motion.div key={item.label}
-                                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                                className="p-6 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]">
-                                <Icon className="w-6 h-6 mb-3" style={{ color: 'var(--accent-text)' }} />
-                                <p className="font-black text-text-primary text-sm mb-1.5">{item.label}</p>
-                                <p className="text-xs text-text-secondary leading-relaxed">{item.desc}</p>
-                            </motion.div>
-                        );
-                    })}
+                    </motion.div>
                 </div>
-            </div>
 
-            <div className="container mx-auto px-6 max-w-6xl mb-20">
-                <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                    <div className="flex items-center gap-3 mb-5">
-                        <AutoAwesomeIcon className="w-4 h-4 text-amber-400" />
-                        <p className="text-sm font-black uppercase tracking-widest text-text-secondary">Ways to pay less</p>
-                        <div className="flex-1 h-px bg-gray-200/40 dark:bg-white/10" />
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {EARLY_OFFERS.map((offer, i) => {
-                            const Icon = offer.icon;
+                <div className="container mx-auto px-6 max-w-4xl mb-20">
+                    <PricingCalculator />
+                </div>
+
+                <div className="container mx-auto px-6 max-w-5xl mb-20">
+                    <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                        className="text-2xl font-black text-text-primary text-center mb-2">
+                        What the price does not cover
+                    </motion.h2>
+                    <p className="text-sm text-text-secondary text-center mb-8 max-w-xl mx-auto">
+                        Three things sit outside the licence. Better you read them here than meet them on an invoice.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {NOT_INCLUDED.map((item, i) => {
+                            const Icon = item.icon;
                             return (
-                                <motion.div key={offer.label}
-                                    initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                                    transition={{ delay: i * 0.06 }}
-                                    className="flex items-start gap-4 p-4 rounded-2xl border bg-white/50 dark:bg-white/[0.01]"
-                                    style={{ borderColor: offer.border }}>
-                                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${offer.color}15` }}>
-                                        <Icon className="w-5 h-5" style={{ color: offer.color }} />
-                                    </div>
-                                    <div className="min-w-0">
-                                        <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                                            <p className="text-sm font-black text-text-primary">{offer.label}</p>
-                                            <span className="text-[10px] font-black px-2 py-0.5 rounded-full border"
-                                                style={{ background: `${offer.color}15`, borderColor: `${offer.color}40`, color: offer.color }}>
-                                                {offer.badge}
-                                            </span>
-                                        </div>
-                                        <p className="text-xs text-text-secondary font-medium leading-relaxed">{offer.desc}</p>
-                                    </div>
+                                <motion.div key={item.label}
+                                    initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                                    className="p-6 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]">
+                                    <Icon className="w-6 h-6 mb-3" style={{ color: 'var(--accent-text)' }} />
+                                    <p className="font-black text-text-primary text-sm mb-1.5">{item.label}</p>
+                                    <p className="text-xs text-text-secondary leading-relaxed">{item.desc}</p>
                                 </motion.div>
                             );
                         })}
                     </div>
-                    <p className="text-xs text-text-secondary text-center mt-3">
-                        One per school, and none of them stack. Tell us which fits and we will apply it.
-                    </p>
-                </motion.div>
-            </div>
+                </div>
 
-            <div className="container mx-auto px-6 max-w-5xl mb-20">
-                <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                    className="text-2xl font-black text-text-primary text-center mb-10">
-                    Why the deal is shaped this way
-                </motion.h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {WHY_EDUANANT.map((item, i) => (
-                        <motion.div key={item.label}
-                            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                            className="flex items-start gap-4 p-5 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]">
-                            <CheckCircleIcon className="w-5 h-5 shrink-0 mt-0.5 text-emerald-500" />
-                            <div>
-                                <p className="font-black text-text-primary text-sm mb-1">{item.label}</p>
-                                <p className="text-xs text-text-secondary leading-relaxed font-medium">{item.desc}</p>
-                            </div>
-                        </motion.div>
-                    ))}
+                <div className="container mx-auto px-6 max-w-6xl mb-20">
+                    <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                        <div className="flex items-center gap-3 mb-5">
+                            <AutoAwesomeIcon className="w-4 h-4 text-amber-400" />
+                            <p className="text-sm font-black uppercase tracking-widest text-text-secondary">Ways to pay less</p>
+                            <div className="flex-1 h-px bg-gray-200/40 dark:bg-white/10" />
+                        </div>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            {EARLY_OFFERS.map((offer, i) => {
+                                const Icon = offer.icon;
+                                return (
+                                    <motion.div key={offer.label}
+                                        initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                                        transition={{ delay: i * 0.06 }}
+                                        className="flex items-start gap-4 p-4 rounded-2xl border bg-white/50 dark:bg-white/[0.01]"
+                                        style={{ borderColor: offer.border }}>
+                                        <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style={{ background: `${offer.color}15` }}>
+                                            <Icon className="w-5 h-5" style={{ color: offer.color }} />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                                                <p className="text-sm font-black text-text-primary">{offer.label}</p>
+                                                <span className="text-[10px] font-black px-2 py-0.5 rounded-full border"
+                                                    style={{ background: `${offer.color}15`, borderColor: `${offer.color}40`, color: offer.color }}>
+                                                    {offer.badge}
+                                                </span>
+                                            </div>
+                                            <p className="text-xs text-text-secondary font-medium leading-relaxed">{offer.desc}</p>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                        <p className="text-xs text-text-secondary text-center mt-3">
+                            One per school, and none of them stack. Tell us which fits and we will apply it.
+                        </p>
+                    </motion.div>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-5xl mb-20">
+                    <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                        className="text-2xl font-black text-text-primary text-center mb-10">
+                        Why the deal is shaped this way
+                    </motion.h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {WHY_EDUANANT.map((item, i) => (
+                            <motion.div key={item.label}
+                                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                                className="flex items-start gap-4 p-5 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]">
+                                <CheckCircleIcon className="w-5 h-5 shrink-0 mt-0.5 text-emerald-500" />
+                                <div>
+                                    <p className="font-black text-text-primary text-sm mb-1">{item.label}</p>
+                                    <p className="text-xs text-text-secondary leading-relaxed font-medium">{item.desc}</p>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-4xl mb-16">
+                    <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                        className="text-2xl font-black text-text-primary text-center mb-8">
+                        Set against a cloud ERP
+                    </motion.h2>
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                        className="rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] shadow-xl overflow-x-auto">
+                        <table className="w-full text-left border-collapse table-fixed min-w-[640px]">
+                            <thead>
+                                <tr className="border-b border-gray-200/50 dark:border-white/10 bg-white/50 dark:bg-white/[0.02]">
+                                    <th className="w-[32%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary">What matters</th>
+                                    <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-[var(--accent-text)] border-l border-gray-200/5 dark:border-white/5">EduAnant</th>
+                                    <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary border-l border-gray-200/5 dark:border-white/5">Typical cloud ERP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {COMPARISON.map((row, i) => (
+                                    <tr key={row.feature}
+                                        className={`hover:bg-gray-50/50 dark:hover:bg-white/[0.01] transition-colors ${i !== COMPARISON.length - 1 ? 'border-b border-gray-200/30 dark:border-white/5' : ''}`}>
+                                        <td className="p-4 text-xs font-semibold text-text-secondary md:text-sm">{row.feature}</td>
+                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5">
+                                            <div className="flex items-center gap-2 text-text-primary text-xs font-semibold">
+                                                <CheckIcon className="w-4 h-4 text-emerald-500 shrink-0" />
+                                                <span>{row.eduanant.text}</span>
+                                            </div>
+                                        </td>
+                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5">
+                                            <div className="flex items-center gap-2 text-text-secondary text-xs font-semibold">
+                                                {row.other.status === 'error' && <CancelIcon className="w-4 h-4 text-red-500 shrink-0" />}
+                                                {row.other.status === 'warning' && <WarningAmberIcon className="w-4 h-4 text-amber-500 shrink-0" />}
+                                                <span>{row.other.text}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </motion.div>
+                    <p className="text-xs text-text-secondary text-center mt-3">
+                        Cloud ERP terms vary by vendor and tier. Bring us a quote you have been given and we will go through it line by line.
+                    </p>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-4xl mb-16">
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                        className="p-8 rounded-3xl border flex flex-col md:flex-row items-center gap-6"
+                        style={{ borderColor: 'rgba(16,185,129,0.25)', background: 'rgba(16,185,129,0.04)' }}>
+                        <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/10 border border-gray-200/20 shadow-sm">
+                            <AccountBalanceIcon className="w-6 h-6 text-emerald-500" />
+                        </div>
+                        <div className="flex-1 text-center md:text-left">
+                            <h3 className="text-xl font-black text-text-primary mb-1">Government and aided schools</h3>
+                            <p className="text-sm text-text-secondary leading-relaxed font-medium">
+                                40% off everything above, for schools that can show recognition or aid status.
+                                The product is identical; only the invoice changes.
+                            </p>
+                        </div>
+                        <Link to="/contact" className="shrink-0">
+                            <motion.button whileHover={{ scale: 1.04 }}
+                                className="px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 border"
+                                style={{ borderColor: 'rgba(16,185,129,0.4)', color: '#10b981' }}>
+                                <SchoolIcon className="w-4 h-4" /> Apply for this rate
+                            </motion.button>
+                        </Link>
+                    </motion.div>
+                </div>
+
+                <div className="container mx-auto px-6 max-w-3xl text-center">
+                    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                        className="p-10 rounded-3xl border"
+                        style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
+                        <p className="text-xs font-black uppercase tracking-widest mb-4" style={{ color: 'var(--accent-text)' }}>Still weighing it up?</p>
+                        <h3 className="text-3xl font-black text-text-primary mb-4">Start with the thirty days</h3>
+                        <p className="text-text-secondary mb-8 font-medium">
+                            Installation, data migration and staff training happen first. The invoice comes only once
+                            you have decided to keep it.
+                        </p>
+                        <Link to="/contact">
+                            <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
+                                className="btn-primary px-10 py-4 rounded-xl font-bold text-base inline-flex items-center gap-2">
+                                Book a walkthrough <ArrowForwardIcon className="w-5 h-5" />
+                            </motion.button>
+                        </Link>
+                        <p className="text-xs text-text-secondary mt-4 font-semibold">We reply within 24 hours</p>
+                    </motion.div>
                 </div>
             </div>
-
-            <div className="container mx-auto px-6 max-w-4xl mb-16">
-                <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                    className="text-2xl font-black text-text-primary text-center mb-8">
-                    Set against a cloud ERP
-                </motion.h2>
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] shadow-xl overflow-x-auto">
-                    <table className="w-full text-left border-collapse table-fixed min-w-[640px]">
-                        <thead>
-                            <tr className="border-b border-gray-200/50 dark:border-white/10 bg-white/50 dark:bg-white/[0.02]">
-                                <th className="w-[32%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary">What matters</th>
-                                <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-[var(--accent-text)] border-l border-gray-200/5 dark:border-white/5">EduAnant</th>
-                                <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary border-l border-gray-200/5 dark:border-white/5">Typical cloud ERP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {COMPARISON.map((row, i) => (
-                                <tr key={row.feature}
-                                    className={`hover:bg-gray-50/50 dark:hover:bg-white/[0.01] transition-colors ${i !== COMPARISON.length - 1 ? 'border-b border-gray-200/30 dark:border-white/5' : ''}`}>
-                                    <td className="p-4 text-xs font-semibold text-text-secondary md:text-sm">{row.feature}</td>
-                                    <td className="p-4 border-l border-gray-200/5 dark:border-white/5">
-                                        <div className="flex items-center gap-2 text-text-primary text-xs font-semibold">
-                                            <CheckIcon className="w-4 h-4 text-emerald-500 shrink-0" />
-                                            <span>{row.eduanant.text}</span>
-                                        </div>
-                                    </td>
-                                    <td className="p-4 border-l border-gray-200/5 dark:border-white/5">
-                                        <div className="flex items-center gap-2 text-text-secondary text-xs font-semibold">
-                                            {row.other.status === 'error' && <CancelIcon className="w-4 h-4 text-red-500 shrink-0" />}
-                                            {row.other.status === 'warning' && <WarningAmberIcon className="w-4 h-4 text-amber-500 shrink-0" />}
-                                            <span>{row.other.text}</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </motion.div>
-                <p className="text-xs text-text-secondary text-center mt-3">
-                    Cloud ERP terms vary by vendor and tier. Bring us a quote you have been given and we will go through it line by line.
-                </p>
-            </div>
-
-            <div className="container mx-auto px-6 max-w-4xl mb-16">
-                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                    className="p-8 rounded-3xl border flex flex-col md:flex-row items-center gap-6"
-                    style={{ borderColor: 'rgba(16,185,129,0.25)', background: 'rgba(16,185,129,0.04)' }}>
-                    <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/10 border border-gray-200/20 shadow-sm">
-                        <AccountBalanceIcon className="w-6 h-6 text-emerald-500" />
-                    </div>
-                    <div className="flex-1 text-center md:text-left">
-                        <h3 className="text-xl font-black text-text-primary mb-1">Government and aided schools</h3>
-                        <p className="text-sm text-text-secondary leading-relaxed font-medium">
-                            40% off everything above, for schools that can show recognition or aid status.
-                            The product is identical; only the invoice changes.
-                        </p>
-                    </div>
-                    <Link to="/contact" className="shrink-0">
-                        <motion.button whileHover={{ scale: 1.04 }}
-                            className="px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 border"
-                            style={{ borderColor: 'rgba(16,185,129,0.4)', color: '#10b981' }}>
-                            <SchoolIcon className="w-4 h-4" /> Apply for this rate
-                        </motion.button>
-                    </Link>
-                </motion.div>
-            </div>
-
-            <div className="container mx-auto px-6 max-w-3xl text-center">
-                <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                    className="p-10 rounded-3xl border"
-                    style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
-                    <p className="text-xs font-black uppercase tracking-widest mb-4" style={{ color: 'var(--accent-text)' }}>Still weighing it up?</p>
-                    <h3 className="text-3xl font-black text-text-primary mb-4">Start with the thirty days</h3>
-                    <p className="text-text-secondary mb-8 font-medium">
-                        Installation, data migration and staff training happen first. The invoice comes only once
-                        you have decided to keep it.
-                    </p>
-                    <Link to="/contact">
-                        <motion.button whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.98 }}
-                            className="btn-primary px-10 py-4 rounded-xl font-bold text-base inline-flex items-center gap-2">
-                            Book a walkthrough <ArrowForwardIcon className="w-5 h-5" />
-                        </motion.button>
-                    </Link>
-                    <p className="text-xs text-text-secondary mt-4 font-semibold">We reply within 24 hours</p>
-                </motion.div>
-            </div>
-        </div>
+        </>
     );
 }

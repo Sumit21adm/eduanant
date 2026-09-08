@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/eduanant-logo.svg" />
@@ -8,6 +8,11 @@
     <meta name="description" content="EduAnant is a School Operating System that runs on your school's own Wi-Fi — no internet required. 16 modules covering Admissions, Fees, Attendance, Exams, Transport, HR and Library, with portals for teachers and parents and a native Android app. ₹20 per student a month." />
     <meta name="keywords" content="school management software India, school ERP India, offline school software, fee management software school, attendance software school, school software Hindi, CBSE school software, school management system Bihar" />
     <meta name="theme-color" content="#1E1B4B" />
+    <meta name="author" content="Snapx Technologies LLP" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="geo.region" content="IN-BR" />
+    <meta name="geo.placename" content="Patna" />
+    <link rel="alternate" type="application/xml" href="/sitemap.xml" />
     <link rel="canonical" href="https://eduanant.cloud/" />
 
     <!-- Open Graph — drives the preview card when the link is pasted into
@@ -46,6 +51,46 @@
           if (t && t !== 'default') document.documentElement.classList.add('theme-' + t);
         } catch (e) {}
       })();
+    </script>
+
+    <!-- Baseline structured data. Per-page JSON-LD is injected by src/lib/seo.tsx
+         and frozen into each route's HTML by scripts/prerender.mjs; this block is
+         the floor, so even an un-prerendered deploy identifies the product. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://eduanant.cloud/#organization",
+          "name": "EduAnant",
+          "legalName": "Snapx Technologies LLP",
+          "url": "https://eduanant.cloud",
+          "logo": "https://eduanant.cloud/eduanant-logo.svg",
+          "email": "hello@eduanant.cloud",
+          "telephone": "+91-79036-12979",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Patna",
+            "addressRegion": "Bihar",
+            "postalCode": "804453",
+            "addressCountry": "IN"
+          },
+          "sameAs": [
+            "https://play.google.com/store/apps/details?id=cloud.eduanant.app",
+            "https://snapxtechnologies.com"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://eduanant.cloud/#website",
+          "url": "https://eduanant.cloud",
+          "name": "EduAnant",
+          "inLanguage": ["en-IN", "hi-IN"],
+          "publisher": { "@id": "https://eduanant.cloud/#organization" }
+        }
+      ]
+    }
     </script>
   </head>
   <body>

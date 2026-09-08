@@ -1,0 +1,67 @@
+# EduAnant
+
+> EduAnant is an offline-ready school management system (school ERP) built for
+> Indian schools by Snapx Technologies LLP, Patna, Bihar. It installs on a
+> school's own PC or server and runs over the school's local Wi-Fi, so the fee
+> counter, attendance register and office keep working when the broadband line
+> is down.
+
+## Facts (Release 1.4.0, September 2026)
+
+- **16 fully wired modules**, all included with every school — no tier to upgrade to.
+- **100+ production screens** across the admin console and both portals.
+- **2 self-service portals** (Teacher, and Student/Parent) plus an admin console
+  and a native Android app.
+- **96 granular permission keys** across 22 permission groups, assignable per user.
+- **Runs offline on a school LAN.** No internet dependency, no monthly cloud bill.
+- **Interface in English and Hindi**, switchable in one click.
+- **Supports CBSE, ICSE and State Board** schools on an April–March session.
+- **Pricing:** ₹20 per student per month billed annually (₹25 billed monthly),
+  with a ₹36,000 annual minimum covering up to 150 students. Setup, data
+  migration from Excel, staff training and the Android app are included.
+
+## In production
+
+S.D.V. Public School, Patna, Bihar (CBSE affiliated, three campuses,
+https://sdv-edu.in) has run EduAnant since April 2026 — over 1,300 active
+students and more than 100 school staff, through full admission, fee and
+examination cycles.
+
+## The 16 modules
+
+Registrations & Admissions; Fee Management; Student Attendance; Human Resources
+& Staff Attendance; Examination & Results; Library Management; Reception Counter;
+Transport Management; Academics & Calendar; Communication & Notifications;
+Classroom & Teaching; Reports & Analytics; Portals & Mobile App; Security &
+Access Control; Backup & Restore; System Configuration & Updates.
+
+## Who it is for
+
+School directors and founders choosing a system; principals and administrators
+running daily operations; accountants and fee clerks at the counter; front-desk
+and reception staff; class teachers marking attendance and entering marks;
+librarians, transport managers and HR staff; and parents and students using the
+portal and Android app.
+
+## Data ownership and security
+
+The database is standard PostgreSQL on the school's own machine. Student data
+never leaves the campus, is never shared with third parties, and can be exported
+in full at any time. Every action is written to an immutable audit trail that not
+even the school admin can edit. Aadhaar, PAN and bank numbers are encrypted at
+rest and masked on screen.
+
+## Pages
+
+- [Home](https://eduanant.cloud/): what EduAnant is and who it is for.
+- [Features](https://eduanant.cloud/features): all 16 modules, screen by screen.
+- [Pricing](https://eduanant.cloud/pricing): per-student pricing and what is included.
+- [Live Demo](https://eduanant.cloud/demo): a running install, open without sign-up.
+- [Security](https://eduanant.cloud/security): permissions, audit trail, encryption.
+- [Updates](https://eduanant.cloud/updates): release history since April 2026.
+- [Contact](https://eduanant.cloud/contact): book an on-site walkthrough.
+
+## Contact
+
+M/S Snapx Technologies LLP, Patna 804453, India.
+Email: hello@eduanant.cloud · Phone: +91 79036 12979
