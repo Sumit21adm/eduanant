@@ -2,14 +2,14 @@ import { motion } from 'framer-motion';
 
 export default function PrivacyPolicyPage() {
     return (
-        <div className="pt-32 pb-24 relative">
+        <div className="pt-14 pb-24 relative">
             {/* Background elements */}
-            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#00b6d5]/5 to-transparent pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#F59E0B]/5 to-transparent pointer-events-none" />
             
             <div className="container mx-auto px-6 max-w-5xl relative z-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <div className="text-center mb-12">
-                        <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-4 bg-[#00b6d5]/10 border-[#00b6d5]/20 text-[#00b6d5]">
+                        <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-4 bg-[#F59E0B]/10 border-[#F59E0B]/20 text-[var(--accent-text)]">
                             Legal Document
                         </span>
                         <h1 className="text-4xl md:text-5xl font-black text-text-primary mb-4">
@@ -29,7 +29,7 @@ export default function PrivacyPolicyPage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">1</span>
                                     Introduction and Role
                                 </h3>
-                                <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary">Data Processor</strong> for the schools (the <strong className="text-text-primary">Data Fiduciary</strong>) that use our platform.</p>
+                                <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies LLP) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary">Data Processor</strong> for the schools (the <strong className="text-text-primary">Data Fiduciary</strong>) that use our platform.</p>
                             </section>
                             
                             <section>
@@ -46,7 +46,7 @@ export default function PrivacyPolicyPage() {
                                         ['SMS logs', 'Records of notifications sent via our integrated SMS gateway — retained for 90 days'],
                                     ].map(([item, desc]) => (
                                         <li key={item} className="flex gap-3 items-start">
-                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-[#00b6d5] shrink-0" />
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-[#F59E0B] shrink-0" />
                                             <span><strong className="text-text-primary">{item}:</strong> {desc}</span>
                                         </li>
                                     ))}
@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
                             
                             <section className="bg-blue-50 dark:bg-blue-900/10 p-6 rounded-2xl border border-blue-200/50 dark:border-blue-500/20">
                                 <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 flex items-center gap-3">
-                                     <span className="w-8 h-8 rounded-lg bg-[#00b6d5]/10 text-[#00b6d5] flex items-center justify-center text-sm font-black shrink-0">3</span>
+                                     <span className="w-8 h-8 rounded-lg bg-[#F59E0B]/10 text-[var(--accent-text)] flex items-center justify-center text-sm font-black shrink-0">3</span>
                                     Mobile App & Device Permissions
                                 </h3>
                                 <p className="mb-4">The EduAnant mobile application (package name: <strong className="text-text-primary">cloud.eduanant.app</strong>) provides access to the school portals and supports native features like push notifications. The app itself does <strong className="text-text-primary">not collect or store any personal data</strong> on our servers beyond what is required to maintain your login session and deliver notifications.</p>
@@ -68,7 +68,7 @@ export default function PrivacyPolicyPage() {
                                         ['BIOMETRICS (Face ID / Fingerprint)', 'Used exclusively for local secure login. Biometric verification is processed entirely on the user\'s device and is never sent to our servers.'],
                                     ].map(([perm, desc]) => (
                                         <li key={perm} className="flex gap-3 items-start">
-                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-[#00b6d5] shrink-0" />
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-[#F59E0B] shrink-0" />
                                             <span><strong className="text-text-primary">{perm}:</strong> {desc}</span>
                                         </li>
                                     ))}
@@ -115,7 +115,7 @@ export default function PrivacyPolicyPage() {
                                 <p className="mb-4">You have the right to access, correct, or request deletion of your personal data at any time. To exercise any of these rights:</p>
                                 <ul className="space-y-2 list-none mb-4">
                                     {[
-                                        'Email us at eduanant.cloud@gmail.com with subject line "Data Request"',
+                                        'Email us at hello@eduanant.cloud with subject line "Data Request"',
                                         'Specify whether you want access, correction, or deletion of your data',
                                         'We will verify your identity and respond within 30 days',
                                         'For account/data deletion: all personal data associated with your account will be permanently erased within 60 days of a verified request',
@@ -131,10 +131,10 @@ export default function PrivacyPolicyPage() {
                             
                             <section>
                                 <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-[#00b6d5]/10 text-[#00b6d5] flex items-center justify-center text-sm font-black shrink-0">9</span>
+                                    <span className="w-8 h-8 rounded-lg bg-[#F59E0B]/10 text-[var(--accent-text)] flex items-center justify-center text-sm font-black shrink-0">9</span>
                                     Grievance Redressal
                                 </h3>
-                                <p>For any privacy-related concerns, data breaches, or data rights requests, please contact our Grievance Officer immediately at <a href="mailto:eduanant.cloud@gmail.com" className="text-[#00b6d5] hover:underline font-semibold">eduanant.cloud@gmail.com</a>. We aim to respond to all valid requests within 30 days. This policy may be updated periodically — we will notify subscribing Schools of any material changes via email.</p>
+                                <p>For any privacy-related concerns, data breaches, or data rights requests, please contact our Grievance Officer immediately at <a href="mailto:hello@eduanant.cloud" className="text-[var(--accent-text)] hover:underline font-semibold">hello@eduanant.cloud</a>. We aim to respond to all valid requests within 30 days. This policy may be updated periodically — we will notify subscribing Schools of any material changes via email.</p>
                             </section>
                         </div>
                     </div>

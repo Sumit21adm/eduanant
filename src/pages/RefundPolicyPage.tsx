@@ -2,14 +2,14 @@ import { motion } from 'framer-motion';
 
 export default function RefundPolicyPage() {
     return (
-        <div className="pt-32 pb-24 relative">
+        <div className="pt-14 pb-24 relative">
             {/* Background elements */}
-            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#00b6d5]/5 to-transparent pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#F59E0B]/5 to-transparent pointer-events-none" />
             
             <div className="container mx-auto px-6 max-w-5xl relative z-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <div className="text-center mb-12">
-                        <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-4 bg-[#00b6d5]/10 border-[#00b6d5]/20 text-[#00b6d5]">
+                        <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-4 bg-[#F59E0B]/10 border-[#F59E0B]/20 text-[var(--accent-text)]">
                             Legal Document
                         </span>
                         <h1 className="text-4xl md:text-5xl font-black text-text-primary mb-4">
@@ -53,7 +53,7 @@ export default function RefundPolicyPage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">4</span>
                                     Your data, whenever you leave
                                 </h3>
-                                <p>The database sits on your own server, and you can take a full backup from inside the admin panel at any time — during the trial, mid-subscription, or on your way out. We will also generate a final export for you on request. To cancel or query a bill, write to <a href="mailto:eduanant.cloud@gmail.com" className="text-[#00b6d5] hover:underline font-semibold">eduanant.cloud@gmail.com</a> at least 7 days before your renewal date.</p>
+                                <p>The database sits on your own server, and you can take a full backup from inside the admin panel at any time — during the trial, mid-subscription, or on your way out. We will also generate a final export for you on request. To cancel or query a bill, write to <a href="mailto:hello@eduanant.cloud" className="text-[var(--accent-text)] hover:underline font-semibold">hello@eduanant.cloud</a> at least 7 days before your renewal date.</p>
                             </section>
                         </div>
                     </div>

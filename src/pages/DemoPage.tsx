@@ -101,7 +101,7 @@ export default function DemoPage() {
     };
 
     return (
-        <div className="pt-28 pb-24 relative overflow-hidden">
+        <div className="pt-14 pb-24 relative overflow-hidden">
             {/* Ambient Background Accents */}
             <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-1/4 right-1/10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -116,7 +116,7 @@ export default function DemoPage() {
                         transition={{ duration: 0.6 }}
                     >
                         <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                            style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
+                            style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
                             <AutoAwesomeIcon className="w-3.5 h-3.5" /> Open to anyone, no sign-up
                         </span>
                         <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-6 leading-none">
@@ -139,7 +139,7 @@ export default function DemoPage() {
                             href="https://demo.eduanant.cloud" 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#00b6d5]/20 group transition-all"
+                            className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#F59E0B]/20 group transition-all"
                         >
                             Open the live demo <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </a>
@@ -152,13 +152,13 @@ export default function DemoPage() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
                     className="max-w-4xl mx-auto p-5 rounded-2xl border mb-16 flex items-start gap-4 bg-white/50 dark:bg-white/[0.01]"
-                    style={{ borderColor: 'rgba(0,182,213,0.2)' }}
+                    style={{ borderColor: 'rgba(245,158,11,0.2)' }}
                 >
-                    <InfoIcon className="w-6 h-6 shrink-0 mt-0.5" style={{ color: '#00b6d5' }} />
+                    <InfoIcon className="w-6 h-6 shrink-0 mt-0.5" style={{ color: 'var(--accent-text)' }} />
                     <div>
                         <h3 className="font-black text-text-primary mb-1 text-base">Nothing here is real, so change whatever you like</h3>
                         <p className="text-sm text-text-secondary leading-relaxed font-medium">
-                            The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. Every student, fee and mark in it is invented. Add records, edit them, collect a fee, print a receipt — it resets on its own, and no real child's data is involved.
+                            The demo installation runs at <a href="https://demo.eduanant.cloud" className="font-bold text-[var(--primary-main)] dark:text-[#00b6d5] hover:underline" target="_blank" rel="noopener noreferrer">demo.eduanant.cloud</a>. Every student, fee and mark in it is invented. Add records, edit them, collect a fee, print a receipt — it resets on its own, and no real child's data is involved.
                         </p>
                     </div>
                 </motion.div>
@@ -178,8 +178,8 @@ export default function DemoPage() {
                             >
                                 {/* Role Header */}
                                 <div className="flex items-center gap-4 mb-4">
-                                    <div className="p-3 rounded-2xl border" style={{ backgroundColor: role.bgColor, borderColor: 'rgba(0,182,213,0.1)' }}>
-                                        <IconComponent className="w-6 h-6 text-[#00b6d5]" />
+                                    <div className="p-3 rounded-2xl border" style={{ backgroundColor: role.bgColor, borderColor: 'rgba(245,158,11,0.1)' }}>
+                                        <IconComponent className="w-6 h-6 text-[var(--accent-text)]" />
                                     </div>
                                     <h3 className="text-xl font-black text-text-primary">{role.role}</h3>
                                 </div>
@@ -194,7 +194,7 @@ export default function DemoPage() {
                                     <span className="text-xs font-bold text-text-secondary block uppercase tracking-wider mb-2">Capabilities:</span>
                                     {role.features.map((feat) => (
                                         <div key={feat} className="flex items-center gap-2 text-xs text-text-secondary font-medium">
-                                            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#00b6d5' }} />
+                                            <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: '#F59E0B' }} />
                                             <span>{feat}</span>
                                         </div>
                                     ))}
@@ -207,7 +207,7 @@ export default function DemoPage() {
                                             <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
                                             <span className="font-bold text-text-primary">Sign in as this role</span>
                                         </div>
-                                        <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline flex items-center gap-1 font-bold">
+                                        <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[var(--accent-text)] hover:underline flex items-center gap-1 font-bold">
                                             Log in <OpenInNewIcon className="w-3 h-3" />
                                         </a>
                                     </div>
@@ -258,7 +258,7 @@ export default function DemoPage() {
                             Open the live demo <OpenInNewIcon className="w-4 h-4" />
                         </a>
                         <span className="text-text-secondary text-sm font-bold">or</span>
-                        <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#00b6d5] text-text-primary text-sm font-bold transition-colors">
+                        <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#F59E0B] text-text-primary text-sm font-bold transition-colors">
                             Book a walkthrough
                         </Link>
                     </div>

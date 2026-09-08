@@ -21,7 +21,6 @@ import BusinessIcon from '@mui/icons-material/Business';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DnsIcon from '@mui/icons-material/Dns';
-import SmsIcon from '@mui/icons-material/Sms';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 
 // The commercial model, in one place.
@@ -38,8 +37,8 @@ const ENTERPRISE_ABOVE = 2000;
 const inr = (n: number) => n.toLocaleString('en-IN');
 
 const SUITE_FEATURES = [
-    'All 18 modules, with no tier to upgrade to',
-    '3 portals: Admin, Teacher and Parent, plus the Android app',
+    'All 16 modules, with no tier to upgrade to',
+    '2 self-service portals for teachers and parents, plus the admin console and Android app',
     'Unlimited staff accounts — no per-user charge',
     'Fee collection, demand bills, receipts and ledger',
     'HR with service book, salary structure and compliance exports',
@@ -60,11 +59,6 @@ const NOT_INCLUDED = [
         desc: 'Free if you run it on a school PC or an existing server. If you would rather not, we host and maintain it for Rs 18,000 a year.',
     },
     {
-        icon: SmsIcon,
-        label: 'SMS and WhatsApp credits',
-        desc: 'Messages are billed by the gateway — Twilio, or Meta for WhatsApp — straight to your own account at their rate. We add nothing on top.',
-    },
-    {
         icon: ReceiptLongIcon,
         label: '18% GST',
         desc: 'Every figure on this page is before tax. Your invoice carries GST as a separate line.',
@@ -72,9 +66,9 @@ const NOT_INCLUDED = [
 ];
 
 const EARLY_OFFERS = [
-    { icon: WorkspacePremiumIcon, label: 'Founding 10', desc: 'First ten schools: half price for year one, then renewals locked at 25% off list for three years.', badge: 'Open now', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.25)', color: '#f59e0b' },
+    { icon: WorkspacePremiumIcon, label: 'Founding 10', desc: 'First ten schools: 50% off year one, with renewal rates locked for life.', badge: 'Open now', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.25)', color: '#f59e0b' },
     { icon: RocketLaunchIcon, label: 'Onboarding waived', desc: 'Migration, installation and two days of on-site training — a Rs 15,000 line item, free for founding schools.', badge: 'Worth Rs 15,000', bg: 'rgba(20,184,166,0.08)', border: 'rgba(20,184,166,0.25)', color: '#14b8a6' },
-    { icon: CalendarTodayIcon, label: 'Session 2027-28 early bird', desc: 'Confirm by 31 January 2027 and open the new session on it — 30% off your first year.', badge: 'Next session', bg: 'rgba(0,182,213,0.08)', border: 'rgba(0,182,213,0.25)', color: '#00b6d5' },
+    { icon: CalendarTodayIcon, label: 'Session 2027-28 early bird', desc: 'Confirm by 31 January 2027 and open the new session on it — 30% off your first year.', badge: 'Next session', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' },
     { icon: CardGiftcardIcon, label: 'Refer a school', desc: 'Introduce us to a school that signs and both of you take 20% off the next renewal.', badge: 'Referral', bg: 'rgba(244,63,94,0.08)', border: 'rgba(244,63,94,0.25)', color: '#f43f5e' },
     { icon: HandshakeIcon, label: 'Trust and group rate', desc: 'Three or more schools under one management: 25% off each, one invoice, one onboarding team.', badge: 'Group', bg: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.25)', color: '#8b5cf6' },
     { icon: AccountBalanceIcon, label: 'Government and aided', desc: '40% off for schools that can show recognition or aid status. Send the details and we will confirm.', badge: 'Verified rate', bg: 'rgba(16,185,129,0.08)', border: 'rgba(16,185,129,0.25)', color: '#10b981' },
@@ -101,7 +95,7 @@ const WHY_EDUANANT = [
 
 const COMPARISON = [
     { feature: 'Try it before paying', eduanant: { status: 'success', text: '30 days, no invoice' }, other: { status: 'warning', text: 'Usually behind a sales call' } },
-    { feature: 'All modules from day one', eduanant: { status: 'success', text: 'All 18 included' }, other: { status: 'error', text: 'Tiers and per-module upsells' } },
+    { feature: 'All modules from day one', eduanant: { status: 'success', text: 'All 16 included' }, other: { status: 'error', text: 'Tiers and per-module upsells' } },
     { feature: 'Works on the school LAN', eduanant: { status: 'success', text: 'Runs without external internet' }, other: { status: 'error', text: 'Needs constant connectivity' } },
     { feature: 'Who holds the data', eduanant: { status: 'success', text: 'Your server, exportable database' }, other: { status: 'error', text: 'A third-party cloud' } },
     { feature: 'Library and Reception Counter', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Paid add-on modules' } },
@@ -133,9 +127,9 @@ function PricingCalculator() {
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             className="rounded-3xl border p-8 md:p-10"
-            style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.03)' }}>
+            style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.03)' }}>
             <div className="text-center mb-8">
-                <p className="text-xs font-black uppercase tracking-widest mb-2 inline-flex items-center gap-1.5" style={{ color: '#00b6d5' }}>
+                <p className="text-xs font-black uppercase tracking-widest mb-2 inline-flex items-center gap-1.5" style={{ color: 'var(--accent-text)' }}>
                     <CalculateIcon className="w-3.5 h-3.5" /> Work out your number
                 </p>
                 <h3 className="text-2xl font-black text-text-primary mt-1">What would this cost my school?</h3>
@@ -152,7 +146,7 @@ function PricingCalculator() {
                     <input type="range" min={100} max={3000} step={10} value={students}
                         onChange={e => setStudents(Number(e.target.value))}
                         className="w-full cursor-pointer"
-                        style={{ accentColor: '#00b6d5' }} />
+                        style={{ accentColor: '#F59E0B' }} />
                 </div>
 
                 {isEnterprise ? (
@@ -194,7 +188,7 @@ function PricingCalculator() {
 
                             <label className="flex items-start gap-3 p-3 rounded-xl border border-gray-200/50 dark:border-white/10 bg-white/60 dark:bg-white/[0.02] cursor-pointer">
                                 <input type="checkbox" checked={managedHosting} onChange={e => setManagedHosting(e.target.checked)}
-                                    className="mt-0.5 cursor-pointer" style={{ accentColor: '#00b6d5' }} />
+                                    className="mt-0.5 cursor-pointer" style={{ accentColor: '#F59E0B' }} />
                                 <span>
                                     <span className="block text-xs font-black text-text-primary">We host it for you</span>
                                     <span className="block text-[11px] text-text-secondary leading-snug">Rs 18,000 a year. Leave this unticked if you have a PC or server at school.</span>
@@ -202,9 +196,9 @@ function PricingCalculator() {
                             </label>
                         </div>
 
-                        <div className="bg-white/95 dark:bg-[#0d1721]/95 border border-[#00b6d5]/20 p-5 rounded-2xl space-y-3.5 shadow-lg relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-24 h-24 bg-[#00b6d5]/5 rounded-full blur-xl pointer-events-none" />
-                            <div className="text-xs font-black uppercase tracking-widest text-[#00b6d5] border-b border-gray-100 dark:border-white/5 pb-2 flex items-center justify-between">
+                        <div className="bg-white/95 dark:bg-[#141B2D]/95 border border-[#F59E0B]/20 p-5 rounded-2xl space-y-3.5 shadow-lg relative overflow-hidden">
+                            <div className="absolute top-0 right-0 w-24 h-24 bg-[#F59E0B]/5 rounded-full blur-xl pointer-events-none" />
+                            <div className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] border-b border-gray-100 dark:border-white/5 pb-2 flex items-center justify-between">
                                 <span>Your first year</span>
                                 <span>{billing === 'annual' ? 'Paid yearly' : 'Paid monthly'}</span>
                             </div>
@@ -270,11 +264,11 @@ export default function PricingPage() {
     const ratePerStudent = billing === 'annual' ? RATE_ANNUAL : RATE_MONTHLY;
 
     return (
-        <div className="pt-28 pb-24 relative">
+        <div className="pt-14 pb-24 relative">
             <div className="container mx-auto px-6 max-w-7xl mb-12 text-center">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                        style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
+                        style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
                         <CurrencyRupeeIcon className="w-3.5 h-3.5" /> One plan, priced by school size
                     </span>
                     <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-5 leading-tight">
@@ -282,7 +276,7 @@ export default function PricingPage() {
                         <span className="brand-text-gradient">not per feature.</span>
                     </h1>
                     <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        &#8377;20 per student a month, billed annually. All 18 modules, every portal, unlimited staff accounts.
+                        &#8377;20 per student a month, billed annually. All 16 modules, every portal, unlimited staff accounts.
                         Run your school on it for 30 days before we send an invoice.
                     </p>
                 </motion.div>
@@ -306,13 +300,13 @@ export default function PricingPage() {
                         <div className="flex-1">
                             <p className="text-sm text-text-secondary leading-relaxed mb-4">
                                 We are looking for ten schools to build the next year of this product with. You get half price for
-                                year one and renewals locked at 25% off list for three years. In return we ask for a reference call,
+                                year one and renewal rates locked for life. In return we ask for a reference call,
                                 a line we can quote once you have lived with it for two months, and your name on this website.
                             </p>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                 {[
                                     'Half price, first year',
-                                    'Renewals locked, 25% off, 3 years',
+                                    'Renewal rates locked for life',
                                     'Onboarding and training free',
                                 ].map(t => (
                                     <div key={t} className="flex items-start gap-2 text-xs font-semibold text-text-primary">
@@ -329,11 +323,11 @@ export default function PricingPage() {
             <div className="container mx-auto px-6 max-w-6xl mb-8">
                 <div className="flex items-center justify-center gap-2">
                     <button onClick={() => setBilling('monthly')}
-                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all border ${billing === 'monthly' ? 'btn-primary shadow-lg shadow-[#00b6d5]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
+                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all border ${billing === 'monthly' ? 'btn-primary shadow-lg shadow-[#F59E0B]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
                         Monthly
                     </button>
                     <button onClick={() => setBilling('annual')}
-                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 border ${billing === 'annual' ? 'btn-primary shadow-lg shadow-[#00b6d5]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
+                        className={`px-5 py-2 rounded-xl text-sm font-bold transition-all flex items-center gap-2 border ${billing === 'annual' ? 'btn-primary shadow-lg shadow-[#F59E0B]/20' : 'border-transparent text-text-secondary hover:text-text-primary'}`}>
                         Annual
                         <span className="text-[10px] font-black px-1.5 py-0.5 rounded-full font-sans transition-all"
                             style={{
@@ -348,14 +342,14 @@ export default function PricingPage() {
 
             <div className="container mx-auto px-6 max-w-5xl mb-14">
                 <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}
-                    className="relative rounded-3xl p-8 md:p-12 border border-[#00b6d5]/30 bg-white/70 dark:bg-white/[0.03] backdrop-blur-sm shadow-[0_0_60px_rgba(0,182,213,0.15)] overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#17305a] via-[#00b6d5] to-purple-600" />
-                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#00b6d5]/5 rounded-full blur-3xl pointer-events-none" />
+                    className="relative rounded-3xl p-8 md:p-12 border border-[#F59E0B]/30 bg-white/70 dark:bg-white/[0.03] backdrop-blur-sm shadow-[0_0_60px_rgba(245,158,11,0.15)] overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#1E1B4B] via-[#F59E0B] to-purple-600" />
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-[#F59E0B]/5 rounded-full blur-3xl pointer-events-none" />
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                         <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
                             <div>
-                                <span className="inline-flex items-center gap-1.5 text-[10px] font-black px-3 py-1 rounded-full text-white bg-gradient-to-r from-[#17305a] to-[#00b6d5] uppercase tracking-wider mb-4">
+                                <span className="inline-flex items-center gap-1.5 text-[10px] font-black px-3 py-1 rounded-full text-white bg-gradient-to-r from-[#1E1B4B] to-[#F59E0B] uppercase tracking-wider mb-4">
                                     <AutoAwesomeIcon className="w-3 h-3" /> Full suite
                                 </span>
                                 <h2 className="text-3xl font-black text-text-primary mb-2">EduAnant Unlimited</h2>
@@ -365,7 +359,7 @@ export default function PricingPage() {
                                 </p>
                             </div>
 
-                            <div className="p-5 rounded-2xl border border-[#00b6d5]/15 bg-[#00b6d5]/5">
+                            <div className="p-5 rounded-2xl border border-[#F59E0B]/15 bg-[#F59E0B]/5">
                                 <p className="text-xs font-bold text-text-secondary mb-1">Rate</p>
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="text-4xl font-black brand-text-gradient">&#8377;{ratePerStudent}</span>
@@ -383,14 +377,14 @@ export default function PricingPage() {
 
                             <Link to="/contact" className="block w-full">
                                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                                    className="w-full btn-primary py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#00b6d5]/20">
+                                    className="w-full btn-primary py-4 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#F59E0B]/20">
                                     <PhoneIcon className="w-4 h-4" /> Start your 30 days <ArrowForwardIcon className="w-4 h-4" />
                                 </motion.button>
                             </Link>
                         </div>
 
                         <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-gray-200/50 dark:border-white/10 lg:pl-8 pt-8 lg:pt-0 flex flex-col justify-center">
-                            <p className="text-xs font-black uppercase tracking-widest text-[#00b6d5] mb-4">What you get</p>
+                            <p className="text-xs font-black uppercase tracking-widest text-[var(--accent-text)] mb-4">What you get</p>
                             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {SUITE_FEATURES.map((feat, i) => (
                                     <li key={i} className="flex items-start gap-2.5 text-xs text-text-secondary">
@@ -407,10 +401,10 @@ export default function PricingPage() {
 
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                     className="mt-6 p-7 rounded-3xl border flex flex-col md:flex-row items-center justify-between gap-6"
-                    style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.04)' }}>
+                    style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 rounded-2xl flex items-center justify-center bg-white/10 border border-gray-200/20 shadow-sm">
-                            <BusinessIcon className="w-6 h-6 text-[#00b6d5]" />
+                            <BusinessIcon className="w-6 h-6 text-[var(--accent-text)]" />
                         </div>
                         <div>
                             <h3 className="text-lg font-black text-text-primary">Large schools, trusts and groups</h3>
@@ -448,7 +442,7 @@ export default function PricingPage() {
                                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }} transition={{ delay: i * 0.08 }}
                                 className="p-6 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]">
-                                <Icon className="w-6 h-6 mb-3" style={{ color: '#0091b8' }} />
+                                <Icon className="w-6 h-6 mb-3" style={{ color: 'var(--accent-text)' }} />
                                 <p className="font-black text-text-primary text-sm mb-1.5">{item.label}</p>
                                 <p className="text-xs text-text-secondary leading-relaxed">{item.desc}</p>
                             </motion.div>
@@ -528,7 +522,7 @@ export default function PricingPage() {
                         <thead>
                             <tr className="border-b border-gray-200/50 dark:border-white/10 bg-white/50 dark:bg-white/[0.02]">
                                 <th className="w-[32%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary">What matters</th>
-                                <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-[#00b6d5] border-l border-gray-200/5 dark:border-white/5">EduAnant</th>
+                                <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-[var(--accent-text)] border-l border-gray-200/5 dark:border-white/5">EduAnant</th>
                                 <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary border-l border-gray-200/5 dark:border-white/5">Typical cloud ERP</th>
                             </tr>
                         </thead>
@@ -587,8 +581,8 @@ export default function PricingPage() {
             <div className="container mx-auto px-6 max-w-3xl text-center">
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                     className="p-10 rounded-3xl border"
-                    style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.04)' }}>
-                    <p className="text-xs font-black uppercase tracking-widest mb-4" style={{ color: '#00b6d5' }}>Still weighing it up?</p>
+                    style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
+                    <p className="text-xs font-black uppercase tracking-widest mb-4" style={{ color: 'var(--accent-text)' }}>Still weighing it up?</p>
                     <h3 className="text-3xl font-black text-text-primary mb-4">Start with the thirty days</h3>
                     <p className="text-text-secondary mb-8 font-medium">
                         Installation, data migration and staff training happen first. The invoice comes only once

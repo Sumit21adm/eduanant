@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Shield, Lock, Eye, EyeOff, Server, FileSearch, RefreshCw, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { Shield, ShieldCheck, Lock, Eye, EyeOff, Server, FileSearch, RefreshCw, Users, CheckCircle, ArrowRight, KeyRound } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const SECURITY_PILLARS = [
@@ -8,13 +8,13 @@ const SECURITY_PILLARS = [
         desc: 'Every staff member in EduAnant sees only what their role allows. A teacher never sees fee records. An accountant never touches exam marks. Access boundaries are strictly enforced — at both the screen and data level.',
         points: [
             'Separate roles for Admin, Teacher, Accountant, Parent/Student',
-            '96 individual permissions across 22 modules',
+            '96 individual permissions across 22 permission groups',
             'Tune any single permission per staff member, not just per role',
             'Create custom roles for your school\'s own designations',
             'Cannot bypass restrictions via URL or direct navigation',
             'Role and permission changes take effect immediately',
         ],
-        color: 'from-[#17305a] to-[#0f6187]', border: 'border-[#17305a]/20', bg: 'bg-[#17305a]/5',
+        color: 'from-[#1E1B4B] to-[#312E81]', border: 'border-[#1E1B4B]/20', bg: 'bg-[#1E1B4B]/5',
     },
     {
         icon: Lock, title: 'Two-Factor Login & Session Management',
@@ -26,7 +26,7 @@ const SECURITY_PILLARS = [
             'Sessions invalidated immediately on logout or role change',
             'Rate limiting on login, OTP and password reset',
         ],
-        color: 'from-[#0f6187] to-[#00b6d5]', border: 'border-[#0091b8]/20', bg: 'bg-[#0091b8]/5',
+        color: 'from-[#312E81] to-[#F59E0B]', border: 'border-[#D97706]/20', bg: 'bg-[#D97706]/5',
     },
     {
         icon: FileSearch, title: 'Immutable Audit Trail',
@@ -119,42 +119,134 @@ const COMPLIANCE = [
     { label: 'Data Backup', value: 'Automatic before every update' },
 ];
 
+const HEADLINE_FACTS = [
+    { icon: KeyRound, value: '96', label: 'Granular permission keys' },
+    { icon: Server, value: '100%', label: 'On your own server' },
+    { icon: EyeOff, value: 'Zero', label: 'Third parties with access' },
+];
+
 export default function SecurityPage() {
     return (
-        <div className="pt-28 pb-24 relative">
-            <div className="container mx-auto px-6 max-w-7xl mb-16 text-center">
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                        style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
-                        <Shield className="w-3.5 h-3.5" /> Enterprise-Grade Security
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-5 leading-tight">
-                        Your students' data is<br />
-                        <span className="brand-text-gradient">safe. Always.</span>
-                    </h1>
-                    <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        EduAnant is built with security at its core — not as an afterthought. Here's what that means for your school's data, in plain language.
-                    </p>
-                </motion.div>
+        <div className="pt-14 pb-24 relative">
+            {/* ── Hero ─────────────────────────────────────────────────────────
+                The nine controls used to sit in a flat table. They are the most
+                persuasive thing on this page, so they now lead as a console panel
+                that audits itself as you arrive. Navy in both themes — a console
+                surface should not change identity with the site theme. */}
+            <div className="container mx-auto px-6 max-w-7xl mb-20">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
 
-                {/* Compliance summary */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
-                    className="mt-12 max-w-3xl mx-auto rounded-3xl border overflow-hidden"
-                    style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.04)' }}>
-                    <div className="px-6 py-4 border-b" style={{ borderColor: 'rgba(0,182,213,0.15)' }}>
-                        <p className="text-xs font-black uppercase tracking-widest" style={{ color: '#00b6d5' }}>Security at a glance</p>
-                    </div>
-                    <div className="divide-y" style={{ borderColor: 'rgba(0,182,213,0.08)' }}>
-                        {COMPLIANCE.map(c => (
-                            <div key={c.label} className="flex items-center justify-between px-6 py-3.5">
-                                <span className="text-sm text-text-secondary font-medium">{c.label}</span>
-                                <span className="flex items-center gap-2 text-sm font-bold text-text-primary">
-                                    <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> {c.value}
+                    {/* Left: the claim */}
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="lg:col-span-6 text-center lg:text-left">
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
+                            style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
+                            <Shield className="w-3.5 h-3.5" strokeWidth={1.5} /> Enterprise-Grade Security
+                        </span>
+                        <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-5 leading-[1.05]">
+                            Your students&apos; data is<br />
+                            <span className="brand-text-gradient">safe. Always.</span>
+                        </h1>
+                        <p className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                            EduAnant is built with security at its core — not as an afterthought.
+                            Here&apos;s what that means for your school&apos;s data, in plain language.
+                        </p>
+
+                        <div className="mt-9 grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0">
+                            {HEADLINE_FACTS.map((f, i) => {
+                                const FIcon = f.icon;
+                                return (
+                                    <motion.div key={f.label}
+                                        initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.25 + i * 0.08, duration: 0.5 }}
+                                        className="rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-white/[0.03] p-4 shadow-sm">
+                                        <FIcon className="w-4 h-4 mb-2 text-[var(--brand-cyan-deep)] dark:text-[#00b6d5]" strokeWidth={1.5} />
+                                        <div className="font-display text-2xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white tabular-nums leading-none">
+                                            {f.value}
+                                        </div>
+                                        <p className="text-[11px] text-text-secondary mt-1.5 leading-snug">{f.label}</p>
+                                    </motion.div>
+                                );
+                            })}
+                        </div>
+                    </motion.div>
+
+                    {/* Right: the console */}
+                    <motion.div initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                        className="lg:col-span-6 relative">
+
+                        {/* Rings pulsing out from the shield in the panel's corner.
+                            Sized so a clean arc clears the panel edge instead of
+                            reading as a stray line. */}
+                        <div aria-hidden className="absolute -top-14 -left-14 w-56 h-56 pointer-events-none">
+                            <span className="security-ring inset-0" />
+                            <span className="security-ring inset-0" style={{ animationDelay: '1.15s' }} />
+                            <span className="security-ring inset-0" style={{ animationDelay: '2.3s' }} />
+                        </div>
+                        <div aria-hidden className="absolute -bottom-16 -right-12 w-48 h-48 rounded-full blur-3xl pointer-events-none"
+                            style={{ background: 'radial-gradient(circle, rgba(0,182,213,0.22), transparent 70%)' }} />
+
+                        <div className="relative rounded-3xl border border-white/10 shadow-2xl shadow-indigo-950/30 overflow-hidden
+                            bg-gradient-to-br from-[#0F172A] via-[#1E1B4B] to-[#312E81]">
+
+                            <div aria-hidden className="security-scan top-0" />
+
+                            <div className="relative flex items-center justify-between gap-4 px-6 py-5 border-b border-white/10">
+                                <div className="flex items-center gap-3 min-w-0">
+                                    <div className="w-10 h-10 rounded-xl bg-white/10 ring-1 ring-white/20 flex items-center justify-center shrink-0">
+                                        <ShieldCheck className="w-5 h-5 text-emerald-400" strokeWidth={1.5} />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-400">Security at a glance</p>
+                                        <p className="text-[11px] text-slate-400 truncate">Verified against the Release 1.4.0 build</p>
+                                    </div>
+                                </div>
+                                <span className="hidden sm:flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-emerald-400 shrink-0">
+                                    <span className="relative flex h-1.5 w-1.5">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                                    </span>
+                                    Active
                                 </span>
                             </div>
-                        ))}
-                    </div>
-                </motion.div>
+
+                            <div className="relative px-6 py-2">
+                                {COMPLIANCE.map((c, i) => (
+                                    <motion.div key={c.label}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
+                                        viewport={{ once: true }}
+                                        transition={{ delay: 0.3 + i * 0.05, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                        className="flex items-start justify-between gap-4 py-3 border-b border-white/[0.06] last:border-0">
+                                        <span className="text-[13px] text-slate-400 shrink-0">{c.label}</span>
+                                        <span className="flex items-center gap-2 text-[13px] font-semibold text-white text-right">
+                                            <motion.span
+                                                initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
+                                                transition={{ delay: 0.42 + i * 0.05, type: 'spring', stiffness: 420, damping: 18 }}
+                                                className="shrink-0">
+                                                <CheckCircle className="w-3.5 h-3.5 text-emerald-400" strokeWidth={2} />
+                                            </motion.span>
+                                            {c.value}
+                                        </span>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <div className="relative px-6 pb-5 pt-1">
+                                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+                                    <motion.div className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-[#00b6d5]"
+                                        initial={{ width: 0 }} whileInView={{ width: '100%' }} viewport={{ once: true }}
+                                        transition={{ duration: 1.6, delay: 0.4, ease: 'easeOut' }} />
+                                </div>
+                                <p className="mt-2.5 text-[10px] text-slate-500">
+                                    {COMPLIANCE.length} controls · every EduAnant deployment
+                                </p>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
 
             {/* Security pillars */}
@@ -190,8 +282,8 @@ export default function SecurityPage() {
 
                 {/* CTA */}
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-16 text-center">
-                    <div className="inline-block p-8 rounded-3xl border max-w-xl" style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.04)' }}>
-                        <Shield className="w-10 h-10 mx-auto mb-4" style={{ color: '#00b6d5' }} />
+                    <div className="inline-block p-8 rounded-3xl border max-w-xl" style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
+                        <Shield className="w-10 h-10 mx-auto mb-4" style={{ color: 'var(--accent-text)' }} />
                         <h3 className="text-2xl font-black text-text-primary mb-3">Have specific security questions?</h3>
                         <p className="text-text-secondary text-sm mb-6">Our team is happy to walk you through how EduAnant protects your school's data — in detail, in person or over a call.</p>
                         <Link to="/contact">

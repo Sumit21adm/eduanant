@@ -4,13 +4,49 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/eduanant-logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EduAnant — School Management Software for Indian Schools</title>
-    <meta name="description" content="EduAnant is a modern School Operating System. Transforming school operations, empowering student futures — Admissions, Fees, Attendance, Exams, Transport, HR, Library and Reception. Built for Indian schools of 200 to 5000+ students. Self-hosted, offline-ready, Hindi+English." />
-    <meta name="keywords" content="school management software India, school ERP India, fee management software school, attendance software school, school software Hindi, CBSE school software, school management system" />
-    <meta property="og:title" content="EduAnant — School Management Software for Indian Schools" />
-    <meta property="og:description" content="Run your entire school from one place. Admissions, Fees, Attendance, Exams, Transport, HR & Library — all in one platform. Built for Indian schools." />
-    <meta property="og:image" content="/eduanant-logo.svg" />
-    <meta name="theme-color" content="#00b6d5" />
+    <title>EduAnant — Offline-Ready School Management OS for Indian Schools</title>
+    <meta name="description" content="EduAnant is a School Operating System that runs on your school's own Wi-Fi — no internet required. 16 modules covering Admissions, Fees, Attendance, Exams, Transport, HR and Library, with portals for teachers and parents and a native Android app. ₹20 per student a month." />
+    <meta name="keywords" content="school management software India, school ERP India, offline school software, fee management software school, attendance software school, school software Hindi, CBSE school software, school management system Bihar" />
+    <meta name="theme-color" content="#1E1B4B" />
+    <link rel="canonical" href="https://eduanant.cloud/" />
+
+    <!-- Open Graph — drives the preview card when the link is pasted into
+         WhatsApp, which is how most of these links actually reach a director.
+         og:image must be an absolute URL; WhatsApp will not resolve a relative one. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="EduAnant" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:url" content="https://eduanant.cloud/" />
+    <meta property="og:title" content="EduAnant — Offline-Ready School Management OS" />
+    <meta property="og:description" content="16 Modules. Runs on local school Wi-Fi without internet. Admissions, Fees, Attendance, Transport & Android App. ₹20/student." />
+    <meta property="og:image" content="https://eduanant.cloud/og-whatsapp-preview.png" />
+    <meta property="og:image:secure_url" content="https://eduanant.cloud/og-whatsapp-preview.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="EduAnant dashboard showing today's fee collection and attendance, beside an Android phone with parent notifications." />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="EduAnant — Offline-Ready School Management OS" />
+    <meta name="twitter:description" content="16 Modules. Runs on local school Wi-Fi without internet. Admissions, Fees, Attendance, Transport & Android App. ₹20/student." />
+    <meta name="twitter:image" content="https://eduanant.cloud/og-whatsapp-preview.png" />
+    <script>
+      // Applied before first paint so dark-mode users never see a white flash.
+      // Must stay in sync with ThemeContext: an explicit choice wins,
+      // otherwise follow the device's prefers-color-scheme.
+      (function () {
+        try {
+          var saved = localStorage.getItem('app-dark-mode');
+          var dark = saved !== null
+            ? saved === 'true'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (dark) document.documentElement.classList.add('dark');
+          var t = localStorage.getItem('app-color-theme');
+          if (t && t !== 'default') document.documentElement.classList.add('theme-' + t);
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -12,14 +12,14 @@ const PROOF = [
         title: 'Log in to the real thing',
         body: 'Not a video, not a slide deck. Open the live demo with working admin, teacher and accountant logins and click through every screen on this website before you talk to us.',
         cta: 'Open the live demo', to: '/demo',
-        color: 'from-[#17305a] to-[#0f6187]', border: 'border-[#17305a]/25', bg: 'bg-[#17305a]/5',
+        color: 'from-[#1E1B4B] to-[#312E81]', border: 'border-[#1E1B4B]/25', bg: 'bg-[#1E1B4B]/5',
     },
     {
         icon: GitCommitVertical,
         title: 'Read every change we have shipped',
         body: 'Six releases since April 2026, each one listed with its date and what actually changed. If a product is being maintained, its release history shows it. Ours is public.',
         cta: 'See the release history', to: '/updates',
-        color: 'from-[#0f6187] to-[#00b6d5]', border: 'border-[#0091b8]/25', bg: 'bg-[#0091b8]/5',
+        color: 'from-[#312E81] to-[#F59E0B]', border: 'border-[#D97706]/25', bg: 'bg-[#D97706]/5',
     },
     {
         icon: ShieldCheck,
@@ -56,7 +56,7 @@ export default function ProofSection() {
         <section className="py-24 relative overflow-x-clip">
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full blur-[150px] opacity-8"
-                    style={{ background: 'radial-gradient(circle, rgba(0,182,213,0.12), transparent)' }} />
+                    style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12), transparent)' }} />
             </div>
 
             <div className="container mx-auto px-6 max-w-7xl relative z-10">
@@ -64,10 +64,10 @@ export default function ProofSection() {
                     className="text-center mb-14">
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
                         className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                        style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
+                        style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
                         <Handshake className="w-3.5 h-3.5" /> Onboarding our first 10 schools
                     </motion.div>
-                    <h2 className="text-4xl md:text-6xl font-black text-text-primary mb-4 leading-tight">
+                    <h2 className="font-display text-4xl md:text-6xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-4 leading-tight">
                         No testimonials yet.<br />
                         <span className="brand-text-gradient">Evidence instead.</span>
                     </h2>
@@ -95,12 +95,12 @@ export default function ProofSection() {
                                     <Icon className="w-5 h-5 text-white" />
                                 </div>
 
-                                <h3 className="text-lg font-black text-text-primary mb-2 leading-snug">{p.title}</h3>
+                                <h3 className="font-display text-lg font-extrabold tracking-tight text-[#1E1B4B] dark:text-white mb-2 leading-snug">{p.title}</h3>
                                 <p className="text-sm text-text-secondary leading-relaxed mb-5 flex-1">{p.body}</p>
 
                                 <Link to={p.to}
                                     className="inline-flex items-center gap-1.5 text-sm font-bold transition-colors"
-                                    style={{ color: '#0091b8' }}>
+                                    style={{ color: 'var(--accent-text)' }}>
                                     {p.cta} <ArrowRight className="w-3.5 h-3.5" />
                                 </Link>
                             </motion.div>

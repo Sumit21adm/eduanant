@@ -2,14 +2,14 @@ import { motion } from 'framer-motion';
 
 export default function TermsOfServicePage() {
     return (
-        <div className="pt-32 pb-24 relative">
+        <div className="pt-14 pb-24 relative">
             {/* Background elements */}
-            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#00b6d5]/5 to-transparent pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#F59E0B]/5 to-transparent pointer-events-none" />
             
             <div className="container mx-auto px-6 max-w-5xl relative z-10">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <div className="text-center mb-12">
-                        <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-4 bg-[#00b6d5]/10 border-[#00b6d5]/20 text-[#00b6d5]">
+                        <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-4 bg-[#F59E0B]/10 border-[#F59E0B]/20 text-[var(--accent-text)]">
                             Legal Document
                         </span>
                         <h1 className="text-4xl md:text-5xl font-black text-text-primary mb-4">
@@ -29,7 +29,7 @@ export default function TermsOfServicePage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">1</span>
                                     Acceptance of Terms
                                 </h3>
-                                <p>By registering, accessing, or using the EduAnant School Management System ("Service"), the subscribing institution ("Client", "School") agrees to be bound by these Terms of Service. This constitutes a binding commercial B2B agreement between Snapx Technologies and the subscribing School.</p>
+                                <p>By registering, accessing, or using the EduAnant School Management System ("Service"), the subscribing institution ("Client", "School") agrees to be bound by these Terms of Service. This constitutes a binding commercial B2B agreement between Snapx Technologies LLP and the subscribing School.</p>
                             </section>
                             
                             <section>
@@ -37,7 +37,7 @@ export default function TermsOfServicePage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">2</span>
                                     License & Intellectual Property
                                 </h3>
-                                <p>EduAnant grants the School a limited, non-exclusive, non-transferable, and revocable subscription license to use the Service solely for its internal administrative purposes. Snapx Technologies retains all intellectual property rights to the software, codebase, architecture, and branding. The School retains all ownership rights to the data they upload.</p>
+                                <p>EduAnant grants the School a limited, non-exclusive, non-transferable, and revocable subscription license to use the Service solely for its internal administrative purposes. Snapx Technologies LLP retains all intellectual property rights to the software, codebase, architecture, and branding. The School retains all ownership rights to the data they upload.</p>
                             </section>
                             
                             <section>
@@ -53,7 +53,7 @@ export default function TermsOfServicePage() {
                                     <span className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-600 dark:text-orange-400 flex items-center justify-center text-sm font-black shrink-0">4</span>
                                     Limitation of Liability
                                 </h3>
-                                <p>To the maximum extent permitted by Indian law, Snapx Technologies shall not be liable for any indirect, incidental, consequential, or punitive damages (including but not limited to loss of profits, admissions, or data). <strong className="text-text-primary">Our total cumulative liability to the School for any claims arising out of this agreement shall be strictly limited to the amount actually paid by the School for the Service in the three (3) months preceding the claim.</strong></p>
+                                <p>To the maximum extent permitted by Indian law, Snapx Technologies LLP shall not be liable for any indirect, incidental, consequential, or punitive damages (including but not limited to loss of profits, admissions, or data). <strong className="text-text-primary">Our total cumulative liability to the School for any claims arising out of this agreement shall be strictly limited to the amount actually paid by the School for the Service in the three (3) months preceding the claim.</strong></p>
                             </section>
                             
                             <section>
@@ -74,10 +74,10 @@ export default function TermsOfServicePage() {
 
                             <section className="bg-blue-50 dark:bg-blue-900/10 p-6 rounded-2xl border border-blue-200/50 dark:border-blue-500/20">
                                 <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-4 flex items-center gap-3">
-                                    <span className="w-8 h-8 rounded-lg bg-[#00b6d5]/10 text-[#00b6d5] flex items-center justify-center text-sm font-black shrink-0">7</span>
+                                    <span className="w-8 h-8 rounded-lg bg-[#F59E0B]/10 text-[var(--accent-text)] flex items-center justify-center text-sm font-black shrink-0">7</span>
                                     Mobile App — Additional Terms
                                 </h3>
-                                <p className="mb-4">The EduAnant mobile application (package name: <code className="text-xs bg-white/50 dark:bg-white/10 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-500/30">cloud.eduanant.app</code>) provides access to the school portals. By downloading or using the mobile app, you agree to these Terms in full, as well as the <a href="https://play.google.com/intl/en_us/about/play-terms/" target="_blank" rel="noopener noreferrer" className="text-[#00b6d5] hover:underline font-semibold">Google Play / Apple App Store Terms of Service</a>.</p>
+                                <p className="mb-4">The EduAnant mobile application (package name: <code className="text-xs bg-white/50 dark:bg-white/10 px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-500/30">cloud.eduanant.app</code>) provides access to the school portals. By downloading or using the mobile app, you agree to these Terms in full, as well as the <a href="https://play.google.com/intl/en_us/about/play-terms/" target="_blank" rel="noopener noreferrer" className="text-[var(--accent-text)] hover:underline font-semibold">Google Play / Apple App Store Terms of Service</a>.</p>
                                 <ul className="space-y-2 list-none">
                                     {[
                                         ['App updates', 'We may release updates to the mobile app at any time. Continued use of the app after an update constitutes acceptance of any revised terms. We recommend enabling auto-updates.'],
@@ -86,7 +86,7 @@ export default function TermsOfServicePage() {
                                         ['App permissions', 'The app requests INTERNET, CAMERA (for face recognition attendance), POST_NOTIFICATIONS, and local BIOMETRICS permissions as outlined in our Privacy Policy.'],
                                     ].map(([title, desc]) => (
                                         <li key={title} className="flex gap-3 items-start">
-                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-[#00b6d5] shrink-0" />
+                                            <span className="mt-1.5 w-2 h-2 rounded-full bg-[#F59E0B] shrink-0" />
                                             <span><strong className="text-text-primary">{title}:</strong> {desc}</span>
                                         </li>
                                     ))}
@@ -105,7 +105,7 @@ export default function TermsOfServicePage() {
                                         'Scrape, crawl, or use automated tools to extract data from the platform without written authorization',
                                         'Attempt to circumvent authentication, security controls, or rate limits',
                                         'Use the platform to store, transmit, or process data unrelated to school management',
-                                        'Resell, sublicense, or white-label the service without a formal reseller agreement with Snapx Technologies',
+                                        'Resell, sublicense, or white-label the service without a formal reseller agreement with Snapx Technologies LLP',
                                         'Violate any applicable Indian law, including the IT Act 2000, DPDP Act 2023, or any state-level regulations',
                                     ].map((item) => (
                                         <li key={item} className="flex gap-3 items-start">
@@ -121,7 +121,7 @@ export default function TermsOfServicePage() {
                                     <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">9</span>
                                     Changes to These Terms
                                 </h3>
-                                <p>We reserve the right to modify these Terms at any time. Material changes will be communicated to subscribing Schools via email at least 14 days before they take effect. Continued use of the service or app after the effective date of updated Terms constitutes your acceptance of the changes. The current version is always available at <a href="https://eduanant.cloud/terms-of-service" className="text-[#00b6d5] hover:underline font-semibold">eduanant.cloud/terms-of-service</a>.</p>
+                                <p>We reserve the right to modify these Terms at any time. Material changes will be communicated to subscribing Schools via email at least 14 days before they take effect. Continued use of the service or app after the effective date of updated Terms constitutes your acceptance of the changes. The current version is always available at <a href="https://eduanant.cloud/terms-of-service" className="text-[var(--accent-text)] hover:underline font-semibold">eduanant.cloud/terms-of-service</a>.</p>
                             </section>
                         </div>
                     </div>

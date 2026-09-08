@@ -97,11 +97,11 @@ export default function ContactPage() {
     };
 
     return (
-        <div className="pt-28 pb-24 relative">
+        <div className="pt-14 pb-24 relative">
             <div className="container mx-auto px-6 max-w-7xl mb-16 text-center">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                        style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
+                        style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
                         <PhoneCall className="w-3.5 h-3.5" /> Let's Talk
                     </span>
                     <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-5 leading-tight">
@@ -121,17 +121,16 @@ export default function ContactPage() {
                         {[
                             { icon: PhoneCall, label: 'Call Us', value: '+91 79036 12979', href: 'tel:+917903612979', sub: 'Mon–Sat, 9 AM – 7 PM IST' },
                             { icon: MessageCircle, label: 'WhatsApp', value: 'Chat on WhatsApp', href: 'https://wa.me/917903612979', sub: 'Usually replies in 1 hour' },
-                            { icon: Mail, label: 'Email', value: 'eduanant.cloud@gmail.com', href: 'mailto:eduanant.cloud@gmail.com', sub: 'Response within 24 hours' },
+                            { icon: Mail, label: 'Email', value: 'hello@eduanant.cloud', href: 'mailto:hello@eduanant.cloud', sub: 'Response within 24 hours' },
                         ].map((c, i) => {
                             const Icon = c.icon;
                             return (
                                 <motion.a key={c.label} href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined}
                                     rel="noopener noreferrer"
                                     initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
-                                    whileHover={{ x: 4 }}
-                                    className="flex items-start gap-4 p-5 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] hover:border-[#00b6d5]/40 transition-all group">
+                                    className="flex items-start gap-4 p-5 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#F59E0B]/40 transition-all group">
                                     <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
-                                        style={{ background: 'linear-gradient(135deg, #17305a, #00b6d5)' }}>
+                                        style={{ background: 'linear-gradient(135deg, #1E1B4B, #F59E0B)' }}>
                                         <Icon className="w-5 h-5 text-white" />
                                     </div>
                                     <div>
@@ -146,14 +145,14 @@ export default function ContactPage() {
                         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
                             className="p-5 rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]">
                             <div className="flex items-center gap-2 mb-3">
-                                <Clock className="w-4 h-4" style={{ color: '#00b6d5' }} />
+                                <Clock className="w-4 h-4" style={{ color: 'var(--accent-text)' }} />
                                 <p className="text-xs font-black uppercase tracking-wider text-text-secondary">What happens after you submit?</p>
                             </div>
                             <ol className="space-y-3">
                                 {['Our team reviews your requirements', 'We call you within 24 hours', 'Walk you through the app on a call', 'We prepare a quote tailored to your school'].map((s, i) => (
                                     <li key={s} className="flex items-start gap-2.5 text-sm text-text-secondary">
                                         <span className="w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center shrink-0 text-white"
-                                            style={{ background: 'linear-gradient(135deg, #17305a, #00b6d5)' }}>{i + 1}</span>
+                                            style={{ background: 'linear-gradient(135deg, #1E1B4B, #F59E0B)' }}>{i + 1}</span>
                                         {s}
                                     </li>
                                 ))}
@@ -162,8 +161,11 @@ export default function ContactPage() {
 
                         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
                             className="flex items-center gap-2 text-sm text-text-secondary p-4 rounded-xl border border-gray-200/50 dark:border-white/10">
-                            <MapPin className="w-4 h-4 shrink-0" style={{ color: '#00b6d5' }} />
-                            <span>Snapx Technologies · India</span>
+                            <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--accent-text)' }} />
+                            <span className="not-italic leading-snug">
+                                <span className="block font-semibold text-text-primary">M/S SNAPX TECHNOLOGIES LLP</span>
+                                <span className="block">Patna 804453, INDIA</span>
+                            </span>
                         </motion.div>
                     </div>
 
@@ -173,8 +175,8 @@ export default function ContactPage() {
                         {submitted ? (
                             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
                                 className="h-full flex flex-col items-center justify-center text-center p-12 rounded-3xl border"
-                                style={{ borderColor: 'rgba(0,182,213,0.2)', background: 'rgba(0,182,213,0.04)' }}>
-                                <CheckCircle className="w-16 h-16 mb-5" style={{ color: '#00b6d5' }} />
+                                style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
+                                <CheckCircle className="w-16 h-16 mb-5" style={{ color: 'var(--accent-text)' }} />
                                 <h2 className="text-2xl font-black text-text-primary mb-3">We've received your enquiry!</h2>
                                 <p className="text-text-secondary mb-2">Our team will reach out to you at <strong>{form.phone || form.email}</strong> within 24 hours.</p>
                                 <p className="text-sm text-text-secondary">For urgent queries, call us directly at <strong>+91 79036 12979</strong></p>
@@ -191,14 +193,14 @@ export default function ContactPage() {
                                     ].map(field => (
                                         <div key={field.name}>
                                             <label htmlFor={field.name} className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
-                                                {field.label} {field.required && <span style={{ color: '#00b6d5' }}>*</span>}
+                                                {field.label} {field.required && <span style={{ color: 'var(--accent-text)' }}>*</span>}
                                             </label>
                                             <input
                                                 type="text" id={field.name} name={field.name} value={(form as Record<string, string>)[field.name]}
                                                 onChange={handleChange} placeholder={field.placeholder} required={field.required}
                                                 autoComplete={field.autoComplete}
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all placeholder:text-text-secondary/50"
-                                                style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as React.CSSProperties} />
+                                                style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as React.CSSProperties} />
                                         </div>
                                     ))}
                                 </div>
@@ -206,7 +208,7 @@ export default function ContactPage() {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
                                         <label htmlFor="size" className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
-                                            School Size <span style={{ color: '#00b6d5' }}>*</span>
+                                            School Size <span style={{ color: 'var(--accent-text)' }}>*</span>
                                         </label>
                                         <select id="size" name="size" value={form.size} onChange={handleChange} required
                                             className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all">
@@ -216,7 +218,7 @@ export default function ContactPage() {
                                     </div>
                                     <div>
                                         <label htmlFor="inquiry" className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">
-                                            How can we help? <span style={{ color: '#00b6d5' }}>*</span>
+                                            How can we help? <span style={{ color: 'var(--accent-text)' }}>*</span>
                                         </label>
                                         <select id="inquiry" name="inquiry" value={form.inquiry} onChange={handleChange} required
                                             className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all">
@@ -248,7 +250,7 @@ export default function ContactPage() {
                                     <span className="text-sm font-black text-text-secondary uppercase tracking-wider whitespace-nowrap">
                                         Verify you're human:
                                     </span>
-                                    <span className="text-base font-black text-text-primary" style={{ color: '#00b6d5' }}>
+                                    <span className="text-base font-black text-text-primary" style={{ color: 'var(--accent-text)' }}>
                                         {math.a} {math.op} {math.b} =
                                     </span>
                                     <input
@@ -261,7 +263,7 @@ export default function ContactPage() {
                                         required
                                         autoComplete="off"
                                         className="w-20 px-3 py-2 rounded-lg border border-gray-200/70 dark:border-white/15 bg-white dark:bg-white/[0.06] text-text-primary text-sm font-bold text-center focus:outline-none focus:ring-2"
-                                        style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as React.CSSProperties}
+                                        style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as React.CSSProperties}
                                     />
                                     <button type="button" onClick={refreshMath}
                                         className="text-xs text-text-secondary hover:text-text-primary underline ml-auto shrink-0">
@@ -277,7 +279,7 @@ export default function ContactPage() {
                                 )}
 
                                 <motion.button type="submit" disabled={submitting}
-                                    whileHover={{ scale: submitting ? 1 : 1.02, boxShadow: submitting ? 'none' : '0 0 30px rgba(0,182,213,0.25)' }}
+                                    whileHover={{ scale: submitting ? 1 : 1.02, boxShadow: submitting ? 'none' : '0 0 30px rgba(245,158,11,0.25)' }}
                                     whileTap={{ scale: submitting ? 1 : 0.98 }}
                                     className="w-full btn-primary py-4 rounded-xl font-black text-base flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
                                     {submitting
@@ -285,7 +287,7 @@ export default function ContactPage() {
                                         : <><Send className="w-4 h-4" /> Submit Enquiry</>}
                                 </motion.button>
                                 <p className="text-center text-xs text-text-secondary">
-                                    Or call us directly: <a href="tel:+917903612979" className="font-bold" style={{ color: '#00b6d5' }}>+91 79036 12979</a>
+                                    Or call us directly: <a href="tel:+917903612979" className="font-bold" style={{ color: 'var(--accent-text)' }}>+91 79036 12979</a>
                                 </p>
                             </form>
                         )}

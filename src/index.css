@@ -1,3 +1,6 @@
+/* display=swap keeps headlines readable in a fallback face while the webfont
+   is still in flight — on a 3G connection that is the difference between a
+   visible page and a blank one. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -6,48 +9,83 @@
 
 @layer base {
   :root {
-    /* ── Brand palette extracted from EduAnant logo ── */
-    /* Navy anchor: #17305a → Cyan peak: #00b6d5 → Light cyan: #63cae0 */
-    --primary-main:       #0091b8;   /* mid-range cyan-blue */
-    --primary-light:      #00b6d5;   /* bright cyan from logo centre */
-    --primary-dark:       #17305a;   /* deep navy from logo left */
+    /* ── Institutional Trust & Action palette ──
+       Navy carries authority and permanence; amber carries every action.
+       Nothing else competes for attention. */
+    --primary-main:       #1E1B4B;   /* midnight indigo — the institutional base */
+    --primary-light:      #312E81;   /* indigo 900 — hover / raised navy */
+    --primary-dark:       #0F172A;   /* slate 950 — deepest navy, footers & dark cards */
     --primary-contrast:   #ffffff;
 
-    --secondary-main:     #063a6e;   /* deep navy accent */
-    --secondary-light:    #1a5a8a;
-    --secondary-dark:     #0d2344;
-    --secondary-contrast: #ffffff;
+    --secondary-main:     #F59E0B;   /* vibrant amber — the action accent */
+    --secondary-light:    #FBBF24;
+    --secondary-dark:     #D97706;
+    --secondary-contrast: #1E1B4B;
 
-    /* Gradient string for reuse */
-    --brand-gradient: linear-gradient(135deg, #17305a 0%, #0f6187 30%, #00b6d5 60%, #63cae0 100%);
-    --brand-gradient-text: linear-gradient(90deg, #0091b8 0%, #00b6d5 50%, #63cae0 100%);
+    /* Amber is gorgeous as a surface and unreadable as small text on white
+       (#F59E0B on white is 2.1:1). --accent-text is the contrast-safe amber
+       for anything a person actually has to read; it flips in dark mode. */
+    --accent-solid:       #F59E0B;
+    --accent-text:        #B45309;   /* amber 700 — 4.8:1 on the off-white canvas */
+
+    /* ── Logo cyan, sampled straight out of eduanant-logo.svg ──
+       Navy still carries authority and amber still carries the actions; cyan is
+       the brand signature, reserved for confirmations, link hovers and the
+       active-portal indicator. --brand-cyan is 2.3:1 on white, so anything that
+       is read rather than glanced at uses --brand-cyan-deep (#0f6187, also a
+       logo colour, 6.9:1). */
+    --brand-cyan:         #00b6d5;   /* logo peak cyan */
+    --brand-cyan-light:   #63cae0;   /* logo light cyan */
+    --brand-cyan-deep:    #0f6187;   /* logo deep cyan-blue — contrast-safe for text */
+
+    /* Gradient strings for reuse */
+    --brand-gradient:      linear-gradient(135deg, #0F172A 0%, #1E1B4B 55%, #312E81 100%);
+    --action-gradient:     linear-gradient(135deg, #F59E0B 0%, #EA580C 55%, #C2410C 100%);
+    --brand-gradient-text: linear-gradient(90deg, #F59E0B 0%, #EA580C 100%);
 
     /* Surfaces */
-    --background-default: #f0f6fa;
+    --background-default: #F8FAFC;   /* soft off-white — no clinical white glare */
     --background-paper:   #ffffff;
-    --text-primary:       #0d1f35;
-    --text-secondary:     #4a6580;
+    --text-primary:       #0F172A;
+    --text-secondary:     #475569;
   }
 
   .dark {
-    --background-default: #080e17;
-    --background-paper:   #0d1721;
-    --text-primary:       #e8f4f8;
-    --text-secondary:     #6da0bb;
+    --accent-text:        #FBBF24;   /* amber 400 reads cleanly on navy */
+    --brand-cyan-deep:    #63cae0;   /* on navy the light cyan is the legible one */
+    --background-default: #0B1120;
+    --background-paper:   #141B2D;
+    --text-primary:       #E2E8F0;
+    --text-secondary:     #94A3B8;
   }
 
   html {
     scroll-behavior: smooth;
-    font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   body {
     @apply bg-background text-[var(--text-primary)] antialiased min-h-screen;
+    line-height: 1.65;
+  }
+
+  /* Headings carry the geometric weight of Plus Jakarta Sans; body copy stays
+     in Inter. Applied at the element level so all ~68 headings pick it up
+     without touching every component. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+    letter-spacing: -0.021em;
+    line-height: 1.15;
+  }
+
+  /* Fees, roll numbers and percentages must not jitter as they change */
+  .tabular-nums, table, .font-mono {
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
   }
 
   ::selection {
-    background-color: var(--primary-light);
-    color: #fff;
+    background-color: var(--accent-solid);
+    color: #1E1B4B;
   }
 }
 
@@ -56,19 +94,83 @@
     @apply bg-white/70 dark:bg-black/40 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-glass dark:shadow-none;
   }
 
+  /* Every conversion action is amber. The gradient runs amber → burnt orange
+     so white text clears AA against the darker half it actually sits on. */
   .btn-primary {
-    @apply text-white transition-all duration-300 rounded-xl px-6 py-2.5 font-bold shadow-lg active:shadow-none;
-    background: var(--brand-gradient);
+    @apply text-white transition-all duration-300 rounded-xl px-6 py-2.5 font-bold shadow-lg shadow-amber-500/25 active:shadow-none;
+    background: var(--action-gradient);
+  }
+  .btn-primary { transition: transform .3s ease, box-shadow .3s ease, background .3s ease; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(234, 88, 12, 0.35); }
+  .btn-outline { transition: transform .3s ease, box-shadow .3s ease, background .3s ease, color .3s ease; }
+  .btn-outline:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(15, 23, 42, 0.14); }
+
+  /* Secondary actions stay institutional navy on white */
+  .btn-outline {
+    @apply border-2 border-[var(--primary-main)] text-[var(--primary-main)] dark:border-white/25 dark:text-white hover:text-white transition-all duration-300 rounded-xl px-6 py-2.5 font-bold;
+    &:hover { background: var(--brand-gradient); border-color: transparent; }
   }
 
-  .btn-outline {
-    @apply border-2 border-[var(--primary-main)] text-[var(--primary-main)] hover:text-white transition-all duration-300 rounded-xl px-6 py-2.5 font-bold;
-    &:hover { background: var(--brand-gradient); border-color: transparent; }
+  /* The live-demo action. Cyan (the brand signature) so it reads as a distinct
+     third thing next to the amber conversion CTA, with a slow halo pulse to
+     pull the eye. Pauses on hover, and honours reduced-motion. */
+  .btn-live {
+    @apply relative border-2 border-[#00b6d5] text-[var(--brand-cyan-deep)] dark:text-[#4fd8f0]
+           bg-white/80 dark:bg-[#00b6d5]/10 font-bold rounded-xl transition-all duration-300;
+    animation: live-pulse 2.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  .btn-live:hover {
+    animation-play-state: paused;
+    background: #00b6d5;
+    color: #0F172A;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0, 182, 213, 0.35);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-live { animation: none; }
+  }
+
+  /* Edge-faded rail so chips dissolve rather than getting chopped at the sides */
+  .marquee-rail {
+    @apply relative overflow-hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  }
+  .marquee-track {
+    @apply flex w-max gap-3;
+    animation: marquee-left 46s linear infinite;
+  }
+  .marquee-track--reverse { animation-name: marquee-right; animation-duration: 54s; }
+  .marquee-rail:hover .marquee-track { animation-play-state: paused; }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .marquee-rail { -webkit-mask-image: none; mask-image: none; @apply overflow-x-auto; }
+  }
+
+  .security-scan {
+    @apply absolute inset-x-0 pointer-events-none;
+    height: 30%;
+    background: linear-gradient(180deg, transparent, rgba(0, 182, 213, 0.16), transparent);
+    animation: security-scan 6s linear infinite;
+  }
+  .security-ring {
+    @apply absolute rounded-full border pointer-events-none;
+    border-color: rgba(0, 182, 213, 0.35);
+    animation: ring-pulse 3.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .security-scan, .security-ring { animation: none; opacity: 0; }
+  }
+
+  /* Bento cards — one shape, used everywhere */
+  .bento-card {
+    @apply rounded-2xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-white/[0.03]
+           shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
   }
 
   /* Logo glow effect matching the cyan brand */
   .logo-glow {
-    filter: drop-shadow(0 0 20px rgba(0, 182, 213, 0.4));
+    filter: drop-shadow(0 0 20px rgba(245, 158, 11, 0.35));
   }
 
   .brand-text-gradient {
@@ -104,9 +206,35 @@
 
 /* Logo shimmer — inspired by the left-to-right gradient sweep of the logo */
 @keyframes logo-shimmer {
-  0%   { filter: drop-shadow(0 0 8px rgba(0,182,213,0.3)); }
-  50%  { filter: drop-shadow(0 0 24px rgba(0,182,213,0.7)) drop-shadow(0 0 40px rgba(23,48,90,0.3)); }
-  100% { filter: drop-shadow(0 0 8px rgba(0,182,213,0.3)); }
+  0%   { filter: drop-shadow(0 0 8px rgba(245,158,11,0.25)); }
+  50%  { filter: drop-shadow(0 0 24px rgba(245,158,11,0.55)) drop-shadow(0 0 40px rgba(30,27,75,0.3)); }
+  100% { filter: drop-shadow(0 0 8px rgba(245,158,11,0.25)); }
+}
+
+/* Security console: a slow sweep down the panel, plus concentric rings behind
+   the shield. Both are decoration only — the panel reads correctly without them,
+   and both are switched off under reduced-motion. */
+@keyframes security-scan {
+  0%   { transform: translateY(-120%); opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { transform: translateY(520%); opacity: 0; }
+}
+@keyframes ring-pulse {
+  0%   { transform: scale(0.82); opacity: 0.55; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* Module marquee: two tracks drifting in opposite directions. Each track holds
+   the module list twice, so translating by exactly -50% loops seamlessly. */
+@keyframes marquee-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+@keyframes live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 182, 213, 0.42); }
+  70%  { box-shadow: 0 0 0 12px rgba(0, 182, 213, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 182, 213, 0); }
 }
 
 /* Nav glass */
@@ -118,8 +246,8 @@
 /* Cinematic noise for dark mode */
 .dark body {
   background:
-    radial-gradient(ellipse at 20% 10%, rgba(0,182,213,0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 90%, rgba(23,48,90,0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 20% 10%, rgba(245,158,11,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(49,46,129,0.22) 0%, transparent 50%),
     var(--background-default);
   background-attachment: fixed;
 }

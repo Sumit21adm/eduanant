@@ -46,11 +46,11 @@ export default function RegistrationPage() {
     };
 
     return (
-        <div className="pt-28 pb-24 relative">
+        <div className="pt-14 pb-24 relative">
             <div className="container mx-auto px-6 max-w-7xl mb-12 text-center">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                     <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
-                        style={{ background: 'rgba(0,182,213,0.08)', borderColor: 'rgba(0,182,213,0.25)', color: '#00b6d5' }}>
+                        style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
                         <Building2 className="w-3.5 h-3.5" /> School Onboarding
                     </span>
                     <h1 className="text-4xl md:text-6xl font-black text-text-primary mb-5 leading-tight">
@@ -67,7 +67,7 @@ export default function RegistrationPage() {
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
                     {submitted ? (
                         <div className="flex flex-col items-center justify-center text-center p-12 rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/80 dark:bg-white/[0.02]">
-                            <CheckCircle className="w-16 h-16 mb-5" style={{ color: '#00b6d5' }} />
+                            <CheckCircle className="w-16 h-16 mb-5" style={{ color: 'var(--accent-text)' }} />
                             <h2 className="text-2xl font-black text-text-primary mb-3">Registration Received!</h2>
                             <p className="text-text-secondary mb-6 max-w-md mx-auto">
                                 Thank you for registering <strong>{form.schoolName}</strong>. Our onboarding team is reviewing your details and will contact you at <strong>{form.email}</strong> within 24 hours to hand over your Admin Portal credentials.
@@ -80,18 +80,18 @@ export default function RegistrationPage() {
                             {/* School Details */}
                             <div className="space-y-5">
                                 <h3 className="text-lg font-black text-text-primary flex items-center gap-2 border-b border-gray-200 dark:border-white/10 pb-2">
-                                    <Building2 className="w-5 h-5 text-[#00b6d5]" /> School Information
+                                    <Building2 className="w-5 h-5 text-[var(--accent-text)]" /> School Information
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div className="sm:col-span-2">
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">School Name <span className="text-red-500">*</span></label>
                                         <input type="text" name="schoolName" value={form.schoolName} onChange={handleChange} required placeholder="e.g. Delhi Public School"
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as any} />
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as any} />
                                     </div>
                                     <div className="sm:col-span-2">
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">School Address <span className="text-red-500">*</span></label>
                                         <input type="text" name="address" value={form.address} onChange={handleChange} required placeholder="Full address including city and state"
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as any} />
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as any} />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Total Students <span className="text-red-500">*</span></label>
@@ -107,28 +107,28 @@ export default function RegistrationPage() {
                             {/* Contact Details */}
                             <div className="space-y-5">
                                 <h3 className="text-lg font-black text-text-primary flex items-center gap-2 border-b border-gray-200 dark:border-white/10 pb-2">
-                                    <UserCircle className="w-5 h-5 text-[#00b6d5]" /> Primary Contact Person
+                                    <UserCircle className="w-5 h-5 text-[var(--accent-text)]" /> Primary Contact Person
                                 </h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                     <div>
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Full Name <span className="text-red-500">*</span></label>
                                         <input type="text" name="contactPerson" value={form.contactPerson} onChange={handleChange} required placeholder="e.g. Ramesh Singh"
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as any} />
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as any} />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Role / Designation <span className="text-red-500">*</span></label>
                                         <input type="text" name="role" value={form.role} onChange={handleChange} required placeholder="e.g. Principal, Director, IT Head"
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as any} />
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as any} />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Mobile Number <span className="text-red-500">*</span></label>
                                         <input type="tel" name="phone" value={form.phone} onChange={handleChange} required placeholder="+91"
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as any} />
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as any} />
                                     </div>
                                     <div>
                                         <label className="block text-xs font-black uppercase tracking-wider text-text-secondary mb-2">Official Email <span className="text-red-500">*</span></label>
                                         <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="principal@school.com"
-                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(0,182,213,0.3)' } as any} />
+                                            className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-sm text-text-primary focus:ring-2 focus:outline-none" style={{ '--tw-ring-color': 'rgba(245,158,11,0.3)' } as any} />
                                     </div>
                                 </div>
                             </div>
@@ -141,18 +141,18 @@ export default function RegistrationPage() {
                                 <label className="flex items-start gap-3 cursor-pointer group">
                                     <div className="relative flex items-center mt-0.5">
                                         <input type="checkbox" name="agreeToTerms" checked={form.agreeToTerms} onChange={handleChange} required
-                                            className="peer w-5 h-5 appearance-none rounded border-2 border-gray-300 dark:border-white/20 checked:border-[#00b6d5] checked:bg-[#00b6d5] focus:outline-none focus:ring-2 focus:ring-[#00b6d5]/30 transition-colors" />
+                                            className="peer w-5 h-5 appearance-none rounded border-2 border-gray-300 dark:border-white/20 checked:border-[#F59E0B] checked:bg-[#F59E0B] focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/30 transition-colors" />
                                         <CheckCircle className="w-3.5 h-3.5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
                                     </div>
                                     <span className="text-sm text-text-secondary leading-tight group-hover:text-text-primary transition-colors">
-                                        I have read and agree to the <Link to="/terms-of-service" target="_blank" className="text-[#00b6d5] hover:underline">Terms of Service</Link>, <Link to="/privacy-policy" target="_blank" className="text-[#00b6d5] hover:underline">Privacy Policy</Link>, and <Link to="/refund-policy" target="_blank" className="text-[#00b6d5] hover:underline">Refund Policy</Link>. <span className="text-red-500">*</span>
+                                        I have read and agree to the <Link to="/terms-of-service" target="_blank" className="text-[var(--accent-text)] hover:underline">Terms of Service</Link>, <Link to="/privacy-policy" target="_blank" className="text-[var(--accent-text)] hover:underline">Privacy Policy</Link>, and <Link to="/refund-policy" target="_blank" className="text-[var(--accent-text)] hover:underline">Refund Policy</Link>. <span className="text-red-500">*</span>
                                     </span>
                                 </label>
                                 
                                 <label className="flex items-start gap-3 cursor-pointer group">
                                     <div className="relative flex items-center mt-0.5">
                                         <input type="checkbox" name="dataConsent" checked={form.dataConsent} onChange={handleChange} required
-                                            className="peer w-5 h-5 appearance-none rounded border-2 border-gray-300 dark:border-white/20 checked:border-[#00b6d5] checked:bg-[#00b6d5] focus:outline-none focus:ring-2 focus:ring-[#00b6d5]/30 transition-colors" />
+                                            className="peer w-5 h-5 appearance-none rounded border-2 border-gray-300 dark:border-white/20 checked:border-[#F59E0B] checked:bg-[#F59E0B] focus:outline-none focus:ring-2 focus:ring-[#F59E0B]/30 transition-colors" />
                                         <CheckCircle className="w-3.5 h-3.5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" />
                                     </div>
                                     <span className="text-sm text-text-secondary leading-tight group-hover:text-text-primary transition-colors">
