@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { RELEASE_COUNT } from '../data/changelog';
-import { LIVE_SINCE_LABEL, monthsLiveLabel, monthsLiveUnit, spell } from '../lib/timeline';
+import { LIVE_SINCE_LABEL, monthsLiveLabel, monthsLiveUnit } from '../lib/timeline';
+import { spell, capitalise } from '../lib/text';
 import { Link } from 'react-router-dom';
 import {
     ExternalLink,
@@ -20,7 +21,7 @@ const PROOF = [
     {
         icon: GitCommitVertical,
         title: 'Read every change we have shipped',
-        body: `${spell(RELEASE_COUNT)[0].toUpperCase()}${spell(RELEASE_COUNT).slice(1)} releases since ${LIVE_SINCE_LABEL}, each one listed with its date and what actually changed. If a product is being maintained, its release history shows it. Ours is public.`,
+        body: `${capitalise(spell(RELEASE_COUNT))} releases since ${LIVE_SINCE_LABEL}, each one listed with its date and what actually changed. If a product is being maintained, its release history shows it. Ours is public.`,
         cta: 'See the release history', to: '/updates',
         color: 'from-[#312E81] to-[#F59E0B]', border: 'border-[#D97706]/25', bg: 'bg-[#D97706]/5',
     },

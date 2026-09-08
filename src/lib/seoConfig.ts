@@ -1,6 +1,7 @@
 import { SITE } from './seo';
 import { RELEASE_COUNT } from '../data/changelog';
-import { LIVE_SINCE_LABEL, monthsSince, spell } from './timeline';
+import { LIVE_SINCE_LABEL, monthsSince } from './timeline';
+import { spell, capitalise } from './text';
 
 /**
  * Per-route metadata. Titles stay under ~60 characters and descriptions under
@@ -53,7 +54,7 @@ export const PAGE_SEO = {
     updates: {
         title: 'Updates: Release Notes & Version History | EduAnant',
         description:
-            `${spell(RELEASE_COUNT)[0].toUpperCase()}${spell(RELEASE_COUNT).slice(1)} releases since ${LIVE_SINCE_LABEL}. See exactly what shipped in each version and how one-click updates back up your school data before anything changes.`,
+            `${capitalise(spell(RELEASE_COUNT))} releases since ${LIVE_SINCE_LABEL}. See exactly what shipped in each version and how one-click updates back up your school data before anything changes.`,
         path: '/updates',
         keywords:
             'EduAnant release notes, school software updates, school ERP changelog, school software version history',

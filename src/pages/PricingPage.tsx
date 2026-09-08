@@ -23,6 +23,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DnsIcon from '@mui/icons-material/Dns';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import Seo from '../lib/seo';
+import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
 
 // The commercial model, in one place.
@@ -436,9 +437,11 @@ export default function PricingPage() {
                         What the price does not cover
                     </motion.h2>
                     <p className="text-sm text-text-secondary text-center mb-8 max-w-xl mx-auto">
-                        Two things sit outside the licence. Better you read them here than meet them on an invoice.
+                        {capitalise(countOf(NOT_INCLUDED.length, 'thing'))}{' '}
+                        {NOT_INCLUDED.length === 1 ? 'sits' : 'sit'} outside the licence.
+                        Better you read them here than meet them on an invoice.
                     </p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                    <div className={`grid grid-cols-1 gap-4 mx-auto ${NOT_INCLUDED.length >= 3 ? 'sm:grid-cols-2 lg:grid-cols-3 max-w-5xl' : 'sm:grid-cols-2 max-w-3xl'}`}>
                         {NOT_INCLUDED.map((item, i) => {
                             const Icon = item.icon;
                             return (

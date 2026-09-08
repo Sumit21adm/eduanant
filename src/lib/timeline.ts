@@ -33,11 +33,3 @@ export function monthsLiveLabel(now: Date = new Date()): string {
 export function monthsLiveUnit(now: Date = new Date()): string {
     return monthsSince(LIVE_SINCE, now) < 12 ? 'Months live' : 'Live for';
 }
-
-const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
-    'nine', 'ten', 'eleven', 'twelve'] as const;
-
-/** "six" for 6, "17" past twelve — house style is words up to twelve. */
-export function spell(n: number): string {
-    return n <= 12 ? WORDS[n] : String(n);
-}

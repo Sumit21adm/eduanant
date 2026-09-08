@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { CHANGELOG, RELEASE_COUNT } from '../data/changelog';
-import { LIVE_SINCE_LABEL, spell } from '../lib/timeline';
+import { LIVE_SINCE_LABEL } from '../lib/timeline';
+import { spell } from '../lib/text';
 import { Zap, CheckCircle, Clock, ArrowRight, Package, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Seo from '../lib/seo';
