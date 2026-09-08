@@ -12,6 +12,7 @@ export const SITE = {
     region: 'Bihar',
     postalCode: '804453',
     country: 'IN',
+    /** The product's released version — not the website build. */
     version: '1.4.0',
 } as const;
 

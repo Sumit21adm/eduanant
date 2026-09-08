@@ -1,5 +1,5 @@
 import { Mail, Phone, MessageCircle, MapPin, FileDown } from 'lucide-react';
-import { APP_VERSION, APP_COMMIT, buildDateLabel } from '../lib/version';
+import { APP_VERSION, APP_COMMIT, PRODUCT_VERSION, buildDateLabel } from '../lib/version';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -130,13 +130,16 @@ export default function Footer() {
                             Built with ❤️ for Indian schools
                         </span>
                         <span className="hidden sm:inline opacity-30">·</span>
-                        {/* Comes from the release tag at build time, so it always
-                            matches the artefact actually deployed. */}
-                        <Link to="/updates"
-                            title={`Website ${APP_VERSION} · build ${APP_COMMIT} · ${buildDateLabel()}`}
-                            className="font-mono text-xs tabular-nums opacity-60 hover:opacity-100 hover:text-[var(--brand-cyan-deep)] transition-all">
-                            {APP_VERSION}
-                        </Link>
+                        {/* This is the WEBSITE build, not the product. EduAnant the
+                            software is at Release 1.4.0 and is versioned separately;
+                            a bare number here reads as the product version and makes
+                            a mature product look like a v1. Hence the explicit
+                            "Site" label, and no link to the product changelog. */}
+                        <span
+                            title={`Website build ${APP_VERSION} · ${APP_COMMIT} · ${buildDateLabel()} — the marketing site, not the EduAnant product (Release ${PRODUCT_VERSION})`}
+                            className="font-mono text-[11px] tabular-nums opacity-45 hover:opacity-80 transition-opacity cursor-default">
+                            Site {APP_VERSION}
+                        </span>
                     </div>
                     <div className="flex items-center gap-5 flex-wrap justify-center">
                         <Link to="/privacy-policy" className="hover:text-[var(--brand-cyan-deep)] transition-colors">Privacy Policy</Link>
