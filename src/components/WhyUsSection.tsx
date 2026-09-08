@@ -73,7 +73,7 @@ const PILLARS = [
         title: 'No Internet Dependency',
         subtitle: 'Works on your school Wi-Fi',
         body: 'Staff access EduAnant over the school network — no external broadband needed. Broadband down outside? Doesn\'t matter.',
-        tag: 'LAN-Ready',
+        tag: 'Offline / Intranet',
         variant: 'accent',
         span: 'lg:col-span-2',
     },

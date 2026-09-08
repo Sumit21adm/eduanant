@@ -236,7 +236,7 @@ export default function HeroSection() {
                             <circle cx="10.5" cy="7" r="1.6" fill="none" stroke="#000080" strokeWidth="0.5" />
                         </svg>
                         <span className="text-[#B45309] dark:text-amber-400">Built for Indian Realities</span>
-                        <span aria-hidden className="opacity-40">·</span>100% LAN-Ready
+                        <span aria-hidden className="opacity-40">·</span>Works Offline
                         <span aria-hidden className="opacity-40">·</span>Zero Cloud Bills
                     </motion.div>
 

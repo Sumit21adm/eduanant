@@ -14,7 +14,7 @@ const FEATURES = [
     'Parent app with push notifications',
     'Unlimited staff accounts — no per-staff fee',
     'Hindi + English UI',
-    'Runs on school LAN — no external internet dependency',
+    'Runs on your school intranet — no external internet dependency',
     'Self-hosted on your own server/PC',
     'PDF receipts & demand bills included',
     'UDISE+ & CBSE Appendix-IX compliance exports',

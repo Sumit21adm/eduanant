@@ -13,7 +13,7 @@
 - **2 self-service portals** (Teacher, and Student/Parent) plus an admin console
   and a native Android app.
 - **96 granular permission keys** across 22 permission groups, assignable per user.
-- **Runs offline on a school LAN.** No internet dependency, no monthly cloud bill.
+- **Runs offline on the school intranet.** No internet dependency, no monthly cloud bill.
 - **Interface in English and Hindi**, switchable in one click.
 - **Supports CBSE, ICSE and State Board** schools on an April–March session.
 - **Pricing:** ₹20 per student per month billed annually (₹25 billed monthly),

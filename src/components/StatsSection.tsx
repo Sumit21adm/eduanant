@@ -60,7 +60,7 @@ const STATS = [
         icon: WifiOff,
         display: '₹0',
         label: 'Monthly Cloud Bill',
-        desc: 'Runs on your own server over the school LAN — you pay for software, not someone else\'s cloud',
+        desc: 'Runs on your own server over the school intranet — you pay for software, not someone else\'s cloud',
         border: 'border-slate-200/70 dark:border-white/10',
         iconColor: 'text-white',
         iconBg: 'bg-gradient-to-br from-[#F59E0B] to-[#EA580C] ring-1 ring-black/5',

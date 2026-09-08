@@ -98,10 +98,22 @@ export default function ProofSection() {
                                     Live since {LIVE_SINCE_LABEL}
                                 </span>
                             </div>
-                            <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-white mb-2">
-                                S.D.V. Public School, Patna
-                            </h3>
-                            <p className="text-sm text-indigo-200 mb-4">CBSE affiliated · three campuses across Patna, Bihar</p>
+                            <div className="flex items-center gap-4 mb-4">
+                                {/* The crest sits on a white plate: school logos are drawn for
+                                    paper and lose their edges on a navy ground. */}
+                                <span className="w-20 h-20 rounded-2xl bg-white shrink-0 flex items-center justify-center p-2.5 ring-1 ring-white/20 shadow-lg">
+                                    <img src="/clients/sdv-public-school.webp"
+                                        alt="S.D.V. Public School crest"
+                                        width={60} height={60} loading="lazy" decoding="async"
+                                        className="w-full h-full object-contain" />
+                                </span>
+                                <div className="min-w-0">
+                                    <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                                        S.D.V. Public School, Patna
+                                    </h3>
+                                    <p className="text-sm text-indigo-200 mt-1">CBSE affiliated · three campuses across Patna, Bihar</p>
+                                </div>
+                            </div>
                             <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
                                 Admissions, fee collection, attendance, examinations and staff records for the whole
                                 school have run on EduAnant every working day since {LIVE_SINCE_LABEL} — through a full

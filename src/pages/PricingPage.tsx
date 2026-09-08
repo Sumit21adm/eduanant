@@ -98,7 +98,7 @@ const WHY_EDUANANT = [
 const COMPARISON = [
     { feature: 'Try it before paying', eduanant: { status: 'success', text: '30 days, no invoice' }, other: { status: 'warning', text: 'Usually behind a sales call' } },
     { feature: 'All modules from day one', eduanant: { status: 'success', text: 'All 16 included' }, other: { status: 'error', text: 'Tiers and per-module upsells' } },
-    { feature: 'Works on the school LAN', eduanant: { status: 'success', text: 'Runs without external internet' }, other: { status: 'error', text: 'Needs constant connectivity' } },
+    { feature: 'Works on the school intranet', eduanant: { status: 'success', text: 'Runs without external internet' }, other: { status: 'error', text: 'Needs constant connectivity' } },
     { feature: 'Who holds the data', eduanant: { status: 'success', text: 'Your server, exportable database' }, other: { status: 'error', text: 'A third-party cloud' } },
     { feature: 'Library and Reception Counter', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Paid add-on modules' } },
     { feature: 'HR, service book and statutory exports', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Higher tiers only' } },
