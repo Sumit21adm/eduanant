@@ -72,19 +72,19 @@ export function SideBar({ activeId }: { activeId: string }) {
 function DashboardSim() {
     return (
         <div className="p-4 flex flex-col gap-4 h-full bg-gray-50 dark:bg-[#111318]">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 {[
                     { l: 'Active Students', v: '1,250', sub: '+15 this month', i: Users, c: 'text-blue-500' },
                     { l: 'Attendance', v: '95%', sub: '1,187 present today', i: CheckCircle2, c: 'text-green-500' },
                     { l: "Today's Collection", v: '₹15,000', sub: '₹2,500,000 this month', i: IndianRupee, c: 'text-orange-500' },
                     { l: 'Month Collection', v: '₹2,500,000', sub: 'Financial trend', i: TrendingUp, c: 'text-blue-500' },
                 ].map(k => (
-                    <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-3 flex items-center gap-3 shadow-sm">
+                    <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm min-w-0">
                         <div className={`w-10 h-10 rounded-full ${k.c.replace('text-', 'bg-')}/10 flex items-center justify-center`}>
                             <k.i className={`w-5 h-5 ${k.c}`} />
                         </div>
                         <div>
-                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold">{k.l}</p>
+                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold leading-tight">{k.l}</p>
                             <p className={`text-xl font-bold ${k.c}`}>{k.v}</p>
                             <p className="text-[8px] text-gray-400">{k.sub}</p>
                         </div>
@@ -141,19 +141,19 @@ function AdmissionsSim() {
                 </div>
             </div>
             
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                 {[
                     { l: 'Active in Session', v: '1,250', i: Users, c: 'text-green-500' },
                     { l: 'Alumni / Passed Out', v: '3,500', i: Users, c: 'text-orange-500' },
                     { l: 'Archived Students', v: '12', i: Users, c: 'text-red-500' },
                     { l: "Today's Birthdays", v: '3', i: Users, c: 'text-blue-500' },
                 ].map(k => (
-                    <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-3 flex items-center gap-3 shadow-sm">
+                    <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm min-w-0">
                         <div className={`w-10 h-10 rounded-full ${k.c.replace('text-', 'bg-')}/10 flex items-center justify-center`}>
                             <k.i className={`w-5 h-5 ${k.c}`} />
                         </div>
                         <div>
-                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold">{k.l}</p>
+                            <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold leading-tight">{k.l}</p>
                             <p className={`text-xl font-bold ${k.c}`}>{k.v}</p>
                         </div>
                     </div>
@@ -173,8 +173,13 @@ function AdmissionsSim() {
             </div>
 
             <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl shadow-sm overflow-hidden flex flex-col">
-                <div className="grid grid-cols-7 gap-2 p-3 border-b border-gray-100 dark:border-white/[0.07] bg-gray-50/50 dark:bg-white/[0.03] text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">
-                    <span>Photo</span><span>Student ID</span><span className="col-span-2">Name</span><span>Class</span><span>Phone</span><span>Status</span>
+                <div className="grid grid-cols-4 sm:grid-cols-7 gap-2 p-3 border-b border-gray-100 dark:border-white/[0.07] bg-gray-50/50 dark:bg-white/[0.03] text-[10px] font-bold text-gray-500 dark:text-gray-400 uppercase">
+                    <span>Photo</span>
+                    <span className="hidden sm:block">Student ID</span>
+                    <span className="col-span-2">Name</span>
+                    <span className="hidden sm:block">Class</span>
+                    <span className="hidden sm:block">Phone</span>
+                    <span>Status</span>
                 </div>
                 <div className="flex-1 overflow-hidden">
                     {[
@@ -182,12 +187,12 @@ function AdmissionsSim() {
                         { id: '1002', n: 'John Smith', c: 'XII-Science-A', p: '+1 555-0101' },
                         { id: '1003', n: 'Alex Johnson', c: 'XII-Com-A', p: '+1 555-0102' },
                     ].map(s => (
-                        <div key={s.id} className="grid grid-cols-7 gap-2 p-3 border-b border-gray-50 dark:border-white/[0.06] items-center text-xs text-gray-700 dark:text-gray-300">
+                        <div key={s.id} className="grid grid-cols-4 sm:grid-cols-7 gap-2 p-3 border-b border-gray-50 dark:border-white/[0.06] items-center text-xs text-gray-700 dark:text-gray-300">
                             <div><div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">{s.n[0]}</div></div>
-                            <span className="font-semibold">{s.id}</span>
-                            <span className="col-span-2 font-bold text-gray-900 dark:text-gray-100">{s.n}</span>
-                            <span>{s.c}</span>
-                            <span>{s.p}</span>
+                            <span className="hidden sm:block font-semibold">{s.id}</span>
+                            <span className="col-span-2 font-bold text-gray-900 dark:text-gray-100 truncate">{s.n}</span>
+                            <span className="hidden sm:block truncate">{s.c}</span>
+                            <span className="hidden sm:block truncate">{s.p}</span>
                             <div><span className="px-2 py-0.5 rounded bg-green-500/10 text-green-600 font-bold text-[9px]">Active</span></div>
                         </div>
                     ))}
@@ -305,7 +310,7 @@ function FeeReportsSim() {
             </div>
 
             <div className="flex gap-4 flex-1 min-h-0">
-                <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex flex-col">
+                <div className="hidden sm:flex flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex-col">
                     <p className="text-xs font-bold text-gray-800 dark:text-gray-100 mb-4">Collection Overview</p>
                     <div className="flex-1 flex items-center justify-center">
                         <div className="w-32 h-32 rounded-full border-[16px] border-red-500 border-l-green-500 border-t-green-500 relative transform -rotate-12" />
@@ -315,7 +320,7 @@ function FeeReportsSim() {
                         <span className="flex items-center gap-1"><span className="w-2 h-2 bg-red-500 rounded-sm"/>Pending: ₹3.0M</span>
                     </div>
                 </div>
-                <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex flex-col">
+                <div className="hidden sm:flex flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex-col">
                     <p className="text-xs font-bold text-gray-800 dark:text-gray-100 mb-4">Fee Distribution by Frequency</p>
                     <div className="flex-1 flex items-center justify-center">
                         <div className="w-32 h-32 rounded-full border-[16px] border-green-500 border-r-orange-400 relative transform rotate-45" />

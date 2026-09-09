@@ -30,6 +30,20 @@ export default function Header() {
     // Close mobile menu on navigation
     useEffect(() => { setMobileOpen(false); }, [pathname]);
 
+    // While the sheet is open the page behind it must not scroll, and Escape
+    // must close it — both expected of anything covering the whole screen.
+    useEffect(() => {
+        if (!mobileOpen) return;
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setMobileOpen(false); };
+        window.addEventListener('keydown', onKey);
+        return () => {
+            document.body.style.overflow = prev;
+            window.removeEventListener('keydown', onKey);
+        };
+    }, [mobileOpen]);
+
     return (
         <>
             <motion.header
@@ -98,45 +112,74 @@ export default function Header() {
                             <span className="hidden sm:inline">Book On-Site Demo</span>
                             <span className="sm:hidden">Book Visit</span>
                         </Link>
-                        <button onClick={() => setMobileOpen(!mobileOpen)}
+                        <button onClick={() => setMobileOpen(true)} type="button"
+                            aria-label="Open menu" aria-expanded={mobileOpen} aria-controls="mobile-menu"
                             className="lg:hidden p-2 rounded-lg text-text-secondary hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
-                            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                            <Menu className="w-5 h-5" strokeWidth={1.5} />
                         </button>
                     </div>
                 </div>
-                {/* Mobile Menu — anchored to the bar itself, so it can never drift
-                    out of alignment the way a hardcoded top-[64px] offset did */}
+                {/* Mobile menu — a full-screen sheet.
+                    The previous version was a translucent dropdown anchored under
+                    the bar: the page showed through it, headline text collided with
+                    the links, and it stopped partway down the screen. A menu needs
+                    an opaque surface of its own. */}
                 <AnimatePresence>
                     {mobileOpen && (
                         <motion.div
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            transition={{ duration: 0.28, ease: 'easeOut' }}
-                            onClick={() => setMobileOpen(false)}
-                            className="fixed inset-0 top-full z-30 bg-slate-900/20 backdrop-blur-sm lg:hidden" />
-                    )}
-                    {mobileOpen && (
-                        <motion.div
-                            initial={{ opacity: 0, y: -12, scaleY: 0.97 }}
-                            animate={{ opacity: 1, y: 0, scaleY: 1 }}
-                            exit={{ opacity: 0, y: -12, scaleY: 0.97 }}
-                            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                            style={{ transformOrigin: 'top' }}
-                            className="absolute top-full inset-x-0 z-40 origin-top bg-white/90 dark:bg-[#0B1120]/90 backdrop-blur-md border-b border-slate-200/80 dark:border-white/10 shadow-xl lg:hidden">
-                            <nav className="container mx-auto px-6 py-5 flex flex-col gap-1">
-                                {NAV_LINKS.map((link, i) => (
-                                    <motion.div key={link.label} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
-                                        <Link to={link.href}
-                                            className="flex items-center gap-2 px-4 py-3 rounded-xl text-base font-semibold font-display text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white hover:bg-[var(--primary-main)]/5 transition-all">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-[#F59E0B]" />
-                                            {link.label}
-                                        </Link>
-                                    </motion.div>
-                                ))}
+                            initial={{ opacity: 0, y: -8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                            id="mobile-menu"
+                            className="fixed inset-0 z-[60] lg:hidden flex flex-col bg-[#F8FAFC] dark:bg-[#0B1120]">
+
+                            <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200/80 dark:border-white/10 shrink-0">
+                                <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center shrink-0">
+                                    <img src="/eduanant-logo.svg" alt="EduAnant" className="h-8 w-auto object-contain dark:hidden" />
+                                    <img src="/eduanant-logo-dark.svg" alt="EduAnant" className="h-8 w-auto object-contain hidden dark:block" />
+                                </Link>
+                                <button type="button" onClick={() => setMobileOpen(false)} aria-label="Close menu"
+                                    className="p-2.5 -mr-1 rounded-xl text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white
+                                        hover:bg-slate-100 dark:hover:bg-white/10 transition-colors
+                                        focus:outline-none focus-visible:ring-2 focus-visible:ring-[#00b6d5]">
+                                    <X className="w-6 h-6" strokeWidth={1.5} />
+                                </button>
+                            </div>
+
+                            <nav className="flex-1 overflow-y-auto px-4 sm:px-6 py-4">
+                                {NAV_LINKS.map((link, i) => {
+                                    const isActive = link.href === '/' ? pathname === '/' : pathname === link.href;
+                                    return (
+                                        <motion.div key={link.label}
+                                            initial={{ opacity: 0, x: -12 }} animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.04 + i * 0.035, duration: 0.3 }}>
+                                            <Link to={link.href}
+                                                className={`flex items-center gap-3 px-3 py-4 rounded-xl text-lg font-display font-bold
+                                                    border-b border-slate-200/60 dark:border-white/[0.06] transition-colors
+                                                    ${isActive
+                                                        ? 'text-[var(--primary-main)] dark:text-white'
+                                                        : 'text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white'}`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isActive ? 'bg-[#F59E0B]' : 'bg-slate-300 dark:bg-white/25'}`} />
+                                                {link.label}
+                                            </Link>
+                                        </motion.div>
+                                    );
+                                })}
+                            </nav>
+
+                            <div className="px-4 sm:px-6 py-4 border-t border-slate-200/80 dark:border-white/10 shrink-0
+                                pb-[max(1rem,env(safe-area-inset-bottom))]">
                                 <Link to="/contact"
-                                    className="mt-2 flex items-center justify-center gap-2 btn-primary px-6 py-3 rounded-xl font-bold">
+                                    className="flex items-center justify-center gap-2 btn-primary w-full px-6 py-4 rounded-xl font-bold text-base">
                                     <PhoneCall className="w-4 h-4" strokeWidth={1.5} /> Book On-Site Demo
                                 </Link>
-                            </nav>
+                                <a href="tel:+917903612979"
+                                    className="mt-2 flex items-center justify-center gap-2 w-full px-6 py-3 rounded-xl text-sm font-semibold
+                                        text-text-secondary hover:text-[var(--brand-cyan-deep)] transition-colors">
+                                    Or call +91 79036 12979
+                                </a>
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>

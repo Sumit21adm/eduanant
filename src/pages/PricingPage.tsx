@@ -478,9 +478,9 @@ export default function PricingPage() {
                                             <Icon className="w-5 h-5" style={{ color: offer.color }} />
                                         </div>
                                         <div className="min-w-0">
-                                            <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                                                <p className="text-sm font-black text-text-primary">{offer.label}</p>
-                                                <span className="text-[10px] font-black px-2 py-0.5 rounded-full border"
+                                            <div className="flex items-start justify-between gap-2 mb-0.5">
+                                                <p className="text-sm font-black text-text-primary min-w-0">{offer.label}</p>
+                                                <span className="text-[10px] font-black px-2 py-0.5 rounded-full border shrink-0 whitespace-nowrap mt-0.5"
                                                     style={{ background: `${offer.color}15`, borderColor: `${offer.color}40`, color: offer.color }}>
                                                     {offer.badge}
                                                 </span>

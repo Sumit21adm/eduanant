@@ -128,7 +128,19 @@ export default function PainPointsSection() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            dragElastic={0.18}
+                            dragMomentum={false}
+                            onDragEnd={(_, info) => {
+                                // A short flick counts as much as a long drag.
+                                const swipe = info.offset.x + info.velocity.x * 0.08;
+                                if (swipe < -60) setActive((i + 1) % PAIN_POINTS.length);
+                                else if (swipe > 60) setActive((i - 1 + PAIN_POINTS.length) % PAIN_POINTS.length);
+                            }}
+                            // pan-y keeps vertical page scrolling working inside the draggable area
+                            style={{ touchAction: 'pan-y' }}
+                            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto cursor-grab active:cursor-grabbing select-none">
 
                             {/* BEFORE */}
                             <div className="relative rounded-3xl p-8 border border-red-500/20 bg-red-500/5 backdrop-blur-sm overflow-hidden group">
@@ -167,13 +179,16 @@ export default function PainPointsSection() {
                     );
                 })}
 
-                {/* Navigation dots */}
-                <div className="flex gap-2 justify-center mt-8">
+                {/* Pager — now truthful: the cards above swipe */}
+                <div className="flex gap-2 justify-center mt-8" role="tablist" aria-label="Problem walkthrough">
                     {PAIN_POINTS.map((_, i) => (
                         <button key={i} onClick={() => setActive(i)}
-                            className={`h-1.5 rounded-full transition-all duration-300 ${i === active ? 'w-8 bg-primary-main' : 'w-1.5 bg-gray-300 dark:bg-white/20'}`} />
+                            role="tab" aria-selected={i === active}
+                            aria-label={`Show problem ${i + 1} of ${PAIN_POINTS.length}`}
+                            className={`h-1.5 rounded-full transition-all duration-300 ${i === active ? 'w-8 bg-[#00b6d5]' : 'w-1.5 bg-gray-300 dark:bg-white/20'}`} />
                     ))}
                 </div>
+                <p className="sm:hidden text-center text-[11px] text-text-secondary/70 mt-3">Swipe to see the next one</p>
 
                 {/* Bottom line */}
                 <motion.div

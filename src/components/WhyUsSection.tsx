@@ -188,12 +188,12 @@ export default function WhyUsSection() {
                                     </div>
 
                                     <div className="relative z-10">
-                                        <div className="flex items-center gap-2 flex-wrap mb-1.5">
+                                        <div className="flex items-start justify-between gap-2 mb-1.5">
                                             <h3 className={`font-display font-extrabold tracking-tight
                                                 ${isFeature ? 'text-2xl md:text-3xl text-white' : 'text-base text-text-primary'}`}>
                                                 {p.title}
                                             </h3>
-                                            <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border
+                                            <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border shrink-0 whitespace-nowrap mt-0.5
                                                 ${isFeature
                                                     ? 'border-amber-400/40 bg-amber-400/15 text-amber-300'
                                                     : 'border-amber-500/30 bg-amber-500/10 text-[var(--accent-text)]'}`}>

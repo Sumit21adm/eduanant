@@ -85,7 +85,7 @@ function PortalPanel({ t, index }: { t: (typeof PORTAL_TABS)[number]; index: num
                         </div>
 
                         {/* App Layout */}
-                        <div className="flex h-[380px]">
+                        <div className="flex h-auto sm:h-[380px]">
                             <SideBar activeId={index === 0 ? 'dashboard' : index === 1 ? 'academics' : 'admissions'} />
                             <div className="flex-1 flex flex-col min-w-0">
                                 <TopBar />
@@ -102,22 +102,20 @@ function PortalPanel({ t, index }: { t: (typeof PORTAL_TABS)[number]; index: num
                                         </div>
                                     </div>
 
-                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
                                         {t.metrics.map((m) => (
                                             <div key={m.label} className="p-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1d24] shadow-sm">
-                                                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wide mb-1.5 truncate">{m.label}</p>
+                                                <p className="text-[9px] sm:text-[10px] font-bold text-gray-500 uppercase tracking-wide leading-tight mb-1.5 min-h-[1.6em]">{m.label}</p>
                                                 <div className={`h-1.5 rounded-full w-8 bg-gradient-to-r ${t.mockColor} opacity-80 mb-2`} />
-                                                <p className={`text-lg font-black leading-none tabular-nums ${m.tone}`}>{m.value}</p>
-                                                <p className="text-[10px] text-gray-500 dark:text-gray-400 mt-1 truncate">{m.sub}</p>
+                                                <p className={`text-base sm:text-lg font-black leading-none tabular-nums ${m.tone}`}>{m.value}</p>
+                                                <p className="text-[9px] sm:text-[10px] text-gray-500 dark:text-gray-400 mt-1 leading-tight">{m.sub}</p>
                                             </div>
                                         ))}
                                     </div>
 
-                                    <div className="flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-sm relative overflow-hidden flex flex-col justify-end">
-                                        <div className="absolute top-4 left-4">
-                                            <p className="text-xs font-bold text-gray-800 dark:text-gray-200">{t.chartLabel}</p>
-                                        </div>
-                                        <svg className="w-full h-32" viewBox="0 0 100 40" preserveAspectRatio="none">
+                                    <div className="hidden sm:flex flex-1 min-h-[120px] bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-sm relative overflow-hidden flex-col">
+                                        <p className="text-[11px] sm:text-xs font-bold text-gray-800 dark:text-gray-200 leading-tight mb-1">{t.chartLabel}</p>
+                                        <svg className="w-full flex-1 min-h-[64px]" viewBox="0 0 100 40" preserveAspectRatio="none">
                                             <defs>
                                                 <linearGradient id={`hg${index}`} x1="0%" y1="0%" x2="100%" y2="0%">
                                                     <stop offset="0%" stopColor="var(--primary-main)" />
