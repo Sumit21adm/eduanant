@@ -80,18 +80,18 @@ function DashboardSim() {
                     { l: 'Month Collection', v: '₹2,500,000', sub: 'Financial trend', i: TrendingUp, c: 'text-blue-500' },
                 ].map(k => (
                     <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm min-w-0">
-                        <div className={`w-10 h-10 rounded-full ${k.c.replace('text-', 'bg-')}/10 flex items-center justify-center`}>
+                        <div className={`w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full ${k.c.replace('text-', 'bg-')}/10 flex items-center justify-center`}>
                             <k.i className={`w-5 h-5 ${k.c}`} />
                         </div>
-                        <div>
+                        <div className="min-w-0">
                             <p className="text-[10px] text-gray-500 dark:text-gray-400 font-semibold leading-tight">{k.l}</p>
-                            <p className={`text-xl font-bold ${k.c}`}>{k.v}</p>
-                            <p className="text-[8px] text-gray-400">{k.sub}</p>
+                            <p className={`text-base sm:text-xl font-bold tabular-nums truncate ${k.c}`}>{k.v}</p>
+                            <p className="text-[8px] text-gray-400 truncate">{k.sub}</p>
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="flex gap-4 flex-1 min-h-0">
+            <div className="hidden sm:flex gap-4 flex-1 min-h-0">
                 <div className="flex-[2] bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-4 shadow-sm flex flex-col">
                     <div className="flex justify-between items-center mb-4">
                         <div className="flex items-center gap-2">
@@ -149,7 +149,7 @@ function AdmissionsSim() {
                     { l: "Today's Birthdays", v: '3', i: Users, c: 'text-blue-500' },
                 ].map(k => (
                     <div key={k.l} className="bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-gray-800 rounded-xl p-2.5 sm:p-3 flex items-center gap-2 sm:gap-3 shadow-sm min-w-0">
-                        <div className={`w-10 h-10 rounded-full ${k.c.replace('text-', 'bg-')}/10 flex items-center justify-center`}>
+                        <div className={`w-8 h-8 sm:w-10 sm:h-10 shrink-0 rounded-full ${k.c.replace('text-', 'bg-')}/10 flex items-center justify-center`}>
                             <k.i className={`w-5 h-5 ${k.c}`} />
                         </div>
                         <div>
@@ -309,7 +309,7 @@ function FeeReportsSim() {
                 ))}
             </div>
 
-            <div className="flex gap-4 flex-1 min-h-0">
+            <div className="hidden sm:flex gap-4 flex-1 min-h-0">
                 <div className="hidden sm:flex flex-1 bg-white dark:bg-[#1a1d24] border border-gray-200 dark:border-white/10 rounded-xl p-4 shadow-sm flex-col">
                     <p className="text-xs font-bold text-gray-800 dark:text-gray-100 mb-4">Collection Overview</p>
                     <div className="flex-1 flex items-center justify-center">

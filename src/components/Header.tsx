@@ -11,7 +11,7 @@ import { useTheme } from '../contexts/ThemeContext';
  *  to say it and a bare list of eight words gives a visitor nothing to aim at. */
 const NAV_LINKS = [
     { label: 'Home', href: '/', icon: Home, hint: 'What EduAnant is' },
-    { label: 'Features', href: '/features', icon: Layers, hint: 'All 16 modules' },
+    { label: 'Features', href: '/features', icon: Layers, hint: 'Fees, attendance, exams & more' },
     { label: 'Security', href: '/security', icon: ShieldCheck, hint: 'Your data, your server' },
     { label: 'Updates', href: '/updates', icon: Zap, hint: 'What shipped, and when' },
     { label: 'Pricing', href: '/pricing', icon: IndianRupee, hint: '₹20 per student a month' },

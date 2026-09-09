@@ -88,7 +88,7 @@ export default function StatsSection() {
                     </p>
                 </motion.div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                     {STATS.map((stat, i) => {
                         const Icon = stat.icon;
                         return (
@@ -98,7 +98,7 @@ export default function StatsSection() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                                                                className={`relative rounded-2xl p-6 border ${stat.border} bg-white dark:bg-white/[0.03] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden`}>
+                                                                className={`relative rounded-2xl p-4 sm:p-6 border ${stat.border} bg-white dark:bg-white/[0.03] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg group overflow-hidden`}>
 
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-white/40 dark:via-white/10 to-transparent" />
                                 <div className="absolute -top-8 -right-8 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-amber-400/25" />
@@ -114,7 +114,9 @@ export default function StatsSection() {
                                     )}
                                 </div>
                                 <p className="font-display font-bold text-text-primary text-sm mb-1">{stat.label}</p>
-                                <p className="text-text-secondary text-xs leading-relaxed">{stat.desc}</p>
+                                {/* The number and label carry this section. On a phone the prose turns
+                                    six quick facts into six paragraphs, so it waits for a wider screen. */}
+                                <p className="hidden sm:block text-text-secondary text-xs leading-relaxed">{stat.desc}</p>
                             </motion.div>
                         );
                     })}
