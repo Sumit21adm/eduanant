@@ -68,6 +68,7 @@ export default function PrivacyPolicyPage() {
                                         {[
                                             ['INTERNET', 'Required to access and load the school portal service.'],
                                             ['CAMERA', 'Required solely to allow the school portal to perform face recognition attendance check-in. The app does not save or transmit photos/videos from your camera feed to our servers.'],
+                                            ['ACCESS_FINE_LOCATION / ACCESS_COARSE_LOCATION', 'Requested only when a staff member taps Check In, and only at schools that have enabled campus geofencing. Your location is sent to your school\'s server solely to confirm the check-in happened on campus; the server records only whether the check passed or failed, never the coordinates themselves. The app never accesses your location in the background, and parents and students are never asked for it.'],
                                             ['POST_NOTIFICATIONS', 'Required to receive push notifications for announcements, messages, and student alerts from your school.'],
                                             ['BIOMETRICS (Face ID / Fingerprint)', 'Used exclusively for local secure login. Biometric verification is processed entirely on the user\'s device and is never sent to our servers.'],
                                         ].map(([perm, desc]) => (
