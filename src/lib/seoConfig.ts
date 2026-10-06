@@ -1,7 +1,7 @@
 import { SITE } from './seo';
 import {
-    annualRateLabel, monthlyRateLabel, minAnnualLabel,
-    RATE_ANNUAL, MIN_COVERS_STUDENTS,
+    annualRateLabel, monthlyRateLabel,
+    RATE_ANNUAL, ANNUAL_SAVING_PCT,
 } from '../data/pricing';
 import { RELEASE_COUNT } from '../data/changelog';
 import { LIVE_SINCE_LABEL, monthsSince } from './timeline';
@@ -42,7 +42,7 @@ export const PAGE_SEO = {
     pricing: {
         title: `Pricing: ${annualRateLabel} per Student — School ERP Cost | EduAnant`,
         description:
-            `${annualRateLabel} per student a month billed annually, ${minAnnualLabel} minimum. All 16 modules, both portals, the Android app, migration and training included.`,
+            `${annualRateLabel} per student a month billed annually, ${monthlyRateLabel} billed monthly. All 16 modules, both portals, the Android app, migration and training included.`,
         path: '/pricing',
         keywords:
             'school management software price India, school ERP cost, per student school software pricing, affordable school software, school software India cost',
@@ -166,7 +166,7 @@ export const homeFaqSchema = {
         },
         {
             q: 'What does EduAnant cost for a school in India?',
-            a: `${annualRateLabel} per student per month billed annually, or ${monthlyRateLabel} billed monthly, with a ${minAnnualLabel} annual minimum that covers a school of up to ${MIN_COVERS_STUDENTS} students. All 16 modules, both portals, the Android app, data migration and staff training are included at no extra cost.`,
+            a: `${monthlyRateLabel} per student per month at entry size, or ${annualRateLabel} if you pay for the year up front — ${ANNUAL_SAVING_PCT}% less. The rate steps down as the school grows, to ₹24 a month on annual billing above 1,000 students. You are billed on your actual roll, with no minimum. All 16 modules, both portals, the Android app, data migration and staff training are included at no extra cost.`,
         },
         {
             q: 'Which modules are included?',

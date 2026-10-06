@@ -20,12 +20,13 @@
   first two keep the database in their own building.
 - **Interface in English and Hindi**, switchable in one click.
 - **Supports CBSE, ICSE and State Board** schools on an April–March session.
-- **Pricing:** charged per student per month, with the rate set by the size of
-  the school and applied to the whole roll: up to 250 students ₹50, up to 500 ₹45,
-  up to 750 ₹40, up to 1,000 ₹35, up to 1,250 ₹30. Above 1,250 students we quote
-  on the actual setup, from ₹25. Those are the annual-billing rates; monthly
-  billing is 25% higher (₹63 at the entry band). A 1,000-student school pays
-  ₹4,20,000 a year. ₹90,000 annual minimum.
+- **Pricing:** charged per student per month on your actual roll, with no minimum
+  and no setup fee. The rate is set by the size of the school and applies to the
+  whole roll. Billed monthly: up to 250 students ₹50, up to 500 ₹45, up to 750 ₹40,
+  up to 1,000 ₹35, up to 1,250 ₹30. Pay for the year up front and each is 20% less:
+  ₹40, ₹36, ₹32, ₹28, ₹24. Above 1,250 students we quote on the actual setup, from
+  ₹20 on annual billing. A 1,000-student school paying annually comes to ₹3,36,000
+  a year.
   Setup, data migration from Excel, staff training and the Android app are
   included at no extra cost.
 

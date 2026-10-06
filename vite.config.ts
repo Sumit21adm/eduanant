@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { execSync } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 import type { Plugin } from 'vite'
-import { RATE_ANNUAL, RATE_MONTHLY, RATE_FLOOR_ANNUAL, MIN_ANNUAL, CONTACT_SALES_ABOVE, inr } from './src/data/pricing'
+import { RATE_ANNUAL, RATE_MONTHLY, RATE_FLOOR_ANNUAL, CONTACT_SALES_ABOVE, inr } from './src/data/pricing'
 
 const pkg = JSON.parse(readFileSync('./package.json', 'utf8'))
 
@@ -18,7 +18,6 @@ function pricingTokens(): Plugin {
     '%RATE_ANNUAL%': String(RATE_ANNUAL),
     '%RATE_MONTHLY%': String(RATE_MONTHLY),
     '%RATE_FLOOR%': String(RATE_FLOOR_ANNUAL),
-    '%MIN_ANNUAL%': inr(MIN_ANNUAL),
     '%LARGE_SCHOOL_FROM%': inr(CONTACT_SALES_ABOVE),
   }
   return {
@@ -28,7 +27,7 @@ function pricingTokens(): Plugin {
         (acc, [k, v]) => acc.split(k).join(v),
         html,
       )
-      const stray = out.match(/%(?:RATE_[A-Z_]+|MIN_ANNUAL|LARGE_SCHOOL_FROM)%/)
+      const stray = out.match(/%(?:RATE_[A-Z_]+|LARGE_SCHOOL_FROM)%/)
       if (stray) {
         throw new Error(
           `index.html uses the pricing token ${stray[0]}, which pricingTokens() does not define. ` +

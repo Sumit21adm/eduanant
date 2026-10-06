@@ -24,9 +24,10 @@ import DnsIcon from '@mui/icons-material/Dns';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import Seo from '../lib/seo';
 import {
-    RATE_ANNUAL, RATE_MONTHLY, MIN_ANNUAL, HOSTING_ANNUAL, ONBOARDING_VALUE,
-    GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel, minAnnualLabel,
-    SIZE_BANDS, annualFor, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor, EXAMPLE_ROLL, DEPLOYMENT_MODES, MIN_COVERS_STUDENTS,
+    RATE_ANNUAL, RATE_MONTHLY, HOSTING_ANNUAL, ONBOARDING_VALUE,
+    GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel,
+    SIZE_BANDS, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor,
+    EXAMPLE_ROLL, DEPLOYMENT_MODES, CONTACT_SALES_ABOVE,
 } from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
@@ -34,7 +35,16 @@ import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
 // The commercial model, in one place.
 const ONBOARDING = 15000;
 
-const ENTERPRISE_ABOVE = 2000;
+/* The slider stops a little past the last band so the quote panel is reachable
+ * without a long dead stretch of slider that only ever shows the same panel. */
+const SLIDER_MIN = 100;
+const SLIDER_MAX = CONTACT_SALES_ABOVE + 250;
+
+/* Where the published table ends. Hardcoding this at 2,000 while the bands stopped
+ * at 1,250 left 1,251-2,000 with no band: licenceFor returned null and the figure
+ * fell through to the old annual minimum, so a 1,370-student school was quoted
+ * Rs 90,000. It follows the table now. */
+const ENTERPRISE_ABOVE = CONTACT_SALES_ABOVE;
 
 
 const SUITE_FEATURES = [
@@ -86,7 +96,7 @@ const WHY_EDUANANT = [
     },
     {
         label: 'You pay for your actual size',
-        desc: `A 200-student school should not be billed like a 2,000-student one. The Rs ${inr(MIN_ANNUAL)} minimum is what keeps the smallest schools worth serving properly.`,
+        desc: 'A 200-student school should not be billed like a 2,000-student one. You pay for the students on your roll at the rate for your size, and nothing else.',
     },
     {
         label: 'No cloud subscription underneath it',
@@ -184,7 +194,7 @@ function ValueCase() {
                     {
                         icon: ReceiptLongIcon,
                         title: 'No surprise invoice in October',
-                        body: `A quote you compare us against may not include onboarding, the message pack, or the tier that unlocks HR. Ours does. One line on the budget, fixed for the year, with ${minAnnualLabel} the smallest it gets and GST the only thing added.`,
+                        body: `A quote you compare us against may not include onboarding, the message pack, or the tier that unlocks HR. Ours does. One line on the budget, fixed for the year, worked out from your roll and the rate for your size, with GST the only thing added.`,
                     },
                     {
                         icon: DnsIcon,
@@ -332,7 +342,7 @@ function SizeBandTable() {
                         className="grid grid-cols-5 gap-2 items-center px-5 sm:px-6 py-3.5 border-b border-slate-100 dark:border-white/[0.06]">
                         <span className="col-span-2 text-sm font-bold text-text-primary">{band.label}</span>
                         <span className="col-span-2 text-sm font-bold text-text-primary text-right tabular-nums">
-                            ₹{inr(band.from!)} <span className="text-text-secondary font-medium">–</span> ₹{inr(annualFor(band.max!) ?? 0)}
+                            <span className="text-text-secondary font-medium">up to </span>₹{inr(band.upToAnnual)}
                         </span>
                         <span className="text-sm font-bold text-right tabular-nums text-[var(--brand-cyan-deep)] dark:text-[#00b6d5]">
                             ₹{effectiveRate(band.max!).toFixed(0)}
@@ -356,8 +366,8 @@ function SizeBandTable() {
             <p className="text-xs text-text-secondary text-center mt-4 leading-relaxed max-w-xl mx-auto">
                 Charged on the students you actually have, at the single rate for your school's size — a school of
                 {' '}{inr(EXAMPLE_ROLL)} pays &#8377;{effectiveRate(EXAMPLE_ROLL)} a month for every one of them, not
-                {' '}{annualRateLabel} for the first 250 and less thereafter. The {minAnnualLabel} annual minimum sets
-                the floor, and figures are before {Math.round(GST * 100)}% GST.
+                {' '}{annualRateLabel} for the first 250 and less thereafter. The licence column shows what a school
+                at the top of each band pays; figures are before {Math.round(GST * 100)}% GST.
             </p>
         </div>
     );
@@ -373,14 +383,17 @@ function PricingCalculator() {
 
     // Everything is normalised to a full year so the two billing cycles compare honestly.
     // Above the published bands there is no list price — sales quotes it.
-    const listLicence = Math.max(licenceFor(students, billing) ?? 0, MIN_ANNUAL);
+    // Null only above the bands, where isEnterprise renders the quote panel instead.
+    const listLicence = licenceFor(students, billing) ?? 0;
     const licence = founding ? Math.round(listLicence / 2) : listLicence;
     const onboarding = founding ? 0 : ONBOARDING;
     const hosting = managedHosting ? HOSTING_ANNUAL : 0;
     const subtotal = licence + onboarding + hosting;
     const gst = Math.round(subtotal * GST);
     const firstYear = subtotal + gst;
-    const perStudentMonth = licence / 12 / students;
+    // Derived from the all-in total, not the licence: the line above it reads
+    // "first year, all in", so dividing the pre-GST figure contradicted it.
+    const perStudentMonth = firstYear / 12 / students;
 
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -397,11 +410,11 @@ function PricingCalculator() {
             <div className="max-w-2xl mx-auto space-y-8">
                 <div>
                     <div className="flex justify-between text-xs text-text-secondary mb-2">
-                        <span>100</span>
+                        <span>{inr(SLIDER_MIN)}</span>
                         <span className="font-black text-text-primary text-base">{inr(students)} students</span>
-                        <span>3,000</span>
+                        <span>{inr(SLIDER_MAX)}</span>
                     </div>
-                    <input type="range" min={100} max={3000} step={10} value={students}
+                    <input type="range" min={SLIDER_MIN} max={SLIDER_MAX} step={10} value={students}
                         onChange={e => setStudents(Number(e.target.value))}
                         className="w-full cursor-pointer"
                         style={{ accentColor: '#F59E0B' }} />
@@ -409,7 +422,7 @@ function PricingCalculator() {
 
                 {isEnterprise ? (
                     <div className="text-center p-8 rounded-2xl border" style={{ borderColor: 'rgba(245,158,11,0.3)', background: 'rgba(245,158,11,0.05)' }}>
-                        <p className="text-lg font-black text-text-primary mb-1">Above 2,000 students we quote it properly</p>
+                        <p className="text-lg font-black text-text-primary mb-1">Above {inr(ENTERPRISE_ABOVE)} students we quote it properly</p>
                         <p className="text-sm text-text-secondary mb-5">At this size the server sizing, the volume of data to migrate and the training plan all change. Better to look at your actual setup than guess a number here.</p>
                         <Link to="/contact">
                             <motion.button whileHover={{ scale: 1.03 }} className="btn-primary px-6 py-2.5 rounded-xl text-sm font-bold inline-flex items-center gap-2">
@@ -463,12 +476,8 @@ function PricingCalculator() {
 
                             <div className="space-y-2 text-xs">
                                 <div className="flex justify-between">
-                                    {/* Below the minimum, "N students x rate" would not multiply out to the
-                                        figure beside it. Say which of the two is being charged instead. */}
                                     <span className="text-text-secondary">
-                                        {listLicence === MIN_ANNUAL
-                                            ? `Software (minimum, covers up to ${inr(MIN_COVERS_STUDENTS)} students)`
-                                            : `Software (${inr(students)} students \u00d7 \u20b9${effectiveRate(students, billing).toFixed(0)}/mo)`}
+                                        Software ({inr(students)} students &times; &#8377;{effectiveRate(students, billing).toFixed(0)}/mo)
                                     </span>
                                     <span className="font-semibold text-text-primary">&#8377;{inr(listLicence)}</span>
                                 </div>
@@ -634,7 +643,7 @@ export default function PricingPage() {
                                             : `₹${inr(RATE_MONTHLY * 12)} per student a year. Switch to annual and it is ₹${inr(RATE_ANNUAL * 12)}.`}
                                     </p>
                                     <p className="text-[11px] text-text-secondary mt-1">
-                                        &#8377;{inr(MIN_ANNUAL)} a year minimum &middot; 18% GST extra
+                                        Billed on your actual roll &middot; 18% GST extra
                                     </p>
                                 </div>
 
@@ -671,7 +680,7 @@ export default function PricingPage() {
                             </div>
                             <div>
                                 <h3 className="text-lg font-black text-text-primary">Large schools, trusts and groups</h3>
-                                <p className="text-sm text-text-secondary font-medium">Above 2,000 students &middot; Several schools under one management</p>
+                                <p className="text-sm text-text-secondary font-medium">Above {inr(CONTACT_SALES_ABOVE)} students &middot; Several schools under one management</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4 shrink-0">

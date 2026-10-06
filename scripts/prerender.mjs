@@ -98,25 +98,24 @@ if (!chrome) {
 // src/data/pricing.ts. Repricing used to mean remembering they exist; now the
 // build refuses rather than letting the site quote two different numbers.
 const pricingSrc = await readFile('src/data/pricing.ts', 'utf8');
-const allBands = [...pricingSrc.matchAll(/\{\s*upTo:\s*(\d+),\s*annual:\s*(\d+),\s*monthly:\s*(\d+)\s*\}/g)];
+const allBands = [...pricingSrc.matchAll(/\{\s*upTo:\s*(\d+),\s*monthly:\s*(\d+),\s*annual:\s*(\d+)\s*\}/g)];
 const firstTier = allBands[0];
 const lastTier = allBands[allBands.length - 1];
-const minMatch = /MIN_ANNUAL = ([\d_]+)/.exec(pricingSrc);
 // The quotable floor is its own constant, not the last band's rate: the table stops
 // at the 1,250 band and ₹25 is room to negotiate below it, so deriving it from the
 // last band would silently publish ₹30 as the floor.
 const floorMatch = /RATE_FLOOR_ANNUAL = (\d+)/.exec(pricingSrc);
-if (!firstTier || !lastTier || !minMatch || !floorMatch) {
+if (!firstTier || !lastTier || !floorMatch) {
     console.error('\n  prerender: could not read the rates out of src/data/pricing.ts — the drift guard cannot run.\n');
     process.exit(1);
 }
 const rates = {
-    entryAnnual: Number(firstTier[2]),
-    entryMonthly: Number(firstTier[3]),
-    lastBandAnnual: Number(lastTier[2]),
+    entryMonthly: Number(firstTier[2]),
+    entryAnnual: Number(firstTier[3]),
+    lastBandMonthly: Number(lastTier[2]),
+    lastBandAnnual: Number(lastTier[3]),
     contactAbove: Number(lastTier[1]),
     floorAnnual: Number(floorMatch[1]),
-    minAnnual: Number(minMatch[1].replace(/_/g, '')),
 };
 const inrGroup = (n) => n.toLocaleString('en-IN');
 const staticPriceFiles = ['public/llms.txt', 'docs/brochure-source.html'];
@@ -127,10 +126,10 @@ for (const f of staticPriceFiles) {
     for (const [label, value] of [
         ['entry annual rate', `\u20b9${rates.entryAnnual}`],
         ['entry monthly rate', `\u20b9${rates.entryMonthly}`],
-        ['largest published band rate', `\u20b9${rates.lastBandAnnual}`],
+        ['largest band monthly rate', `\u20b9${rates.lastBandMonthly}`],
+        ['largest band annual rate', `\u20b9${rates.lastBandAnnual}`],
         ['quotable floor rate', `\u20b9${rates.floorAnnual}`],
         ['contact-sales threshold', inrGroup(rates.contactAbove)],
-        ['annual minimum', `\u20b9${inrGroup(rates.minAnnual)}`],
     ]) {
         if (!text.includes(value)) priceProblems.push(`${f} does not mention the ${label} ${value}`);
     }

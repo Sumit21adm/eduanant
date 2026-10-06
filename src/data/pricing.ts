@@ -16,24 +16,26 @@
  * Rate bands, in uniform steps of 250. The rate for a school's band applies to its
  * whole roll, not marginally like tax brackets.
  *
- * Band rates are a deliberate commercial choice with a known cost: because the rate
- * steps down at a boundary, a school just over one pays less in total than a school
- * just under it (251 students costs less than 250). Charging marginally keeps totals
- * rising but cannot reach the low rates this table publishes — it bottoms out near
- * ₹28 — and the table was the priority.
+ * `monthly` is the list rate — what a school pays billed month to month. `annual` is
+ * that less 20%, the discount for paying for the year up front. The ladder is the
+ * monthly one (₹50 down to ₹30); the annual column is derived from it, so changing a
+ * monthly rate means recomputing its partner.
  *
- * The table stops at 1,250 rather than running to 1,500 at ₹25. An earlier version
- * published a 1,301–1,500 band at ₹25 and it inverted badly: 1,301 students came to
- * ₹3,90,300 against ₹4,68,000 for 1,300, so the smaller school paid ₹77,700 more.
- * Stopping here keeps every published step at +250, drops the inverted row, and
- * leaves ₹25 as a floor sales can quote down to instead of a rate we must honour.
+ * Band rates carry a known cost: because the rate steps down at a boundary, a school
+ * just over one pays less in total than a school just under it (251 students costs
+ * less than 250). Charging marginally keeps totals rising but cannot reach the low
+ * rates this table publishes, and the table was the priority.
+ *
+ * The table stops at 1,250. An earlier version ran to 1,500 and inverted badly, the
+ * smaller school paying ₹77,700 more. Stopping here keeps every step at +250 and
+ * leaves the floor below as something sales quotes rather than a rate we must honour.
  */
 export const RATE_BANDS = [
-    { upTo: 250, annual: 50, monthly: 63 },
-    { upTo: 500, annual: 45, monthly: 56 },
-    { upTo: 750, annual: 40, monthly: 50 },
-    { upTo: 1000, annual: 35, monthly: 44 },
-    { upTo: 1250, annual: 30, monthly: 38 },
+    { upTo: 250, monthly: 50, annual: 40 },
+    { upTo: 500, monthly: 45, annual: 36 },
+    { upTo: 750, monthly: 40, annual: 32 },
+    { upTo: 1000, monthly: 35, annual: 28 },
+    { upTo: 1250, monthly: 30, annual: 24 },
 ] as const;
 
 /** Above the last band we quote rather than publish. */
@@ -44,11 +46,12 @@ export const RATE_ANNUAL = RATE_BANDS[0].annual;
 export const RATE_MONTHLY = RATE_BANDS[0].monthly;
 
 /**
- * The lowest rate sales may quote, for "from ₹25" copy on the contact row. It is
- * deliberately below the last published band (₹30) rather than derived from it:
- * this is the room to negotiate on a large school, not a rate in the table.
+ * The lowest annual rate sales may quote, for the "from" figure on the contact row.
+ * Below the last published band (₹24 annual) rather than derived from it: this is
+ * room to negotiate on a large school, not a rate in the table. Equivalent to ₹25
+ * a month at list, which is where the number came from.
  */
-export const RATE_FLOOR_ANNUAL = 25;
+export const RATE_FLOOR_ANNUAL = 20;
 
 /** The band a roll of n students falls into, or null above the last one. */
 export const bandFor = (students: number) =>
@@ -67,11 +70,6 @@ export const effectiveRate = (students: number, cycle: 'annual' | 'monthly' = 'a
     return band ? band[cycle] : RATE_FLOOR_ANNUAL;
 };
 
-/** Floor for an annual contract, so a very small school is still viable to serve.
- *  Scaled with the rate so it keeps covering ~150 students — a floor that covers
- *  fewer and fewer schools as the rate rises stops being a floor. */
-export const MIN_ANNUAL = 90_000;
-
 /** Optional managed hosting, per year, if the school would rather not run a box. */
 export const HOSTING_ANNUAL = 18_000;
 
@@ -85,9 +83,6 @@ export const GST_RATE = 0.18;
 export const FOUNDING_COUNT = 10;
 export const FOUNDING_DISCOUNT = 0.5;
 
-/** Students covered before the annual minimum stops binding. */
-export const MIN_COVERS_STUDENTS = Math.round(MIN_ANNUAL / (RATE_ANNUAL * 12));
-
 /** What a monthly payer gives up by not paying annually, as a percentage. */
 export const ANNUAL_SAVING_PCT = Math.round((1 - RATE_ANNUAL / RATE_MONTHLY) * 100);
 
@@ -97,7 +92,6 @@ export const inr = (n: number) => n.toLocaleString('en-IN');
 /** "₹20" — the headline rate, for prose and metadata. */
 export const annualRateLabel = `₹${RATE_ANNUAL}`;
 export const monthlyRateLabel = `₹${RATE_MONTHLY}`;
-export const minAnnualLabel = `₹${inr(MIN_ANNUAL)}`;
 
 /* ── Size bands ───────────────────────────────────────────────────────────────
  * Presentation only. Billing stays per student, so a school at the bottom of a
@@ -109,27 +103,26 @@ export interface SizeBand {
     label: string;
     /** Upper bound of the band; undefined means "and above". */
     max?: number;
-    /** Lower display bound — what the smallest school in this band actually pays. */
-    from?: number;
+    /** Licence for a school at the top of this band — the "up to" figure. */
+    upToAnnual: number;
 }
 
 const BAND_CEILINGS = RATE_BANDS.map(b => b.upTo);
 
-/** Annual licence for a roll of n students, before GST, respecting the minimum.
- *  Null above the published bands. */
-export const annualFor = (students: number) => {
-    const l = licenceFor(students, 'annual');
-    return l === null ? null : Math.max(MIN_ANNUAL, l);
-};
+/** Annual licence for a roll of n students, before GST. Null above the published
+ *  bands, where sales quotes instead — callers must handle that rather than
+ *  substituting a number, which is how the calculator once showed a 1,370-student
+ *  school the old annual minimum. */
+export const annualFor = (students: number) => licenceFor(students, 'annual');
 
-/* Each row's range is bounded by its own band's rate: the smallest roll that falls
- * in the band, and the largest. Using the previous band's ceiling price as the lower
- * bound instead would overstate every row, and on the last band it inverts — ₹4,68,000
- * down to ₹4,50,000 — because the rate step is steeper than the 200 extra students. */
+/* The licence column shows the ceiling for each band — what a school at the top of
+ * it pays. Showing a range needs a lower bound, and without an annual minimum the
+ * first band's would be one student at Rs 600, which tells a director nothing. The
+ * rate beside it is what they multiply by their own roll. */
 export const SIZE_BANDS: SizeBand[] = BAND_CEILINGS.map((max, i) => ({
     label: i === 0 ? `Up to ${inr(max)} students` : `${inr(BAND_CEILINGS[i - 1] + 1)} – ${inr(max)}`,
     max,
-    from: annualFor(i === 0 ? 1 : BAND_CEILINGS[i - 1] + 1) ?? MIN_ANNUAL,
+    upToAnnual: annualFor(max) ?? 0,
 }));
 
 /** A concrete mid-table roll used in pricing copy, so the worked example in prose
