@@ -13,13 +13,15 @@
  */
 
 /** Per student per month when the year is paid up front. */
-export const RATE_ANNUAL = 20;
+export const RATE_ANNUAL = 40;
 
 /** Per student per month when billed monthly. */
-export const RATE_MONTHLY = 25;
+export const RATE_MONTHLY = 50;
 
-/** Floor for an annual contract, so a very small school is still viable to serve. */
-export const MIN_ANNUAL = 36_000;
+/** Floor for an annual contract, so a very small school is still viable to serve.
+ *  Scaled with the rate so it keeps covering ~150 students — a floor that covers
+ *  fewer and fewer schools as the rate rises stops being a floor. */
+export const MIN_ANNUAL = 72_000;
 
 /** Optional managed hosting, per year, if the school would rather not run a box. */
 export const HOSTING_ANNUAL = 18_000;

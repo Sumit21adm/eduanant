@@ -25,7 +25,7 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import Seo from '../lib/seo';
 import {
     RATE_ANNUAL, RATE_MONTHLY, MIN_ANNUAL, HOSTING_ANNUAL, ONBOARDING_VALUE,
-    GST_RATE as GST, ANNUAL_SAVING_PCT, inr,
+    GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel,
 } from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
@@ -278,7 +278,7 @@ export default function PricingPage() {
                             <span className="brand-text-gradient">not per feature.</span>
                         </h1>
                         <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                            &#8377;20 per student a month, billed annually. All 16 modules, every portal, unlimited staff accounts.
+                            {annualRateLabel} per student a month, billed annually. All 16 modules, every portal, unlimited staff accounts.
                             Run your school on it for 30 days before we send an invoice.
                         </p>
                     </motion.div>
