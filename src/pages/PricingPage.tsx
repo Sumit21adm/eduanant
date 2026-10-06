@@ -182,6 +182,18 @@ const COMPARISON: { feature: string; eduanant: Cell; budget: Cell; legacy: Cell 
 function ValueCase() {
     return (
         <div className="container mx-auto px-6 max-w-5xl mb-16">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                className="text-center mb-8">
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-text-secondary mb-3">What you get back</p>
+                <h2 className="text-2xl md:text-3xl font-black text-text-primary mb-3">
+                    Three ways it pays for itself
+                </h2>
+                <p className="text-sm text-text-secondary max-w-2xl mx-auto leading-relaxed">
+                    A licence is a line on next year's budget, so it is fair to ask what comes back against it.
+                    These are the three we would put in front of a board.
+                </p>
+            </motion.div>
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
                 {[
                     {
@@ -214,7 +226,7 @@ function ValueCase() {
             <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-6 sm:p-7 shadow-sm">
                 <h3 className="font-display text-lg font-extrabold text-text-primary mb-3">
-                    Why a yearly fee for software that runs on your own machine
+                    And why a yearly fee for software that runs on your own machine
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-3">
                     It is a fair question, and the honest answer is that the two older models each got half of it
@@ -316,9 +328,9 @@ function SizeBandTable() {
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                 className="text-center mb-7">
                 <p className="text-xs font-black uppercase tracking-[0.3em] text-text-secondary mb-3">Find your school</p>
-                <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white">
+                <h2 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white">
                     What it comes to, by size
-                </h3>
+                </h2>
             </motion.div>
 
             <div className="rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-white/[0.03] overflow-hidden shadow-sm">
@@ -387,7 +399,7 @@ function PricingCalculator() {
                 <p className="text-xs font-black uppercase tracking-widest mb-2 inline-flex items-center gap-1.5" style={{ color: 'var(--accent-text)' }}>
                     <CalculateIcon className="w-3.5 h-3.5" /> Work out your number
                 </p>
-                <h3 className="text-2xl font-black text-text-primary mt-1">What would this cost my school?</h3>
+                <h2 className="text-2xl font-black text-text-primary mt-1">What would this cost my school?</h2>
                 <p className="text-sm text-text-secondary mt-1">Drag the slider to your student count. Every figure below covers a full year, so the two billing cycles compare fairly.</p>
             </div>
 
@@ -542,43 +554,7 @@ export default function PricingPage() {
                     </motion.div>
                 </div>
 
-                {/* Founding 10 — the reason to move now */}
-                <div className="container mx-auto px-6 max-w-5xl mb-16">
-                    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-                        className="rounded-3xl border p-7 md:p-9"
-                        style={{ borderColor: 'rgba(251,191,36,0.3)', background: 'rgba(251,191,36,0.05)' }}>
-                        <div className="flex flex-col md:flex-row md:items-center gap-6">
-                            <div className="flex items-center gap-4 md:w-1/3">
-                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(251,191,36,0.15)' }}>
-                                    <WorkspacePremiumIcon className="w-6 h-6" style={{ color: '#f59e0b' }} />
-                                </div>
-                                <div>
-                                    <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: '#f59e0b' }}>Open now</p>
-                                    <h2 className="text-2xl font-black text-text-primary leading-tight">Founding 10</h2>
-                                </div>
-                            </div>
-                            <div className="flex-1">
-                                <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                                    We are looking for ten schools to build the next year of this product with. You get half price for
-                                    year one and renewal rates locked for life. In return we ask for a reference call,
-                                    a line we can quote once you have lived with it for two months, and your name on this website.
-                                </p>
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                                    {[
-                                        'Half price, first year',
-                                        'Renewal rates locked for life',
-                                        'Onboarding and training free',
-                                    ].map(t => (
-                                        <div key={t} className="flex items-start gap-2 text-xs font-semibold text-text-primary">
-                                            <CheckCircleIcon className="w-4 h-4 shrink-0" style={{ color: '#f59e0b' }} />
-                                            {t}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
+
 
                 <div className="container mx-auto px-6 max-w-6xl mb-8">
                     <div className="flex items-center justify-center gap-2">
@@ -658,7 +634,17 @@ export default function PricingPage() {
                             </div>
                         </div>
                     </motion.div>
+                </div>
 
+                <div className="container mx-auto px-6 max-w-4xl mb-20">
+                    <SizeBandTable />
+
+                    <PricingCalculator />
+                </div>
+
+                {/* Rolls past the published table land here, straight after the
+                    calculator has shown them the quote panel. */}
+                <div className="container mx-auto px-6 max-w-4xl mb-20">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
                         className="mt-6 p-7 rounded-3xl border flex flex-col md:flex-row items-center justify-between gap-6"
                         style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
@@ -680,12 +666,6 @@ export default function PricingPage() {
                             </Link>
                         </div>
                     </motion.div>
-                </div>
-
-                <div className="container mx-auto px-6 max-w-4xl mb-20">
-                    <SizeBandTable />
-
-                    <PricingCalculator />
                 </div>
 
                 <div className="container mx-auto px-6 max-w-5xl mb-20">
@@ -715,11 +695,49 @@ export default function PricingPage() {
                     </div>
                 </div>
 
+                {/* The offer comes after the price it discounts, not before it. */}
+                <div className="container mx-auto px-6 max-w-5xl mb-16">
+                    <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+                        className="rounded-3xl border p-7 md:p-9"
+                        style={{ borderColor: 'rgba(251,191,36,0.3)', background: 'rgba(251,191,36,0.05)' }}>
+                        <div className="flex flex-col md:flex-row md:items-center gap-6">
+                            <div className="flex items-center gap-4 md:w-1/3">
+                                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0" style={{ background: 'rgba(251,191,36,0.15)' }}>
+                                    <WorkspacePremiumIcon className="w-6 h-6" style={{ color: '#f59e0b' }} />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-black uppercase tracking-widest" style={{ color: '#f59e0b' }}>Open now</p>
+                                    <h2 className="text-2xl font-black text-text-primary leading-tight">Founding 10</h2>
+                                </div>
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                                    We are looking for ten schools to build the next year of this product with. You get half price for
+                                    year one and renewal rates locked for life. In return we ask for a reference call,
+                                    a line we can quote once you have lived with it for two months, and your name on this website.
+                                </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    {[
+                                        'Half price, first year',
+                                        'Renewal rates locked for life',
+                                        'Onboarding and training free',
+                                    ].map(t => (
+                                        <div key={t} className="flex items-start gap-2 text-xs font-semibold text-text-primary">
+                                            <CheckCircleIcon className="w-4 h-4 shrink-0" style={{ color: '#f59e0b' }} />
+                                            {t}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+
                 <div className="container mx-auto px-6 max-w-6xl mb-20">
                     <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
                         <div className="flex items-center gap-3 mb-5">
                             <AutoAwesomeIcon className="w-4 h-4 text-amber-400" />
-                            <p className="text-sm font-black uppercase tracking-widest text-text-secondary">Ways to pay less</p>
+                            <h2 className="text-sm font-black uppercase tracking-widest text-text-secondary">Ways to pay less</h2>
                             <div className="flex-1 h-px bg-gray-200/40 dark:bg-white/10" />
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -864,7 +882,7 @@ export default function PricingPage() {
                             <AccountBalanceIcon className="w-6 h-6 text-emerald-500" />
                         </div>
                         <div className="flex-1 text-center md:text-left">
-                            <h3 className="text-xl font-black text-text-primary mb-1">Government and aided schools</h3>
+                            <h2 className="text-xl font-black text-text-primary mb-1">Government and aided schools</h2>
                             <p className="text-sm text-text-secondary leading-relaxed font-medium">
                                 40% off everything above, for schools that can show recognition or aid status.
                                 The product is identical; only the invoice changes.
@@ -885,7 +903,7 @@ export default function PricingPage() {
                         className="p-10 rounded-3xl border"
                         style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>
                         <p className="text-xs font-black uppercase tracking-widest mb-4" style={{ color: 'var(--accent-text)' }}>Still weighing it up?</p>
-                        <h3 className="text-3xl font-black text-text-primary mb-4">Start with the thirty days</h3>
+                        <h2 className="text-3xl font-black text-text-primary mb-4">Start with the thirty days</h2>
                         <p className="text-text-secondary mb-8 font-medium">
                             Installation, data migration and staff training happen first. The invoice comes only once
                             you have decided to keep it.
