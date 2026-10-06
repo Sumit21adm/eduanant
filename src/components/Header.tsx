@@ -15,7 +15,7 @@ const NAV_LINKS = [
     { label: 'Security', href: '/security', icon: ShieldCheck, hint: 'Your data, your server' },
     { label: 'Updates', href: '/updates', icon: Zap, hint: 'What shipped, and when' },
     { label: 'Pricing', href: '/pricing', icon: IndianRupee, hint: '₹20 per student a month' },
-    { label: 'Live Demo', href: '/demo', icon: MonitorPlay, hint: 'Open the real thing' },
+    { label: 'Live Demo', href: '/demo', icon: MonitorPlay, hint: 'Request access to the build' },
     { label: 'Contact', href: '/contact', icon: Mail, hint: 'Book a school visit' },
     { label: 'Register', href: '/register', icon: UserPlus, hint: 'Start onboarding' },
 ];

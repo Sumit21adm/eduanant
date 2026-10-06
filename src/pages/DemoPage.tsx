@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -9,13 +8,11 @@ import SchoolIcon from '@mui/icons-material/School';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import PeopleIcon from '@mui/icons-material/People';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import CheckIcon from '@mui/icons-material/Check';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import ArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import InfoIcon from '@mui/icons-material/Info';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import LockIcon from '@mui/icons-material/Lock';
 import Seo from '../lib/seo';
+import DemoRequestForm from '../components/DemoRequestForm';
 import { PAGE_SEO } from '../lib/seoConfig';
 
 const DEMO_ROLES = [
@@ -24,8 +21,6 @@ const DEMO_ROLES = [
         role: 'System Administrator',
         icon: ShieldIcon,
         description: 'Runs the whole system. Academic sessions, school details, user roles, backups and the security log.',
-        username: 'admin@eduanant.cloud',
-        password: 'Admin@123',
         color: 'from-blue-600 to-indigo-600',
         textColor: 'text-indigo-400 dark:text-indigo-300',
         bgColor: 'rgba(99, 102, 241, 0.08)',
@@ -36,8 +31,6 @@ const DEMO_ROLES = [
         role: 'School Principal',
         icon: VerifiedUserIcon,
         description: 'The overview a head of school wants: notices, staff leave approvals, class tests and parent meetings.',
-        username: 'principal@eduanant.cloud',
-        password: 'Demo@1234',
         color: 'from-purple-600 to-pink-600',
         textColor: 'text-pink-400 dark:text-pink-300',
         bgColor: 'rgba(236, 72, 153, 0.08)',
@@ -48,8 +41,6 @@ const DEMO_ROLES = [
         role: 'Class Teacher',
         icon: SchoolIcon,
         description: 'A teacher\'s day: attendance, homework, lesson plans, curriculum progress and marks entry.',
-        username: 'teacher.math@eduanant.cloud',
-        password: 'Demo@1234',
         color: 'from-emerald-600 to-teal-600',
         textColor: 'text-teal-400 dark:text-teal-300',
         bgColor: 'rgba(20, 184, 166, 0.08)',
@@ -60,8 +51,6 @@ const DEMO_ROLES = [
         role: 'School Accountant',
         icon: AccountBalanceWalletIcon,
         description: 'The fee counter: heads and structures, demand bills for a whole class, collection and receipts.',
-        username: 'accountant@eduanant.cloud',
-        password: 'Demo@1234',
         color: 'from-amber-600 to-orange-600',
         textColor: 'text-amber-400 dark:text-amber-300',
         bgColor: 'rgba(245, 158, 11, 0.08)',
@@ -72,8 +61,6 @@ const DEMO_ROLES = [
         role: 'Front Desk Executive',
         icon: AssignmentIcon,
         description: 'The front desk: admission enquiries, visitors, appointments and students leaving early.',
-        username: 'receptionist@eduanant.cloud',
-        password: 'Demo@1234',
         color: 'from-cyan-600 to-sky-600',
         textColor: 'text-cyan-400 dark:text-cyan-300',
         bgColor: 'rgba(14, 165, 233, 0.08)',
@@ -84,8 +71,6 @@ const DEMO_ROLES = [
         role: 'Student & Parent',
         icon: PeopleIcon,
         description: 'What a parent sees at home: homework, attendance, results, fees and report cards.',
-        username: 'SID00001',
-        password: 'Demo@1234',
         color: 'from-rose-600 to-red-600',
         textColor: 'text-rose-400 dark:text-rose-300',
         bgColor: 'rgba(244, 63, 94, 0.08)',
@@ -94,14 +79,6 @@ const DEMO_ROLES = [
 ];
 
 export default function DemoPage() {
-    const [copiedField, setCopiedField] = useState<string | null>(null);
-
-    const handleCopy = (text: string, id: string) => {
-        navigator.clipboard.writeText(text);
-        setCopiedField(id);
-        setTimeout(() => setCopiedField(null), 2000);
-    };
-
     return (
         <>
             <Seo {...PAGE_SEO.demo} schema={[]} crumbs={[{ name: 'Live Demo', path: '/demo' }]} />
@@ -121,14 +98,14 @@ export default function DemoPage() {
                         >
                             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border mb-6"
                                 style={{ background: 'rgba(245,158,11,0.08)', borderColor: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' }}>
-                                <AutoAwesomeIcon className="w-3.5 h-3.5" /> Open to anyone, no sign-up
+                                <AutoAwesomeIcon className="w-3.5 h-3.5" /> Real build · access on request
                             </span>
                             <h1 className="text-5xl md:text-7xl font-black text-text-primary mb-6 leading-none">
-                                Log in and<br />
-                                <span className="brand-text-gradient">have a look around.</span>
+                                See the real build,<br />
+                                <span className="brand-text-gradient">not a slide deck.</span>
                             </h1>
                             <p className="text-xl text-text-secondary leading-relaxed">
-                                This is the current build of EduAnant, running on a school we made up. Pick a role below, sign in with the credentials shown, and use it exactly as that person would.
+                                This is the current build of EduAnant, running on a school we made up. Tell us who you are and we will send sign-in details, so you can use it exactly as the person in your office would.
                             </p>
                         </motion.div>
 
@@ -145,7 +122,7 @@ export default function DemoPage() {
                                 rel="noopener noreferrer"
                                 className="btn-primary px-8 py-4 rounded-xl font-bold inline-flex items-center gap-2.5 shadow-lg shadow-[#F59E0B]/20 group transition-all"
                             >
-                                Open the live demo <OpenInNewIcon className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                Request demo access <ArrowDownIcon className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
                             </a>
                         </motion.div>
                     </div>
@@ -166,6 +143,11 @@ export default function DemoPage() {
                             </p>
                         </div>
                     </motion.div>
+
+                    {/* Access is requested here rather than handed out above. */}
+                    <div id="request" className="max-w-3xl mx-auto mb-16 scroll-mt-24">
+                        <DemoRequestForm />
+                    </div>
 
                     {/* Demo Roles Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -194,7 +176,7 @@ export default function DemoPage() {
                                     </p>
 
                                     {/* Features Checklist */}
-                                    <div className="mb-6 space-y-2">
+                                    <div className="space-y-2">
                                         <span className="text-xs font-bold text-text-secondary block uppercase tracking-wider mb-2">Capabilities:</span>
                                         {role.features.map((feat) => (
                                             <div key={feat} className="flex items-center gap-2 text-xs text-text-secondary font-medium">
@@ -204,48 +186,8 @@ export default function DemoPage() {
                                         ))}
                                     </div>
 
-                                    {/* Credentials Panel */}
-                                    <div className="mt-auto p-4 rounded-2xl bg-gray-100/60 dark:bg-white/[0.02] border border-gray-200/30 dark:border-white/5 space-y-3">
-                                        <div className="flex items-center justify-between text-xs">
-                                            <div className="flex items-center gap-1.5">
-                                                <LockIcon className="w-3.5 h-3.5 text-text-secondary" />
-                                                <span className="font-bold text-text-primary">Sign in as this role</span>
-                                            </div>
-                                            <a href={`https://demo.eduanant.cloud/login?username=${encodeURIComponent(role.username)}&password=${encodeURIComponent(role.password)}`} target="_blank" rel="noopener noreferrer" className="text-[var(--accent-text)] hover:underline flex items-center gap-1 font-bold">
-                                                Log in <OpenInNewIcon className="w-3 h-3" />
-                                            </a>
-                                        </div>
-
-                                        {/* Username field */}
-                                        <div className="flex items-center justify-between bg-white dark:bg-black/20 p-2.5 rounded-xl border border-gray-200/40 dark:border-white/5">
-                                            <div className="overflow-hidden mr-2">
-                                                <span className="text-[10px] text-text-secondary block font-bold uppercase">Username</span>
-                                                <span className="text-xs font-mono text-text-primary truncate block">{role.username}</span>
-                                            </div>
-                                            <button 
-                                                onClick={() => handleCopy(role.username, `${role.id}-user`)}
-                                                className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
-                                                title="Copy Username"
-                                            >
-                                                {copiedField === `${role.id}-user` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
-                                            </button>
-                                        </div>
-
-                                        {/* Password field */}
-                                        <div className="flex items-center justify-between bg-white dark:bg-black/20 p-2.5 rounded-xl border border-gray-200/40 dark:border-white/5">
-                                            <div className="overflow-hidden mr-2">
-                                                <span className="text-[10px] text-text-secondary block font-bold uppercase">Password</span>
-                                                <span className="text-xs font-mono text-text-primary truncate block">{role.password}</span>
-                                            </div>
-                                            <button 
-                                                onClick={() => handleCopy(role.password, `${role.id}-pass`)}
-                                                className="p-2 hover:bg-gray-100 dark:hover:bg-white/10 rounded-lg text-text-secondary transition-colors shrink-0"
-                                                title="Copy Password"
-                                            >
-                                                {copiedField === `${role.id}-pass` ? <CheckIcon className="w-4 h-4 text-emerald-500" /> : <ContentCopyIcon className="w-4 h-4" />}
-                                            </button>
-                                        </div>
-                                    </div>
+                                    {/* Credentials used to sit here in plain text. They are
+                                        issued on request now — see the form below. */}
                                 </motion.div>
                             );
                         })}
@@ -258,8 +200,8 @@ export default function DemoPage() {
                             Book a walkthrough and we will take you through it on a call, using your school's own structure — your classes, your fee heads, your board — instead of ours.
                         </p>
                         <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
-                            <a href="https://demo.eduanant.cloud" target="_blank" rel="noopener noreferrer" className="btn-primary px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
-                                Open the live demo <OpenInNewIcon className="w-4 h-4" />
+                            <a href="#request" className="btn-primary px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
+                                Request demo access
                             </a>
                             <span className="text-text-secondary text-sm font-bold">or</span>
                             <Link to="/contact" className="px-6 py-3 rounded-xl border border-gray-300 dark:border-white/20 hover:border-[#F59E0B] text-text-primary text-sm font-bold transition-colors">

@@ -14,8 +14,8 @@ const PROOF = [
     {
         icon: KeyRound,
         title: 'Log in to the real thing',
-        body: 'Not a video, not a slide deck. Open the live demo with working admin, teacher and accountant logins and click through every screen on this website before you talk to us.',
-        cta: 'Open the live demo', to: '/demo',
+        body: 'Not a video, not a slide deck. Ask for demo access and sign in as an admin, a teacher or an accountant on the running install — the same build a paying school uses.',
+        cta: 'Request demo access', to: '/demo',
         color: 'from-[#1E1B4B] to-[#312E81]', border: 'border-[#1E1B4B]/25', bg: 'bg-[#1E1B4B]/5',
     },
     {

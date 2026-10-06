@@ -44,9 +44,9 @@ export const PAGE_SEO = {
             'school management software price India, school ERP cost, per student school software pricing, affordable school software, school software India cost',
     },
     demo: {
-        title: 'Live Demo: Try the School ERP Free, No Sign-Up | EduAnant',
+        title: 'Live Demo: See the Real School ERP Build | EduAnant',
         description:
-            'Open the running EduAnant demo and sign in as a principal, class teacher, accountant, receptionist or parent. Real screens, real data, no sign-up required.',
+            'Request access to the running EduAnant demo and sign in as a principal, class teacher, accountant, receptionist or parent. Real screens, real data.',
         path: '/demo',
         keywords:
             'school management software demo, free school ERP demo, try school software online, school software trial India',

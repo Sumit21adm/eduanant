@@ -56,7 +56,7 @@ rest and masked on screen.
 - [Home](https://eduanant.cloud/): what EduAnant is and who it is for.
 - [Features](https://eduanant.cloud/features): all 16 modules, screen by screen.
 - [Pricing](https://eduanant.cloud/pricing): per-student pricing and what is included.
-- [Live Demo](https://eduanant.cloud/demo): a running install, open without sign-up.
+- [Live Demo](https://eduanant.cloud/demo): a running install; sign-in details are issued on request.
 - [Security](https://eduanant.cloud/security): permissions, audit trail, encryption.
 - [Updates](https://eduanant.cloud/updates): release history since April 2026.
 - [Contact](https://eduanant.cloud/contact): book an on-site walkthrough.

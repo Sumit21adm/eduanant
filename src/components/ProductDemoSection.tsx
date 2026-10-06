@@ -361,7 +361,7 @@ export default function ProductDemoSection() {
                         See it working.<br />
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B45309] via-[#EA580C] to-[#F59E0B] dark:from-[#FBBF24] dark:via-[#F59E0B] dark:to-[#FB923C]">Right here. Right now.</span>
                     </h2>
-                    <p className="text-lg text-text-secondary max-w-2xl mx-auto">A faithful preview of the screens your staff and parents use every day. Open the live demo and click through the real thing yourself.</p>
+                    <p className="text-lg text-text-secondary max-w-2xl mx-auto">A faithful preview of the screens your staff and parents use every day. Ask for demo access and click through the real thing yourself.</p>
                 </motion.div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
