@@ -186,3 +186,93 @@ export const DEPLOYMENT_MODES: DeploymentMode[] = [
         bestFor: 'Several branches, or parents who should see it from home',
     },
 ];
+
+/* ── The quote ────────────────────────────────────────────────────────────────
+ * Every figure the calculator prints comes from here. It used to be computed
+ * inline in the component, where nothing could test it, and it was wrong twice:
+ * a roll above the bands fell through to the old annual minimum, and the
+ * per-student line divided the pre-GST licence while the total beside it was
+ * post-GST. scripts/verify-pricing.mjs exercises this function across every
+ * slider position and option combination on each build.
+ */
+
+export const ONBOARDING_LIST = ONBOARDING_VALUE;
+
+export interface QuoteInput {
+    students: number;
+    cycle: 'annual' | 'monthly';
+    founding: boolean;
+    managedHosting: boolean;
+}
+
+export interface Quote {
+    students: number;
+    cycle: 'annual' | 'monthly';
+    /** Per student per month, for this roll and cycle. */
+    rate: number;
+    /** A full year at list, before any discount. */
+    listLicence: number;
+    /** After the founding discount, if taken. */
+    licence: number;
+    foundingDiscount: number;
+    onboarding: number;
+    hosting: number;
+    subtotal: number;
+    gst: number;
+    firstYear: number;
+    /** All-in, per student per month — the same total divided down, never the
+     *  pre-GST figure, so the two lines cannot disagree. */
+    perStudentMonth: number;
+}
+
+/** Null above the published bands: there is no list price there, sales quotes it.
+ *  Callers must render that case rather than substituting a number. */
+export function quoteFor({ students, cycle, founding, managedHosting }: QuoteInput): Quote | null {
+    const band = bandFor(students);
+    if (!band) return null;
+
+    const rate = band[cycle];
+    const listLicence = students * rate * 12;
+    const licence = founding ? Math.round(listLicence / 2) : listLicence;
+    const onboarding = founding ? 0 : ONBOARDING_VALUE;
+    const hosting = managedHosting ? HOSTING_ANNUAL : 0;
+    const subtotal = licence + onboarding + hosting;
+    const gst = Math.round(subtotal * GST_RATE);
+    const firstYear = subtotal + gst;
+
+    return {
+        students, cycle, rate, listLicence, licence,
+        foundingDiscount: listLicence - licence,
+        onboarding, hosting, subtotal, gst, firstYear,
+        perStudentMonth: firstYear / 12 / students,
+    };
+}
+
+/* ── Slider geometry ──────────────────────────────────────────────────────────
+ * 100 students to "5,000 or more", but not linearly: most schools sit inside the
+ * published bands, and a straight track would spend three quarters of its length
+ * on sizes that all show the same quote panel. The first 70% of the travel covers
+ * 100 up to the last band in steps of 10; the rest covers everything above it in
+ * steps of 50.
+ */
+export const SLIDER_MIN = 100;
+export const SLIDER_MAX = 5000;
+export const SLIDER_TICKS = 1000;
+const SLIDER_SPLIT = Math.round(SLIDER_TICKS * 0.7);
+
+export function studentsAtTick(tick: number): number {
+    if (tick <= SLIDER_SPLIT) {
+        const t = tick / SLIDER_SPLIT;
+        return Math.round((SLIDER_MIN + t * (CONTACT_SALES_ABOVE - SLIDER_MIN)) / 10) * 10;
+    }
+    const t = (tick - SLIDER_SPLIT) / (SLIDER_TICKS - SLIDER_SPLIT);
+    return Math.round((CONTACT_SALES_ABOVE + t * (SLIDER_MAX - CONTACT_SALES_ABOVE)) / 50) * 50;
+}
+
+export function tickForStudents(students: number): number {
+    if (students <= CONTACT_SALES_ABOVE) {
+        return Math.round(((students - SLIDER_MIN) / (CONTACT_SALES_ABOVE - SLIDER_MIN)) * SLIDER_SPLIT);
+    }
+    const t = (students - CONTACT_SALES_ABOVE) / (SLIDER_MAX - CONTACT_SALES_ABOVE);
+    return Math.round(SLIDER_SPLIT + t * (SLIDER_TICKS - SLIDER_SPLIT));
+}

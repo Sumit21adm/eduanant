@@ -26,24 +26,17 @@ import Seo from '../lib/seo';
 import {
     RATE_ANNUAL, RATE_MONTHLY, HOSTING_ANNUAL, ONBOARDING_VALUE,
     GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel,
-    SIZE_BANDS, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor,
+    SIZE_BANDS, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL,
     EXAMPLE_ROLL, DEPLOYMENT_MODES, CONTACT_SALES_ABOVE,
+    quoteFor, SLIDER_MIN, SLIDER_MAX, SLIDER_TICKS, studentsAtTick, tickForStudents,
 } from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
 
-// The commercial model, in one place.
-const ONBOARDING = 15000;
-
-/* The slider stops a little past the last band so the quote panel is reachable
- * without a long dead stretch of slider that only ever shows the same panel. */
-const SLIDER_MIN = 100;
-const SLIDER_MAX = CONTACT_SALES_ABOVE + 250;
-
-/* Where the published table ends. Hardcoding this at 2,000 while the bands stopped
- * at 1,250 left 1,251-2,000 with no band: licenceFor returned null and the figure
- * fell through to the old annual minimum, so a 1,370-student school was quoted
- * Rs 90,000. It follows the table now. */
+/* Where the published table ends. This was hardcoded at 2,000 while the bands
+ * stopped at 1,250, so 1,251-2,000 had no band, licenceFor returned null, and the
+ * figure fell through to the old annual minimum — a 1,370-student school was shown
+ * Rs 90,000. The commercial model now lives entirely in src/data/pricing.ts. */
 const ENTERPRISE_ABOVE = CONTACT_SALES_ABOVE;
 
 
@@ -374,26 +367,17 @@ function SizeBandTable() {
 }
 
 function PricingCalculator() {
-    const [students, setStudents] = useState(300);
+    const [tick, setTick] = useState(() => tickForStudents(300));
+    const students = studentsAtTick(tick);
+    const atCeiling = students >= SLIDER_MAX;
     const [billing, setBilling] = useState<'monthly' | 'annual'>('annual');
     const [managedHosting, setManagedHosting] = useState(false);
     const [founding, setFounding] = useState(true);
 
-    const isEnterprise = students > ENTERPRISE_ABOVE;
-
-    // Everything is normalised to a full year so the two billing cycles compare honestly.
-    // Above the published bands there is no list price — sales quotes it.
-    // Null only above the bands, where isEnterprise renders the quote panel instead.
-    const listLicence = licenceFor(students, billing) ?? 0;
-    const licence = founding ? Math.round(listLicence / 2) : listLicence;
-    const onboarding = founding ? 0 : ONBOARDING;
-    const hosting = managedHosting ? HOSTING_ANNUAL : 0;
-    const subtotal = licence + onboarding + hosting;
-    const gst = Math.round(subtotal * GST);
-    const firstYear = subtotal + gst;
-    // Derived from the all-in total, not the licence: the line above it reads
-    // "first year, all in", so dividing the pre-GST figure contradicted it.
-    const perStudentMonth = firstYear / 12 / students;
+    // One source for every figure below — see quoteFor() in src/data/pricing.ts.
+    // Null means the roll is past the published bands, which renders the quote panel.
+    const q = quoteFor({ students, cycle: billing, founding, managedHosting });
+    const isEnterprise = q === null;
 
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
@@ -411,11 +395,15 @@ function PricingCalculator() {
                 <div>
                     <div className="flex justify-between text-xs text-text-secondary mb-2">
                         <span>{inr(SLIDER_MIN)}</span>
-                        <span className="font-black text-text-primary text-base">{inr(students)} students</span>
-                        <span>{inr(SLIDER_MAX)}</span>
+                        <span className="font-black text-text-primary text-base">
+                            {inr(students)}{atCeiling ? '+' : ''} students
+                        </span>
+                        <span>{inr(SLIDER_MAX)}+</span>
                     </div>
-                    <input type="range" min={SLIDER_MIN} max={SLIDER_MAX} step={10} value={students}
-                        onChange={e => setStudents(Number(e.target.value))}
+                    <input type="range" min={0} max={SLIDER_TICKS} step={1} value={tick}
+                        aria-label="Number of students"
+                        aria-valuetext={`${inr(students)}${atCeiling ? ' or more' : ''} students`}
+                        onChange={e => setTick(Number(e.target.value))}
                         className="w-full cursor-pointer"
                         style={{ accentColor: '#F59E0B' }} />
                 </div>
@@ -477,38 +465,38 @@ function PricingCalculator() {
                             <div className="space-y-2 text-xs">
                                 <div className="flex justify-between">
                                     <span className="text-text-secondary">
-                                        Software ({inr(students)} students &times; &#8377;{effectiveRate(students, billing).toFixed(0)}/mo)
+                                        Software ({inr(students)} students &times; &#8377;{q!.rate}/mo)
                                     </span>
-                                    <span className="font-semibold text-text-primary">&#8377;{inr(listLicence)}</span>
+                                    <span className="font-semibold text-text-primary">&#8377;{inr(q!.listLicence)}</span>
                                 </div>
                                 {founding && (
                                     <div className="flex justify-between text-[#f59e0b] font-semibold">
                                         <span>Founding 10, half off year one</span>
-                                        <span>&minus;&#8377;{inr(listLicence - licence)}</span>
+                                        <span>&minus;&#8377;{inr(q!.foundingDiscount)}</span>
                                     </div>
                                 )}
                                 <div className="flex justify-between">
                                     <span className="text-text-secondary">Onboarding, migration and training</span>
-                                    <span className="font-semibold text-text-primary">{onboarding ? `₹${inr(onboarding)}` : 'Free'}</span>
+                                    <span className="font-semibold text-text-primary">{q!.onboarding ? `₹${inr(q!.onboarding)}` : 'Free'}</span>
                                 </div>
                                 {managedHosting && (
                                     <div className="flex justify-between">
                                         <span className="text-text-secondary">Managed hosting</span>
-                                        <span className="font-semibold text-text-primary">&#8377;{inr(hosting)}</span>
+                                        <span className="font-semibold text-text-primary">&#8377;{inr(q!.hosting)}</span>
                                     </div>
                                 )}
                                 <div className="flex justify-between border-t border-dashed border-gray-100 dark:border-white/5 pt-2">
                                     <span className="text-text-secondary">GST at 18%</span>
-                                    <span className="font-semibold text-text-primary">&#8377;{inr(gst)}</span>
+                                    <span className="font-semibold text-text-primary">&#8377;{inr(q!.gst)}</span>
                                 </div>
                             </div>
 
                             <div className="border-t border-gray-200/50 dark:border-white/10 pt-3 flex items-end justify-between gap-3">
                                 <div>
                                     <p className="text-[10px] font-black uppercase text-text-secondary">First year, all in</p>
-                                    <p className="text-2xl font-black text-text-primary">&#8377;{inr(firstYear)}</p>
+                                    <p className="text-2xl font-black text-text-primary">&#8377;{inr(q!.firstYear)}</p>
                                     <p className="text-[11px] text-text-secondary mt-0.5">
-                                        about &#8377;{perStudentMonth.toFixed(0)} per student a month
+                                        about &#8377;{q!.perStudentMonth.toFixed(0)} per student a month
                                     </p>
                                 </div>
                                 <Link to="/contact">
