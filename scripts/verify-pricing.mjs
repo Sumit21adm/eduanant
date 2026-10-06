@@ -89,7 +89,11 @@ for (let t = 0; t <= P.SLIDER_TICKS; t++) {
                 check(q.listLicence === students * band[cycle] * 12, `${where}: licence ${money(q.listLicence)} != students x rate x 12`);
                 check(q.licence === (founding ? Math.round(q.listLicence / 2) : q.listLicence), `${where}: founding discount misapplied`);
                 check(q.foundingDiscount === q.listLicence - q.licence, `${where}: the discount line does not match the licence lines`);
-                check(q.onboarding === (founding ? 0 : P.ONBOARDING_VALUE), `${where}: onboarding is ${q.onboarding}`);
+                // Onboarding is included for every school. It was once charged unless
+                // `founding`, while the comparison table, brochure, llms.txt and plan
+                // card all said it was included — a non-founding school read "free"
+                // and then met Rs 15,000 on its estimate.
+                check(q.onboarding === 0, `${where}: onboarding is ${q.onboarding}, but the site says it is included for every school`);
                 check(q.hosting === (managedHosting ? P.HOSTING_ANNUAL : 0), `${where}: hosting is ${q.hosting}`);
                 check(q.subtotal === q.licence + q.onboarding + q.hosting, `${where}: subtotal does not add up`);
                 check(q.gst === Math.round(q.subtotal * P.GST_RATE), `${where}: GST is not ${P.GST_RATE * 100}% of the subtotal`);

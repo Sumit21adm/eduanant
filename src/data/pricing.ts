@@ -234,7 +234,12 @@ export function quoteFor({ students, cycle, founding, managedHosting }: QuoteInp
     const rate = band[cycle];
     const listLicence = students * rate * 12;
     const licence = founding ? Math.round(listLicence / 2) : listLicence;
-    const onboarding = founding ? 0 : ONBOARDING_VALUE;
+    // Included for every school, not only founding ones. Charging it unless
+    // `founding` contradicted the comparison table, the brochure, llms.txt and the
+    // plan card, all of which said setup and training were included — so a school
+    // outside the founding ten read "free" and then met a Rs 15,000 line on its own
+    // estimate. ONBOARDING_VALUE survives as the list value the copy quotes.
+    const onboarding = 0;
     const hosting = managedHosting ? HOSTING_ANNUAL : 0;
     const subtotal = licence + onboarding + hosting;
     const gst = Math.round(subtotal * GST_RATE);

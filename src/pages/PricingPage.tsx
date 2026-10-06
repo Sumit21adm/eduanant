@@ -71,7 +71,7 @@ const NOT_INCLUDED = [
 
 const EARLY_OFFERS = [
     { icon: WorkspacePremiumIcon, label: 'Founding 10', desc: 'First ten schools: 50% off year one, with renewal rates locked for life.', badge: 'Open now', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.25)', color: '#f59e0b' },
-    { icon: RocketLaunchIcon, label: 'Onboarding waived', desc: `Migration, installation and two days of on-site training — a Rs ${inr(ONBOARDING_VALUE)} line item, free for founding schools.`, badge: `Worth Rs ${inr(ONBOARDING_VALUE)}`, bg: 'rgba(20,184,166,0.08)', border: 'rgba(20,184,166,0.25)', color: '#14b8a6' },
+    { icon: RocketLaunchIcon, label: 'Onboarding included', desc: `Migration, installation and two days of on-site training — a Rs ${inr(ONBOARDING_VALUE)} line item at most vendors, and nothing here, whatever your size.`, badge: `Worth Rs ${inr(ONBOARDING_VALUE)}`, bg: 'rgba(20,184,166,0.08)', border: 'rgba(20,184,166,0.25)', color: '#14b8a6' },
     { icon: CalendarTodayIcon, label: 'Session 2027-28 early bird', desc: 'Confirm by 31 January 2027 and open the new session on it — 30% off your first year.', badge: 'Next session', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' },
     { icon: CardGiftcardIcon, label: 'Refer a school', desc: 'Introduce us to a school that signs and both of you take 20% off the next renewal.', badge: 'Referral', bg: 'rgba(244,63,94,0.08)', border: 'rgba(244,63,94,0.25)', color: '#f43f5e' },
     { icon: HandshakeIcon, label: 'Trust and group rate', desc: 'Three or more schools under one management: 25% off each, one invoice, one onboarding team.', badge: 'Group', bg: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.25)', color: '#8b5cf6' },
@@ -453,7 +453,7 @@ function PricingCalculator() {
                                     className="mt-0.5 cursor-pointer" style={{ accentColor: '#f59e0b' }} />
                                 <span>
                                     <span className="block text-xs font-black text-text-primary">Founding 10 rate</span>
-                                    <span className="block text-[11px] text-text-secondary leading-snug">Half price for year one, onboarding waived. Ten schools only.</span>
+                                    <span className="block text-[11px] text-text-secondary leading-snug">Half price for year one, renewal rates locked for life. Ten schools only.</span>
                                 </span>
                             </label>
 
@@ -720,7 +720,7 @@ export default function PricingPage() {
                                     {[
                                         'Half price, first year',
                                         'Renewal rates locked for life',
-                                        'Onboarding and training free',
+                                        'Your name on this page as a founding school',
                                     ].map(t => (
                                         <div key={t} className="flex items-start gap-2 text-xs font-semibold text-text-primary">
                                             <CheckCircleIcon className="w-4 h-4 shrink-0" style={{ color: '#f59e0b' }} />
