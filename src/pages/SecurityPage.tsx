@@ -284,6 +284,50 @@ export default function SecurityPage() {
                         })}
                     </div>
 
+                    {/* The DPDP Act is the question boards started asking in 2025, and it is the
+                        one place where where-it-runs stops being a preference and starts being
+                        a compliance position. Stated carefully: readiness, not certification. */}
+                    <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                        className="mt-10 rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-7 sm:p-9 shadow-sm">
+                        <p className="text-xs font-black uppercase tracking-[0.3em] text-text-secondary mb-3">Data protection</p>
+                        <h2 className="text-2xl font-black text-text-primary mb-4">
+                            Built for the DPDP Act, 2023
+                        </h2>
+                        <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                            Under the Digital Personal Data Protection Act, a school is the Data Fiduciary for the
+                            children on its roll. That responsibility stays with the school whichever software it
+                            buys — which makes knowing where the data physically sits, and being able to get it all
+                            back, a governance question rather than an IT one.
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                            {[
+                                {
+                                    h: 'You can say where it is',
+                                    b: 'Installed in school, the database is on a machine in your building and you can point at it. Hosted by us, it is on a server run for your school alone, not a pool shared with other schools.',
+                                },
+                                {
+                                    h: 'You can take it back',
+                                    b: 'Standard PostgreSQL, exportable in full at any time. Erasure and correction requests are answered from your own copy, not through a support ticket with a vendor.',
+                                },
+                                {
+                                    h: 'You can show who saw what',
+                                    b: '96 permission keys decide who opens which record, so access is something you can demonstrate to a board or a parent rather than assert.',
+                                },
+                            ].map(c => (
+                                <div key={c.h} className="rounded-2xl border border-gray-200/40 dark:border-white/5 p-4">
+                                    <h3 className="font-display text-sm font-extrabold text-text-primary mb-2">{c.h}</h3>
+                                    <p className="text-xs text-text-secondary leading-relaxed">{c.b}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <p className="text-xs text-text-secondary leading-relaxed">
+                            EduAnant is built to support your obligations under the Act; it does not discharge them
+                            for you, and nothing here is legal advice. Consent notices, retention periods and
+                            grievance handling remain the school\u2019s to set. We are glad to go through how the
+                            software supports each of them with your counsel on the call.
+                        </p>
+                    </motion.div>
+
                     {/* CTA */}
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-16 text-center">
                         <div className="inline-block p-8 rounded-3xl border max-w-xl" style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.04)' }}>

@@ -18,7 +18,7 @@ export const PAGE_SEO = {
     home: {
         title: 'Home: School Management Software for Indian Schools | EduAnant',
         description:
-            `Offline-ready school ERP for Indian schools. 16 modules — admissions, fees, attendance, exams, HR, library, transport — on your own server. ${annualRateLabel}/student.`,
+            `Offline-ready school ERP for Indian schools. 16 modules — admissions, fees, attendance, exams, HR, library, transport. Your PC, your network, or hosted by us. From ${annualRateLabel}/student.`,
         path: '/',
         keywords:
             'school management software India, school ERP, offline school software, fee management software, student attendance software, school administration software, CBSE school software, Hindi school software',
@@ -178,7 +178,7 @@ export const homeFaqSchema = {
         },
         {
             q: 'Who owns the school data?',
-            a: 'Your school does. EduAnant runs on your own server, the database sits on your machine in standard PostgreSQL, and you can export a full backup at any time. No student data is shared with third parties.',
+            a: 'Your school does, wherever it runs. Install it in school and the database sits on your own machine; choose managed hosting and it sits on a server we run for your school alone. Either way it is standard PostgreSQL and you can export a full backup at any time. No student data is shared with third parties.',
         },
         {
             q: 'Does EduAnant work in Hindi?',

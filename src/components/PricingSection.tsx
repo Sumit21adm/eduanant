@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { annualRateLabel, minAnnualLabel } from '../data/pricing';
+import { annualRateLabel, minAnnualLabel, monthlyRateLabel, ANNUAL_SAVING_PCT, GST_RATE } from '../data/pricing';
 
 import { CheckCircle2, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
 
@@ -11,8 +11,8 @@ const FEATURES = [
     'Parent app with push notifications',
     'Unlimited staff accounts — no per-staff fee',
     'Hindi + English UI',
-    'Runs on your school intranet — no external internet dependency',
-    'Self-hosted on your own server/PC',
+    'Runs on your school intranet — usable with the broadband down',
+    'Install it on your own PC or server, or let us host it',
     'PDF receipts & demand bills included',
     'UDISE+ & CBSE Appendix-IX compliance exports',
     'Data migration from Excel included',
@@ -97,15 +97,15 @@ export default function PricingSection() {
                                         <div className="text-4xl font-black mb-1 brand-text-gradient">
                                             {annualRateLabel} / student
                                         </div>
-                                        <p className="text-text-secondary text-sm font-semibold">per month, billed annually · ₹25 if you pay monthly</p>
+                                        <p className="text-text-secondary text-sm font-semibold">per month at entry size, billed annually · {monthlyRateLabel} if you pay monthly</p>
                                     </div>
 
                                     <div className="space-y-3 mb-8">
                                         {[
                                             { label: 'Before you pay', value: '30 days on your own data' },
-                                            { label: 'Annual billing', value: '20% below the monthly rate' },
+                                            { label: 'Annual billing', value: `${ANNUAL_SAVING_PCT}% below the monthly rate` },
                                             { label: 'Smallest deal we take', value: `${minAnnualLabel} a year` },
-                                            { label: 'GST', value: '18%, shown separately' },
+                                            { label: 'GST', value: `${Math.round(GST_RATE * 100)}%, shown separately` },
                                             { label: 'Founding 10', value: 'Half price, first year' },
                                         ].map(r => (
                                             <div key={r.label} className="flex items-start justify-between gap-4 text-sm border-b border-gray-100 dark:border-white/5 pb-2">

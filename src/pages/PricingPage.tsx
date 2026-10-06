@@ -26,7 +26,7 @@ import Seo from '../lib/seo';
 import {
     RATE_ANNUAL, RATE_MONTHLY, MIN_ANNUAL, HOSTING_ANNUAL, ONBOARDING_VALUE,
     GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel, minAnnualLabel,
-    SIZE_BANDS, annualFor, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor, EXAMPLE_ROLL,
+    SIZE_BANDS, annualFor, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor, EXAMPLE_ROLL, DEPLOYMENT_MODES,
 } from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
@@ -94,16 +94,75 @@ const WHY_EDUANANT = [
     },
 ];
 
-const COMPARISON = [
-    { feature: 'Try it before paying', eduanant: { status: 'success', text: '30 days, no invoice' }, other: { status: 'warning', text: 'Usually behind a sales call' } },
-    { feature: 'All modules from day one', eduanant: { status: 'success', text: 'All 16 included' }, other: { status: 'error', text: 'Tiers and per-module upsells' } },
-    { feature: 'Works on the school intranet', eduanant: { status: 'success', text: 'Runs without external internet' }, other: { status: 'error', text: 'Needs constant connectivity' } },
-    { feature: 'Who holds the data', eduanant: { status: 'success', text: 'Your server, exportable database' }, other: { status: 'error', text: 'A third-party cloud' } },
-    { feature: 'Library and Reception Counter', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Paid add-on modules' } },
-    { feature: 'HR, service book and statutory exports', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Higher tiers only' } },
-    { feature: 'Parent app with push alerts', eduanant: { status: 'success', text: 'Included' }, other: { status: 'warning', text: 'Often billed separately' } },
-    { feature: 'Server cost', eduanant: { status: 'success', text: `Your own PC, or Rs ${inr(HOSTING_ANNUAL)} a year managed` }, other: { status: 'error', text: 'Built into every monthly bill' } },
-    { feature: 'Who answers when it breaks', eduanant: { status: 'success', text: 'The people who built it' }, other: { status: 'error', text: 'A ticket queue' } },
+/**
+ * Set against the two shapes the market actually comes in, not against a named
+ * vendor. Deliberately qualitative: the rupee figures a principal is comparing us
+ * against are on their quote, not ours, which is why the note under the table asks
+ * for it. Claims about another vendor's prices would need substantiating and would
+ * go stale; "often billed separately" stays true and stays defensible.
+ */
+type Cell = { status: 'success' | 'warning' | 'error'; text: string };
+const COMPARISON: { feature: string; eduanant: Cell; budget: Cell; legacy: Cell }[] = [
+    {
+        feature: 'Year one setup and training',
+        eduanant: { status: 'success', text: 'Free, included' },
+        budget: { status: 'warning', text: 'Often a separate onboarding fee' },
+        legacy: { status: 'error', text: 'Implementation quoted on top' },
+    },
+    {
+        feature: 'Core modules like HR and Library',
+        eduanant: { status: 'success', text: 'All 16 from day one' },
+        budget: { status: 'error', text: 'Held back for a premium tier' },
+        legacy: { status: 'error', text: 'Sold as priced add-ons' },
+    },
+    {
+        feature: 'Parent and teacher apps',
+        eduanant: { status: 'success', text: 'Included, with push alerts' },
+        budget: { status: 'warning', text: 'Often billed separately' },
+        legacy: { status: 'error', text: 'Carries its own maintenance fee' },
+    },
+    {
+        feature: 'Where the database sits',
+        eduanant: { status: 'success', text: 'Your building, or a server we run for you alone' },
+        budget: { status: 'error', text: 'A shared multi-tenant cloud' },
+        legacy: { status: 'error', text: "The vendor's own servers" },
+    },
+    {
+        feature: 'The day the line goes down',
+        eduanant: { status: 'success', text: 'Keeps working if installed in school' },
+        budget: { status: 'error', text: 'Front desk stops with it' },
+        legacy: { status: 'error', text: 'Front desk stops with it' },
+    },
+    {
+        feature: 'Alerts to parents',
+        eduanant: { status: 'success', text: 'No per-message fee' },
+        budget: { status: 'error', text: 'Message packs billed on top' },
+        legacy: { status: 'error', text: 'Message packs billed on top' },
+    },
+    {
+        feature: 'Server to run it on',
+        eduanant: { status: 'success', text: `A school PC, or Rs ${inr(HOSTING_ANNUAL)} a year managed` },
+        budget: { status: 'error', text: 'Built into every monthly bill' },
+        legacy: { status: 'error', text: 'A hosting package to buy' },
+    },
+    {
+        feature: 'What changes by year three',
+        eduanant: { status: 'success', text: 'The published rate, no maintenance charge' },
+        budget: { status: 'warning', text: 'Tier upgrades as the school grows' },
+        legacy: { status: 'error', text: 'Annual maintenance on top of licence' },
+    },
+    {
+        feature: 'Trying it first',
+        eduanant: { status: 'success', text: '30 days, no invoice' },
+        budget: { status: 'warning', text: 'Usually behind a sales call' },
+        legacy: { status: 'error', text: 'A pilot, after a contract' },
+    },
+    {
+        feature: 'Who answers when it breaks',
+        eduanant: { status: 'success', text: 'The people who built it' },
+        budget: { status: 'error', text: 'A ticket queue' },
+        legacy: { status: 'warning', text: 'An account manager, or a partner' },
+    },
 ];
 
 
@@ -112,6 +171,142 @@ const COMPARISON = [
  * arithmetic in a meeting. Billing underneath is still per student, which is why
  * each row is a range: a school at the bottom of a band pays the bottom of it.
  */
+/**
+ * The two arguments a principal actually weighs after the table: what else lands on
+ * the invoice, and why software installed on their own machine carries a yearly fee
+ * at all. Both come up in every sales conversation; neither was anywhere on the site.
+ */
+function ValueCase() {
+    return (
+        <div className="container mx-auto px-6 max-w-5xl mb-16">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+                {[
+                    {
+                        icon: ReceiptLongIcon,
+                        title: 'No surprise invoice in October',
+                        body: `A quote you compare us against may not include onboarding, the message pack, or the tier that unlocks HR. Ours does. One line on the budget, fixed for the year, with ${minAnnualLabel} the smallest it gets and GST the only thing added.`,
+                    },
+                    {
+                        icon: DnsIcon,
+                        title: 'The front desk never waits for a page',
+                        body: 'Installed in school, the software is on the same network as the people using it. Fee week does not stop because the broadband is down, and a counter that keeps taking receipts through an outage pays for a good deal of software.',
+                    },
+                    {
+                        icon: AccountBalanceIcon,
+                        title: 'The server is a PC you already own',
+                        body: `There is no hosting package to buy unless you want one. If you would rather not run it yourself, we will, for Rs ${inr(HOSTING_ANNUAL)} a year — and that is the whole of it, not a platform fee that grows with your roll.`,
+                    },
+                ].map((c, i) => (
+                    <motion.div key={c.title}
+                        initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                        transition={{ delay: i * 0.08, duration: 0.35 }}
+                        className="rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-5 shadow-sm">
+                        <c.icon className="w-6 h-6 text-[var(--accent-text)] mb-3" />
+                        <h3 className="font-display text-base font-extrabold text-text-primary mb-2">{c.title}</h3>
+                        <p className="text-xs text-text-secondary leading-relaxed">{c.body}</p>
+                    </motion.div>
+                ))}
+            </div>
+
+            <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-6 sm:p-7 shadow-sm">
+                <h3 className="font-display text-lg font-extrabold text-text-primary mb-3">
+                    Why a yearly fee for software that runs on your own machine
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-3">
+                    It is a fair question, and the honest answer is that the two older models each got half of it
+                    right. Offline software used to arrive on a disc, work well, and quietly go stale — no new board
+                    circular, no new report format, no one to call. Cloud software fixed that and took the database
+                    in exchange, so leaving meant leaving your own records behind.
+                </p>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                    The fee buys the first half without the second: the circulars and formats kept current, the
+                    updates applied for you, and people who answer the phone — on an install that is still yours, in
+                    a database you can export this afternoon. Stop paying and the software stops; the data does not
+                    go anywhere. You can see what that has actually meant on the{' '}
+                    <Link to="/updates" className="font-semibold text-[var(--accent-text)] hover:underline">
+                        release history
+                    </Link>.
+                </p>
+            </motion.div>
+        </div>
+    );
+}
+
+function DeploymentModes() {
+    return (
+        <div className="container mx-auto px-6 max-w-5xl mb-16">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                className="text-center mb-8">
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-text-secondary mb-3">Where it runs</p>
+                <h2 className="text-2xl md:text-3xl font-black text-text-primary mb-3">
+                    One product, three ways to install it
+                </h2>
+                <p className="text-sm text-text-secondary max-w-2xl mx-auto leading-relaxed">
+                    The same build and the same 16 modules in every case. You choose where the database lives, and
+                    you can move between these later without changing software — a school that starts on one PC can
+                    be on the school network next term, or hosted by us the term after.
+                </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {DEPLOYMENT_MODES.map((mode, i) => (
+                    <motion.div key={mode.key}
+                        initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                        transition={{ delay: i * 0.08, duration: 0.35 }}
+                        className="rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-5 shadow-sm flex flex-col">
+                        <div className="flex items-center justify-between gap-2 mb-3">
+                            <h3 className="font-display text-base font-extrabold text-text-primary">{mode.name}</h3>
+                            <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-1 rounded-full shrink-0 ${
+                                mode.cost === 0
+                                    ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/10'
+                                    : 'text-[var(--accent-text)] bg-[var(--accent-text)]/10'
+                            }`}>
+                                {mode.cost === 0 ? 'No hosting fee' : `\u20b9${inr(mode.cost)} a year`}
+                            </span>
+                        </div>
+
+                        <p className="text-xs text-text-secondary leading-relaxed mb-4 flex-1">{mode.blurb}</p>
+
+                        <dl className="space-y-2 text-xs border-t border-gray-200/40 dark:border-white/5 pt-3">
+                            <div className="flex gap-2">
+                                <dt className="text-text-secondary shrink-0 w-20">You provide</dt>
+                                <dd className="font-semibold text-text-primary">{mode.needs}</dd>
+                            </div>
+                            <div className="flex gap-2">
+                                <dt className="text-text-secondary shrink-0 w-20">Worth knowing</dt>
+                                <dd className="font-semibold text-text-primary">{mode.limit}</dd>
+                            </div>
+                            <div className="flex gap-2">
+                                <dt className="text-text-secondary shrink-0 w-20">Suits</dt>
+                                <dd className="font-semibold text-text-primary">{mode.bestFor}</dd>
+                            </div>
+                        </dl>
+                    </motion.div>
+                ))}
+            </div>
+
+            <p className="text-xs text-text-secondary text-center mt-4 max-w-2xl mx-auto leading-relaxed">
+                In the first two the database never leaves your building, and it stays standard PostgreSQL you can
+                export whenever you like. In the third it sits on a server we run for your school alone.
+            </p>
+        </div>
+    );
+}
+
+/** One cell of the comparison grid. Shared by the desktop table and the phone cards
+ *  so the two can never drift apart. */
+function StatusCell({ cell, strong = false }: { cell: Cell; strong?: boolean }) {
+    return (
+        <div className={`flex items-start gap-2 text-xs font-semibold ${strong ? 'text-text-primary' : 'text-text-secondary'}`}>
+            {cell.status === 'success' && <CheckIcon className="w-4 h-4 text-emerald-500 shrink-0 mt-px" />}
+            {cell.status === 'warning' && <WarningAmberIcon className="w-4 h-4 text-amber-500 shrink-0 mt-px" />}
+            {cell.status === 'error' && <CancelIcon className="w-4 h-4 text-red-500 shrink-0 mt-px" />}
+            <span>{cell.text}</span>
+        </div>
+    );
+}
+
 function SizeBandTable() {
     return (
         <div className="max-w-3xl mx-auto mb-20">
@@ -580,48 +775,86 @@ export default function PricingPage() {
                     </div>
                 </div>
 
-                <div className="container mx-auto px-6 max-w-4xl mb-16">
-                    <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-                        className="text-2xl font-black text-text-primary text-center mb-8">
-                        Set against a cloud ERP
-                    </motion.h2>
+                <DeploymentModes />
+
+                <div className="container mx-auto px-6 max-w-5xl mb-16">
+                    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+                        className="text-center mb-8">
+                        <h2 className="text-2xl font-black text-text-primary mb-3">
+                            The starting price is rarely the finishing price
+                        </h2>
+                        <p className="text-sm text-text-secondary max-w-2xl mx-auto leading-relaxed">
+                            School software tends to arrive in one of two shapes: a cheap per-student app that bills
+                            for the parts you assumed were included, or an enterprise suite quoted as one large number
+                            with maintenance after it. Here is where the money actually goes in each.
+                        </p>
+                    </motion.div>
+
+                    {/* Desktop: EduAnant sits second, not last, so it is never the column that
+                        scrolls off the edge on a narrow screen. */}
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-                        className="rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] shadow-xl overflow-x-auto">
-                        <table className="w-full text-left border-collapse table-fixed min-w-[640px]">
+                        className="hidden md:block rounded-3xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] shadow-xl overflow-hidden">
+                        <table className="w-full text-left border-collapse table-fixed">
                             <thead>
                                 <tr className="border-b border-gray-200/50 dark:border-white/10 bg-white/50 dark:bg-white/[0.02]">
-                                    <th className="w-[32%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary">What matters</th>
-                                    <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-[var(--accent-text)] border-l border-gray-200/5 dark:border-white/5">EduAnant</th>
-                                    <th className="w-[34%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary border-l border-gray-200/5 dark:border-white/5">Typical cloud ERP</th>
+                                    <th className="w-[25%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary">What it costs you</th>
+                                    <th className="w-[27%] p-4 text-xs font-black uppercase tracking-wider text-[var(--accent-text)] border-l border-gray-200/5 dark:border-white/5 bg-[var(--accent-text)]/[0.04]">EduAnant Unlimited</th>
+                                    <th className="w-[24%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary border-l border-gray-200/5 dark:border-white/5">A budget cloud app</th>
+                                    <th className="w-[24%] p-4 text-xs font-black uppercase tracking-wider text-text-secondary border-l border-gray-200/5 dark:border-white/5">A legacy enterprise ERP</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {COMPARISON.map((row, i) => (
                                     <tr key={row.feature}
                                         className={`hover:bg-gray-50/50 dark:hover:bg-white/[0.01] transition-colors ${i !== COMPARISON.length - 1 ? 'border-b border-gray-200/30 dark:border-white/5' : ''}`}>
-                                        <td className="p-4 text-xs font-semibold text-text-secondary md:text-sm">{row.feature}</td>
-                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5">
-                                            <div className="flex items-center gap-2 text-text-primary text-xs font-semibold">
-                                                <CheckIcon className="w-4 h-4 text-emerald-500 shrink-0" />
-                                                <span>{row.eduanant.text}</span>
-                                            </div>
+                                        <td className="p-4 text-xs font-semibold text-text-secondary lg:text-sm align-top">{row.feature}</td>
+                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5 bg-[var(--accent-text)]/[0.04] align-top">
+                                            <StatusCell cell={row.eduanant} strong />
                                         </td>
-                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5">
-                                            <div className="flex items-center gap-2 text-text-secondary text-xs font-semibold">
-                                                {row.other.status === 'error' && <CancelIcon className="w-4 h-4 text-red-500 shrink-0" />}
-                                                {row.other.status === 'warning' && <WarningAmberIcon className="w-4 h-4 text-amber-500 shrink-0" />}
-                                                <span>{row.other.text}</span>
-                                            </div>
+                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5 align-top">
+                                            <StatusCell cell={row.budget} />
+                                        </td>
+                                        <td className="p-4 border-l border-gray-200/5 dark:border-white/5 align-top">
+                                            <StatusCell cell={row.legacy} />
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </motion.div>
-                    <p className="text-xs text-text-secondary text-center mt-3">
-                        Cloud ERP terms vary by vendor and tier. Bring us a quote you have been given and we will go through it line by line.
+
+                    {/* Phones: one card per row. A four-column table cannot be read at 375px,
+                        and squeezing it only produces a column of single words. */}
+                    <div className="md:hidden space-y-3">
+                        {COMPARISON.map((row, i) => (
+                            <motion.div key={row.feature}
+                                initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                                transition={{ delay: Math.min(i * 0.04, 0.2), duration: 0.3 }}
+                                className="rounded-2xl border border-gray-200/50 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-4 shadow-sm">
+                                <p className="text-xs font-black uppercase tracking-wider text-text-secondary mb-3">{row.feature}</p>
+                                <div className="rounded-xl bg-[var(--accent-text)]/[0.06] px-3 py-2.5 mb-2">
+                                    <p className="text-[10px] font-black uppercase tracking-wider text-[var(--accent-text)] mb-1">EduAnant</p>
+                                    <StatusCell cell={row.eduanant} strong />
+                                </div>
+                                <div className="px-3 py-1.5">
+                                    <p className="text-[10px] font-black uppercase tracking-wider text-text-secondary mb-1">A budget cloud app</p>
+                                    <StatusCell cell={row.budget} />
+                                </div>
+                                <div className="px-3 py-1.5">
+                                    <p className="text-[10px] font-black uppercase tracking-wider text-text-secondary mb-1">A legacy enterprise ERP</p>
+                                    <StatusCell cell={row.legacy} />
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <p className="text-xs text-text-secondary text-center mt-4 max-w-2xl mx-auto leading-relaxed">
+                        Terms vary by vendor and by tier, and these are the patterns we see rather than any one
+                        company's price list. Bring us a quote you have been given and we will go through it line by line.
                     </p>
                 </div>
+
+                <ValueCase />
 
                 <div className="container mx-auto px-6 max-w-4xl mb-16">
                     <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}

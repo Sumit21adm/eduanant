@@ -13,14 +13,19 @@
 - **2 self-service portals** (Teacher, and Student/Parent) plus an admin console
   and a native Android app.
 - **96 granular permission keys** across 22 permission groups, assignable per user.
-- **Runs offline on the school intranet.** No internet dependency, no monthly cloud bill.
+- **Three ways to install it**, same product in each: on a single office PC (works
+  with no internet at all, one user at a time); on the school network, where everyone
+  on the school Wi-Fi uses it at once and an external broadband outage does not stop
+  it; or hosted by us for Rs 18,000 a year, reachable from anywhere. Schools on the
+  first two keep the database in their own building.
 - **Interface in English and Hindi**, switchable in one click.
 - **Supports CBSE, ICSE and State Board** schools on an April–March session.
 - **Pricing:** charged per student per month, with the rate set by the size of
-  the school: up to 250 students ₹50, up to 500 ₹45, up to 750 ₹40, up to 1,000
-  ₹35, up to 1,300 ₹30, up to 1,500 ₹25. Above 1,500 students we quote on the
-  actual setup. Those are the annual-billing rates; monthly billing is 25%
-  higher (₹63 at the entry band). A 1,000-student school pays ₹4,20,000 a year. ₹90,000 annual minimum.
+  the school and applied to the whole roll: up to 250 students ₹50, up to 500 ₹45,
+  up to 750 ₹40, up to 1,000 ₹35, up to 1,250 ₹30. Above 1,250 students we quote
+  on the actual setup, from ₹25. Those are the annual-billing rates; monthly
+  billing is 25% higher (₹63 at the entry band). A 1,000-student school pays
+  ₹4,20,000 a year. ₹90,000 annual minimum.
   Setup, data migration from Excel, staff training and the Android app are
   included at no extra cost.
 

@@ -14,7 +14,7 @@
  * Keep ROUTES in step with the router in src/App.tsx.
  */
 import { createServer } from 'node:http';
-import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, access, readdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -98,18 +98,24 @@ if (!chrome) {
 // src/data/pricing.ts. Repricing used to mean remembering they exist; now the
 // build refuses rather than letting the site quote two different numbers.
 const pricingSrc = await readFile('src/data/pricing.ts', 'utf8');
-const allBands = [...pricingSrc.matchAll(/\{\s*upTo:\s*\d+,\s*annual:\s*(\d+),\s*monthly:\s*(\d+)\s*\}/g)];
+const allBands = [...pricingSrc.matchAll(/\{\s*upTo:\s*(\d+),\s*annual:\s*(\d+),\s*monthly:\s*(\d+)\s*\}/g)];
 const firstTier = allBands[0];
-const floorTier = allBands[allBands.length - 1];
+const lastTier = allBands[allBands.length - 1];
 const minMatch = /MIN_ANNUAL = ([\d_]+)/.exec(pricingSrc);
-if (!firstTier || !floorTier || !minMatch) {
+// The quotable floor is its own constant, not the last band's rate: the table stops
+// at the 1,250 band and ₹25 is room to negotiate below it, so deriving it from the
+// last band would silently publish ₹30 as the floor.
+const floorMatch = /RATE_FLOOR_ANNUAL = (\d+)/.exec(pricingSrc);
+if (!firstTier || !lastTier || !minMatch || !floorMatch) {
     console.error('\n  prerender: could not read the rates out of src/data/pricing.ts — the drift guard cannot run.\n');
     process.exit(1);
 }
 const rates = {
-    entryAnnual: Number(firstTier[1]),
-    entryMonthly: Number(firstTier[2]),
-    floorAnnual: Number(floorTier[1]),
+    entryAnnual: Number(firstTier[2]),
+    entryMonthly: Number(firstTier[3]),
+    lastBandAnnual: Number(lastTier[2]),
+    contactAbove: Number(lastTier[1]),
+    floorAnnual: Number(floorMatch[1]),
     minAnnual: Number(minMatch[1].replace(/_/g, '')),
 };
 const inrGroup = (n) => n.toLocaleString('en-IN');
@@ -121,12 +127,48 @@ for (const f of staticPriceFiles) {
     for (const [label, value] of [
         ['entry annual rate', `\u20b9${rates.entryAnnual}`],
         ['entry monthly rate', `\u20b9${rates.entryMonthly}`],
-        ['volume floor rate', `\u20b9${rates.floorAnnual}`],
+        ['largest published band rate', `\u20b9${rates.lastBandAnnual}`],
+        ['quotable floor rate', `\u20b9${rates.floorAnnual}`],
+        ['contact-sales threshold', inrGroup(rates.contactAbove)],
         ['annual minimum', `\u20b9${inrGroup(rates.minAnnual)}`],
     ]) {
         if (!text.includes(value)) priceProblems.push(`${f} does not mention the ${label} ${value}`);
     }
 }
+// A per-student rate typed by hand into a component is how the homepage ended up
+// offering "₹25 if you pay monthly" a reprice after that stopped being true, and how
+// index.html advertised ₹20 through two of them. Anything shaped like a per-student
+// rate must be one of the rates this file defines — mock dashboard amounts such as
+// ₹64,500 for a day's collection do not match the pattern and are left alone.
+const known = new Set([
+    ...allBands.flatMap(b => [Number(b[2]), Number(b[3])]),
+    rates.floorAnnual,
+]);
+const PER_STUDENT = /\u20b9\s*(\d{1,3})\s*(?:\/\s*stu|per stu|a month per stu|\/ ?student)/gi;
+const sourceFiles = [];
+for (const dir of ['src', 'index.html']) {
+    if (dir === 'index.html') { sourceFiles.push(dir); continue; }
+    const walk = async (d) => {
+        for (const e of await readdir(d, { withFileTypes: true })) {
+            const full = `${d}/${e.name}`;
+            if (e.isDirectory()) await walk(full);
+            else if (/\.(tsx?|html)$/.test(e.name) && full !== 'src/data/pricing.ts') sourceFiles.push(full);
+        }
+    };
+    await walk(dir);
+}
+for (const f of sourceFiles) {
+    const text = await readFile(f, 'utf8');
+    for (const m of text.matchAll(PER_STUDENT)) {
+        if (!known.has(Number(m[1]))) {
+            priceProblems.push(
+                `${f} hardcodes "${m[0].trim()}", which is not a rate in src/data/pricing.ts ` +
+                `(known: ${[...known].sort((a, b) => a - b).join(', ')}) — import it instead of typing it`,
+            );
+        }
+    }
+}
+
 if (priceProblems.length) {
     console.error('\n  prerender: pricing drift — src/data/pricing.ts disagrees with the static files:');
     for (const m of priceProblems) console.error(`    - ${m}`);

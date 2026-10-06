@@ -13,22 +13,27 @@
  */
 
 /**
- * Rate bands. The rate for a school's band applies to its whole roll.
+ * Rate bands, in uniform steps of 250. The rate for a school's band applies to its
+ * whole roll, not marginally like tax brackets.
  *
- * Deliberate commercial choice, made with the numbers in front of us: because
- * the rate steps down at a boundary, a school just over one pays slightly less
- * in total than a school just under it (a roll of 251 pays less than 250). The
- * alternative — charging marginally, like tax brackets — keeps totals rising but
- * cannot reach ₹25 at 1,500; it bottoms out near ₹28. The published table was
- * the priority, and anything above 1,500 is quoted by sales anyway.
+ * Band rates are a deliberate commercial choice with a known cost: because the rate
+ * steps down at a boundary, a school just over one pays less in total than a school
+ * just under it (251 students costs less than 250). Charging marginally keeps totals
+ * rising but cannot reach the low rates this table publishes — it bottoms out near
+ * ₹28 — and the table was the priority.
+ *
+ * The table stops at 1,250 rather than running to 1,500 at ₹25. An earlier version
+ * published a 1,301–1,500 band at ₹25 and it inverted badly: 1,301 students came to
+ * ₹3,90,300 against ₹4,68,000 for 1,300, so the smaller school paid ₹77,700 more.
+ * Stopping here keeps every published step at +250, drops the inverted row, and
+ * leaves ₹25 as a floor sales can quote down to instead of a rate we must honour.
  */
 export const RATE_BANDS = [
     { upTo: 250, annual: 50, monthly: 63 },
     { upTo: 500, annual: 45, monthly: 56 },
     { upTo: 750, annual: 40, monthly: 50 },
     { upTo: 1000, annual: 35, monthly: 44 },
-    { upTo: 1300, annual: 30, monthly: 38 },
-    { upTo: 1500, annual: 25, monthly: 31 },
+    { upTo: 1250, annual: 30, monthly: 38 },
 ] as const;
 
 /** Above the last band we quote rather than publish. */
@@ -38,8 +43,12 @@ export const CONTACT_SALES_ABOVE = RATE_BANDS[RATE_BANDS.length - 1].upTo;
 export const RATE_ANNUAL = RATE_BANDS[0].annual;
 export const RATE_MONTHLY = RATE_BANDS[0].monthly;
 
-/** Lowest published rate, for "down to ₹25" copy. */
-export const RATE_FLOOR_ANNUAL = RATE_BANDS[RATE_BANDS.length - 1].annual;
+/**
+ * The lowest rate sales may quote, for "from ₹25" copy on the contact row. It is
+ * deliberately below the last published band (₹30) rather than derived from it:
+ * this is the room to negotiate on a large school, not a rate in the table.
+ */
+export const RATE_FLOOR_ANNUAL = 25;
 
 /** The band a roll of n students falls into, or null above the last one. */
 export const bandFor = (students: number) =>
@@ -129,3 +138,58 @@ export const EXAMPLE_ROLL = 600;
 
 /** Above the last ceiling we quote on the actual setup rather than a table row. */
 export const LARGE_SCHOOL_FROM = CONTACT_SALES_ABOVE;
+
+/**
+ * How a school can actually run EduAnant. Kept here beside HOSTING_ANNUAL because
+ * the choice is as much a cost decision as a technical one.
+ *
+ * The site used to say "self-hosted, no internet dependency" flatly, which sold one
+ * mode and quietly denied the other two. It is one product in all three cases — the
+ * same build, the same 16 modules — so the honest pitch is that the school picks where
+ * it lives, not that it only lives in one place.
+ */
+export interface DeploymentMode {
+    key: 'single' | 'network' | 'cloud';
+    name: string;
+    blurb: string;
+    /** What the school needs to provide. */
+    needs: string;
+    /** The honest limit of this mode, stated plainly rather than buried. */
+    limit: string;
+    /** Annual cost to us for the hosting itself, before the licence. */
+    cost: number;
+    bestFor: string;
+}
+
+export const DEPLOYMENT_MODES: DeploymentMode[] = [
+    {
+        key: 'single',
+        name: 'One computer',
+        blurb:
+            'Installed on a single office PC and used from that machine. No internet, no network setup, nothing else to buy.',
+        needs: 'A PC in the office',
+        limit: 'One person works in it at a time, at that desk',
+        cost: 0,
+        bestFor: 'A small school, or a first term before widening it out',
+    },
+    {
+        key: 'network',
+        name: 'Your school network',
+        blurb:
+            'Installed on one PC or a small server; everyone on the school Wi-Fi or cable opens it in a browser at the same time — front desk, staffroom, accounts, principal.',
+        needs: 'One PC to host it, and the Wi-Fi you already have',
+        limit: 'Reachable on campus; parents off-site need the cloud option',
+        cost: 0,
+        bestFor: 'Most schools — full use with no internet bill and no cloud fee',
+    },
+    {
+        key: 'cloud',
+        name: 'Hosted for you',
+        blurb:
+            'We run it on a server we maintain, with backups, updates and a web address of your own. Staff, parents and the Android app reach it from anywhere.',
+        needs: 'Nothing — we set it up',
+        limit: 'Needs a working internet line at school, like any cloud system',
+        cost: HOSTING_ANNUAL,
+        bestFor: 'Several branches, or parents who should see it from home',
+    },
+];
