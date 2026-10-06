@@ -23,21 +23,18 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import DnsIcon from '@mui/icons-material/Dns';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import Seo from '../lib/seo';
+import {
+    RATE_ANNUAL, RATE_MONTHLY, MIN_ANNUAL, HOSTING_ANNUAL, ONBOARDING_VALUE,
+    GST_RATE as GST, ANNUAL_SAVING_PCT, inr,
+} from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
 
 // The commercial model, in one place.
-// Rs 20 per student per month billed annually, Rs 25 billed monthly (20% saving).
-// Rs 36,000 annual minimum so a very small school is still a viable deal.
-const RATE_ANNUAL = 20;
-const RATE_MONTHLY = 25;
-const MIN_ANNUAL = 36000;
 const ONBOARDING = 15000;
-const HOSTING_ANNUAL = 18000;
-const GST = 0.18;
+
 const ENTERPRISE_ABOVE = 2000;
 
-const inr = (n: number) => n.toLocaleString('en-IN');
 
 const SUITE_FEATURES = [
     'All 16 modules, with no tier to upgrade to',
@@ -59,7 +56,7 @@ const NOT_INCLUDED = [
     {
         icon: DnsIcon,
         label: 'The server itself',
-        desc: 'Free if you run it on a school PC or an existing server. If you would rather not, we host and maintain it for Rs 18,000 a year.',
+        desc: `Free if you run it on a school PC or an existing server. If you would rather not, we host and maintain it for Rs ${inr(HOSTING_ANNUAL)} a year.`,
     },
     {
         icon: ReceiptLongIcon,
@@ -70,7 +67,7 @@ const NOT_INCLUDED = [
 
 const EARLY_OFFERS = [
     { icon: WorkspacePremiumIcon, label: 'Founding 10', desc: 'First ten schools: 50% off year one, with renewal rates locked for life.', badge: 'Open now', bg: 'rgba(251,191,36,0.08)', border: 'rgba(251,191,36,0.25)', color: '#f59e0b' },
-    { icon: RocketLaunchIcon, label: 'Onboarding waived', desc: 'Migration, installation and two days of on-site training — a Rs 15,000 line item, free for founding schools.', badge: 'Worth Rs 15,000', bg: 'rgba(20,184,166,0.08)', border: 'rgba(20,184,166,0.25)', color: '#14b8a6' },
+    { icon: RocketLaunchIcon, label: 'Onboarding waived', desc: `Migration, installation and two days of on-site training — a Rs ${inr(ONBOARDING_VALUE)} line item, free for founding schools.`, badge: `Worth Rs ${inr(ONBOARDING_VALUE)}`, bg: 'rgba(20,184,166,0.08)', border: 'rgba(20,184,166,0.25)', color: '#14b8a6' },
     { icon: CalendarTodayIcon, label: 'Session 2027-28 early bird', desc: 'Confirm by 31 January 2027 and open the new session on it — 30% off your first year.', badge: 'Next session', bg: 'rgba(245,158,11,0.08)', border: 'rgba(245,158,11,0.25)', color: 'var(--accent-text)' },
     { icon: CardGiftcardIcon, label: 'Refer a school', desc: 'Introduce us to a school that signs and both of you take 20% off the next renewal.', badge: 'Referral', bg: 'rgba(244,63,94,0.08)', border: 'rgba(244,63,94,0.25)', color: '#f43f5e' },
     { icon: HandshakeIcon, label: 'Trust and group rate', desc: 'Three or more schools under one management: 25% off each, one invoice, one onboarding team.', badge: 'Group', bg: 'rgba(139,92,246,0.08)', border: 'rgba(139,92,246,0.25)', color: '#8b5cf6' },
@@ -88,7 +85,7 @@ const WHY_EDUANANT = [
     },
     {
         label: 'You pay for your actual size',
-        desc: 'A 200-student school should not be billed like a 2,000-student one. The Rs 36,000 minimum is what keeps the smallest schools worth serving properly.',
+        desc: `A 200-student school should not be billed like a 2,000-student one. The Rs ${inr(MIN_ANNUAL)} minimum is what keeps the smallest schools worth serving properly.`,
     },
     {
         label: 'No cloud subscription underneath it',
@@ -104,7 +101,7 @@ const COMPARISON = [
     { feature: 'Library and Reception Counter', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Paid add-on modules' } },
     { feature: 'HR, service book and statutory exports', eduanant: { status: 'success', text: 'Included' }, other: { status: 'error', text: 'Higher tiers only' } },
     { feature: 'Parent app with push alerts', eduanant: { status: 'success', text: 'Included' }, other: { status: 'warning', text: 'Often billed separately' } },
-    { feature: 'Server cost', eduanant: { status: 'success', text: 'Your own PC, or Rs 18,000 a year managed' }, other: { status: 'error', text: 'Built into every monthly bill' } },
+    { feature: 'Server cost', eduanant: { status: 'success', text: `Your own PC, or Rs ${inr(HOSTING_ANNUAL)} a year managed` }, other: { status: 'error', text: 'Built into every monthly bill' } },
     { feature: 'Who answers when it breaks', eduanant: { status: 'success', text: 'The people who built it' }, other: { status: 'error', text: 'A ticket queue' } },
 ];
 
@@ -175,7 +172,7 @@ function PricingCalculator() {
                                     <button type="button" onClick={() => setBilling('annual')}
                                         className={`py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${billing === 'annual' ? 'bg-white dark:bg-white/10 text-text-primary shadow-sm' : 'text-text-secondary hover:text-text-primary'}`}>
                                         Annual
-                                        <span className="text-[9px] font-black px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-sans">-20%</span>
+                                        <span className="text-[9px] font-black px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full font-sans">-{ANNUAL_SAVING_PCT}%</span>
                                     </button>
                                 </div>
                             </div>
@@ -194,7 +191,7 @@ function PricingCalculator() {
                                     className="mt-0.5 cursor-pointer" style={{ accentColor: '#F59E0B' }} />
                                 <span>
                                     <span className="block text-xs font-black text-text-primary">We host it for you</span>
-                                    <span className="block text-[11px] text-text-secondary leading-snug">Rs 18,000 a year. Leave this unticked if you have a PC or server at school.</span>
+                                    <span className="block text-[11px] text-text-secondary leading-snug">Rs {inr(HOSTING_ANNUAL)} a year. Leave this unticked if you have a PC or server at school.</span>
                                 </span>
                             </label>
                         </div>
@@ -339,7 +336,7 @@ export default function PricingPage() {
                                     background: billing === 'annual' ? 'rgba(255,255,255,0.25)' : 'rgba(52,211,153,0.2)',
                                     color: billing === 'annual' ? '#ffffff' : '#10b981'
                                 }}>
-                                Save 20%
+                                Save {ANNUAL_SAVING_PCT}%
                             </span>
                         </button>
                     </div>
@@ -372,7 +369,7 @@ export default function PricingPage() {
                                     </div>
                                     <p className="text-[11px] text-text-secondary mt-1.5">
                                         {billing === 'annual'
-                                            ? `₹${inr(RATE_ANNUAL * 12)} per student a year, paid once — a fifth less than the monthly rate.`
+                                            ? `₹${inr(RATE_ANNUAL * 12)} per student a year, paid once — ${ANNUAL_SAVING_PCT}% less than the monthly rate.`
                                             : `₹${inr(RATE_MONTHLY * 12)} per student a year. Switch to annual and it is ₹${inr(RATE_ANNUAL * 12)}.`}
                                     </p>
                                     <p className="text-[11px] text-text-secondary mt-1">

@@ -94,6 +94,37 @@ if (!chrome) {
     process.exit(1);
 }
 
+// public/llms.txt and docs/brochure-source.html quote prices but cannot import
+// src/data/pricing.ts. Repricing used to mean remembering they exist; now the
+// build refuses rather than letting the site quote two different numbers.
+const pricingSrc = await readFile('src/data/pricing.ts', 'utf8');
+const num = (name) => Number(/(?:export const )?%s = ([\d_]+)/.exec(pricingSrc.replace('%s', name))?.[1]?.replace(/_/g, ''));
+const rates = {
+    RATE_ANNUAL: Number(/RATE_ANNUAL = ([\d_]+)/.exec(pricingSrc)[1].replace(/_/g, '')),
+    RATE_MONTHLY: Number(/RATE_MONTHLY = ([\d_]+)/.exec(pricingSrc)[1].replace(/_/g, '')),
+    MIN_ANNUAL: Number(/MIN_ANNUAL = ([\d_]+)/.exec(pricingSrc)[1].replace(/_/g, '')),
+};
+const inrGroup = (n) => n.toLocaleString('en-IN');
+const staticPriceFiles = ['public/llms.txt', 'docs/brochure-source.html'];
+const priceProblems = [];
+for (const f of staticPriceFiles) {
+    let text;
+    try { text = await readFile(f, 'utf8'); } catch { continue; }
+    for (const [label, value] of [
+        ['annual rate', `\u20b9${rates.RATE_ANNUAL}`],
+        ['monthly rate', `\u20b9${rates.RATE_MONTHLY}`],
+        ['annual minimum', `\u20b9${inrGroup(rates.MIN_ANNUAL)}`],
+    ]) {
+        if (!text.includes(value)) priceProblems.push(`${f} does not mention the ${label} ${value}`);
+    }
+}
+if (priceProblems.length) {
+    console.error('\n  prerender: pricing drift — src/data/pricing.ts disagrees with the static files:');
+    for (const m of priceProblems) console.error(`    - ${m}`);
+    console.error('  Update those files (and regenerate the PDF) to match.\n');
+    process.exit(1);
+}
+
 // A route added to the router but not to ROUTES would 404 in production, since
 // nginx only serves what was prerendered. Fail the build instead of shipping it.
 const appSrc = await readFile('src/App.tsx', 'utf8');

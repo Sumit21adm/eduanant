@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../contexts/ThemeContext';
+import { annualRateLabel } from '../data/pricing';
 
 /** icon + a one-line "what is this" for the mobile sheet, where there is room
  *  to say it and a bare list of eight words gives a visitor nothing to aim at. */
@@ -14,7 +15,7 @@ const NAV_LINKS = [
     { label: 'Features', href: '/features', icon: Layers, hint: 'Fees, attendance, exams & more' },
     { label: 'Security', href: '/security', icon: ShieldCheck, hint: 'Your data, your server' },
     { label: 'Updates', href: '/updates', icon: Zap, hint: 'What shipped, and when' },
-    { label: 'Pricing', href: '/pricing', icon: IndianRupee, hint: '₹20 per student a month' },
+    { label: 'Pricing', href: '/pricing', icon: IndianRupee, hint: `${annualRateLabel} per student a month` },
     { label: 'Live Demo', href: '/demo', icon: MonitorPlay, hint: 'Request access to the build' },
     { label: 'Contact', href: '/contact', icon: Mail, hint: 'Book a school visit' },
     { label: 'Register', href: '/register', icon: UserPlus, hint: 'Start onboarding' },

@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { annualRateLabel, minAnnualLabel } from '../data/pricing';
 
 import { CheckCircle2, ArrowRight, PhoneCall, Sparkles } from 'lucide-react';
 
@@ -45,7 +46,7 @@ export default function PricingSection() {
                         <span className="brand-text-gradient">not per feature.</span>
                     </h2>
                     <p className="text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-                        ₹20 per student a month, billed annually. All 16 modules, and 30 days on it before we send an invoice.
+                        {annualRateLabel} per student a month, billed annually. All 16 modules, and 30 days on it before we send an invoice.
                     </p>
                 </motion.div>
 
@@ -94,7 +95,7 @@ export default function PricingSection() {
                                     <div className="mb-6 p-5 rounded-2xl border"
                                         style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.05)' }}>
                                         <div className="text-4xl font-black mb-1 brand-text-gradient">
-                                            ₹20 / student
+                                            {annualRateLabel} / student
                                         </div>
                                         <p className="text-text-secondary text-sm font-semibold">per month, billed annually · ₹25 if you pay monthly</p>
                                     </div>
@@ -103,7 +104,7 @@ export default function PricingSection() {
                                         {[
                                             { label: 'Before you pay', value: '30 days on your own data' },
                                             { label: 'Annual billing', value: '20% below the monthly rate' },
-                                            { label: 'Smallest deal we take', value: '₹36,000 a year' },
+                                            { label: 'Smallest deal we take', value: `${minAnnualLabel} a year` },
                                             { label: 'GST', value: '18%, shown separately' },
                                             { label: 'Founding 10', value: 'Half price, first year' },
                                         ].map(r => (

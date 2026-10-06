@@ -1,4 +1,8 @@
 import { SITE } from './seo';
+import {
+    annualRateLabel, monthlyRateLabel, minAnnualLabel,
+    RATE_ANNUAL, MIN_COVERS_STUDENTS,
+} from '../data/pricing';
 import { RELEASE_COUNT } from '../data/changelog';
 import { LIVE_SINCE_LABEL, monthsSince } from './timeline';
 import { spell, capitalise } from './text';
@@ -14,7 +18,7 @@ export const PAGE_SEO = {
     home: {
         title: 'Home: School Management Software for Indian Schools | EduAnant',
         description:
-            'Offline-ready school ERP for Indian schools. 16 modules — admissions, fees, attendance, exams, HR, library, transport — on your own server. ₹20/student.',
+            `Offline-ready school ERP for Indian schools. 16 modules — admissions, fees, attendance, exams, HR, library, transport — on your own server. ${annualRateLabel}/student.`,
         path: '/',
         keywords:
             'school management software India, school ERP, offline school software, fee management software, student attendance software, school administration software, CBSE school software, Hindi school software',
@@ -36,9 +40,9 @@ export const PAGE_SEO = {
             'school data security, student data privacy India, DPDP Act school software, role based access control school, school software audit trail',
     },
     pricing: {
-        title: 'Pricing: ₹20 per Student — School ERP Cost | EduAnant',
+        title: `Pricing: ${annualRateLabel} per Student — School ERP Cost | EduAnant`,
         description:
-            '₹20 per student a month billed annually, ₹36,000 minimum. All 16 modules, both portals, the Android app, migration and training included.',
+            `${annualRateLabel} per student a month billed annually, ${minAnnualLabel} minimum. All 16 modules, both portals, the Android app, migration and training included.`,
         path: '/pricing',
         keywords:
             'school management software price India, school ERP cost, per student school software pricing, affordable school software, school software India cost',
@@ -108,11 +112,11 @@ export const softwareSchema = {
     inLanguage: ['en-IN', 'hi-IN'],
     offers: {
         '@type': 'Offer',
-        price: '20',
+        price: String(RATE_ANNUAL),
         priceCurrency: 'INR',
         priceSpecification: {
             '@type': 'UnitPriceSpecification',
-            price: '20',
+            price: String(RATE_ANNUAL),
             priceCurrency: 'INR',
             unitText: 'per student per month, billed annually',
         },
@@ -162,7 +166,7 @@ export const homeFaqSchema = {
         },
         {
             q: 'What does EduAnant cost for a school in India?',
-            a: '₹20 per student per month billed annually, or ₹25 billed monthly, with a ₹36,000 annual minimum that covers a school of up to 150 students. All 16 modules, both portals, the Android app, data migration and staff training are included at no extra cost.',
+            a: `${annualRateLabel} per student per month billed annually, or ${monthlyRateLabel} billed monthly, with a ${minAnnualLabel} annual minimum that covers a school of up to ${MIN_COVERS_STUDENTS} students. All 16 modules, both portals, the Android app, data migration and staff training are included at no extra cost.`,
         },
         {
             q: 'Which modules are included?',

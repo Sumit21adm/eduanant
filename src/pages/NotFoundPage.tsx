@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Home, ArrowRight, Compass } from 'lucide-react';
 import Seo from '../lib/seo';
+import { annualRateLabel } from '../data/pricing';
 
 const ELSEWHERE = [
     { to: '/features', label: 'All 16 modules', desc: 'Admissions, fees, attendance, exams and the rest' },
-    { to: '/pricing', label: 'Pricing', desc: '₹20 per student a month, everything included' },
+    { to: '/pricing', label: 'Pricing', desc: `${annualRateLabel} per student a month, everything included` },
     { to: '/demo', label: 'Live demo', desc: 'A running install — request access' },
     { to: '/contact', label: 'Talk to us', desc: 'Book a walkthrough at your school' },
 ];
