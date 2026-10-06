@@ -26,7 +26,7 @@ import Seo from '../lib/seo';
 import {
     RATE_ANNUAL, RATE_MONTHLY, MIN_ANNUAL, HOSTING_ANNUAL, ONBOARDING_VALUE,
     GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel, minAnnualLabel,
-    SIZE_BANDS, annualFor, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor, EXAMPLE_ROLL, DEPLOYMENT_MODES,
+    SIZE_BANDS, annualFor, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor, EXAMPLE_ROLL, DEPLOYMENT_MODES, MIN_COVERS_STUDENTS,
 } from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
@@ -463,12 +463,15 @@ function PricingCalculator() {
 
                             <div className="space-y-2 text-xs">
                                 <div className="flex justify-between">
-                                    <span className="text-text-secondary">Software ({inr(students)} students &times; &#8377;{effectiveRate(students, billing).toFixed(0)}/mo)</span>
+                                    {/* Below the minimum, "N students x rate" would not multiply out to the
+                                        figure beside it. Say which of the two is being charged instead. */}
+                                    <span className="text-text-secondary">
+                                        {listLicence === MIN_ANNUAL
+                                            ? `Software (minimum, covers up to ${inr(MIN_COVERS_STUDENTS)} students)`
+                                            : `Software (${inr(students)} students \u00d7 \u20b9${effectiveRate(students, billing).toFixed(0)}/mo)`}
+                                    </span>
                                     <span className="font-semibold text-text-primary">&#8377;{inr(listLicence)}</span>
                                 </div>
-                                {listLicence === MIN_ANNUAL && (
-                                    <p className="text-[10px] text-text-secondary italic">The &#8377;{inr(MIN_ANNUAL)} annual minimum applies at this size.</p>
-                                )}
                                 {founding && (
                                     <div className="flex justify-between text-[#f59e0b] font-semibold">
                                         <span>Founding 10, half off year one</span>
