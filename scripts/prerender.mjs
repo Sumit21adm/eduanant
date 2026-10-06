@@ -98,11 +98,19 @@ if (!chrome) {
 // src/data/pricing.ts. Repricing used to mean remembering they exist; now the
 // build refuses rather than letting the site quote two different numbers.
 const pricingSrc = await readFile('src/data/pricing.ts', 'utf8');
-const num = (name) => Number(/(?:export const )?%s = ([\d_]+)/.exec(pricingSrc.replace('%s', name))?.[1]?.replace(/_/g, ''));
+const allBands = [...pricingSrc.matchAll(/\{\s*upTo:\s*\d+,\s*annual:\s*(\d+),\s*monthly:\s*(\d+)\s*\}/g)];
+const firstTier = allBands[0];
+const floorTier = allBands[allBands.length - 1];
+const minMatch = /MIN_ANNUAL = ([\d_]+)/.exec(pricingSrc);
+if (!firstTier || !floorTier || !minMatch) {
+    console.error('\n  prerender: could not read the rates out of src/data/pricing.ts — the drift guard cannot run.\n');
+    process.exit(1);
+}
 const rates = {
-    RATE_ANNUAL: Number(/RATE_ANNUAL = ([\d_]+)/.exec(pricingSrc)[1].replace(/_/g, '')),
-    RATE_MONTHLY: Number(/RATE_MONTHLY = ([\d_]+)/.exec(pricingSrc)[1].replace(/_/g, '')),
-    MIN_ANNUAL: Number(/MIN_ANNUAL = ([\d_]+)/.exec(pricingSrc)[1].replace(/_/g, '')),
+    entryAnnual: Number(firstTier[1]),
+    entryMonthly: Number(firstTier[2]),
+    floorAnnual: Number(floorTier[1]),
+    minAnnual: Number(minMatch[1].replace(/_/g, '')),
 };
 const inrGroup = (n) => n.toLocaleString('en-IN');
 const staticPriceFiles = ['public/llms.txt', 'docs/brochure-source.html'];
@@ -111,9 +119,10 @@ for (const f of staticPriceFiles) {
     let text;
     try { text = await readFile(f, 'utf8'); } catch { continue; }
     for (const [label, value] of [
-        ['annual rate', `\u20b9${rates.RATE_ANNUAL}`],
-        ['monthly rate', `\u20b9${rates.RATE_MONTHLY}`],
-        ['annual minimum', `\u20b9${inrGroup(rates.MIN_ANNUAL)}`],
+        ['entry annual rate', `\u20b9${rates.entryAnnual}`],
+        ['entry monthly rate', `\u20b9${rates.entryMonthly}`],
+        ['volume floor rate', `\u20b9${rates.floorAnnual}`],
+        ['annual minimum', `\u20b9${inrGroup(rates.minAnnual)}`],
     ]) {
         if (!text.includes(value)) priceProblems.push(`${f} does not mention the ${label} ${value}`);
     }

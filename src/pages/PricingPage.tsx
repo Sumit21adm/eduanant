@@ -25,7 +25,8 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import Seo from '../lib/seo';
 import {
     RATE_ANNUAL, RATE_MONTHLY, MIN_ANNUAL, HOSTING_ANNUAL, ONBOARDING_VALUE,
-    GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel,
+    GST_RATE as GST, ANNUAL_SAVING_PCT, inr, annualRateLabel, minAnnualLabel,
+    SIZE_BANDS, annualFor, LARGE_SCHOOL_FROM, effectiveRate, RATE_FLOOR_ANNUAL, licenceFor, EXAMPLE_ROLL,
 } from '../data/pricing';
 import { capitalise, countOf } from '../lib/text';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
@@ -105,6 +106,68 @@ const COMPARISON = [
     { feature: 'Who answers when it breaks', eduanant: { status: 'success', text: 'The people who built it' }, other: { status: 'error', text: 'A ticket queue' } },
 ];
 
+
+/**
+ * Size bands — so a director finds their school in one row rather than doing
+ * arithmetic in a meeting. Billing underneath is still per student, which is why
+ * each row is a range: a school at the bottom of a band pays the bottom of it.
+ */
+function SizeBandTable() {
+    return (
+        <div className="max-w-3xl mx-auto mb-20">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                className="text-center mb-7">
+                <p className="text-xs font-black uppercase tracking-[0.3em] text-text-secondary mb-3">Find your school</p>
+                <h3 className="font-display text-2xl md:text-3xl font-extrabold tracking-tight text-[#1E1B4B] dark:text-white">
+                    What it comes to, by size
+                </h3>
+            </motion.div>
+
+            <div className="rounded-3xl border border-slate-200/70 dark:border-white/10 bg-white dark:bg-white/[0.03] overflow-hidden shadow-sm">
+                <div className="grid grid-cols-5 gap-2 px-5 sm:px-6 py-3 bg-slate-50 dark:bg-white/[0.04] border-b border-slate-200/70 dark:border-white/10">
+                    <span className="col-span-2 text-[10px] font-black uppercase tracking-wider text-text-secondary">School size</span>
+                    <span className="col-span-2 text-[10px] font-black uppercase tracking-wider text-text-secondary text-right">Licence, per year</span>
+                    <span className="text-[10px] font-black uppercase tracking-wider text-text-secondary text-right">Per student</span>
+                </div>
+
+                {SIZE_BANDS.map((band, i) => (
+                    <motion.div key={band.label}
+                        initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+                        transition={{ delay: i * 0.05, duration: 0.35 }}
+                        className="grid grid-cols-5 gap-2 items-center px-5 sm:px-6 py-3.5 border-b border-slate-100 dark:border-white/[0.06]">
+                        <span className="col-span-2 text-sm font-bold text-text-primary">{band.label}</span>
+                        <span className="col-span-2 text-sm font-bold text-text-primary text-right tabular-nums">
+                            ₹{inr(band.from!)} <span className="text-text-secondary font-medium">–</span> ₹{inr(annualFor(band.max!) ?? 0)}
+                        </span>
+                        <span className="text-sm font-bold text-right tabular-nums text-[var(--brand-cyan-deep)] dark:text-[#00b6d5]">
+                            ₹{effectiveRate(band.max!).toFixed(0)}
+                        </span>
+                    </motion.div>
+                ))}
+
+                <div className="grid grid-cols-5 gap-2 items-center px-5 sm:px-6 py-3.5">
+                    <span className="col-span-2 text-sm font-bold text-text-primary">More than {inr(LARGE_SCHOOL_FROM)}</span>
+                    <span className="col-span-2 text-right">
+                        <Link to="/contact" className="text-sm font-bold text-[var(--brand-cyan-deep)] dark:text-[#00b6d5] hover:underline">
+                            Quoted on your setup
+                        </Link>
+                    </span>
+                    <span className="text-sm font-bold text-right tabular-nums text-[var(--brand-cyan-deep)] dark:text-[#00b6d5]">
+                        from ₹{RATE_FLOOR_ANNUAL}
+                    </span>
+                </div>
+            </div>
+
+            <p className="text-xs text-text-secondary text-center mt-4 leading-relaxed max-w-xl mx-auto">
+                Charged on the students you actually have, at the single rate for your school's size — a school of
+                {' '}{inr(EXAMPLE_ROLL)} pays &#8377;{effectiveRate(EXAMPLE_ROLL)} a month for every one of them, not
+                {' '}{annualRateLabel} for the first 250 and less thereafter. The {minAnnualLabel} annual minimum sets
+                the floor, and figures are before {Math.round(GST * 100)}% GST.
+            </p>
+        </div>
+    );
+}
+
 function PricingCalculator() {
     const [students, setStudents] = useState(300);
     const [billing, setBilling] = useState<'monthly' | 'annual'>('annual');
@@ -112,10 +175,10 @@ function PricingCalculator() {
     const [founding, setFounding] = useState(true);
 
     const isEnterprise = students > ENTERPRISE_ABOVE;
-    const rate = billing === 'annual' ? RATE_ANNUAL : RATE_MONTHLY;
 
     // Everything is normalised to a full year so the two billing cycles compare honestly.
-    const listLicence = Math.max(students * rate * 12, MIN_ANNUAL);
+    // Above the published bands there is no list price — sales quotes it.
+    const listLicence = Math.max(licenceFor(students, billing) ?? 0, MIN_ANNUAL);
     const licence = founding ? Math.round(listLicence / 2) : listLicence;
     const onboarding = founding ? 0 : ONBOARDING;
     const hosting = managedHosting ? HOSTING_ANNUAL : 0;
@@ -205,7 +268,7 @@ function PricingCalculator() {
 
                             <div className="space-y-2 text-xs">
                                 <div className="flex justify-between">
-                                    <span className="text-text-secondary">Software ({inr(students)} &times; &#8377;{rate} &times; 12)</span>
+                                    <span className="text-text-secondary">Software ({inr(students)} students &times; &#8377;{effectiveRate(students, billing).toFixed(0)}/mo)</span>
                                     <span className="font-semibold text-text-primary">&#8377;{inr(listLicence)}</span>
                                 </div>
                                 {listLicence === MIN_ANNUAL && (
@@ -425,6 +488,8 @@ export default function PricingPage() {
                 </div>
 
                 <div className="container mx-auto px-6 max-w-4xl mb-20">
+                    <SizeBandTable />
+
                     <PricingCalculator />
                 </div>
 
