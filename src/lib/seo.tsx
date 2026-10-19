@@ -4,7 +4,7 @@ export const SITE = {
     name: 'EduAnant',
     legalName: 'Snapx Technologies LLP',
     url: 'https://eduanant.cloud',
-    logo: 'https://eduanant.cloud/eduanant-logo.svg',
+    logo: 'https://eduanant.cloud/icon-512.png',
     ogImage: 'https://eduanant.cloud/og-whatsapp-preview.png',
     phone: '+91-79036-12979',
     email: 'hello@eduanant.cloud',
