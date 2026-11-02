@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Representative Authorisation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+@page { size: A4 portrait; margin: 0; }
+/* A stranger asking a school for its student records and its director's time
+   needs to be verifiable in ten seconds. This letter, on letterhead, with a
+   number the school can ring that is not the rep's own, is what makes that
+   possible — and it is also the cheapest way to look like a real company. */
+.letter { font-size: 10pt; color: var(--ink-soft); line-height: 1.65; }
+.letter p { margin-bottom: 3.4mm; }
+.letter b { color: var(--navy-mid); }
+.fld-i { border-bottom: 0.3mm solid #94A3B8; display: inline-block;
+         min-width: 58mm; height: 4.6mm; }
+.may { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 4mm 0; }
+.may-h { font-size: 8.6pt; font-weight: 800; margin-bottom: 1.6mm; }
+.may li { font-size: 8.4pt; line-height: 1.5; margin-bottom: 1.2mm; padding-left: 3.4mm;
+          position: relative; list-style: none; }
+.may li::before { position: absolute; left: 0; top: 0; font-weight: 800; }
+.may--can li::before { content: '✓'; color: #2e7d32; }
+.may--cant li::before { content: '✕'; color: #b02020; }
+.photo-box { width: 32mm; height: 40mm; border: 0.3mm dashed #94A3B8; border-radius: 1.5mm;
+             display: flex; align-items: center; justify-content: center; text-align: center;
+             font-size: 7pt; color: var(--ink-mute); line-height: 1.4; padding: 2mm; }
+</style></head>
+<body>
+
+<section class="sheet sheet--a4p">
+  <div class="masthead" style="padding-bottom:3.4mm;margin-bottom:6mm">
+    {{LOCKUP_LG}}
+    <div class="masthead-right" style="font-size:var(--t-caption);color:var(--ink-mute);line-height:1.6">
+      <b style="color:var(--navy-mid);font-size:8.4pt">{{LEGAL_NAME}}</b><br>
+      {{ADDRESS}}<br>{{PHONE}} · {{EMAIL}}<br>{{SITE}}
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;margin-bottom:5mm">
+    <div style="flex:1">
+      <div style="font-size:var(--t-caption);color:var(--ink-mute);margin-bottom:3mm">
+        Date ____ / ____ / 20____ &nbsp;·&nbsp; Authorisation no. ______________ &nbsp;·&nbsp; Valid until ____ / ____ / 20____</div>
+      <h1 style="font-size:19pt;color:var(--navy-mid);margin-bottom:2mm">
+        Letter of authorisation</h1>
+      <div style="font-size:9pt;color:var(--ink-mute)">To the Principal / Director / Office in-charge</div>
+    </div>
+    <div class="photo-box">Photograph<br>of the representative<br>(affix &amp; stamp across)</div>
+  </div>
+
+  <div class="letter">
+    <p>This is to confirm that <b><span class="fld-i"></span></b>, holding identity card number
+    <b><span class="fld-i" style="min-width:34mm"></span></b>, is an authorised representative of
+    <b>{{LEGAL_NAME}}</b> and may call at your school to present <b>EduAnant</b>, our school management
+    system.</p>
+
+    <p>EduAnant has been in daily production use at <b>{{REF_NAME}}, {{REF_CITY}}</b> — {{REF_BOARD}},
+    {{REF_CAMPUSES}}, {{REF_STUDENTS}} students — since <b>{{LIVE_SINCE}}</b>. We would be glad to arrange a
+    visit so that you can see it working in a school before you consider it for your own.</p>
+
+    <p><b>Please verify this person before discussing anything about your school.</b> Call
+    <b>{{PHONE}}</b> and quote the authorisation number above. That number reaches us, not the
+    representative. If the person in front of you cannot produce this letter and a photo identity
+    card, they do not represent us.</p>
+  </div>
+
+  <div class="may">
+    <div>
+      <div class="may-h" style="color:#2e7d32">This representative may</div>
+      <ul class="may--can">
+        <li>Present EduAnant and demonstrate it on a laptop</li>
+        <li>Leave our brochure, price card and order form with you</li>
+        <li>Quote only the rates printed on our published price card</li>
+        <li>Arrange a visit to a school already using the system</li>
+        <li>Note your requirements and pass them to us</li>
+        <li>Accept a signed order form for our counter-signature</li>
+      </ul>
+    </div>
+    <div>
+      <div class="may-h" style="color:#b02020">This representative may not</div>
+      <ul class="may--cant">
+        <li>Offer any discount or rate not on the price card</li>
+        <li>Promise a feature that is not already working</li>
+        <li>Collect cash, cheques or any payment from your school</li>
+        <li>Ask for passwords to any system you currently use</li>
+        <li>Take away original student or staff records</li>
+        <li>Commit us to a date without our written confirmation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel panel--amber" style="margin-bottom:6mm">
+    <div style="font-size:8.6pt;color:var(--ink-soft);line-height:1.55">
+      <b style="color:var(--navy-mid)">On your students' data.</b> We do not need any student records to
+      show you the system — we demonstrate on our own sample school. If you later ask us to prepare a
+      demonstration using your own class structure, we need only your list of classes and sections,
+      never student names, phone numbers or any document. Nothing is taken from your school without a
+      signed order.
+    </div>
+  </div>
+
+  <div class="letter">
+    <p>Thank you for your time. If this is not a convenient moment, the representative has been asked
+    to leave the brochure and go — and to return when you ask them to, not before.</p>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8mm;margin-top:10mm">
+    <div style="flex:1">
+      <div style="height:16mm"></div>
+      <div style="border-top:0.3mm solid #94A3B8;padding-top:1.6mm;font-size:8pt;color:var(--ink-soft)">
+        <b style="color:var(--navy-mid)">Sumit Kumar</b> · Founder<br>
+        <span style="font-size:7.4pt;color:var(--ink-mute)">For and on behalf of {{LEGAL_NAME}}</span></div>
+    </div>
+    <div style="text-align:center">
+      <div style="width:24mm;height:24mm">{{QR_SITE}}</div>
+      <div class="qr-cap">Verify us at<br>{{SITE}}</div>
+    </div>
+  </div>
+
+  <div class="footer"><span><b>EduAnant</b> · representative authorisation</span>
+    <span>{{LEGAL_NAME}} · {{ADDRESS}} · {{PHONE}}</span></div>
+</section>
+
+</body></html>

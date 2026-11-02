@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Brand Standards</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+@page { size: A4 portrait; margin: 0; }
+.spec { display: grid; grid-template-columns: 34mm 1fr; gap: 3mm; margin-bottom: 3.5mm; align-items: start; }
+.spec-k { font-size: var(--t-caption); font-weight: 800; text-transform: uppercase;
+          letter-spacing: 0.08em; color: var(--ink-mute); padding-top: 0.6mm; }
+.spec-v { font-size: var(--t-small); color: var(--ink-soft); line-height: 1.55; }
+.swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2mm; }
+.sw { border-radius: 2mm; overflow: hidden; border: 0.2mm solid var(--rule); }
+.sw-chip { height: 14mm; }
+.sw-meta { padding: 1.4mm 1.8mm; background: #fff; }
+.sw-n { font-size: var(--t-caption); font-weight: 800; color: var(--navy-mid); }
+.sw-h { font-size: var(--t-caption); color: var(--ink-mute); font-variant-numeric: tabular-nums; }
+.sw-u { font-size: 6.5pt; color: var(--ink-mute); line-height: 1.3; margin-top: 0.5mm; }
+.demo { border: 0.25mm dashed var(--rule); border-radius: 2mm; padding: 4mm; background: #fff; }
+.demo--navy { background: var(--grad-brand); border-color: var(--navy-mid); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+.three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+.no { border-left: 0.8mm solid #d32f2f; padding-left: 2.6mm; }
+.no-t { font-size: var(--t-small); font-weight: 800; color: #b02020; }
+.no-b { font-size: var(--t-caption); color: var(--ink-soft); line-height: 1.45; }
+.scale-row { display: flex; align-items: baseline; gap: 3mm; border-bottom: 0.2mm solid var(--rule);
+             padding: 1.6mm 0; }
+.scale-lab { font-size: 6.5pt; color: var(--ink-mute); width: 26mm; flex-shrink: 0;
+             text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
+.clearspace { position: relative; display: inline-block; padding: 9mm;
+              background: repeating-linear-gradient(45deg, #F8FAFC, #F8FAFC 2mm, #EEF2F7 2mm, #EEF2F7 4mm);
+              border: 0.2mm solid var(--rule); border-radius: 2mm; }
+.clearspace-inner { background: #fff; padding: 2mm 3mm; border-radius: 1mm; }
+</style></head>
+<body>
+
+<!-- ─────────────── SHEET 1 · THE MARK ─────────────── -->
+<section class="sheet sheet--a4p">
+  <div class="masthead">
+    {{LOCKUP}}
+    <div class="masthead-right">
+      <span class="pill">Brand standards</span>
+      <div class="sw-h" style="margin-top:1.4mm">{{LEGAL_NAME}} · Release {{VERSION}}</div>
+    </div>
+  </div>
+
+  <h1 style="font-size:var(--t-h1);color:var(--navy-mid);margin-bottom:1.5mm">One logo. One name.<br>Everywhere.</h1>
+  <p style="font-size:var(--t-lead);color:var(--ink-soft);max-width:150mm;margin-bottom:6mm">
+    This page is the rule for every brochure, card, slide, invoice and sign we produce. If a piece
+    disagrees with this page, the piece is wrong. Everything in <b>docs/print</b> is generated from it.
+  </p>
+
+  <div class="eyebrow">The mark</div>
+  <div class="two" style="margin-bottom:5mm">
+    <div class="demo" style="text-align:center">
+      <div style="height:26mm;display:flex;align-items:center;justify-content:center">{{MARK}}</div>
+      <div class="sw-u" style="margin-top:2mm">An infinity drawn as an open book, wearing a graduation
+      cap. <b>Anant</b> means endless. Use on white and on any light wash.</div>
+    </div>
+    <div class="demo demo--navy" style="text-align:center">
+      <div style="height:26mm;display:flex;align-items:center;justify-content:center">{{MARK_WHITE}}</div>
+      <div class="sw-u" style="margin-top:2mm;color:rgba(255,255,255,0.75)">The white mark is the only
+      one permitted on navy. The gradient version loses its left loop against a dark ground.</div>
+    </div>
+  </div>
+
+  <div class="eyebrow">The lockup — what actually gets printed</div>
+  <div class="panel panel--amber" style="margin-bottom:4mm">
+    <div class="spec-v"><b>The mark never appears alone on paper.</b> On screen the name is in the
+    address bar and the page title; on paper there is nothing to tell a principal what we are called.
+    A director who likes the leaflet has to be able to ask for us by name, so the printed logo is
+    always mark&nbsp;+&nbsp;name, in one of the three forms below.</div>
+  </div>
+
+  <div class="three" style="margin-bottom:5mm">
+    <div class="demo">
+      <div style="margin-bottom:3mm">{{LOCKUP}}</div>
+      <div class="sw-n">Primary</div>
+      <div class="sw-u">Default for every piece. Masthead, covers, letterhead, invoices.</div>
+    </div>
+    <div class="demo demo--navy">
+      <div style="margin-bottom:3mm">{{LOCKUP_DARK}}</div>
+      <div class="sw-n" style="color:#fff">Reversed</div>
+      <div class="sw-u" style="color:rgba(255,255,255,0.75)">On navy panels, slide covers and the back of the visiting card.</div>
+    </div>
+    <div class="demo">
+      <div style="margin-bottom:3mm">{{LOCKUP_HI}}</div>
+      <div class="sw-n">Bilingual</div>
+      <div class="sw-u">Hindi pieces, and anywhere the reader has never met the word &ldquo;EduAnant&rdquo;.</div>
+    </div>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="eyebrow">Clear space &amp; minimum size</div>
+      <div class="clearspace">
+        <div class="clearspace-inner">{{LOCKUP_SM}}</div>
+      </div>
+      <div class="spec-v" style="margin-top:2.5mm">
+        Keep clear on all four sides by the height of the graduation cap. Nothing — no rule, no photo
+        edge, no other logo — enters that band. <b>Minimum printed height of the mark: 7&nbsp;mm.</b>
+        Below that the cap tassel and the page lines of the book fill in on press and it reads as a grey blob.
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow">Never do this</div>
+      <div class="no" style="margin-bottom:2.4mm">
+        <div class="no-t">Never substitute a letter</div>
+        <div class="no-b">The first brochure used a navy square with an &ldquo;E&rdquo; in it because the
+        real logo was not to hand. We have a logo.</div>
+      </div>
+      <div class="no" style="margin-bottom:2.4mm">
+        <div class="no-t">Never use public/logo.png</div>
+        <div class="no-b">An older, differently coloured rendering that survives in the repo. Retire it.
+        The SVGs are the only approved artwork.</div>
+      </div>
+      <div class="no" style="margin-bottom:2.4mm">
+        <div class="no-t">Never recolour, outline, rotate or stretch</div>
+        <div class="no-b">Scale proportionally only. No drop shadows, no glow, no box around it.</div>
+      </div>
+      <div class="no">
+        <div class="no-t">Never write the name any other way</div>
+        <div class="no-b">It is <b>EduAnant</b> — one word, capital E, capital A, no space, no hyphen.
+        Not Eduanant, EDUANANT, Edu Anant or Edu-Anant. In Devanagari: एडुअनंत.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Sheet 1 of 2 · <b>EduAnant</b> brand standards</span>
+    <span>{{SITE}} · {{EMAIL}} · {{PHONE}}</span></div>
+</section>
+
+<!-- ─────────────── SHEET 2 · COLOUR, TYPE, WORDS ─────────────── -->
+<section class="sheet sheet--a4p">
+  <div class="masthead">
+    {{LOCKUP}}
+    <div class="masthead-right"><span class="pill">Colour · Type · Words</span></div>
+  </div>
+
+  <div class="eyebrow">Palette</div>
+  <div class="swatches" style="margin-bottom:3mm">
+    <div class="sw"><div class="sw-chip" style="background:#0F172A"></div><div class="sw-meta">
+      <div class="sw-n">Navy</div><div class="sw-h">#0F172A</div><div class="sw-u">Page furniture, deepest panels</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#1E1B4B"></div><div class="sw-meta">
+      <div class="sw-n">Navy Mid</div><div class="sw-h">#1E1B4B</div><div class="sw-u">Headings, table heads, the name</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#312E81"></div><div class="sw-meta">
+      <div class="sw-n">Indigo</div><div class="sw-h">#312E81</div><div class="sw-u">Gradient partner only, never flat text</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#F59E0B"></div><div class="sw-meta">
+      <div class="sw-n">Amber</div><div class="sw-h">#F59E0B</div><div class="sw-u">Action: CTAs, bullets, rules</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:#00b6d5"></div><div class="sw-meta">
+      <div class="sw-n">Cyan</div><div class="sw-h">#00b6d5</div><div class="sw-u">The logo's own. Reserved for the mark</div></div></div>
+  </div>
+  <div class="spec" style="margin-bottom:5mm">
+    <div class="spec-k">Rules</div>
+    <div class="spec-v">
+      Navy is authority, amber is action, cyan belongs to the mark. <b>Amber text on white must use
+      #B45309</b>, never #F59E0B — at 9&nbsp;pt the brighter amber fails contrast and vanishes under
+      a reading lamp. Do not introduce a fifth colour; if something needs to stand out, give it space,
+      not a new hue.
+    </div>
+  </div>
+
+  <div class="eyebrow">Typefaces</div>
+  <div class="three" style="margin-bottom:4mm">
+    <div class="panel panel--plain">
+      <div class="sw-n" style="margin-bottom:1.2mm">Plus Jakarta Sans — 800</div>
+      <div class="display" style="font-size:14pt;color:var(--navy-mid)">Run your school</div>
+      <div class="sw-u" style="margin-top:1.2mm">Everything you <b>scan</b>: the name, headlines, stat figures.</div>
+    </div>
+    <div class="panel panel--plain">
+      <div class="sw-n" style="margin-bottom:1.2mm">Inter — 400 / 600</div>
+      <div style="font-size:9pt;color:var(--ink-soft)">Admissions, fees, attendance and exams in one system.</div>
+      <div class="sw-u" style="margin-top:1.2mm">Everything you <b>read</b>: body copy, forms, terms.</div>
+    </div>
+    <div class="panel panel--plain">
+      <div class="sw-n" style="margin-bottom:1.2mm">Noto Sans Devanagari</div>
+      <div class="hi" style="font-size:9.5pt;color:var(--ink)">आपके स्कूल का पूरा दफ़्तर।</div>
+      <div class="sw-u" style="margin-top:1.2mm">All Hindi. Looser leading than Inter, or the matras collide. <b>Never set Hindi in Inter.</b></div>
+    </div>
+  </div>
+
+  <div class="eyebrow">Type scale — print</div>
+  <div style="margin-bottom:4mm">
+    <div class="scale-row"><span class="scale-lab">H1 · 25pt</span><span class="display" style="font-size:25pt;color:var(--navy-mid)">Headline</span></div>
+    <div class="scale-row"><span class="scale-lab">H2 · 17pt</span><span class="display" style="font-size:17pt;color:var(--navy-mid)">Section heading</span></div>
+    <div class="scale-row"><span class="scale-lab">Lead · 11pt</span><span style="font-size:11pt;color:var(--ink-soft)">The opening paragraph of a panel</span></div>
+    <div class="scale-row"><span class="scale-lab">Body · 9.5pt</span><span style="font-size:9.5pt;color:var(--ink-soft)">Running text — the floor for anything a director reads</span></div>
+    <div class="scale-row"><span class="scale-lab">Caption · 7.5pt</span><span style="font-size:7.5pt;color:var(--ink-mute)">Footers, labels, legal — the absolute floor</span></div>
+  </div>
+
+  <div class="two">
+    <div>
+      <div class="eyebrow">How we write</div>
+      <ul class="ticks">
+        <li><b>Say what it does, not what it is.</b> &ldquo;Mark a whole class in 60 seconds&rdquo;, not &ldquo;attendance module&rdquo;.</li>
+        <li><b>Rupees, not adjectives.</b> Print the number.</li>
+        <li><b>Never promise what is not shipped.</b> Every claim traces to src/data/modules.ts or to running code.</li>
+        <li><b>Name the role, not the technology.</b> Accountant, class teacher, front desk.</li>
+        <li><b>No exclamation marks.</b> Schools are buying an office system.</li>
+        <li><b>Hindi is written, not translated.</b> Always proofed by a native speaker before press.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="eyebrow">Fixed details — never retyped</div>
+      <div class="spec"><div class="spec-k">Legal name</div><div class="spec-v">{{LEGAL_NAME}}</div></div>
+      <div class="spec"><div class="spec-k">Address</div><div class="spec-v">{{ADDRESS}}</div></div>
+      <div class="spec"><div class="spec-k">Phone / WhatsApp</div><div class="spec-v">{{PHONE}}</div></div>
+      <div class="spec"><div class="spec-k">Email</div><div class="spec-v">{{EMAIL}}</div></div>
+      <div class="spec"><div class="spec-k">Website</div><div class="spec-v">{{SITE}}</div></div>
+      <div class="spec"><div class="spec-k">Product</div><div class="spec-v">EduAnant — School Management System, Release {{VERSION}}, {{MODULE_COUNT}} modules</div></div>
+      <div class="panel panel--amber" style="margin-top:1mm">
+        <div class="sw-u" style="font-size:var(--t-caption);line-height:1.5">These values live in
+        <b>docs/print/build.mjs</b> and are substituted into every piece at build time. Changing a phone
+        number is one edit, then <b>npm run print</b> — not nine files and a card that still shows the old one.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Sheet 2 of 2 · <b>EduAnant</b> brand standards</span>
+    <span>{{LEGAL_NAME}} · {{ADDRESS}}</span></div>
+</section>
+
+</body></html>

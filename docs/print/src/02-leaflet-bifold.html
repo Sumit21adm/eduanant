@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Bifold Leaflet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+/* One A4 sheet, printed both sides and folded once down the middle. Folding is
+   a few paise a copy at any Patna press, so this costs the same as a flat
+   duplex A4 and behaves like a booklet on a director's desk. */
+@page { size: A4 landscape; margin: 0; }
+.fold { width: 297mm; height: 210mm; display: flex; position: relative;
+        overflow: hidden; page-break-after: always; background: #fff; }
+.fold:last-child { page-break-after: auto; }
+/* The crease is shown on screen so a proof can be checked, and never printed —
+   a dashed line down the middle of a finished leaflet looks like a mistake. The
+   press creases from the trim, not from a printed guide. */
+@media screen {
+  .fold::after { content: ''; position: absolute; left: 148.5mm; top: 0; bottom: 0;
+                 width: 0.2mm; background: repeating-linear-gradient(
+                 to bottom, #CBD5E1 0 2mm, transparent 2mm 4mm); }
+}
+.pan { width: 148.5mm; height: 210mm; padding: 12mm 11mm; position: relative;
+       display: flex; flex-direction: column; }
+.pan--navy { background: var(--grad-brand); color: #fff; }
+.pan-foot { position: absolute; left: 11mm; right: 11mm; bottom: 9mm;
+            font-size: var(--t-caption); color: var(--ink-mute); }
+.pan--navy .pan-foot { color: rgba(255,255,255,0.6); }
+.cover-h { font-size: 27pt; font-weight: 800; line-height: 1.1; color: #fff; }
+.cover-h .hl { color: var(--amber); }
+.cover-hi { font-family: 'Noto Sans Devanagari', sans-serif; font-size: 11pt;
+            color: var(--cyan-light); line-height: 1.7; }
+.big-num { font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 15pt;
+           color: var(--navy-mid); line-height: 1; }
+.pain { margin-bottom: 2.8mm; }
+.pain-q { font-family: 'Plus Jakarta Sans'; font-size: 10pt; font-weight: 800;
+          color: var(--navy-mid); margin-bottom: 0.9mm; }
+.pain-a { font-size: 8.8pt; color: var(--ink-soft); line-height: 1.5; }
+.pain-a b { color: var(--amber-text); }
+.auto-row { display: flex; gap: 2.4mm; margin-bottom: 2.4mm; align-items: flex-start; }
+.auto-dot { width: 4.4mm; height: 4.4mm; border-radius: 50%; background: var(--wash-amber);
+            border: 0.2mm solid var(--amber); color: var(--amber-text); flex-shrink: 0;
+            font-size: 7pt; font-weight: 800; display: flex; align-items: center;
+            justify-content: center; margin-top: 0.4mm; }
+.auto-t { font-size: 8.8pt; font-weight: 800; color: var(--navy-mid); line-height: 1.3; }
+.auto-b { font-size: 8pt; color: var(--ink-soft); line-height: 1.45; }
+.modlist { column-count: 2; column-gap: 4mm; list-style: none; }
+.modlist li { font-size: 8pt; color: var(--ink-soft); line-height: 1.45;
+              break-inside: avoid; display: flex; gap: 1.6mm; align-items: flex-start;
+              margin-bottom: 0.9mm; }
+.modlist .ico { width: 3.4mm; height: 3.4mm; margin-top: 0.5mm; }
+.qr-lg { width: 26mm; height: 26mm; }
+.qr-lg svg { width: 100%; height: 100%; display: block; }
+.qr-sm { width: 19mm; height: 19mm; }
+.qr-sm svg { width: 100%; height: 100%; display: block; }
+.contact-line { font-size: 10pt; color: var(--navy-mid); font-weight: 700; line-height: 1.75; }
+.contact-line span { color: var(--ink-mute); font-weight: 600; font-size: 8pt; }
+</style></head>
+<body>
+
+<!-- ═══════ OUTSIDE  (left panel = back cover · right panel = front cover) ═══════ -->
+<div class="fold">
+
+  <!-- BACK COVER -->
+  <div class="pan">
+    <div class="eyebrow">What it costs</div>
+    <table style="margin-bottom:3mm">
+      <tr><th>School size</th><th>Monthly</th><th>Annual</th></tr>
+      {{RATE_ROWS_COMPACT}}
+      <tr><td>Above {{CONTACT_ABOVE}}</td><td class="num">Quoted</td>
+          <td class="num num--amber">from {{FLOOR_ANNUAL}}</td></tr>
+    </table>
+    <div style="font-size:8pt;color:var(--ink-soft);line-height:1.5;margin-bottom:3.5mm">
+      Per student, per month, on your actual roll — <b>{{GST_PCT}}% GST on top</b>. The rate is set by the size
+      of your school. No annual minimum, no setup fee, no per-module charge, no tier to upgrade to.
+      Paying for the year up front takes <b>{{ANNUAL_SAVING_PCT}}% off</b>.
+    </div>
+
+    <div class="panel panel--amber" style="margin-bottom:3.5mm">
+      <div style="font-size:9.5pt;font-weight:800;color:var(--navy-mid);margin-bottom:1.2mm">
+        Founding {{FOUNDING_COUNT}} schools — open now</div>
+      <div style="font-size:8.2pt;color:var(--ink-soft);line-height:1.5">
+        The first {{FOUNDING_COUNT}} schools to join get <b style="color:var(--amber-text)">{{FOUNDING_PCT}}% off year one and
+        renewal rates locked for life.</b> In return: a reference call, a line we can quote after two
+        months, and your school's name on our website.</div>
+    </div>
+
+    <div class="eyebrow">Talk to us</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:4mm">
+      <div>
+        <div class="contact-line">{{PHONE}}<br><span>Phone &amp; WhatsApp — call any working day</span></div>
+        <div class="contact-line" style="margin-top:1.6mm">{{EMAIL}}<br><span>We reply within 24 hours</span></div>
+        <div class="contact-line" style="margin-top:1.6mm">{{SITE}}<br><span>Work out your own price on the calculator</span></div>
+      </div>
+      <div style="text-align:center">
+        <div class="qr-lg">{{QR_SITE}}</div>
+        <div class="qr-cap">Scan to see<br>the whole system</div>
+      </div>
+    </div>
+
+    <div style="margin-top:auto">
+      <div style="border-top:0.2mm solid var(--rule);padding-top:3mm;display:flex;
+                  justify-content:space-between;align-items:flex-end;gap:4mm">
+        {{LOCKUP_SM}}
+        <div style="text-align:right;font-size:var(--t-caption);color:var(--ink-mute);line-height:1.5">
+          {{LEGAL_NAME}}<br>{{ADDRESS}}<br>Release {{VERSION}}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRONT COVER -->
+  <div class="pan pan--navy">
+    <div class="on-dark" style="margin-bottom:auto">{{LOCKUP_DARK_LG}}</div>
+
+    <div>
+      <div style="display:inline-block;padding:1.4mm 3.4mm;border-radius:99px;
+                  background:rgba(52,211,153,0.14);border:0.2mm solid rgba(52,211,153,0.5);
+                  color:#34D399;font-size:7.5pt;font-weight:800;text-transform:uppercase;
+                  letter-spacing:0.09em;margin-bottom:5mm">
+        Live in a {{REF_CITY}} school since {{LIVE_SINCE}}</div>
+
+      <h1 class="cover-h">Your school's<br>whole office,<br><span class="hl">in one system.</span></h1>
+
+      <p style="font-size:10pt;color:#CBD5E1;line-height:1.6;margin-top:4mm;max-width:108mm">
+        Admissions, fees, attendance, exams, library, transport, HR and the front desk — with a
+        teacher portal, a parent portal and an Android app.</p>
+
+      <p class="cover-hi" style="margin-top:4mm">
+        आपके स्कूल का पूरा दफ़्तर, एक सिस्टम में।<br>
+        इंटरनेट बंद हो, तब भी काम चालू।</p>
+    </div>
+
+    <div style="margin-top:auto;display:flex;justify-content:space-between;
+                align-items:flex-end;gap:4mm;padding-top:8mm">
+      <div style="font-size:9.5pt;font-weight:800;color:#fff;line-height:1.6">
+        {{PHONE}}<br>
+        <span style="font-weight:600;font-size:8pt;color:rgba(255,255,255,0.65)">{{SITE}} · {{EMAIL}}</span>
+      </div>
+      <div style="text-align:center;background:#fff;padding:2mm;border-radius:2mm">
+        <div class="qr-sm">{{QR_DEMO}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ INSIDE  (the spread a director opens) ═══════ -->
+<div class="fold">
+
+  <!-- INSIDE LEFT -->
+  <div class="pan">
+    <div class="eyebrow">Sound familiar?</div>
+
+    <div class="pain">
+      <div class="pain-q">&ldquo;Fee disputes at the counter.&rdquo;</div>
+      <div class="pain-a">A parent insists last quarter was paid. The clerk works through a ledger
+      while a queue builds. <b>Now:</b> search the name — dues, advances, split cash and UPI entries,
+      all on screen in seconds. Reprint the receipt on the spot.</div>
+    </div>
+
+    <div class="pain">
+      <div class="pain-q">&ldquo;Chasing the same parents every month.&rdquo;</div>
+      <div class="pain-a">Somebody has to telephone families about overdue fees, and nobody has time.
+      <b>Now:</b> five reminders reach the parent's phone around every due date. Nobody at school
+      lifts a finger.</div>
+    </div>
+
+    <div class="pain">
+      <div class="pain-q">&ldquo;Twenty minutes gone in first period.&rdquo;</div>
+      <div class="pain-a">Roll call on paper, late-comers overwriting entries, a register totalled by
+      hand at month end. <b>Now:</b> a whole class marked in 60 seconds on any phone — and the system
+      refuses to mark a Sunday or a holiday.</div>
+    </div>
+
+    <div class="pain" style="margin-bottom:4.5mm">
+      <div class="pain-q">&ldquo;Results take a fortnight to reach parents.&rdquo;</div>
+      <div class="pain-a">Marks totalled by hand, grades on a calculator, report cards sent home in
+      school bags. <b>Now:</b> teachers enter marks on a phone; grades, GPA and rank calculate
+      themselves and publish straight to the parent app.</div>
+    </div>
+
+    <div class="eyebrow">The part nobody else does</div>
+    <div class="panel panel--plain" style="padding:2.6mm 3mm">
+      <div style="font-size:8.2pt;color:var(--ink-soft);line-height:1.5">
+        Most school software gives your staff more screens to fill in. EduAnant takes work away from
+        them. <b style="color:var(--navy-mid)">These happen on their own, with nobody at school
+        involved:</b> fee reminders around every due date · absence and low-attendance alerts ·
+        results published the moment they are ready · homework and morning reminders that know the
+        school calendar · a full backup before every software update.
+      </div>
+    </div>
+
+    <!-- A director who has read this far is deciding whether to spend an hour on
+         us. Three concrete ways to do that beat another claim. -->
+    <div class="eyebrow" style="margin-top:3.5mm">Three ways to see it for yourself</div>
+    <div class="auto-row">
+      <div class="auto-dot">1</div>
+      <div><div class="auto-t">Watch it run in a school that uses it</div>
+      <div class="auto-b">We will take you to {{REF_NAME}}, where you can ask their accountant and
+      front desk whatever you like.</div></div>
+    </div>
+    <div class="auto-row">
+      <div class="auto-dot">2</div>
+      <div><div class="auto-t">We come to you with your own data in it</div>
+      <div class="auto-b">Send your class and section list beforehand and we arrive with your school
+      already set up on the laptop — not a demo school.</div></div>
+    </div>
+    <div class="auto-row" style="margin-bottom:0">
+      <div class="auto-dot">3</div>
+      <div><div class="auto-t">Sign in to the live system yourself</div>
+      <div class="auto-b">Ask for demo access and log in as an admin, a teacher or an accountant —
+      the same build a paying school uses today.</div></div>
+    </div>
+
+    <div class="pan-foot">{{SITE}} · {{PHONE}}</div>
+  </div>
+
+  <!-- INSIDE RIGHT -->
+  <div class="pan">
+    <div class="eyebrow">Everything included — there is no tier to upgrade to</div>
+    <ul class="modlist" style="margin-bottom:4mm">
+      {{MODULE_LIST}}
+    </ul>
+
+    <div class="eyebrow">Where it lives is your choice</div>
+    <div style="font-size:8.4pt;color:var(--ink-soft);line-height:1.55;margin-bottom:4mm">
+      Install it on one office computer, or on your school network so the front desk, staffroom,
+      accounts and principal all use it at once over your own Wi-Fi — <b style="color:var(--navy-mid)">with
+      no internet bill and no cloud fee.</b> Or let us host it for you at ₹{{HOSTING_ANNUAL}} a year.
+      On the first two, the database stays in your building. It is standard PostgreSQL: if you ever
+      leave us, your data is already yours.
+    </div>
+
+    <div class="panel panel--navy" style="margin-bottom:4mm">
+      <div style="font-size:7pt;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;
+                  color:#34D399;margin-bottom:1.4mm">In production since {{LIVE_SINCE}}</div>
+      <div style="font-family:'Plus Jakarta Sans';font-size:12pt;font-weight:800;color:#fff;
+                  margin-bottom:1.2mm">{{REF_NAME}}, {{REF_CITY}}</div>
+      <div style="font-size:8pt;color:#CBD5E1;line-height:1.5">
+        {{REF_BOARD}}, {{REF_CAMPUSES}} · {{REF_STUDENTS}} students · {{REF_STAFF}} staff.
+        A full admission cycle, a full fee cycle and a full exam cycle have run on it.
+        <b style="color:#63cae0">Come and watch it work before you decide anything.</b></div>
+    </div>
+
+    <div class="eyebrow">Free with every school</div>
+    <div class="auto-row">
+      <div class="auto-dot">1</div>
+      <div><div class="auto-t">Setup, installation and configuration</div>
+      <div class="auto-b">Your board, session, classes, sections and fee heads, set up for you.</div></div>
+    </div>
+    <div class="auto-row">
+      <div class="auto-dot">2</div>
+      <div><div class="auto-t">Migration from your Excel sheets</div>
+      <div class="auto-b">Students, staff and opening balances imported and reconciled against your own registers.</div></div>
+    </div>
+    <div class="auto-row">
+      <div class="auto-dot">3</div>
+      <div><div class="auto-t">On-site staff training, in Hindi or English</div>
+      <div class="auto-b">Each team trained on their own screens — accounts, class teachers, front desk.</div></div>
+    </div>
+    <div class="auto-row">
+      <div class="auto-dot">4</div>
+      <div><div class="auto-t">The Android app and every future update</div>
+      <div class="auto-b">{{RELEASE_COUNT}} releases since {{LIVE_SINCE}}. Updates install in one click, with a backup taken first.</div></div>
+    </div>
+
+    <div class="pan-foot" style="text-align:right">EduAnant · Release {{VERSION}} · {{MODULE_COUNT}} modules</div>
+  </div>
+</div>
+
+</body></html>

@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Presentation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+@page { size: 254mm 142.9mm; margin: 0; }
+
+/* ── Why this deck is shaped the way it is ───────────────────────────────────
+   A director gives ten minutes, not forty. A thirty-slide walk-through of every
+   feature is a deck that never gets finished and a meeting that never reaches
+   the price. So the deck is a 12-slide core that tells the whole story on its
+   own, followed by one slide per module as an appendix the rep flips to when a
+   question lands on it. Slides 1-12 are the meeting. Slides 13 onward are the
+   answer to "what about the library?".                                        */
+
+.sheet--slide { justify-content: center; }
+.slide-head { display: flex; justify-content: space-between; align-items: center;
+              margin-bottom: 5mm; }
+.slide-no { font-size: 7.5pt; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--amber-text); }
+.slide-h1 { font-size: 33pt; font-weight: 800; color: var(--navy-mid); line-height: 1.08; }
+.slide-h2 { font-size: 24pt; font-weight: 800; color: var(--navy-mid); line-height: 1.1;
+            margin-bottom: 1.5mm; }
+.slide-lead { font-size: 12pt; color: var(--amber-text); font-weight: 700; margin-bottom: 4mm; }
+.slide-body { font-size: 11pt; color: var(--ink-soft); line-height: 1.6; }
+.slide-foot { position: absolute; left: 14mm; right: 14mm; bottom: 6mm;
+              font-size: 7pt; color: var(--ink-mute); text-align: right; }
+.slide--navy { background: var(--grad-brand); }
+.slide--navy .slide-h1, .slide--navy .slide-h2 { color: #fff; }
+.slide--navy .slide-body { color: #CBD5E1; }
+.slide--navy .slide-foot { color: rgba(255,255,255,0.45); }
+.slide-split { display: grid; grid-template-columns: 1fr 1fr; gap: 7mm; align-items: start; }
+.slide-split--wide { grid-template-columns: 1.3fr 1fr; }
+.big4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4mm; }
+.big-stat { text-align: center; padding: 4mm 2mm; border: 0.25mm solid var(--rule);
+            border-radius: 3mm; background: var(--wash); }
+.big-stat .v { font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 26pt;
+               color: var(--navy-mid); line-height: 1; }
+.big-stat .l { font-size: 8pt; color: var(--ink-mute); font-weight: 700; margin-top: 1.6mm;
+               line-height: 1.3; }
+.slide--navy .big-stat { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.14); }
+.slide--navy .big-stat .v { color: #fff; }
+.slide--navy .big-stat .l { color: #A5B4FC; }
+.before-after { display: grid; grid-template-columns: 1fr auto 1fr; gap: 5mm; align-items: center; }
+.ba-side { border-radius: 3mm; padding: 4mm 4.5mm; }
+.ba-before { background: #F1F5F9; border: 0.25mm solid var(--rule); }
+.ba-after { background: rgba(245,158,11,0.08); border: 0.25mm solid rgba(245,158,11,0.4); }
+.ba-lab { font-size: 7.5pt; font-weight: 800; text-transform: uppercase;
+          letter-spacing: 0.1em; margin-bottom: 2mm; }
+.ba-item { font-size: 9.5pt; line-height: 1.55; margin-bottom: 1.4mm; padding-left: 4mm;
+           position: relative; }
+.arrow { font-size: 20pt; color: var(--amber); font-weight: 800; }
+.auto-card { border: 0.25mm solid var(--rule); border-radius: 3mm; padding: 3mm 3.6mm;
+             background: #fff; }
+.auto-card .t { font-size: 10pt; font-weight: 800; color: var(--navy-mid); margin-bottom: 1.1mm; }
+.auto-card .b { font-size: 8.6pt; color: var(--ink-soft); line-height: 1.45; }
+.price-hero { font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 48pt;
+              color: var(--navy-mid); line-height: 1; }
+.cover-badge { display: inline-block; padding: 2mm 4.5mm; border-radius: 99px;
+               background: rgba(52,211,153,0.14); border: 0.25mm solid rgba(52,211,153,0.5);
+               color: #34D399; font-size: 8.5pt; font-weight: 800;
+               text-transform: uppercase; letter-spacing: 0.1em; }
+.qr-d { width: 24mm; height: 24mm; }
+.qr-d svg { width: 100%; height: 100%; display: block; }
+/* Appendix slides are generated from modules.ts — see build.mjs. */
+.slide-ico { display: inline-flex; vertical-align: -1.5mm; margin-right: 3mm; }
+.slide-ico .ico { width: 8mm; height: 8mm; }
+.auto-card .ico { width: 4.6mm; height: 4.6mm; margin-bottom: 1.2mm; }
+.sheet--slide ul.modlist { column-count: 4; column-gap: 6mm; list-style: none; }
+.sheet--slide ul.modlist li { display: flex; gap: 2mm; align-items: flex-start;
+                              padding-left: 0; line-height: 1.5; margin-bottom: 1.2mm; }
+.sheet--slide ul.modlist li::before { content: none; }
+.sheet--slide ul.modlist .ico { width: 4mm; height: 4mm; margin-top: 0.6mm; }
+</style></head>
+<body>
+
+<!-- ══════ 1 · COVER ══════ -->
+<section class="sheet sheet--slide slide--navy">
+  <div style="margin-bottom:auto">{{LOCKUP_DARK_LG}}</div>
+  <div>
+    <div class="cover-badge" style="margin-bottom:6mm">
+      Live in a {{REF_CITY}} school since {{LIVE_SINCE}}</div>
+    <h1 class="slide-h1">Your school's whole office,<br>
+      <span style="color:var(--amber)">in one system.</span></h1>
+    <p class="slide-body" style="margin-top:5mm;max-width:170mm">
+      Admissions, fees, attendance, exams, library, transport, HR and the front desk — with a teacher
+      portal, a parent portal and an Android app.</p>
+    <p style="font-family:'Noto Sans Devanagari',sans-serif;font-size:11pt;color:var(--cyan-light);
+              margin-top:4mm;line-height:1.7">आपके स्कूल का पूरा दफ़्तर, एक सिस्टम में।</p>
+  </div>
+  <div style="margin-top:auto;font-size:9pt;color:rgba(255,255,255,0.7)">
+    {{LEGAL_NAME}} · {{ADDRESS}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 2 · THE PROBLEM ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">The problem</span>{{LOCKUP_SM}}</div>
+  <h2 class="slide-h2">A school office runs on paper, memory<br>and one person who knows everything.</h2>
+  <p class="slide-body" style="margin-bottom:5mm;max-width:190mm">
+    Nothing here is a software problem. It is what a working day costs when the records are not joined up.</p>
+  <div class="big4">
+    <div class="big-stat"><div class="v">20 min</div><div class="l">to settle one fee dispute at the counter</div></div>
+    <div class="big-stat"><div class="v">1 period</div><div class="l">lost to roll call and register totals</div></div>
+    <div class="big-stat"><div class="v">2 weeks</div><div class="l">from last exam paper to report card</div></div>
+    <div class="big-stat"><div class="v">Nobody</div><div class="l">has time to chase overdue fees</div></div>
+  </div>
+  <p style="font-size:8.5pt;color:var(--ink-mute);margin-top:4mm;max-width:190mm">
+    These are the four complaints we heard in every school we sat in before we wrote any of this —
+    from accountants, class teachers, the front desk and the transport in-charge.</p>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 3 · WHY WE BUILT IT ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">Why we built it</span>{{LOCKUP_SM}}</div>
+  <div class="slide-split slide-split--wide">
+    <div>
+      <h2 class="slide-h2">Built in Patna, with a Patna school,<br>for schools like yours.</h2>
+      <p class="slide-body" style="margin-top:3mm">
+        We did not start from a feature list. We sat with the people who would have to use it — the
+        accountant at the fee counter, the class teacher with the register, the librarian, the
+        transport in-charge, the front desk, the principal and the director — and built what they
+        actually do each day.</p>
+      <p class="slide-body" style="margin-top:3mm">
+        That is why there is no module here that a school does not open. Most systems sell you a
+        hundred features and your staff use twenty. You are paying for the eighty either way.</p>
+    </div>
+    <div class="panel panel--amber">
+      <div style="font-size:10pt;font-weight:800;color:var(--navy-mid);margin-bottom:2mm">
+        What that produced</div>
+      <ul class="ticks">
+        <li style="font-size:9pt">{{MODULE_COUNT}} modules, every one in daily use at a real school</li>
+        <li style="font-size:9pt">{{RELEASE_COUNT}} releases since {{LIVE_SINCE}} — many of them because a
+        teacher or an accountant asked</li>
+        <li style="font-size:9pt">English and Hindi, switchable in one click</li>
+        <li style="font-size:9pt">Works on the cheap Android phones your staff and parents actually carry</li>
+        <li style="font-size:9pt">Runs on one ordinary office computer</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 4 · PROOF ══════ -->
+<section class="sheet sheet--slide slide--navy">
+  <div class="slide-head"><span class="slide-no" style="color:#34D399">Proof</span>{{LOCKUP_DARK_SM}}</div>
+  <h2 class="slide-h2">It is not a prototype.<br>A school has run on it every day since {{LIVE_SINCE}}.</h2>
+  <p class="slide-body" style="margin:3mm 0 5mm;max-width:180mm">
+    {{REF_NAME}}, {{REF_CITY}} — {{REF_BOARD}}, {{REF_CAMPUSES}}. Admissions, fee collection,
+    attendance, examinations and staff records, through a full admission cycle, a full fee cycle and
+    a full exam cycle.</p>
+  <div class="big4">
+    <div class="big-stat"><div class="v">{{REF_STUDENTS}}</div><div class="l">Active students</div></div>
+    <div class="big-stat"><div class="v">{{REF_STAFF}}</div><div class="l">School staff using it</div></div>
+    <div class="big-stat"><div class="v">{{MONTHS_LIVE}}</div><div class="l">Months in production</div></div>
+    <div class="big-stat"><div class="v">{{RELEASE_COUNT}}</div><div class="l">Releases shipped</div></div>
+  </div>
+  <p style="font-size:11pt;color:var(--amber);font-weight:700;margin-top:5mm">
+    Come and watch it run. Ask their accountant anything you like — we will wait outside.</p>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 5 · BEFORE / AFTER ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">What changes on day one</span>{{LOCKUP_SM}}</div>
+  <h2 class="slide-h2" style="margin-bottom:4mm">The same working day, with and without it.</h2>
+  <div class="before-after">
+    <div class="ba-side ba-before">
+      <div class="ba-lab" style="color:var(--ink-mute)">Today</div>
+      <div class="ba-item">Parent disputes a fee; clerk searches a ledger while a queue builds</div>
+      <div class="ba-item">Roll call on paper, totalled by hand at month end</div>
+      <div class="ba-item">Marks added on a calculator, report cards typed out</div>
+      <div class="ba-item">Circular goes home in a school bag and is never seen</div>
+      <div class="ba-item">Nobody knows who visited the school last Tuesday</div>
+      <div class="ba-item">Dues chased by telephone, when somebody has time</div>
+    </div>
+    <div class="arrow">&rarr;</div>
+    <div class="ba-side ba-after">
+      <div class="ba-lab" style="color:var(--amber-text)">With EduAnant</div>
+      <div class="ba-item">Search the name — full history on screen, receipt reprinted on the spot</div>
+      <div class="ba-item">Whole class marked in 60 seconds on a phone; totals are automatic</div>
+      <div class="ba-item">Grades, GPA and rank calculated; report cards generated</div>
+      <div class="ba-item">Notice reaches the parent's phone the moment it is published</div>
+      <div class="ba-item">Every visitor, call and gate pass logged and searchable months later</div>
+      <div class="ba-item">Five reminders per due date, sent by the system, by itself</div>
+    </div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 6 · IT RUNS ITSELF ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">The part nobody else does</span>{{LOCKUP_SM}}</div>
+  <h2 class="slide-h2">Most software gives your staff more to do.<br>This takes work away from them.</h2>
+  <p class="slide-body" style="margin:2mm 0 3mm">
+    All of this happens on its own. Nobody at school starts it, remembers it, or checks it.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm">
+    <div class="auto-card">
+      {{ICON:BellRing}}
+      <div class="t">Fee reminders, five per due date</div>
+      <div class="b">Three days before, the day before, on the day, the day after, and a week after.
+      Each one goes to the parent's phone. Holiday-aware.</div>
+    </div>
+    <div class="auto-card">
+      {{ICON:TrendingUp}}
+      <div class="t">Results that say how a child is doing</div>
+      <div class="b">Grades, GPA and rank calculated. The parent app shows whether the result improved
+      on the last exam, and joins it to attendance.</div>
+    </div>
+    <div class="auto-card">
+      {{ICON:CalendarCheck}}
+      <div class="t">Attendance that knows the calendar</div>
+      <div class="b">Marking is blocked on Sundays, off-Saturdays and holidays. Approved leave applies
+      itself. Absence alerts go out automatically.</div>
+    </div>
+    <div class="auto-card">
+      {{ICON:NotebookPen}}
+      <div class="t">Homework and morning reminders</div>
+      <div class="b">Students and parents are nudged about new work — and never on a day the school
+      is closed.</div>
+    </div>
+    <div class="auto-card">
+      {{ICON:DatabaseBackup}}
+      <div class="t">A backup before every update</div>
+      <div class="b">Daily backups, plus a full one before any new release installs — and an
+      automatic rollback if the update fails its health check.</div>
+    </div>
+    <div class="auto-card">
+      {{ICON:Cake}}
+      <div class="t">Small things that make parents notice</div>
+      <div class="b">A birthday greeting to the student in the app. Gate passes and movement history
+      visible to the parent who asked where their child was.</div>
+    </div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 7 · THE WHOLE SYSTEM ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">What you get — all of it, included</span>{{LOCKUP_SM}}</div>
+  <h2 class="slide-h2" style="margin-bottom:3.5mm">{{MODULE_COUNT}} modules. No tier to upgrade to.</h2>
+  <ul class="modlist">
+    {{MODULE_LIST}}
+  </ul>
+  <style>
+    .sheet--slide ul li { font-size: 9.5pt; color: var(--ink-soft); line-height: 1.75;
+                          padding-left: 3.4mm; position: relative; break-inside: avoid; }
+    .sheet--slide ul li::before { content: ''; position: absolute; left: 0; top: 2mm;
+                                  width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--cyan); }
+    .sheet--slide ul.ticks li::before { background: var(--amber); }
+  </style>
+  <p class="slide-body" style="margin-top:4mm">
+    Every school gets every module, both portals, the Android app and unlimited staff accounts.
+    There is nothing held back for a higher plan.</p>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 8 · WHERE IT RUNS ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">Where it lives</span>{{LOCKUP_SM}}</div>
+  <h2 class="slide-h2" style="margin-bottom:4mm">On your computer, your network, or ours.<br>Same product either way.</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm">
+    <div class="auto-card">
+      {{ICON:Monitor}}
+      <div class="t">One office computer</div>
+      <div class="b">Installed on a single PC and used from that desk. No internet needed at all,
+      nothing else to buy. One person at a time.</div>
+      <div style="font-size:8pt;color:var(--amber-text);font-weight:700;margin-top:2mm">₹0 extra</div>
+    </div>
+    <div class="auto-card" style="border-color:rgba(245,158,11,0.45);background:rgba(245,158,11,0.05)">
+      {{ICON:Wifi}}
+      <div class="t">Your school network &nbsp;<span style="font-size:7pt;color:var(--amber-text)">MOST SCHOOLS</span></div>
+      <div class="b">One PC hosts it; the front desk, staffroom, accounts and principal all use it at
+      once over your own Wi-Fi. A broadband outage does not stop the fee counter.</div>
+      <div style="font-size:8pt;color:var(--amber-text);font-weight:700;margin-top:2mm">₹0 extra</div>
+    </div>
+    <div class="auto-card">
+      {{ICON:Cloud}}
+      <div class="t">Hosted by us</div>
+      <div class="b">We run it, back it up and update it, with a web address of your own. Staff and
+      parents reach it from anywhere. Needs a working line at school.</div>
+      <div style="font-size:8pt;color:var(--amber-text);font-weight:700;margin-top:2mm">₹{{HOSTING_ANNUAL}} a year</div>
+    </div>
+  </div>
+  <div class="panel panel--navy" style="margin-top:4mm">
+    <div style="font-size:9.5pt;color:#CBD5E1;line-height:1.55">
+      <b style="color:#fff">On the first two, your database never leaves your building.</b> It is standard
+      PostgreSQL, exportable in full at any time. If you ever stop paying us, your data does not go
+      anywhere — it is already on your machine.</div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 9 · SECURITY ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">Who can see what</span>{{LOCKUP_SM}}</div>
+  <div class="slide-split">
+    <div>
+      <h2 class="slide-h2">Your accountant sees fees.<br>Your class teacher sees their class.</h2>
+      <p class="slide-body" style="margin-top:3mm">
+        Every member of staff sees only what their role allows, down to individual screens and
+        actions — 96 permissions across 22 groups, editable per person. You can create your own roles.</p>
+      <p class="slide-body" style="margin-top:3mm">
+        Every sensitive action is written to an audit trail that not even the school admin can edit.
+        Aadhaar, PAN and bank numbers are encrypted and masked on screen; revealing one is itself
+        recorded.</p>
+    </div>
+    <div class="panel panel--plain">
+      <ul class="ticks">
+        <li style="font-size:9.5pt">96 permissions, assignable per user</li>
+        <li style="font-size:9.5pt">Two-factor authentication for staff logins</li>
+        <li style="font-size:9.5pt">Immutable audit log, exportable</li>
+        <li style="font-size:9.5pt">Encryption at rest for Aadhaar, PAN and bank details</li>
+        <li style="font-size:9.5pt">Forced password reset on first login</li>
+        <li style="font-size:9.5pt">Automatic daily backups, plus one before every update</li>
+        <li style="font-size:9.5pt">Student data never shared with anyone, ever</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 10 · PRICE ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">What it costs</span>{{LOCKUP_SM}}</div>
+  <div class="slide-split slide-split--wide">
+    <div>
+      <h2 class="slide-h2" style="margin-bottom:3mm">One line on your budget.</h2>
+      <table>
+        <tr><th>School size</th><th>Monthly</th><th>Annual</th></tr>
+        {{RATE_ROWS_COMPACT}}
+        <tr><td>Above {{CONTACT_ABOVE}}</td><td class="num">Quoted</td>
+            <td class="num num--amber">from {{FLOOR_ANNUAL}}</td></tr>
+      </table>
+      <p style="font-size:8.5pt;color:var(--ink-mute);line-height:1.5;margin-top:2.5mm">
+        Per student per month on your actual roll, {{GST_PCT}}% GST on top. The rate is set by the size of
+        the school. No annual minimum, no setup fee, no per-module charge. Paying for the year up
+        front takes {{ANNUAL_SAVING_PCT}}% off.</p>
+    </div>
+    <div>
+      <div class="panel panel--plain" style="margin-bottom:3.5mm">
+        <div style="font-size:8pt;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;
+                    color:var(--ink-mute);margin-bottom:2mm">Your first year, all in</div>
+        <table>
+          <tr><th>Roll</th><th>List, incl. GST</th><th>Founding {{FOUNDING_COUNT}}</th></tr>
+          {{EXAMPLE_ROWS_COMPACT}}
+        </table>
+      </div>
+      <div class="panel panel--amber">
+        <div style="font-size:10pt;font-weight:800;color:var(--navy-mid);margin-bottom:1.4mm">
+          Founding {{FOUNDING_COUNT}} — open now</div>
+        <div style="font-size:9pt;color:var(--ink-soft);line-height:1.5">
+          <b style="color:var(--amber-text)">{{FOUNDING_PCT}}% off year one, renewal rates locked for life.</b>
+          In return: a reference call, one quotable sentence after two months, and your school's name
+          on our website.</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 11 · HOW WE GET YOU LIVE ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">How we get you live</span>{{LOCKUP_SM}}</div>
+  <h2 class="slide-h2" style="margin-bottom:4mm">Four steps, and we are beside you for all of them.</h2>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4mm">
+    <div class="auto-card">
+      <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:20pt;color:var(--amber);line-height:1;margin-bottom:2mm">1</div>
+      <div class="t">Site survey &amp; install</div>
+      <div class="b">We check the computer, the power backup and whether the Wi-Fi reaches your fee
+      counter, then install and configure your board, session and classes.</div>
+    </div>
+    <div class="auto-card">
+      <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:20pt;color:var(--amber);line-height:1;margin-bottom:2mm">2</div>
+      <div class="t">Your records, migrated</div>
+      <div class="b">Students, staff, fee heads and opening balances imported from your Excel sheets
+      and reconciled against your registers — plus a drive to verify parent phone numbers.</div>
+    </div>
+    <div class="auto-card">
+      <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:20pt;color:var(--amber);line-height:1;margin-bottom:2mm">3</div>
+      <div class="t">Roles &amp; staff training</div>
+      <div class="b">Permissions set per role, then each team trained on their own screens, on site,
+      in Hindi or English.</div>
+    </div>
+    <div class="auto-card">
+      <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:20pt;color:var(--amber);line-height:1;margin-bottom:2mm">4</div>
+      <div class="t">Go live at session start</div>
+      <div class="b">We stay reachable through your first fee cycle and first exam cycle — the two
+      moments that decide whether a system is trusted.</div>
+    </div>
+  </div>
+  <div class="panel panel--amber" style="margin-top:4mm">
+    <div style="font-size:9.5pt;color:var(--ink-soft);line-height:1.5">
+      <b style="color:var(--navy-mid)">Your first term is a pilot.</b> If it is not right for your school,
+      say so in writing and the licence ends — you pay for the term you used, and we hand you a full
+      export of your data within seven working days.</div>
+  </div>
+  <div class="slide-foot">{{SITE}} · {{PHONE}}</div>
+</section>
+
+<!-- ══════ 12 · CLOSE ══════ -->
+<section class="sheet sheet--slide slide--navy">
+  <div class="slide-head"><span class="slide-no" style="color:#34D399">Next step</span>{{LOCKUP_DARK_SM}}</div>
+  <div class="slide-split slide-split--wide" style="align-items:center">
+    <div>
+      <h2 class="slide-h2">Pick one. All three are free.</h2>
+      <div style="margin-top:5mm">
+        <div style="display:flex;gap:3.5mm;margin-bottom:4mm">
+          <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:15pt;color:var(--amber);line-height:1">1</div>
+          <div><div style="font-size:11pt;font-weight:800;color:#fff">Watch it run at {{REF_NAME}}</div>
+          <div style="font-size:9.5pt;color:#CBD5E1;line-height:1.5">Ask their accountant and front desk
+          anything. We will wait outside.</div></div>
+        </div>
+        <div style="display:flex;gap:3.5mm;margin-bottom:4mm">
+          <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:15pt;color:var(--amber);line-height:1">2</div>
+          <div><div style="font-size:11pt;font-weight:800;color:#fff">We come to you, with your own school in it</div>
+          <div style="font-size:9.5pt;color:#CBD5E1;line-height:1.5">Send your class and section list and
+          we arrive set up as your school — not a demo school.</div></div>
+        </div>
+        <div style="display:flex;gap:3.5mm">
+          <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:15pt;color:var(--amber);line-height:1">3</div>
+          <div><div style="font-size:11pt;font-weight:800;color:#fff">Sign in to the live system yourself</div>
+          <div style="font-size:9.5pt;color:#CBD5E1;line-height:1.5">As an admin, a teacher or an accountant —
+          the same build a paying school is using today.</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#fff;padding:3.5mm;border-radius:3mm;display:inline-block">
+        <div class="qr-d">{{QR_DEMO}}</div>
+      </div>
+      <div style="font-size:8pt;color:rgba(255,255,255,0.6);margin-top:2mm">Scan for the live demo</div>
+      <div style="font-family:'Plus Jakarta Sans';font-weight:800;font-size:15pt;color:#fff;margin-top:5mm">
+        {{PHONE}}</div>
+      <div style="font-size:9pt;color:rgba(255,255,255,0.7);line-height:1.6">
+        Phone &amp; WhatsApp<br>{{EMAIL}}<br>{{SITE}}</div>
+    </div>
+  </div>
+  <div class="slide-foot">{{LEGAL_NAME}} · {{ADDRESS}}</div>
+</section>
+
+<!-- ══════ APPENDIX DIVIDER ══════ -->
+<section class="sheet sheet--slide">
+  <div class="slide-head"><span class="slide-no">Appendix</span>{{LOCKUP_SM}}</div>
+  <div style="margin:auto 0">
+    <h2 class="slide-h2">One page per module.</h2>
+    <p class="slide-body" style="margin-top:3mm;max-width:170mm">
+      The slides that follow are not meant to be presented in order. They are here so that when you
+      ask &ldquo;what about the library?&rdquo; or &ldquo;how does transport billing work?&rdquo;, we can
+      turn straight to the page that answers it.</p>
+  </div>
+  <div class="slide-foot">{{MODULE_COUNT}} modules · Release {{VERSION}}</div>
+</section>
+
+<!-- ══════ GENERATED: one slide per module, from src/data/modules.ts ══════ -->
+{{MODULE_SLIDES}}
+
+</body></html>

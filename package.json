@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "build:spa": "tsc -b && vite build",
     "prerender": "node scripts/prerender.mjs",
-    "verify:pricing": "node scripts/verify-pricing.mjs"
+    "verify:pricing": "node scripts/verify-pricing.mjs",
+    "print": "node docs/print/build.mjs",
+    "print:check": "node docs/print/build.mjs --check"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

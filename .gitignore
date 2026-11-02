@@ -10,6 +10,16 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+
+# Internal sales material: discount limits, objection scripts, lead lists.
+# This repository is public, so none of it may be committed.
+Branding and Marketing/
+
+# Generated print kit — 4MB of PDFs rebuilt by `npm run print` from the sources
+# beside them. The deploy copies the whole repo to the VPS, so build output has
+# no business being in it. The brochure the website actually serves is tracked
+# separately at public/eduanant-school-overview.pdf.
+docs/print/dist/
 *.local
 
 # Editor directories and files

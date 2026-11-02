@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Price Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+/* A5, two sides. The one piece of paper a rep may leave on a desk without
+   talking through it, so every number on it has to survive being read alone. */
+@page { size: A5 portrait; margin: 0; }
+.hd-rule { border-bottom: 0.6mm solid var(--navy-mid); padding-bottom: 2.4mm; margin-bottom: 3.4mm; }
+.lead { font-size: 9pt; color: var(--ink-soft); line-height: 1.55; }
+.note { font-size: 7.4pt; color: var(--ink-mute); line-height: 1.45; }
+.big { font-family: 'Plus Jakarta Sans'; font-weight: 800; color: var(--navy-mid); }
+.incl { column-count: 2; column-gap: 4mm; list-style: none; margin-top: 1.5mm; }
+.incl li { font-size: 7.6pt; color: var(--ink-soft); line-height: 1.45; padding-left: 2.8mm;
+           position: relative; break-inside: avoid; margin-bottom: 0.5mm; }
+.incl li::before { content: ''; position: absolute; left: 0; top: 1.4mm; width: 1.1mm;
+                   height: 1.1mm; border-radius: 50%; background: var(--amber); }
+.qr-b { width: 20mm; height: 20mm; }
+.qr-b svg { width: 100%; height: 100%; display: block; }
+.foot-rule { position: absolute; left: 11mm; right: 11mm; bottom: 10mm;
+             border-top: 0.2mm solid var(--rule); padding-top: 2.4mm; }
+</style></head>
+<body>
+
+<!-- ═══════ SIDE 1 — the numbers ═══════ -->
+<section class="sheet sheet--a5p">
+  <div class="hd-rule" style="display:flex;justify-content:space-between;align-items:flex-start">
+    {{LOCKUP_SM}}
+    <span class="pill">Price card</span>
+  </div>
+
+  <h1 style="font-size:16pt;color:var(--navy-mid);margin-bottom:1.6mm">
+    One line on your budget.</h1>
+  <p class="lead" style="margin-bottom:4mm">
+    Charged per student, per month, on your actual roll. The rate is set by the size of your school
+    and applies to the whole roll — there is no annual minimum, no setup fee and no module you have
+    to buy separately.</p>
+
+  <div class="eyebrow">The rate</div>
+  <table style="margin-bottom:2mm">
+    <tr><th>School size</th><th>Billed monthly</th><th>Billed annually</th></tr>
+    {{RATE_ROWS_COMPACT}}
+    <tr><td>Above {{CONTACT_ABOVE}} students</td><td class="num">Quoted</td>
+        <td class="num num--amber">from {{FLOOR_ANNUAL}}</td></tr>
+  </table>
+  <p class="note" style="margin-bottom:4mm">
+    Paying for the year up front takes <b>{{ANNUAL_SAVING_PCT}}% off</b> the monthly rate — that is the
+    annual column. <b>{{GST_PCT}}% GST is added on top of every figure here.</b> The totals in the next
+    table already include it.</p>
+
+  <div class="eyebrow">What that comes to — a full year, GST included</div>
+  <table style="margin-bottom:2mm">
+    <tr><th>Your roll</th><th>Licence</th><th>Year 1, all in</th>
+        <th>Founding {{FOUNDING_COUNT}}</th><th>Year 1, all in</th></tr>
+    {{EXAMPLE_ROWS}}
+  </table>
+  <p class="note">
+    Billed annually. Find the row nearest your own roll — your actual figure is your exact student
+    count times the rate for your band, times twelve.</p>
+
+  <div class="foot-rule" style="display:flex;justify-content:space-between;align-items:center">
+    <span class="note"><b style="color:var(--navy-mid)">EduAnant</b> · Release {{VERSION}} · prices valid for the current session</span>
+    <span class="note">{{SITE}} · {{PHONE}}</span>
+  </div>
+</section>
+
+<!-- ═══════ SIDE 2 — what the money buys ═══════ -->
+<section class="sheet sheet--a5p">
+  <div class="hd-rule" style="display:flex;justify-content:space-between;align-items:flex-start">
+    {{LOCKUP_SM}}
+    <span class="pill">What is included</span>
+  </div>
+
+  <div class="panel panel--amber" style="margin-bottom:3mm">
+    <div style="font-size:11pt;font-weight:800;color:var(--navy-mid);margin-bottom:1.2mm">
+      Founding {{FOUNDING_COUNT}} schools — open now</div>
+    <div style="font-size:8.4pt;color:var(--ink-soft);line-height:1.5">
+      We are looking for {{FOUNDING_COUNT}} schools to build the next year of this product with.
+      <b style="color:var(--amber-text)">{{FOUNDING_PCT}}% off your first year, and renewal rates locked for
+      life.</b> In return we ask for a reference call, a line we can quote once you have lived with it
+      for two months, and your school's name on our website.</div>
+  </div>
+
+  <div class="eyebrow">Included for every school, at no extra cost</div>
+  <ul class="incl" style="margin-bottom:3.5mm">
+    <li>All {{MODULE_COUNT}} modules — no tier to upgrade to</li>
+    <li>Unlimited staff accounts</li>
+    <li>Teacher portal and parent portal</li>
+    <li>The Android app for parents and staff</li>
+    <li>Installation and configuration on site</li>
+    <li>Migration from your existing Excel sheets</li>
+    <li>On-site staff training, Hindi or English</li>
+    <li>Every future update, free</li>
+    <li>Daily automatic backups</li>
+    <li>Support direct from the people who build it</li>
+  </ul>
+
+  <div class="eyebrow">The only thing that costs extra</div>
+  <table style="margin-bottom:3mm">
+    <tr><th>Item</th><th>Per year</th><th>Incl. GST</th><th>When you need it</th></tr>
+    <tr><td>We host it for you</td><td class="num">₹{{HOSTING_ANNUAL}}</td>
+        <td class="num">₹{{HOSTING_ANNUAL_GST}}</td>
+        <td>Only if you would rather not keep a computer for it at school</td></tr>
+  </table>
+
+  <div class="eyebrow">Where it runs — your choice, same product</div>
+  <div style="font-size:8pt;color:var(--ink-soft);line-height:1.5;margin-bottom:3.5mm">
+    <b style="color:var(--navy-mid)">One office computer</b> — no internet needed at all, one person at a
+    time. <b style="color:var(--navy-mid)">Your school network</b> — everyone on your Wi-Fi at once; a
+    broadband outage does not stop the fee counter. <b style="color:var(--navy-mid)">Hosted by us</b> —
+    reachable from anywhere. On the first two the database stays in your building, in standard
+    PostgreSQL you can export at any time.
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:4mm">
+    <div>
+      <div class="eyebrow" style="margin-bottom:1.4mm">Work out your own number</div>
+      <div style="font-size:8.2pt;color:var(--ink-soft);line-height:1.5;max-width:68mm">
+        The calculator on our website takes your exact roll and shows the year, with GST, in both
+        billing cycles and at the Founding {{FOUNDING_COUNT}} rate.</div>
+      <div style="font-size:10pt;font-weight:800;color:var(--navy-mid);margin-top:2mm;line-height:1.5">
+        {{PHONE}}<br>
+        <span style="font-size:7.8pt;font-weight:600;color:var(--ink-mute)">Phone &amp; WhatsApp · {{EMAIL}}</span></div>
+    </div>
+    <div style="text-align:center">
+      <div class="qr-b">{{QR_PRICING}}</div>
+      <div class="qr-cap">Price<br>calculator</div>
+    </div>
+  </div>
+
+  <div class="foot-rule" style="display:flex;justify-content:space-between;align-items:center">
+    <span class="note">{{LEGAL_NAME}} · {{ADDRESS}}</span>
+    <span class="note">An estimate, not a quotation. Group and referral rates are settled on a call.</span>
+  </div>
+</section>
+
+</body></html>

@@ -1,0 +1,291 @@
+/**
+ * EduAnant print brand sheet — the single source of truth for anything printed.
+ *
+ * Every leaflet, card, form and slide in docs/print/src imports exactly this file,
+ * so a colour or a type size is defined once and the whole kit moves together.
+ * The tokens mirror tailwind.config.js: if the website's brand changes, change it
+ * there first and copy the hex across, rather than inventing a second palette.
+ *
+ * Units are pt and mm, never px. A px size that looked fine in a browser is how
+ * the first brochure ended up setting its body copy at roughly 6 pt — legible on
+ * a screen, unreadable in a principal's hand.
+ */
+
+/* ── Tokens ──────────────────────────────────────────────────────────────────
+ * Navy is authority, amber is action, cyan is the logo's own signature and is
+ * reserved for the mark and for confirmations. Three accent colours is already
+ * one more than most printed pieces need; do not add a fourth.
+ */
+:root {
+    --navy:        #0F172A;  /* deepest institutional navy — page furniture */
+    --navy-mid:    #1E1B4B;  /* midnight indigo — headings, primary base */
+    --indigo:      #312E81;  /* gradient partner, never used flat for text */
+    --amber:       #F59E0B;  /* action accent: CTAs, rules, bullets */
+    --amber-deep:  #EA580C;
+    --amber-text:  #B45309;  /* the only amber safe for small text on white */
+    --cyan:        #00b6d5;  /* logo signature */
+    --cyan-light:  #63cae0;
+    --cyan-deep:   #0f6187;
+
+    --ink:         #0F172A;  /* body copy */
+    --ink-soft:    #334155;  /* secondary copy */
+    --ink-mute:    #64748B;  /* captions, footers */
+    --rule:        #E2E8F0;  /* hairlines */
+    --wash:        #F8FAFC;  /* panel fill */
+    --wash-amber:  #FEF3C7;
+
+    --grad-brand:  linear-gradient(135deg, #0F172A 0%, #1E1B4B 55%, #312E81 100%);
+    --grad-action: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+
+    /* Paper-grade type. 9pt is the floor for anything a director reads at arm's
+     * length; captions may go to 7.5pt, nothing goes below that. */
+    --t-caption: 7.5pt;
+    --t-small:   8.5pt;
+    --t-body:    9.5pt;
+    --t-lead:    11pt;
+    --t-h3:      13pt;
+    --t-h2:      17pt;
+    --t-h1:      25pt;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+    /* Backgrounds and panel fills must survive the print dialog, or every navy
+     * panel in this kit prints as white paper with white text on it. */
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+body {
+    font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--ink);
+    background: #fff;
+}
+
+h1, h2, h3, h4, .display {
+    font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+}
+
+/* Hindi sets on a different font and a looser leading: Devanagari has taller
+ * ascenders and a headline rule, and at Inter's leading the matras collide. */
+.hi, [lang="hi"] {
+    font-family: 'Noto Sans Devanagari', 'Kohinoor Devanagari', sans-serif;
+    line-height: 1.75;
+    letter-spacing: 0;
+}
+
+/* ── The logo lockup ─────────────────────────────────────────────────────────
+ * The mark on its own does not say "EduAnant". On screen that is survivable,
+ * because the name is in the address bar and the page title. On paper it is not:
+ * a director who likes the leaflet has to be able to ask for us by name.
+ *
+ * So the printed logo is always a lockup — mark plus name — in one of the three
+ * forms below, and never the bare mark except as a watermark or a cover motif.
+ */
+.lockup { display: inline-flex; align-items: center; gap: 2.6mm; }
+/* The width is stated, not left to `auto`. The artwork is 830.2 x 500, so width
+ * is height x 1.6604 — computed here once rather than by the layout engine,
+ * which collapsed the mark to a sliver whenever a lockup sat inside a flex row
+ * that aligned its items to an edge. */
+.lockup-mark { height: 9mm; width: 14.94mm; flex-shrink: 0; }
+.lockup-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 16pt;
+    letter-spacing: -0.025em;
+    color: var(--navy-mid);
+    line-height: 1;
+    display: block;
+}
+.lockup-sub {
+    font-size: var(--t-caption);
+    font-weight: 700;
+    color: var(--ink-mute);
+    letter-spacing: 0.02em;
+    margin-top: 0.9mm;
+    display: block;
+}
+/* Devanagari reading of the name, for Hindi pieces and for any audience that has
+ * never met the word. अनंत = endless, which is the whole point of the mark. */
+.lockup-hi {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: var(--t-caption);
+    font-weight: 600;
+    color: var(--ink-mute);
+    display: block;
+    line-height: 1.4;
+}
+.on-dark .lockup-name { color: #fff; }
+.on-dark .lockup-sub,
+.on-dark .lockup-hi  { color: rgba(255,255,255,0.72); }
+
+/* Minimum sizes. Below these the cap tassel and the book's page lines fill in on
+ * press and the mark reads as a grey blob. */
+.lockup--sm .lockup-mark { height: 7mm; width: 11.62mm; }
+.lockup--sm .lockup-name { font-size: 12.5pt; }
+.lockup--lg .lockup-mark { height: 14mm; width: 23.25mm; }
+.lockup--lg .lockup-name { font-size: 24pt; }
+
+/* ── Page geometry ───────────────────────────────────────────────────────────
+ * Each piece sets its own @page size; these are the shared shells. `.sheet` is
+ * one printed side. Nothing may sit closer than the margin to a trimmed edge.
+ */
+.sheet {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    page-break-after: always;
+}
+.sheet:last-child { page-break-after: auto; }
+
+.sheet--a4l { width: 297mm; height: 210mm; padding: 13mm 15mm 16mm; }
+.sheet--a4p { width: 210mm; height: 297mm; padding: 14mm 15mm 16mm; }
+.sheet--a5p { width: 148mm; height: 210mm; padding: 11mm 11mm 13mm; }
+.sheet--slide {
+    width: 254mm; height: 142.9mm;  /* 16:9 */
+    padding: 12mm 14mm;
+    display: flex; flex-direction: column;
+}
+
+/* ── Shared furniture ────────────────────────────────────────────────────────*/
+.masthead {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 2.5mm;
+    border-bottom: 0.7mm solid var(--navy-mid);
+    margin-bottom: 4mm;
+}
+.masthead-right { text-align: right; }
+
+.pill {
+    display: inline-block;
+    padding: 1mm 2.8mm;
+    border-radius: 99px;
+    background: var(--wash-amber);
+    border: 0.25mm solid var(--amber);
+    color: var(--amber-text);
+    font-size: var(--t-caption);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+.pill--quiet {
+    background: transparent; border-color: var(--rule); color: var(--ink-mute);
+}
+
+.eyebrow {
+    font-size: var(--t-caption);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--amber-text);
+    margin-bottom: 2mm;
+}
+
+.panel {
+    border: 0.25mm solid var(--rule);
+    border-radius: 2.5mm;
+    padding: 3.2mm 3.8mm;
+    background: var(--wash);
+}
+.panel--plain { background: #fff; }
+.panel--navy {
+    background: var(--grad-brand);
+    border-color: var(--navy-mid);
+    color: #fff;
+}
+.panel--navy h2, .panel--navy h3, .panel--navy h4 { color: #fff; }
+.panel--navy p, .panel--navy li { color: #CBD5E1; }
+.panel--amber {
+    background: rgba(245,158,11,0.07);
+    border-color: rgba(245,158,11,0.35);
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 1.2mm; margin-top: 2.4mm; }
+.chip {
+    font-size: var(--t-caption); font-weight: 700;
+    padding: 0.9mm 2.2mm; border-radius: 99px;
+    background: var(--wash-amber); border: 0.2mm solid #FCD34D; color: var(--amber-text);
+}
+.panel--navy .chip {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.22);
+    color: #E2E8F0;
+}
+
+table { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+th {
+    background: var(--navy-mid); color: #fff; font-weight: 700;
+    padding: 1.8mm 2.2mm; text-align: left;
+    font-size: var(--t-caption); text-transform: uppercase; letter-spacing: 0.05em;
+}
+td { padding: 1.7mm 2.2mm; border-bottom: 0.2mm solid var(--rule); color: var(--ink-soft); }
+tr:nth-child(even) td { background: var(--wash); }
+td.num { font-weight: 800; color: var(--navy-mid); font-variant-numeric: tabular-nums; }
+td.num--amber { color: var(--amber-text); }
+tr.row--accent td { background: rgba(245,158,11,0.08); }
+
+ul.ticks { list-style: none; }
+ul.ticks li {
+    font-size: var(--t-small); color: var(--ink-soft); line-height: 1.5;
+    padding-left: 3.4mm; position: relative; margin-bottom: 0.9mm;
+}
+ul.ticks li::before {
+    content: ''; position: absolute; left: 0; top: 1.5mm;
+    width: 1.3mm; height: 1.3mm; border-radius: 50%; background: var(--amber);
+}
+.panel--navy ul.ticks li { color: #CBD5E1; }
+
+.steps .step { display: flex; gap: 2.4mm; margin-bottom: 2.2mm; }
+.step-num {
+    width: 5mm; height: 5mm; flex-shrink: 0; border-radius: 50%;
+    background: var(--amber); color: var(--navy);
+    font-size: var(--t-caption); font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+}
+.step-title { font-size: var(--t-small); font-weight: 800; color: var(--navy-mid); line-height: 1.3; }
+.step-body  { font-size: var(--t-caption); color: var(--ink-soft); line-height: 1.45; margin-top: 0.3mm; }
+
+/* ── Icons ───────────────────────────────────────────────────────────────────
+ * Line icons from the same lucide set the website uses, inherited from
+ * modules.ts so a module's icon is the same on screen and on paper. They mark
+ * things a reader scans for — a module in a grid, a choice in a row of cards —
+ * and never decorate a paragraph. If a word does the job, use the word.
+ */
+.ico { width: 4.2mm; height: 4.2mm; flex-shrink: 0; color: var(--amber-text); }
+.ico--lg { width: 6mm; height: 6mm; }
+.ico--sm { width: 3.4mm; height: 3.4mm; }
+.panel--navy .ico, .on-dark .ico { color: var(--amber); }
+
+.qr { display: block; }
+.qr-cap {
+    font-size: var(--t-caption); font-weight: 700; color: var(--ink-mute);
+    text-align: center; margin-top: 1mm; line-height: 1.3;
+}
+
+.footer {
+    position: absolute; left: 15mm; right: 15mm; bottom: 8mm;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: var(--t-caption); color: var(--ink-mute);
+    border-top: 0.2mm solid var(--rule); padding-top: 2mm;
+}
+.footer b { color: var(--navy-mid); }
+
+.cta-stamp {
+    background: var(--amber); color: var(--navy);
+    padding: 1.2mm 3mm; border-radius: 1.5mm;
+    font-weight: 800; font-size: var(--t-small);
+    display: inline-block;
+}
+
+/* Screen preview only — never printed. Lets a proof be read in a browser with
+ * the sheets separated, the way they will come off the press. */
+@media screen {
+    body { background: #E2E8F0; padding: 10mm; }
+    .sheet { margin: 0 auto 8mm; box-shadow: 0 4mm 10mm rgba(15,23,42,0.18); }
+}
+@page { margin: 0; }

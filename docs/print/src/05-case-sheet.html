@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Reference School Case Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+@page { size: A4 portrait; margin: 0; }
+/* ── DRAFT STATE ─────────────────────────────────────────────────────────────
+   This page carries the single most persuasive thing we will ever hand a
+   school: measured before-and-after numbers from a school that uses the system.
+   None of them exist yet. Until they do, the sheet prints struck through with a
+   draft stamp so a blank one cannot be handed over by accident.
+
+   To finish it: replace every .fill with a real figure taken from the live
+   install over a stated date range, get the school's written approval, then
+   delete the two .draft blocks and the `draft` class on <body>. */
+.draft-stamp { position: absolute; top: 46%; left: 50%;
+               transform: translate(-50%,-50%) rotate(-18deg);
+               font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 44pt;
+               color: rgba(211,47,47,0.13); letter-spacing: 0.04em;
+               white-space: nowrap; pointer-events: none; z-index: 5; }
+body:not(.draft) .draft-stamp, body:not(.draft) .draft-note { display: none; }
+.draft-note { background: rgba(211,47,47,0.07); border: 0.25mm solid rgba(211,47,47,0.4);
+              border-radius: 2mm; padding: 2.4mm 3mm; margin-bottom: 4mm; }
+.draft-note b { color: #b02020; }
+.fill { display: inline-block; min-width: 18mm; border-bottom: 0.35mm solid var(--amber);
+        background: rgba(245,158,11,0.09); text-align: center; font-weight: 800;
+        color: var(--amber-text); padding: 0 1.4mm; }
+.ba { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5mm; margin-bottom: 2mm; }
+.ba-card { border: 0.2mm solid var(--rule); border-radius: 2.5mm; overflow: hidden; }
+.ba-h { background: var(--navy-mid); color: #fff; font-size: 7.6pt; font-weight: 800;
+        padding: 1.8mm 2.4mm; letter-spacing: 0.02em; }
+.ba-b { padding: 2.6mm 2.4mm; }
+.ba-row { display: flex; justify-content: space-between; align-items: baseline;
+          font-size: 8pt; color: var(--ink-soft); margin-bottom: 1mm; }
+.ba-row b { font-family: 'Plus Jakarta Sans'; font-size: 11pt; color: var(--navy-mid); }
+.quote { border-left: 1mm solid var(--amber); padding: 1mm 0 1mm 3.4mm; }
+.quote p { font-size: 11pt; color: var(--navy-mid); line-height: 1.5; font-style: italic; }
+.quote cite { font-size: 8pt; color: var(--ink-mute); font-style: normal;
+              display: block; margin-top: 1.6mm; }
+.stat4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.2mm; }
+.stat { background: rgba(255,255,255,0.07); border: 0.2mm solid rgba(255,255,255,0.14);
+        border-radius: 2mm; padding: 2.4mm 1.6mm; text-align: center; }
+.stat-v { font-family: 'Plus Jakarta Sans'; font-weight: 800; font-size: 14pt; color: #fff; line-height: 1; }
+.stat-l { font-size: 6.6pt; color: #A5B4FC; margin-top: 0.8mm; line-height: 1.25; }
+</style></head>
+<body class="draft">
+
+<section class="sheet sheet--a4p">
+  <div class="draft-stamp">DRAFT — FIGURES NOT YET MEASURED</div>
+
+  <div class="masthead">
+    {{LOCKUP}}
+    <div class="masthead-right">
+      <span class="pill">Reference school</span>
+      <div style="font-size:var(--t-caption);color:var(--ink-mute);margin-top:1.2mm">
+        Live since {{LIVE_SINCE}} · {{MONTHS_LIVE}} months in production</div>
+    </div>
+  </div>
+
+  <div class="draft-note">
+    <div style="font-size:8.4pt;color:var(--ink-soft);line-height:1.5">
+      <b>Internal — do not hand this to a school yet.</b> Every amber field below must be replaced
+      with a figure measured from the live install over a stated date range, and {{REF_NAME}} must
+      approve its name, logo, numbers and quotation <b>in writing</b> before this page is printed.
+      An estimated figure on this sheet is worse than no sheet: it is the one page a director will
+      check. Once the figures are real, delete the <code>draft</code> class on &lt;body&gt; in
+      docs/print/src/05-case-sheet.html and rebuild.</div>
+  </div>
+
+  <h1 style="font-size:23pt;color:var(--navy-mid);line-height:1.1;margin-bottom:2mm">
+    What changed at {{REF_NAME}}.</h1>
+  <p style="font-size:10pt;color:var(--ink-soft);line-height:1.55;margin-bottom:4mm;max-width:155mm">
+    {{REF_BOARD}}, {{REF_CAMPUSES}} in {{REF_CITY}}. {{REF_STUDENTS}} students and {{REF_STAFF}} staff have
+    run their admissions, fee collection, attendance, examinations and staff records on EduAnant
+    every working day since {{LIVE_SINCE}} — through a full admission cycle, a full fee cycle and a
+    full exam cycle.</p>
+
+  <div class="panel panel--navy" style="margin-bottom:4.5mm">
+    <div class="stat4">
+      <div class="stat"><div class="stat-v">{{REF_STUDENTS}}</div><div class="stat-l">Active students</div></div>
+      <div class="stat"><div class="stat-v">{{REF_STAFF}}</div><div class="stat-l">School staff using it</div></div>
+      <div class="stat"><div class="stat-v">{{MONTHS_LIVE}}</div><div class="stat-l">Months in production</div></div>
+      <div class="stat"><div class="stat-v">3</div><div class="stat-l">Campuses on one system</div></div>
+    </div>
+  </div>
+
+  <div class="eyebrow">Measured before and after</div>
+  <div class="ba">
+    <div class="ba-card">
+      <div class="ba-h">At the fee counter</div>
+      <div class="ba-b">
+        <div class="ba-row"><span>Before, per receipt</span><b><span class="fill">&nbsp;</span></b></div>
+        <div class="ba-row"><span>Now, per receipt</span><b><span class="fill">&nbsp;</span></b></div>
+        <div class="ba-row"><span>Month-end reconciliation</span><b><span class="fill">&nbsp;</span></b></div>
+        <div style="font-size:7pt;color:var(--ink-mute);line-height:1.4;margin-top:1.4mm;
+                    padding-top:1.4mm;border-top:0.2mm solid var(--rule)">
+          Measured over <span class="fill">&nbsp;</span> to <span class="fill">&nbsp;</span></div>
+      </div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-h">Attendance &amp; results</div>
+      <div class="ba-b">
+        <div class="ba-row"><span>Class marked in</span><b><span class="fill">&nbsp;</span></b></div>
+        <div class="ba-row"><span>Exam end → report card</span><b><span class="fill">&nbsp;</span></b></div>
+        <div class="ba-row"><span>Was, on paper</span><b><span class="fill">&nbsp;</span></b></div>
+        <div style="font-size:7pt;color:var(--ink-mute);line-height:1.4;margin-top:1.4mm;
+                    padding-top:1.4mm;border-top:0.2mm solid var(--rule)">
+          Measured over <span class="fill">&nbsp;</span> to <span class="fill">&nbsp;</span></div>
+      </div>
+    </div>
+    <div class="ba-card">
+      <div class="ba-h">Reaching parents</div>
+      <div class="ba-b">
+        <div class="ba-row"><span>Notices read same day</span><b><span class="fill">&nbsp;</span></b></div>
+        <div class="ba-row"><span>Fee reminders sent, no staff time</span><b><span class="fill">&nbsp;</span></b></div>
+        <div class="ba-row"><span>Dues outstanding at term end</span><b><span class="fill">&nbsp;</span></b></div>
+        <div style="font-size:7pt;color:var(--ink-mute);line-height:1.4;margin-top:1.4mm;
+                    padding-top:1.4mm;border-top:0.2mm solid var(--rule)">
+          Measured over <span class="fill">&nbsp;</span> to <span class="fill">&nbsp;</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eyebrow">In their words</div>
+  <div class="panel panel--plain" style="margin-bottom:3mm">
+    <div class="quote">
+      <p>&ldquo;<span class="fill" style="min-width:120mm">&nbsp;</span><br>
+         <span class="fill" style="min-width:140mm">&nbsp;</span>&rdquo;</p>
+      <cite><span class="fill">&nbsp;</span> — <span class="fill">&nbsp;</span>, {{REF_NAME}}</cite>
+    </div>
+  </div>
+  <div class="panel panel--plain" style="margin-bottom:3.5mm">
+    <div class="quote">
+      <p style="font-size:9.5pt">&ldquo;<span class="fill" style="min-width:130mm">&nbsp;</span>&rdquo;</p>
+      <cite><span class="fill">&nbsp;</span>, accountant — the person who uses it most</cite>
+    </div>
+  </div>
+
+  <div class="panel panel--amber">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:4mm">
+      <div>
+        <div style="font-size:11pt;font-weight:800;color:var(--navy-mid);margin-bottom:1mm">
+          Don't take our word for it — come and watch it run.</div>
+        <div style="font-size:8.6pt;color:var(--ink-soft);line-height:1.5;max-width:118mm">
+          {{REF_NAME}} has agreed to host visits from schools considering EduAnant. You can ask their
+          accountant, their front desk and their class teachers whatever you like, with nobody from
+          our side in the room. Call us and we will arrange a time that suits them.</div>
+        <div style="font-size:10pt;font-weight:800;color:var(--navy-mid);margin-top:2mm">
+          {{PHONE}} &nbsp;<span style="font-size:8pt;font-weight:600;color:var(--ink-mute)">phone &amp; WhatsApp · {{EMAIL}}</span></div>
+      </div>
+      <div style="text-align:center">
+        <div style="width:22mm;height:22mm">{{QR_SITE}}</div>
+        <div class="qr-cap">eduanant.cloud</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span><b>EduAnant</b> · {{REF_NAME}} case sheet · Release {{VERSION}}</span>
+    <span>{{LEGAL_NAME}} · {{ADDRESS}}</span></div>
+</section>
+
+</body></html>

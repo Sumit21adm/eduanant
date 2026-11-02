@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>EduAnant — Order Form &amp; Pilot Terms</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+{{CSS}}
+@page { size: A4 portrait; margin: 0; }
+/* A rep must be able to leave a signed page behind, not a promise. Two sides:
+   the order on the front, the terms it commits us to on the back. A school that
+   has to wait for "the agreement to be sent over" cools down overnight. */
+.fld { margin-bottom: 2.1mm; }
+.fld-l { font-size: 6.8pt; font-weight: 800; text-transform: uppercase;
+         letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 1mm; }
+.fld-i { border-bottom: 0.3mm solid #94A3B8; height: 6mm; }
+.fld-i--box { border: 0.25mm solid #94A3B8; border-radius: 1.5mm; height: 9mm; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3.5mm; }
+.tick { display: inline-flex; align-items: center; gap: 1.6mm; font-size: 8.4pt;
+        color: var(--ink-soft); margin-right: 5mm; }
+.tick::before { content: ''; width: 3.4mm; height: 3.4mm; border: 0.3mm solid #94A3B8;
+                border-radius: 0.8mm; flex-shrink: 0; }
+.sect-h { font-family: 'Plus Jakarta Sans'; font-size: 10.5pt; font-weight: 800;
+          color: var(--navy-mid); padding-bottom: 1.4mm; margin-bottom: 2.6mm;
+          border-bottom: 0.3mm solid var(--navy-mid); }
+.terms { font-size: 7.8pt; color: var(--ink-soft); line-height: 1.55; }
+.terms h4 { font-size: 8.6pt; color: var(--navy-mid); margin-bottom: 1mm; margin-top: 3mm; }
+.terms h4:first-child { margin-top: 0; }
+.sign { border-top: 0.3mm solid #94A3B8; padding-top: 1.6mm; font-size: 7.4pt; color: var(--ink-mute); }
+</style></head>
+<body>
+
+<!-- ═══════ SIDE 1 — THE ORDER ═══════ -->
+<section class="sheet sheet--a4p">
+  <div class="masthead">
+    {{LOCKUP}}
+    <div class="masthead-right">
+      <span class="pill">Order form</span>
+      <div style="font-size:var(--t-caption);color:var(--ink-mute);margin-top:1.2mm">
+        Ref no. ______________ &nbsp;·&nbsp; Date ____ / ____ / 20____</div>
+    </div>
+  </div>
+
+  <div class="sect-h">1 &nbsp;The school</div>
+  <div class="grid2">
+    <div class="fld"><div class="fld-l">School name</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">Board (CBSE / ICSE / State)</div><div class="fld-i"></div></div>
+  </div>
+  <div class="fld"><div class="fld-l">Address</div><div class="fld-i"></div></div>
+  <div class="grid3">
+    <div class="fld"><div class="fld-l">Students on roll</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">Staff</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">GSTIN (if registered)</div><div class="fld-i"></div></div>
+  </div>
+  <div class="grid3">
+    <div class="fld"><div class="fld-l">Person signing</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">Designation</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">Phone</div><div class="fld-i"></div></div>
+  </div>
+
+  <div class="sect-h" style="margin-top:2mm">2 &nbsp;What is being bought</div>
+  <div style="margin-bottom:3mm">
+    <span class="tick">Billed annually (20% less)</span>
+    <span class="tick">Billed monthly</span>
+    <span class="tick">Founding {{FOUNDING_COUNT}} rate — {{FOUNDING_PCT}}% off year one</span>
+  </div>
+  <div style="margin-bottom:3mm">
+    <span class="tick">Runs on the school's own computer or network — no hosting fee</span>
+    <span class="tick">Hosted by us — ₹{{HOSTING_ANNUAL}} a year</span>
+  </div>
+
+  <table style="margin-bottom:2.5mm">
+    <tr><th style="width:52%">Line</th><th>Working</th><th style="width:26%">Amount (₹)</th></tr>
+    <tr><td>Licence — students &times; rate &times; 12 months</td>
+        <td style="font-size:7.4pt;color:var(--ink-mute)">______ students &times; ₹______ &times; 12</td><td></td></tr>
+    <tr><td>Less Founding {{FOUNDING_COUNT}} discount ({{FOUNDING_PCT}}% of year one)</td>
+        <td style="font-size:7.4pt;color:var(--ink-mute)">if applicable</td><td></td></tr>
+    <tr><td>Setup, data migration and on-site staff training</td>
+        <td style="font-size:7.4pt;color:var(--ink-mute)">included for every school</td>
+        <td class="num">0</td></tr>
+    <tr><td>Managed hosting, if taken</td>
+        <td style="font-size:7.4pt;color:var(--ink-mute)">₹{{HOSTING_ANNUAL}} per year</td><td></td></tr>
+    <tr><td><b>Subtotal</b></td><td></td><td></td></tr>
+    <tr><td>GST @ {{GST_PCT}}%</td>
+        <td style="font-size:7.4pt;color:var(--ink-mute)">added to every figure above</td><td></td></tr>
+    <tr class="row--accent"><td><b>Total payable, first year</b></td><td></td><td></td></tr>
+  </table>
+  <p style="font-size:7.2pt;color:var(--ink-mute);line-height:1.45;margin-bottom:3mm">
+    Rates are set by the size of the school and apply to the whole roll: up to 250 students
+    {{ENTRY_MONTHLY}} a month, falling to {{LAST_MONTHLY}} at {{CONTACT_ABOVE}}; the annual column is
+    {{ANNUAL_SAVING_PCT}}% less. Above {{CONTACT_ABOVE}} students the rate is quoted, from
+    {{FLOOR_ANNUAL}}. Billing follows the actual roll at the start of the session.</p>
+
+  <div class="sect-h">3 &nbsp;Dates and payment</div>
+  <div class="grid3" style="margin-bottom:1mm">
+    <div class="fld"><div class="fld-l">Install &amp; migration week</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">Staff training dates</div><div class="fld-i"></div></div>
+    <div class="fld"><div class="fld-l">Go-live date</div><div class="fld-i"></div></div>
+  </div>
+  <div class="panel" style="margin-bottom:3mm;padding:2.4mm 3mm">
+    <div style="font-size:7.8pt;color:var(--ink-soft);line-height:1.5">
+      <b style="color:var(--navy-mid)">Payment schedule.</b> A school collects its fees in April and has
+      little cash before then, so nothing is due at signature beyond a booking amount.
+      <b>25% on go-live, 75% within 30 days of go-live</b>, unless agreed otherwise below. Payment by
+      cheque, NEFT or UPI to {{LEGAL_NAME}}; a GST invoice is issued for every payment. Cash is not
+      accepted.</div>
+  </div>
+  <div class="fld"><div class="fld-l">Anything agreed differently (written here, or it does not apply)</div>
+    <div class="fld-i--box"></div></div>
+
+  <div class="grid2" style="margin-top:2.5mm">
+    <div>
+      <div style="height:11mm"></div>
+      <div class="sign">For the school — signature, name, designation, date, school seal</div>
+    </div>
+    <div>
+      <div style="height:11mm"></div>
+      <div class="sign">For {{LEGAL_NAME}} — signature, name, date</div>
+    </div>
+  </div>
+
+  <div class="footer"><span>Page 1 of 2 · <b>EduAnant</b> order form · Release {{VERSION}}</span>
+    <span>{{SITE}} · {{PHONE}} · {{EMAIL}}</span></div>
+</section>
+
+<!-- ═══════ SIDE 2 — THE TERMS ═══════ -->
+<section class="sheet sheet--a4p">
+  <div class="masthead">
+    {{LOCKUP}}
+    <div class="masthead-right"><span class="pill">Terms · page 2 of 2</span></div>
+  </div>
+
+  <h1 style="font-size:17pt;color:var(--navy-mid);margin-bottom:1.5mm">
+    What we are committing to.</h1>
+  <p style="font-size:9pt;color:var(--ink-soft);line-height:1.55;margin-bottom:4mm">
+    These terms are part of the order on page 1. They are written to be read by a school, not by a
+    lawyer. If anything here is unclear, ask before you sign — we would rather answer it now.</p>
+
+  <div class="grid2">
+    <div class="terms">
+      <h4>1. What the fee covers</h4>
+      <p>All {{MODULE_COUNT}} modules, both portals, the Android app and unlimited staff accounts. There is no
+      tier to upgrade to and no per-module charge. Setup, migration from your existing records and
+      on-site staff training are included at no cost. Every future release is included for as long as
+      the licence runs.</p>
+
+      <h4>2. The pilot, and how you leave</h4>
+      <p>Your first term is a pilot. If at the end of it you decide EduAnant is not right for your
+      school, tell us in writing and the licence ends there — you pay for the term you used and
+      nothing further. We will hand you a full export of your data within 7 working days, in standard
+      formats you can open without us.</p>
+
+      <h4>3. Your data is yours</h4>
+      <p>Where EduAnant runs on your own computer or network, the database never leaves your building.
+      Where we host it, it stays within India. We do not sell, share or train anything on your
+      students' data. You may export all of it at any time, for any reason, including after you stop
+      paying us.</p>
+
+      <h4>4. Founding {{FOUNDING_COUNT}} terms</h4>
+      <p>If the Founding {{FOUNDING_COUNT}} box on page 1 is ticked: you pay {{FOUNDING_PCT}}% of the licence for your
+      first year, and the rate you renew at will not rise for as long as you keep renewing without a
+      break. In return you agree to take a reference call from other schools, to give us one quotable
+      sentence after two months of use, and to let us name your school on our website. Group,
+      government and referral rates do not stack with this.</p>
+    </div>
+
+    <div class="terms">
+      <h4>5. What we will do, and when</h4>
+      <p>We will install and configure the system, migrate your records and reconcile them against
+      your own registers before go-live, train each team on their own screens, and stay reachable
+      through your first fee cycle. We answer by phone and WhatsApp on working days. If something is
+      broken and stopping your office working, we treat it as urgent and say so honestly if we cannot
+      fix it the same day.</p>
+
+      <h4>6. What we need from the school</h4>
+      <p>A computer that meets the specification we give you after the site survey, with a UPS or
+      inverter so a power cut does not interrupt the fee counter. Wi-Fi that reaches the office and
+      the fee counter. Your existing student, staff and fee records in whatever form they are in. One
+      named person at the school who can decide things during the rollout. Verified phone numbers for
+      parents — the parent app is only as good as the numbers it has.</p>
+
+      <h4>7. Renewal and price changes</h4>
+      <p>The licence runs for the session on page 1 and renews for the next unless either of us says
+      otherwise 30 days before it ends. Billing follows your actual roll at the start of each session,
+      so a school that grows pays more and a school that shrinks pays less. Outside the Founding
+      {{FOUNDING_COUNT}} terms, we will give 60 days' notice of any rate change.</p>
+
+      <h4>8. Limits, stated plainly</h4>
+      <p>We are a small company and we would rather tell you that than imply otherwise. Support is
+      from the people who build the software. We back up daily and automatically, and we take a full
+      backup before every update — but the school should also keep a copy of the exports we provide.
+      Nothing in these terms limits any right you have under Indian law.</p>
+    </div>
+  </div>
+
+  <div class="panel panel--amber" style="margin-top:4mm">
+    <div style="font-size:8.4pt;color:var(--ink-soft);line-height:1.5">
+      <b style="color:var(--navy-mid)">Nothing promised verbally counts.</b> Our representatives may not
+      offer a rate other than the one printed on our price card, and may not promise a feature that is
+      not already working. If you have been told something that does not appear on this form, call
+      <b>{{PHONE}}</b> before you sign and we will put it in writing or correct it.</div>
+  </div>
+
+  <div class="footer"><span>Page 2 of 2 · <b>EduAnant</b> terms · Release {{VERSION}}</span>
+    <span>{{LEGAL_NAME}} · {{ADDRESS}}</span></div>
+</section>
+
+</body></html>
