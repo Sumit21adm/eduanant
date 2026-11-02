@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import { PhoneCall, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import Seo from '../lib/seo';
 import { PAGE_SEO, organizationSchema } from '../lib/seoConfig';
+import { SCHOOL_SIZE_OPTIONS } from '../data/pricing';
 
 const ADMIN_PORTAL_API = 'https://admin.eduanant.cloud/api/v1/contact';
 
@@ -21,7 +22,7 @@ const INQUIRY_TYPES = [
     'Book a walkthrough', 'Get a Pricing Quote', 'Technical / Security Question',
     'Data Migration Query', 'Partnership / Reseller', 'Other',
 ];
-const SCHOOL_SIZES = ['Up to 300 Students (Essential)', '301 – 800 Students (Standard)', '801 – 1,500 Students (Professional)', '1,500+ Students (Enterprise)', 'Not sure yet'];
+const SCHOOL_SIZES = SCHOOL_SIZE_OPTIONS;
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -217,7 +218,9 @@ export default function ContactPage() {
                                             <select id="size" name="size" value={form.size} onChange={handleChange} required
                                                 className="w-full px-4 py-3 rounded-xl border border-gray-200/70 dark:border-white/15 bg-white/80 dark:bg-white/[0.03] text-text-primary text-sm font-medium focus:outline-none focus:ring-2 transition-all">
                                                 <option value="">Select student count</option>
-                                                {SCHOOL_SIZES.map(s => <option key={s} value={s}>{s} students</option>)}
+                                                {/* Rendered verbatim: the options carry their own wording,
+                                                    so appending "students" here produced "Not sure yet students". */}
+                                                {SCHOOL_SIZES.map(s => <option key={s} value={s}>{s}</option>)}
                                             </select>
                                         </div>
                                         <div>

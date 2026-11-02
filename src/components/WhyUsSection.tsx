@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Server, Globe2, WifiOff, Languages, IndianRupee, ShieldCheck, Headphones, Zap, ArrowRight,
     UserPlus, CalendarCheck, School, Landmark, Building2 } from 'lucide-react';
+import { RATE_BANDS, CONTACT_SALES_ABOVE, inr } from '../data/pricing';
 
 /* Live proof that the whole interface speaks Hindi. Worth more in a meeting
    than any sentence claiming it does — the director presses it themselves. */
@@ -115,10 +116,70 @@ const PILLARS = [
     },
 ];
 
-const SCHOOL_SIZES = [
-    { label: 'Essential', size: 'Up to 300 Students', icon: School, suitable: true, points: ['All modules included', 'Teacher & Parent portals + admin console', 'Runs on basic PC/laptop', 'Easy setup — we handle it'] },
-    { label: 'Standard', size: '301 – 800 Students', icon: Landmark, suitable: true, highlight: true, points: ['Everything in Essential', 'Multi-staff & role-based access', 'Transport & HR module', 'On-site staff training'] },
-    { label: 'Professional', size: '801 – 1,500 Students', icon: Building2, suitable: true, points: ['Everything in Standard', 'Custom roles & granular permissions', 'Dedicated account manager', 'Priority SLA support'] },
+/**
+ * Three school sizes — not three plans.
+ *
+ * This used to read Essential / Standard / Professional with "Everything in
+ * Essential" ladders, gating Transport, HR and custom roles behind the middle
+ * and top cards and promising an account manager and an SLA nobody had agreed
+ * to. Every other surface — the pricing page, llms.txt, the brochure, the
+ * leaflet — says all 16 modules are included with no tier to upgrade to, so the
+ * homepage was selling a product we do not have. It also invented its own size
+ * boundaries (300 / 800 / 1,500) that matched no band in pricing.ts and implied
+ * a published rate up to 1,500 when the table stops at 1,250.
+ *
+ * The cards now differ only in what changes with size: the rate, and the way a
+ * school of that size tends to run it. The bands and rates come from
+ * pricing.ts, so they cannot drift from the pricing page again.
+ */
+const sizeCard = (bandIndex: number) => {
+    const band = RATE_BANDS[bandIndex];
+    const from = bandIndex === 0 ? 1 : RATE_BANDS[bandIndex - 1].upTo + 1;
+    return {
+        label: bandIndex === 0 ? `Up to ${inr(band.upTo)} students` : `${inr(from)} – ${inr(band.upTo)} students`,
+        size: `₹${band.annual} per student a month`,
+        rate: band,
+    };
+};
+
+interface SchoolSizeCard {
+    label: string;
+    size: string;
+    icon: typeof School;
+    points: string[];
+    /** Only the middle card carries it, so it has to be optional or the union
+     *  loses the property entirely. */
+    highlight?: boolean;
+}
+
+const SCHOOL_SIZES: SchoolSizeCard[] = [
+    {
+        ...sizeCard(0), icon: School,
+        points: [
+            'All 16 modules — nothing held back',
+            'Runs on one office PC, no internet needed',
+            'Setup, migration and training included',
+            `Billed on your real roll — no minimum`,
+        ],
+    },
+    {
+        ...sizeCard(2), icon: Landmark, highlight: true,
+        points: [
+            'All 16 modules — the same build',
+            'Everyone on the school Wi-Fi at once',
+            'Transport, library, HR and reception included',
+            'The rate falls as the school grows',
+        ],
+    },
+    {
+        ...sizeCard(4), icon: Building2,
+        points: [
+            'All 16 modules — still nothing extra to buy',
+            'Several campuses on one system',
+            'Per-user permissions across 96 keys',
+            `Above ${inr(CONTACT_SALES_ABOVE)} we quote on your setup`,
+        ],
+    },
 ];
 
 export default function WhyUsSection() {
@@ -257,7 +318,7 @@ export default function WhyUsSection() {
                                         style={{ background: 'linear-gradient(90deg, transparent, #F59E0B, transparent)' }} />
                                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                                         <span className="text-[10px] font-black px-3 py-1 rounded-full text-white"
-                                            style={{ background: 'linear-gradient(90deg, #1E1B4B, #F59E0B)' }}>Most Popular</span>
+                                            style={{ background: 'linear-gradient(90deg, #1E1B4B, #F59E0B)' }}>Most schools</span>
                                     </div>
                                 </>
                             )}

@@ -125,6 +125,24 @@ export const SIZE_BANDS: SizeBand[] = BAND_CEILINGS.map((max, i) => ({
     upToAnnual: annualFor(max) ?? 0,
 }));
 
+/**
+ * The size choices on the contact and registration forms.
+ *
+ * Both forms used to offer "Up to 300 Students (Essential)", "301 – 800
+ * (Standard)", "801 – 1,500 (Professional)" and "1,500+ (Enterprise)" — four
+ * tiers that do not exist, with boundaries matching no band in this file. A
+ * prospect picked a plan we do not sell, and the lead arrived labelled with it.
+ *
+ * Offering the published bands instead means a lead turns up already tagged
+ * with the rate that applies to it.
+ */
+export const SCHOOL_SIZE_OPTIONS: string[] = [
+    ...BAND_CEILINGS.map((max, i) =>
+        i === 0 ? `Up to ${inr(max)} students` : `${inr(BAND_CEILINGS[i - 1] + 1)} – ${inr(max)} students`),
+    `More than ${inr(CONTACT_SALES_ABOVE)} students`,
+    'Not sure yet',
+];
+
 /** A concrete mid-table roll used in pricing copy, so the worked example in prose
  *  cannot drift away from the band table beside it. */
 export const EXAMPLE_ROLL = 600;
