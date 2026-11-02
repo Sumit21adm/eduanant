@@ -1,5 +1,6 @@
 import { Mail, Phone, MessageCircle, MapPin, FileDown } from 'lucide-react';
 import { APP_VERSION, APP_COMMIT, PRODUCT_VERSION, buildDateLabel } from '../lib/version';
+import { REGISTRATIONS } from '../data/company';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -56,6 +57,19 @@ export default function Footer() {
                                 <span className="block">Patna 804453, INDIA</span>
                             </span>
                         </address>
+                        {/* Registry identifiers. A director's unspoken question is whether
+                            this is a real company; four numbers they can look up answer it
+                            without a word of persuasion. Small type on purpose — it is
+                            reassurance for whoever goes looking, not a sales line. */}
+                        <ul className="mt-4 space-y-1">
+                            {REGISTRATIONS.map(r => (
+                                <li key={r.label} className="text-[11px] text-text-secondary leading-snug">
+                                    <span className="font-semibold text-text-primary">{r.label}</span>{' '}
+                                    <span className="tabular-nums">{r.value}</span>
+                                    {r.note && <span className="opacity-70"> · {r.note}</span>}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
                     {/* Product */}

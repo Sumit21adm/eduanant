@@ -189,8 +189,19 @@ for (const f of sourceFiles) {
     }
 }
 
-if (!(await readFile('public/llms.txt', 'utf8')).includes(`Release ${productVersion}`)) {
+const llms = await readFile('public/llms.txt', 'utf8');
+if (!llms.includes(`Release ${productVersion}`)) {
     priceProblems.push(`public/llms.txt does not mention Release ${productVersion}`);
+}
+
+/* The registry identifiers are quoted in llms.txt, which cannot import, and are
+ * printed on the order form a school's accountant books an invoice from. A GST
+ * number that disagrees with itself across two surfaces is worse than one that
+ * is missing, so llms.txt is checked against src/data/company.ts. */
+const companySrc = await readFile('src/data/company.ts', 'utf8');
+for (const [, label, value] of companySrc.matchAll(
+    /\{\s*label:\s*'([^']+)',\s*value:\s*'([^']+)'/g)) {
+    if (!llms.includes(value)) priceProblems.push(`public/llms.txt does not state the ${label} ${value}`);
 }
 
 if (priceProblems.length) {

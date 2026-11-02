@@ -72,6 +72,18 @@ rest and masked on screen.
 - [Updates](https://eduanant.cloud/updates): release history since April 2026.
 - [Contact](https://eduanant.cloud/contact): book an on-site walkthrough.
 
+## The company
+
+M/S Snapx Technologies LLP is a limited liability partnership registered in
+India, based in Patna, Bihar. It is a DPIIT-recognised startup under Startup
+India and is registered as an MSME. Every identifier below can be verified in
+the relevant public registry.
+
+- **LLPIN:** AAX-6898 (Ministry of Corporate Affairs)
+- **GSTIN:** 10AEMFS0052G1ZH (Bihar)
+- **Udyam (MSME):** UDYAM-BR-26-0088932
+- **DPIIT recognition:** DIPP85668
+
 ## Contact
 
 M/S Snapx Technologies LLP, Patna 804453, India.

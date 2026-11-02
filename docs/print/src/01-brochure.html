@@ -45,7 +45,7 @@
 .prob-a { font-size: 7.5pt; color: var(--ink-soft); line-height: 1.4;
           padding-top: 1.2mm; border-top: 0.2mm solid #F1F5F9; }
 .prob-a b { color: var(--amber-text); }
-.steps .step { margin-bottom: 1.4mm; }
+.steps .step { margin-bottom: 1mm; }
 </style></head>
 <body>
 
@@ -128,7 +128,7 @@
   <!-- The live deployment, stated as facts. No invented quotation: the one school
        running this has not yet given us a line to print, and a manufactured
        testimonial is the one mistake a director never forgives. -->
-  <div class="panel panel--navy" style="margin-bottom:3.5mm">
+  <div class="panel panel--navy" style="margin-bottom:3mm;padding:2.6mm 3.2mm">
     <div class="ref">
       <div style="flex:1">
         <div style="font-size:6.8pt;font-weight:800;text-transform:uppercase;letter-spacing:0.14em;color:#34D399;margin-bottom:1.4mm">
@@ -148,7 +148,7 @@
     </div>
   </div>
 
-  <div class="cols" style="grid-template-columns:1fr 1fr 1.15fr;margin-bottom:2.4mm">
+  <div class="cols" style="grid-template-columns:1fr 1fr 1.15fr;margin-bottom:2mm">
     <div>
       <div class="eyebrow">Per student, on your actual roll</div>
       <table>
@@ -237,8 +237,13 @@
     </div>
   </div>
 
-  <div class="footer"><span>Page 2 of 2 · <b>EduAnant</b> School Overview · Release {{VERSION}}</span>
-    <span>{{LEGAL_NAME}} · {{ADDRESS}} · {{EMAIL}}</span></div>
+  <div class="footer" style="flex-direction:column;align-items:stretch;gap:0.9mm">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span>Page 2 of 2 · <b>EduAnant</b> School Overview · Release {{VERSION}}</span>
+      <span>{{LEGAL_NAME}} · {{ADDRESS}} · {{EMAIL}}</span>
+    </div>
+    <div style="font-size:6.6pt;color:var(--ink-mute)">{{REG_LINE}}</div>
+  </div>
 </section>
 
 </body></html>

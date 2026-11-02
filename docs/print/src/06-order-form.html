@@ -101,8 +101,8 @@
       <b style="color:var(--navy-mid)">Payment schedule.</b> A school collects its fees in April and has
       little cash before then, so nothing is due at signature beyond a booking amount.
       <b>25% on go-live, 75% within 30 days of go-live</b>, unless agreed otherwise below. Payment by
-      cheque, NEFT or UPI to {{LEGAL_NAME}}; a GST invoice is issued for every payment. Cash is not
-      accepted.</div>
+      cheque, NEFT or UPI to <b>{{LEGAL_NAME}}</b>, <b>GSTIN {{REG_GSTIN}}</b>; a GST invoice is issued
+      for every payment. Cash is not accepted.</div>
   </div>
   <div class="fld"><div class="fld-l">Anything agreed differently (written here, or it does not apply)</div>
     <div class="fld-i--box"></div></div>
@@ -192,7 +192,19 @@
     </div>
   </div>
 
-  <div class="panel panel--amber" style="margin-top:4mm">
+  <!-- Who the school is actually contracting with. An accountant cannot book the
+       invoice without the GST number, and a director checking us out can look
+       every one of these up in a public registry. -->
+  <div class="panel" style="margin-top:4mm;padding:2.4mm 3mm">
+    <div style="font-size:7.6pt;font-weight:800;color:var(--navy-mid);margin-bottom:1.4mm">
+      You are contracting with {{LEGAL_NAME}}, {{ADDRESS}}</div>
+    <table>
+      <tr><th style="width:18%">Registry</th><th style="width:32%">Number</th><th>What it is</th></tr>
+      {{REG_ROWS}}
+    </table>
+  </div>
+
+  <div class="panel panel--amber" style="margin-top:3mm">
     <div style="font-size:8.4pt;color:var(--ink-soft);line-height:1.5">
       <b style="color:var(--navy-mid)">Nothing promised verbally counts.</b> Our representatives may not
       offer a rate other than the one printed on our price card, and may not promise a feature that is

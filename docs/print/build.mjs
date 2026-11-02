@@ -37,21 +37,15 @@ const SRC = join(HERE, 'src');
 const DIST = join(HERE, 'dist');
 
 /* ── Contact block ───────────────────────────────────────────────────────────
- * The one place a printed phone number is defined. It appears on nine pieces;
- * when the number changes, a rep must not be left holding a card with the old
- * one because a template was missed.
+ * The company's own details come from src/data/company.ts, which the website
+ * reads as well — a phone number or a GST number appears on nine pieces and
+ * must not survive a change in one of them. Only the things that exist solely
+ * for print live here: the deep links the QR codes encode, and the reference
+ * school the field material leans on.
  */
 const CONTACT = {
-    legalName: 'M/S Snapx Technologies LLP',
-    address: 'Patna 804453, Bihar, India',
-    phone: '+91 79036 12979',
-    whatsapp: '+91 79036 12979',
-    email: 'hello@eduanant.cloud',
-    site: 'eduanant.cloud',
-    siteUrl: 'https://eduanant.cloud',
     demoUrl: 'https://eduanant.cloud/demo',
     pricingUrl: 'https://eduanant.cloud/pricing',
-    waUrl: 'https://wa.me/917903612979',
     reference: {
         name: 'S.D.V. Public School',
         city: 'Patna',
@@ -154,6 +148,7 @@ async function loadData() {
         export { CHANGELOG, RELEASE_COUNT } from ${JSON.stringify(join(ROOT, 'src/data/changelog.ts'))};
         export { LIVE_SINCE_LABEL, monthsSince } from ${JSON.stringify(join(ROOT, 'src/lib/timeline.ts'))};
         export { PRODUCT_VERSION } from ${JSON.stringify(join(ROOT, 'src/lib/version.ts'))};
+        export { COMPANY, REGISTRATIONS, registrationLine, GSTIN } from ${JSON.stringify(join(ROOT, 'src/data/company.ts'))};
     `);
     await esbuild({
         entryPoints: [entry], bundle: true, format: 'esm', outfile: out,
@@ -339,15 +334,15 @@ async function main() {
     <div><p class="slide-body">${m.description}</p></div>
     <div class="panel panel--plain"><ul class="ticks">${m.features.slice(0, 8).map(f => `<li>${f}</li>`).join('')}</ul></div>
   </div>
-  <div class="slide-foot">${CONTACT.site} · ${CONTACT.phone}</div>
+  <div class="slide-foot">${P.COMPANY.site} · ${P.COMPANY.phone}</div>
 </section>`).join('\n');
 
     const monthsLive = P.monthsSince();
 
-    const qrSite = await qr.make(CONTACT.siteUrl);
+    const qrSite = await qr.make(P.COMPANY.siteUrl);
     const qrDemo = await qr.make(CONTACT.demoUrl);
     const qrPricing = await qr.make(CONTACT.pricingUrl);
-    const qrWa = await qr.make(CONTACT.waUrl);
+    const qrWa = await qr.make(`https://wa.me/${P.COMPANY.phoneDigits}`);
 
     const tokens = {
         CSS: css,
@@ -398,12 +393,27 @@ async function main() {
         REF_BOARD: CONTACT.reference.board,
         REF_SITE: CONTACT.reference.site,
 
-        LEGAL_NAME: CONTACT.legalName,
-        ADDRESS: CONTACT.address,
-        PHONE: CONTACT.phone,
-        WHATSAPP: CONTACT.whatsapp,
-        EMAIL: CONTACT.email,
-        SITE: CONTACT.site,
+        LEGAL_NAME: P.COMPANY.legalName,
+        ADDRESS: P.COMPANY.addressLine,
+        PHONE: P.COMPANY.phone,
+        WHATSAPP: P.COMPANY.whatsapp,
+        EMAIL: P.COMPANY.email,
+        SITE: P.COMPANY.site,
+
+        /* Registry identifiers. REG_LINE is the compact one-liner for a footer;
+         * REG_ROWS is the table a school's accountant reads off the order form. */
+        REG_LINE: P.registrationLine,
+        GSTIN: P.GSTIN,
+        // One token per identifier — REG_LLPIN, REG_GSTIN, REG_UDYAM, REG_DPIIT —
+        // so a narrow letterhead can print two of them without a template
+        // hardcoding a number and quietly going stale.
+        ...Object.fromEntries(P.REGISTRATIONS.map(r =>
+            [`REG_${r.label.toUpperCase()}`, r.value])),
+        REG_ROWS: P.REGISTRATIONS.map(r =>
+            `<tr><td>${r.label}</td><td class="num">${r.value}</td>` +
+            `<td style="font-size:7pt;color:var(--ink-mute)">${r.note ?? ''}</td></tr>`).join('\n'),
+        REG_CHIPS: P.REGISTRATIONS.map(r =>
+            `<span class="chip">${r.label} ${r.value}</span>`).join(''),
 
         QR_SITE: qrSite,
         QR_DEMO: qrDemo,

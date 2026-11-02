@@ -11,7 +11,7 @@
 .spec-v { font-size: var(--t-small); color: var(--ink-soft); line-height: 1.55; }
 .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2mm; }
 .sw { border-radius: 2mm; overflow: hidden; border: 0.2mm solid var(--rule); }
-.sw-chip { height: 14mm; }
+.sw-chip { height: 10mm; }
 .sw-meta { padding: 1.4mm 1.8mm; background: #fff; }
 .sw-n { font-size: var(--t-caption); font-weight: 800; color: var(--navy-mid); }
 .sw-h { font-size: var(--t-caption); color: var(--ink-mute); font-variant-numeric: tabular-nums; }
@@ -161,7 +161,7 @@
   </div>
 
   <div class="eyebrow">Typefaces</div>
-  <div class="three" style="margin-bottom:4mm">
+  <div class="three" style="margin-bottom:3mm">
     <div class="panel panel--plain">
       <div class="sw-n" style="margin-bottom:1.2mm">Plus Jakarta Sans — 800</div>
       <div class="display" style="font-size:14pt;color:var(--navy-mid)">Run your school</div>
@@ -180,10 +180,9 @@
   </div>
 
   <div class="eyebrow">Type scale — print</div>
-  <div style="margin-bottom:4mm">
+  <div style="margin-bottom:3mm">
     <div class="scale-row"><span class="scale-lab">H1 · 25pt</span><span class="display" style="font-size:25pt;color:var(--navy-mid)">Headline</span></div>
     <div class="scale-row"><span class="scale-lab">H2 · 17pt</span><span class="display" style="font-size:17pt;color:var(--navy-mid)">Section heading</span></div>
-    <div class="scale-row"><span class="scale-lab">Lead · 11pt</span><span style="font-size:11pt;color:var(--ink-soft)">The opening paragraph of a panel</span></div>
     <div class="scale-row"><span class="scale-lab">Body · 9.5pt</span><span style="font-size:9.5pt;color:var(--ink-soft)">Running text — the floor for anything a director reads</span></div>
     <div class="scale-row"><span class="scale-lab">Caption · 7.5pt</span><span style="font-size:7.5pt;color:var(--ink-mute)">Footers, labels, legal — the absolute floor</span></div>
   </div>
@@ -196,7 +195,6 @@
         <li><b>Rupees, not adjectives.</b> Print the number.</li>
         <li><b>Never promise what is not shipped.</b> Every claim traces to src/data/modules.ts or to running code.</li>
         <li><b>Name the role, not the technology.</b> Accountant, class teacher, front desk.</li>
-        <li><b>No exclamation marks.</b> Schools are buying an office system.</li>
         <li><b>Hindi is written, not translated.</b> Always proofed by a native speaker before press.</li>
       </ul>
     </div>
@@ -207,6 +205,7 @@
       <div class="spec"><div class="spec-k">Phone / WhatsApp</div><div class="spec-v">{{PHONE}}</div></div>
       <div class="spec"><div class="spec-k">Email</div><div class="spec-v">{{EMAIL}}</div></div>
       <div class="spec"><div class="spec-k">Website</div><div class="spec-v">{{SITE}}</div></div>
+      <div class="spec"><div class="spec-k">Registered as</div><div class="spec-v">{{REG_LINE}}</div></div>
       <div class="spec"><div class="spec-k">Product</div><div class="spec-v">EduAnant — School Management System, Release {{VERSION}}, {{MODULE_COUNT}} modules</div></div>
       <div class="panel panel--amber" style="margin-top:1mm">
         <div class="sw-u" style="font-size:var(--t-caption);line-height:1.5">These values live in
