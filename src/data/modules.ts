@@ -18,7 +18,7 @@ export interface EduModule {
 }
 
 /**
- * The 16 wired modules of Release 1.4.0 — the single source of truth.
+ * The 16 wired modules of the current release — the single source of truth.
  * The Features page and the homepage capabilities section both read this, so a
  * module can never be listed in one place and missing from the other.
  */
@@ -33,6 +33,7 @@ export const MODULES: EduModule[] = [
             'One-click convert registration → admission',
             'Multi-step digital admission form',
             'Document upload & verification tracking',
+            'Families submit a student photo; the school approves or declines it',
             'Bulk Excel import (1,000+ students)',
             'Previous school & TC records',
             'Sibling & re-admission support',
@@ -50,8 +51,11 @@ export const MODULES: EduModule[] = [
             'Demand bill generation (monthly / term)',
             'Split payment & partial collection',
             'Cash, UPI, Cheque, Bank Transfer',
-            'Parents pay online & upload proof — school verifies before posting',
-            'Online payment receipts with QR verification',
+            // The portal never took a payment, and the "Pay Dues" dialog that implied
+            // otherwise was removed. Money moves in the parent's own UPI app; what the
+            // school does here is verify the receipt before posting it.
+            'Parents pay by UPI and upload the receipt — school verifies before posting',
+            'Demand bills carry the school’s own UPI QR and ID',
             'PDF receipts auto-generated',
             'Advance deposit, adjustment & advance balance on receipt',
             'Concession, scholarship & full-year discounts',
@@ -91,6 +95,11 @@ export const MODULES: EduModule[] = [
             'Configurable late cutoff & staff self-correction',
             'Leave policy master with per-session balances',
             'Payable days clamped to the employment window',
+            'HR Today — uncovered periods, absences and decisions on one screen',
+            'Leave rules per type: notice, backdating, half-days and the sandwich rule',
+            'Cover arranged while approving the leave that created the gap',
+            'Correction requests for a missed check-out or any past day',
+            'Printable monthly muster roll, and a Patterns report',
             'Substitute teacher engine & co-teaching cover',
             'Service history, transfers, exit & service book',
             'Effective-dated salary structures, EPF / ESI posture',
@@ -114,6 +123,7 @@ export const MODULES: EduModule[] = [
             'Grade, GPA & class rank calculation',
             'Progress report cards & marksheets (PDF)',
             'Result publishing to student & parent portal',
+            'Each result shown against the last exam — marks and class rank, per subject',
             'Grade distribution & topper analytics',
         ],
     },
@@ -128,7 +138,8 @@ export const MODULES: EduModule[] = [
             'Fines collected at the counter, lost-book write-off',
             'Reservations with automatic hold expiry',
             'Textbook bulk issue & return for a whole class',
-            'ISBN autofill (Open Library / Google Books)',
+            'Barcode scanning with the device camera, or a USB scanner',
+            'ISBN autofill (Open Library / Google Books), with a title search fallback',
             'Accession register, stock & overdue reports',
             'Scan-based stock verification',
             'Library clearance check at promotion time',
@@ -142,6 +153,7 @@ export const MODULES: EduModule[] = [
         features: [
             'Visitor log with in/out timestamps',
             'Student movement & gate pass records',
+            'Families register the adults allowed to collect their child',
             'Admission enquiry capture & follow-up',
             'Appointment scheduling for parents',
             'Phone call log with purpose & outcome',
@@ -198,7 +210,8 @@ export const MODULES: EduModule[] = [
             'Real-time in-app feed with unified inbox',
             'Delivery queue, logs & manual retry',
             'Fee, homework & absence reminders (holiday-aware)',
-            'Birthday auto-notifications',
+            'Birthday auto-notifications, and a birthday moment in the app',
+            'A once-a-day morning digest for whoever runs the school',
             'Per-user mute preferences & one-click unsubscribe',
         ],
     },
@@ -233,19 +246,21 @@ export const MODULES: EduModule[] = [
             'Library circulation, stock & overdue reports',
             'Transport route occupancy',
             'UDISE+ / CBSE compliance exports',
+            'Academic calendar & fee structure exported as a feed for your own website',
             'Export to PDF & Excel throughout',
         ],
     },
     {
         id: '13', icon: Layers, title: 'Portals & Mobile App',
-        tagline: 'Two portals on the web, one app in the pocket',
+        tagline: 'Two portals on the web, and an app on every phone',
         color: 'from-[#F59E0B] to-[#FBBF24]', borderColor: 'border-[#FBBF24]/25', bgColor: 'bg-[#FBBF24]/5',
-        description: 'Admin, Teacher, and Student/Parent portals under one login system — plus an Android app that wraps the portal with native push notifications, a biometric lock, and background sync.',
+        description: 'Admin, Teacher, and Student/Parent portals under one login system — plus an Android app on Google Play with native push notifications, a biometric lock and background sync. On an iPhone, families add the portal to the home screen and it opens full-screen like an app.',
         features: [
             'Admin portal (full school management)',
             'Teacher portal (attendance, marks, homework)',
             'Student & parent portal',
-            'Android app with native push notifications',
+            'Android app on Google Play, with native push notifications',
+            'On iPhone, add the portal to the home screen — it opens like an app',
             'Installable web app on any phone or desktop',
             'Biometric app lock & secure session storage',
             'Deep links straight to the relevant screen',
@@ -259,10 +274,13 @@ export const MODULES: EduModule[] = [
         id: '14', icon: Shield, title: 'Security & Access Control',
         tagline: 'Enterprise-grade access control — every action recorded',
         color: 'from-slate-700 to-slate-500', borderColor: 'border-slate-500/25', bgColor: 'bg-slate-500/5',
-        description: 'Every staff member sees only what their role allows, down to individual screens and actions — 96 permissions across 22 permission groups, editable per user. Every sensitive action is recorded in a tamper-proof audit trail.',
+        description: 'Every staff member sees only what their role allows, down to individual screens and actions — 96 permissions across 21 permission groups, editable per user. Every sensitive action is recorded in a tamper-proof audit trail.',
         features: [
             'Role-based access with per-user permission editor',
-            '96 module-level permissions, role defaults built in',
+            // Counted from PERMISSION_MODULES in the product's frontend/src/utils/permissions.ts,
+            // which is its own source of truth: 21 groups, 96 keys. The site said 22 groups
+            // for a while after two groups were merged there.
+            '96 module-level permissions in 21 groups, role defaults built in',
             'Create your own roles with their own defaults',
             'Two-factor authentication (TOTP)',
             'Server-side PII masking with reveal audit trail',
