@@ -1,4 +1,5 @@
 import { SITE } from './seo';
+import { PRODUCT_VERSION } from './version';
 import {
     annualRateLabel, monthlyRateLabel,
     RATE_ANNUAL, ANNUAL_SAVING_PCT,
@@ -26,7 +27,7 @@ export const PAGE_SEO = {
     features: {
         title: 'Features: Admissions, Fees, Attendance & Exams | EduAnant',
         description:
-            'Admissions, fee collection, student and staff attendance, examinations, library, transport, HR, reception, reports and portals — all live in Release 1.4.0.',
+            `Admissions, fee collection, student and staff attendance, examinations, library, transport, HR, reception, reports and portals — all live in Release ${PRODUCT_VERSION}.`,
         path: '/features',
         keywords:
             'school ERP modules, fee collection software, student attendance system, examination management software, school library software, school transport management, school HR software',

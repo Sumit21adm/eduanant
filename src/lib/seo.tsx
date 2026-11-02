@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { PRODUCT_VERSION } from './version';
 
 export const SITE = {
     name: 'EduAnant',
@@ -13,7 +14,7 @@ export const SITE = {
     postalCode: '804453',
     country: 'IN',
     /** The product's released version — not the website build. */
-    version: '1.4.0',
+    version: PRODUCT_VERSION,
 } as const;
 
 export interface SeoProps {

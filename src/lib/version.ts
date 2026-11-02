@@ -7,8 +7,8 @@
  *   APP_VERSION     — this marketing site. Starts at v1.0.0, bumped by tagging
  *                     this repo. Of interest to us, not to a school director.
  *   PRODUCT_VERSION — EduAnant, the school management system being sold here.
- *                     Currently 1.4.0. This is the number that appears in copy,
- *                     structured data and llms.txt.
+ *                     This is the number that appears in copy, structured data,
+ *                     llms.txt and every printed piece in docs/print.
  *
  * Anything user-facing that shows APP_VERSION must label it, or a visitor reads
  * "v1.0.0" as the product and a mature 16-module system looks like a first
@@ -26,8 +26,10 @@ export const APP_VERSION = __APP_VERSION__;
 export const APP_COMMIT = __APP_COMMIT__;
 export const APP_BUILT_AT = __APP_BUILT_AT__;
 
-/** The released version of the EduAnant product this site sells — not the site. */
-export const PRODUCT_VERSION = '1.4.0';
+/** The released version of the EduAnant product this site sells — not the site.
+ *  Must match what is actually in production at a paying school. The print kit
+ *  reads this too, so a stale value here puts a wrong release number on paper. */
+export const PRODUCT_VERSION = '1.5.4';
 
 /** "8 Sep 2026" — the build date, for the footer tooltip. */
 export function buildDateLabel(): string {

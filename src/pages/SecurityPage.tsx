@@ -3,6 +3,7 @@ import { Shield, ShieldCheck, Lock, Eye, EyeOff, Server, FileSearch, RefreshCw, 
 import { Link } from 'react-router-dom';
 import Seo from '../lib/seo';
 import { PAGE_SEO } from '../lib/seoConfig';
+import { PRODUCT_VERSION } from '../lib/version';
 
 const SECURITY_PILLARS = [
     {
@@ -10,7 +11,7 @@ const SECURITY_PILLARS = [
         desc: 'Every staff member in EduAnant sees only what their role allows. A teacher never sees fee records. An accountant never touches exam marks. Access boundaries are strictly enforced — at both the screen and data level.',
         points: [
             'Separate roles for Admin, Teacher, Accountant, Parent/Student',
-            '96 individual permissions across 22 permission groups',
+            '96 individual permissions across 21 permission groups',
             'Tune any single permission per staff member, not just per role',
             'Create custom roles for your school\'s own designations',
             'Cannot bypass restrictions via URL or direct navigation',
@@ -204,7 +205,7 @@ export default function SecurityPage() {
                                         </div>
                                         <div className="min-w-0">
                                             <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-400">Security at a glance</p>
-                                            <p className="text-[11px] text-slate-400 truncate">Verified against the Release 1.4.0 build</p>
+                                            <p className="text-[11px] text-slate-400 truncate">Verified against the Release {PRODUCT_VERSION} build</p>
                                         </div>
                                     </div>
                                     <span className="hidden sm:flex items-center gap-1.5 text-[10px] font-black uppercase tracking-wider text-emerald-400 shrink-0">

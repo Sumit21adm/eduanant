@@ -6,13 +6,14 @@
 > counter, attendance register and office keep working when the broadband line
 > is down.
 
-## Facts (Release 1.4.0, September 2026)
+## Facts (Release 1.5.4, November 2026)
 
 - **16 fully wired modules**, all included with every school — no tier to upgrade to.
 - **100+ production screens** across the admin console and both portals.
-- **2 self-service portals** (Teacher, and Student/Parent) plus an admin console
-  and a native Android app.
-- **96 granular permission keys** across 22 permission groups, assignable per user.
+- **2 self-service portals** (Teacher, and Student/Parent) plus an admin console,
+  a native Android app on Google Play, and an installable web app that families
+  on an iPhone add to the home screen.
+- **96 granular permission keys** across 21 permission groups, assignable per user.
 - **Three ways to install it**, same product in each: on a single office PC (works
   with no internet at all, one user at a time); on the school network, where everyone
   on the school Wi-Fi uses it at once and an external broadband outage does not stop
@@ -35,7 +36,7 @@
 S.D.V. Public School, Patna, Bihar (CBSE affiliated, three campuses,
 https://sdv-edu.in) has run EduAnant since April 2026 — over 1,300 active
 students and more than 100 school staff, through full admission, fee and
-examination cycles.
+examination cycles. Release 1.5.4 is the version in production there.
 
 ## The 16 modules
 

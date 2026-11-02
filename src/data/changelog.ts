@@ -12,8 +12,55 @@ export interface Release {
 }
 
 export const CHANGELOG: Release[] = [
+    /* The product's own release notes record 1.5.0 to 1.5.4 as one body of work
+     * rather than splitting them, so this entry covers the range. The version
+     * quoted in copy and in print comes from PRODUCT_VERSION in lib/version.ts,
+     * not from this label. */
     {
-        phase: 'Version 1.4.0', date: 'September 2026', status: 'Latest',
+        phase: 'Version 1.5.0 – 1.5.4', date: 'October–November 2026', status: 'Latest',
+        headline: 'Staff attendance and HR rebuilt, the parent portal reworked, and photos families send in',
+        changes: [
+            'HR Today — uncovered periods, who is absent and what needs a decision, on one screen',
+            'Staff leave rebuilt: rules per leave type, half-days, sandwich rule, and the balance shown before applying',
+            'Arrange substitute cover while approving the leave that created the gap',
+            'Staff attendance: tick rows and change them together, plus a printable monthly muster roll',
+            'Staff can ask the office to correct a missed check-out or any past day',
+            'Schools choose who is on the attendance register — drivers and directors need not be',
+            'A holiday can now close the school for only some of the staff',
+            'Staff are marked absent at a time the school sets, and the cron asks before marking a whole school absent',
+            'A morning digest to whoever runs the school, once a day',
+            'Families submit a student photo from the portal; the school approves or declines it with a reason',
+            'Families register the adults allowed to collect their child',
+            'The portal says how results are moving — per subject, against the last exam, with class rank',
+            'Attendance and marks joined in one line on the student dashboard',
+            'Export the academic calendar and fee structure as a feed for the school’s own website',
+            'Refreshing any screen keeps you on the tab you were on',
+            'Security: uploaded files are no longer readable by URL, login codes use a CSPRNG, notices are sanitised',
+        ],
+    },
+    {
+        phase: 'Version 1.4.5', date: '5 October 2026', status: 'Stable',
+        headline: 'Guardians captured at registration, with their relation to the student',
+        changes: [
+            'Registration captures guardian name, relation and phone',
+            'Guardian details carry across when a registration becomes an admission',
+            'A wider relation list, for a child whose daily contact is not a parent',
+        ],
+    },
+    {
+        phase: 'Version 1.4.3', date: '16 September 2026', status: 'Stable',
+        headline: 'Library barcodes scanned with a phone camera, and a fee summary that adds up',
+        changes: [
+            'Scan barcodes with the device camera — EAN-13/8, UPC-A, Code128 and QR',
+            'Decoding runs in the browser, so no image leaves the device',
+            'Continuous scan mode, so a shelf can be walked in one pass',
+            'ISBN autofill falls back to a title and author search',
+            'Scanning a catalogued ISBN offers to add a copy, not a duplicate title',
+            'Collection summary counts UPI in person and Card, so the cards add up to the total',
+        ],
+    },
+    {
+        phase: 'Version 1.4.0', date: 'September 2026', status: 'Stable',
         headline: 'Library, pre-admission registrations, HR attestation & a full access-control overhaul',
         changes: [
             'Library module — catalogue, issue/return, fines, reservations & reports',

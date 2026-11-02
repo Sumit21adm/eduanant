@@ -131,7 +131,7 @@ export default function Footer() {
                         </span>
                         <span className="hidden sm:inline opacity-30">·</span>
                         {/* This is the WEBSITE build, not the product. EduAnant the
-                            software is at Release 1.4.0 and is versioned separately;
+                            software is at PRODUCT_VERSION and is versioned separately;
                             a bare number here reads as the product version and makes
                             a mature product look like a v1. Hence the explicit
                             "Site" label, and no link to the product changelog. */}

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Layers, Check, ArrowRight, ChevronDown, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { MODULES } from '../data/modules';
+import { PRODUCT_VERSION } from '../lib/version';
 import Seo from '../lib/seo';
 import { PAGE_SEO, softwareSchema } from '../lib/seoConfig';
 
@@ -47,7 +48,7 @@ export default function FeaturesPage() {
                     {/* Quick summary */}
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
                         className="mt-10 flex flex-wrap gap-3 justify-center">
-                        {['16 Modules', '2 Portals + Android App', '100+ Screens', '96 Permission Keys', 'Live in Production', 'v1.4.0 — Sept 2026'].map(tag => (
+                        {[`${MODULES.length} Modules`, '2 Portals + Android App', '100+ Screens', '96 Permission Keys', 'Live in Production', `v${PRODUCT_VERSION}`].map(tag => (
                             <span key={tag} className="text-xs font-black px-4 py-2 rounded-full border"
                                 style={{ borderColor: 'rgba(245,158,11,0.2)', background: 'rgba(245,158,11,0.06)', color: 'var(--accent-text)' }}>
                                 {tag}

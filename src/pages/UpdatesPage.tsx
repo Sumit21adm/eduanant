@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { CHANGELOG, RELEASE_COUNT } from '../data/changelog';
+import { PRODUCT_VERSION } from '../lib/version';
 import { LIVE_SINCE_LABEL } from '../lib/timeline';
 import { spell } from '../lib/text';
 import { Zap, CheckCircle, Clock, ArrowRight, Package, ShieldCheck } from 'lucide-react';
@@ -55,7 +56,7 @@ export default function UpdatesPage() {
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
                         className="flex flex-wrap gap-3 justify-center mt-8">
                         {[
-                            { label: 'Current Version', value: 'v1.4.0 — September 2026' },
+                            { label: 'Current Version', value: `v${PRODUCT_VERSION} — ${CHANGELOG[0].date}` },
                             { label: 'Status', value: 'Actively Maintained', dot: true },
                             { label: 'Update Process', value: 'One-Click from Admin Panel' },
                             { label: 'Data Safety', value: 'Auto-backup before every update' },

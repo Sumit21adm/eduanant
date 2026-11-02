@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
 import { Layers, Users, KeyRound, WifiOff, Zap, GraduationCap } from 'lucide-react';
+import { PRODUCT_VERSION } from '../lib/version';
 
 /**
- * Verified against production Release 1.4.0.
+ * Verified against the production build named by PRODUCT_VERSION.
  *
  * These figures are rendered as static text on purpose. They were previously
  * animated count-ups that started at 0, so any hydration hiccup or a paused
@@ -33,7 +34,7 @@ const STATS = [
         display: '2',
         displaySuffix: ' + App',
         label: 'Portals + Android App',
-        desc: 'A Teacher portal and a Student & Parent portal, plus a native Android app with push alerts',
+        desc: 'A Teacher portal and a Student & Parent portal, plus a native Android app with push alerts — and on iPhone, the portal added to the home screen',
         border: 'border-slate-200/70 dark:border-white/10',
         iconColor: 'text-white',
         iconBg: 'bg-gradient-to-br from-[#1E1B4B] to-[#312E81] dark:from-[#312E81] dark:to-[#4F46E5] ring-1 ring-white/10',
@@ -84,7 +85,7 @@ export default function StatsSection() {
                         Everything <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B45309] via-[#EA580C] to-[#F59E0B] dark:from-[#FBBF24] dark:via-[#F59E0B] dark:to-[#FB923C]">EduAnant delivers</span> — on Day 1
                     </h2>
                     <p className="text-sm text-text-secondary mt-3 max-w-xl mx-auto">
-                        Counted from the running Release 1.4.0 build — not a roadmap.
+                        Counted from the running Release {PRODUCT_VERSION} build — not a roadmap.
                     </p>
                 </motion.div>
 

@@ -156,6 +156,19 @@ for (const dir of ['src', 'index.html']) {
     };
     await walk(dir);
 }
+/* The product's release number drifts the same way a rate does, and worse: it
+ * is prose, so nothing type-checks it. Nine files said "Release 1.4.0" for two
+ * months after 1.5.4 went into production at the school we point every prospect
+ * at. Any version-shaped string outside version.ts must now come from
+ * PRODUCT_VERSION, and llms.txt — which cannot import — is checked against it. */
+const productVersion = /PRODUCT_VERSION = '([\d.]+)'/.exec(
+    await readFile('src/lib/version.ts', 'utf8'))?.[1];
+if (!productVersion) {
+    console.error('\n  prerender: could not read PRODUCT_VERSION from src/lib/version.ts.\n');
+    process.exit(1);
+}
+const VERSION_LITERAL = /(?:Release|version|v)\s*(\d+\.\d+\.\d+)/gi;
+
 for (const f of sourceFiles) {
     const text = await readFile(f, 'utf8');
     for (const m of text.matchAll(PER_STUDENT)) {
@@ -166,6 +179,18 @@ for (const f of sourceFiles) {
             );
         }
     }
+    // Two exemptions: the changelog, where a past release number is the point,
+    // and version.ts, which defines the numbers everything else imports.
+    if (f.endsWith('src/data/changelog.ts') || f.endsWith('src/lib/version.ts')) continue;
+    for (const m of text.matchAll(VERSION_LITERAL)) {
+        priceProblems.push(
+            `${f} hardcodes "${m[0].trim()}" — import PRODUCT_VERSION from src/lib/version.ts instead`,
+        );
+    }
+}
+
+if (!(await readFile('public/llms.txt', 'utf8')).includes(`Release ${productVersion}`)) {
+    priceProblems.push(`public/llms.txt does not mention Release ${productVersion}`);
 }
 
 if (priceProblems.length) {
