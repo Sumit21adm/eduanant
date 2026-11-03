@@ -29,16 +29,23 @@
 
     <!-- Open Graph — drives the preview card when the link is pasted into
          WhatsApp, which is how most of these links actually reach a director.
-         og:image must be an absolute URL; WhatsApp will not resolve a relative one. -->
+         og:image must be an absolute URL; WhatsApp will not resolve a relative one.
+
+         The image carries a version in its name (-v2) on purpose. nginx serves it with
+         a one-year "immutable" cache and WhatsApp keeps previews for days, so replacing
+         the file under the same name leaves everything that already fetched it showing
+         the old card. A new design gets a new name; the old file stays so links already
+         sent keep their image. It is a JPEG because the card's gradients make the same
+         picture 3x heavier as a PNG, and WhatsApp drops images much past ~300 KB. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="EduAnant" />
     <meta property="og:locale" content="en_IN" />
     <meta property="og:url" content="https://eduanant.cloud/" />
     <meta property="og:title" content="EduAnant — Offline-Ready School Management OS" />
     <meta property="og:description" content="16 Modules. Admissions, Fees, Attendance, Transport &amp; Android App. Run it on a school PC, on your own Wi-Fi without internet, or hosted by us. From ₹%RATE_ANNUAL%/student." />
-    <meta property="og:image" content="https://eduanant.cloud/og-whatsapp-preview.png" />
-    <meta property="og:image:secure_url" content="https://eduanant.cloud/og-whatsapp-preview.png" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image" content="https://eduanant.cloud/og-whatsapp-preview-v2.jpg" />
+    <meta property="og:image:secure_url" content="https://eduanant.cloud/og-whatsapp-preview-v2.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="EduAnant dashboard showing today's fee collection and attendance, beside an Android phone with parent notifications." />
@@ -47,7 +54,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="EduAnant — Offline-Ready School Management OS" />
     <meta name="twitter:description" content="16 Modules. Admissions, Fees, Attendance, Transport &amp; Android App. Run it on a school PC, on your own Wi-Fi without internet, or hosted by us. From ₹%RATE_ANNUAL%/student." />
-    <meta name="twitter:image" content="https://eduanant.cloud/og-whatsapp-preview.png" />
+    <meta name="twitter:image" content="https://eduanant.cloud/og-whatsapp-preview-v2.jpg" />
     <script>
       // Applied before first paint so dark-mode users never see a white flash.
       // Must stay in sync with ThemeContext: an explicit choice wins,

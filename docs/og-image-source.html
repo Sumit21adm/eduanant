@@ -1,4 +1,13 @@
 <!doctype html><html><head><meta charset="utf-8">
+<!-- Source of public/og-whatsapp-preview-vN.jpg — the card WhatsApp shows when the
+     site is shared. To regenerate (1200 x 630, the size the og:image:width/height
+     tags promise):
+       chrome --headless=new --hide-scrollbars --force-device-scale-factor=1 \
+              --virtual-time-budget=20000 --window-size=1200,630 \
+              --screenshot=card.png file://$PWD/docs/og-image-source.html
+       sips -s format jpeg -s formatOptions 92 card.png --out public/og-whatsapp-preview-v3.jpg
+     Then bump the name in index.html and src/lib/seo.tsx. Never overwrite a published
+     version: the file is served immutable for a year and WhatsApp caches it besides. -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
@@ -9,10 +18,13 @@
   .g2{width:420px;height:420px;background:rgba(0,182,213,.20);bottom:-200px;left:-100px}
   .wrap{position:relative;display:flex;height:100%;padding:54px 56px;gap:28px;align-items:center}
   .left{flex:1;min-width:0}
-  .brand{display:flex;align-items:center;gap:12px;margin-bottom:26px}
-  .mark{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#00b6d5,#0f6187);
-        display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans';font-weight:800;font-size:22px;color:#0F172A}
-  .name{font-family:'Plus Jakarta Sans';font-weight:800;font-size:27px;letter-spacing:-.02em}
+  /* The official logo, not a stand-in. This card used to draw a gradient square
+     with a typed "E" and set the name in Plus Jakarta Sans — the shortcut the
+     brand sheet forbids — on the one image every prospect sees when a link to the
+     site is shared on WhatsApp. The dark-ground version, because the card is navy.
+     62px, not the 46px that looks right at full size: WhatsApp shows this card about
+     310px wide — a quarter of its size — and at 46px the name was 12px tall. */
+  .logo{display:block;height:62px;width:auto;margin-bottom:28px}
   .pill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;
         background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.42);color:#FBBF24;
         font-size:12.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin-bottom:22px}
@@ -48,7 +60,7 @@
 <div class="glow g1"></div><div class="glow g2"></div>
 <div class="wrap">
   <div class="left">
-    <div class="brand"><div class="mark">E</div><div class="name">EduAnant</div></div>
+    <img class="logo" src="../public/eduanant-logo-full-dark.svg" alt="EduAnant" width="343" height="62">
     <div class="pill">🇮🇳 Built for Indian Realities</div>
     <h1>The <span class="amber">Offline&#8209;Ready</span><br>School OS for India</h1>
     <div class="sub">Run it on a school PC, across your own Wi-Fi, or hosted by us. Admissions, Fees, Attendance, Exams, Transport &amp; a parent Android app.</div>

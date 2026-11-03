@@ -7,7 +7,7 @@ export const SITE = {
     legalName: 'Snapx Technologies LLP',
     url: 'https://eduanant.cloud',
     logo: 'https://eduanant.cloud/icon-512.png',
-    ogImage: 'https://eduanant.cloud/og-whatsapp-preview.png',
+    ogImage: 'https://eduanant.cloud/og-whatsapp-preview-v2.jpg',
     phone: '+91-79036-12979',
     email: 'hello@eduanant.cloud',
     /* Postal fields come from the registered office in data/company.ts, so the
