@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
-<title>EduAnant — Order Form &amp; Pilot Terms</title>
+<title>EduAnant — Order Form &amp; Terms</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 {{CSS}}
@@ -8,17 +8,18 @@
 /* A rep must be able to leave a signed page behind, not a promise. Two sides:
    the order on the front, the terms it commits us to on the back. A school that
    has to wait for "the agreement to be sent over" cools down overnight. */
-.fld { margin-bottom: 2.1mm; }
+.fld { margin-bottom: 1.6mm; }
 .fld-l { font-size: 6.8pt; font-weight: 800; text-transform: uppercase;
          letter-spacing: 0.08em; color: var(--ink-mute); margin-bottom: 1mm; }
-.fld-i { border-bottom: 0.3mm solid #94A3B8; height: 6mm; }
-.fld-i--box { border: 0.25mm solid #94A3B8; border-radius: 1.5mm; height: 9mm; }
+.fld-i { border-bottom: 0.3mm solid #94A3B8; height: 5mm; }
+.fld-i--box { border: 0.25mm solid #94A3B8; border-radius: 1.5mm; height: 6.5mm; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; }
 .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3.5mm; }
 .tick { display: inline-flex; align-items: center; gap: 1.6mm; font-size: 8.4pt;
         color: var(--ink-soft); margin-right: 5mm; }
 .tick::before { content: ''; width: 3.4mm; height: 3.4mm; border: 0.3mm solid #94A3B8;
                 border-radius: 0.8mm; flex-shrink: 0; }
+table td, table th { padding-top: 1.3mm; padding-bottom: 1.3mm; }
 .sect-h { font-family: 'Plus Jakarta Sans'; font-size: 10.5pt; font-weight: 800;
           color: var(--navy-mid); padding-bottom: 1.4mm; margin-bottom: 2.6mm;
           border-bottom: 0.3mm solid var(--navy-mid); }
@@ -98,22 +99,23 @@
   </div>
   <div class="panel" style="margin-bottom:3mm;padding:2.4mm 3mm">
     <div style="font-size:7.8pt;color:var(--ink-soft);line-height:1.5">
-      <b style="color:var(--navy-mid)">Payment schedule.</b> A school collects its fees in April and has
-      little cash before then, so nothing is due at signature beyond a booking amount.
-      <b>25% on go-live, 75% within 30 days of go-live</b>, unless agreed otherwise below. Payment by
-      cheque, NEFT or UPI to <b>{{LEGAL_NAME}}</b>, <b>GSTIN {{REG_GSTIN}}</b>; a GST invoice is issued
-      for every payment. Cash is not accepted.</div>
+      <b style="color:var(--navy-mid)">Payment.</b> <b>No invoice is raised during the 30-day trial.</b>
+      Once you confirm, the subscription is prepaid for the cycle you choose — annually, or monthly if you
+      prefer. Pay <b>only to the account named {{PAYEE}}</b> (GSTIN {{REG_GSTIN}}); before you confirm any
+      payment, check that the name your bank shows reads exactly that, because a payment to any other
+      name is not a payment to us. We never debit your account automatically. A GST invoice is issued
+      for every payment.</div>
   </div>
   <div class="fld"><div class="fld-l">Anything agreed differently (written here, or it does not apply)</div>
     <div class="fld-i--box"></div></div>
 
   <div class="grid2" style="margin-top:2.5mm">
     <div>
-      <div style="height:11mm"></div>
+      <div style="height:8.5mm"></div>
       <div class="sign">For the school — signature, name, designation, date, school seal</div>
     </div>
     <div>
-      <div style="height:11mm"></div>
+      <div style="height:8.5mm"></div>
       <div class="sign">For {{LEGAL_NAME}} — signature, name, date</div>
     </div>
   </div>
@@ -143,11 +145,11 @@
       on-site staff training are included at no cost. Every future release is included for as long as
       the licence runs.</p>
 
-      <h4>2. The pilot, and how you leave</h4>
-      <p>Your first term is a pilot. If at the end of it you decide EduAnant is not right for your
-      school, tell us in writing and the licence ends there — you pay for the term you used and
-      nothing further. We will hand you a full export of your data within 7 working days, in standard
-      formats you can open without us.</p>
+      <h4>2. The 30-day trial</h4>
+      <p>Every school starts on a 30-day trial. We install EduAnant, migrate your existing records and
+      train your staff, and you run the school on it for a month. No invoice is raised during that
+      period. If you decide against it before the trial ends, you owe us nothing and you keep a full
+      export of your data.</p>
 
       <h4>3. Your data is yours</h4>
       <p>Where EduAnant runs on your own computer or network, the database never leaves your building.
@@ -178,11 +180,13 @@
       named person at the school who can decide things during the rollout. Verified phone numbers for
       parents — the parent app is only as good as the numbers it has.</p>
 
-      <h4>7. Renewal and price changes</h4>
-      <p>The licence runs for the session on page 1 and renews for the next unless either of us says
-      otherwise 30 days before it ends. Billing follows your actual roll at the start of each session,
-      so a school that grows pays more and a school that shrinks pays less. Outside the Founding
-      {{FOUNDING_COUNT}} terms, we will give 60 days' notice of any rate change.</p>
+      <h4>7. After the trial: billing and cancellation</h4>
+      <p>Once you confirm, the subscription is prepaid — annually, or monthly if you prefer. You can
+      cancel at any time and it takes effect at the end of the cycle you have already paid for;
+      nothing further is charged. We do not refund unused time within a cycle that has already
+      started. To cancel or query a bill, write to {{EMAIL}} at least 7 days before your renewal date.
+      Billing follows your actual roll at the start of each session, so a school that grows pays more
+      and a school that shrinks pays less.</p>
 
       <h4>8. Limits, stated plainly</h4>
       <p>We are a small company and we would rather tell you that than imply otherwise. Support is

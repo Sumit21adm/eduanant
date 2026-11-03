@@ -199,6 +199,9 @@ if (!llms.includes(`Release ${productVersion}`)) {
  * number that disagrees with itself across two surfaces is worse than one that
  * is missing, so llms.txt is checked against src/data/company.ts. */
 const companySrc = await readFile('src/data/company.ts', 'utf8');
+const payee = /payee:\s*'([^']+)'/.exec(companySrc)?.[1];
+if (!payee) priceProblems.push('src/data/company.ts has no PAYMENT.payee, so the bank-account name cannot be checked');
+else if (!llms.includes(payee)) priceProblems.push(`public/llms.txt does not state the payee name ${payee}`);
 for (const [, label, value] of companySrc.matchAll(
     /\{\s*label:\s*'([^']+)',\s*value:\s*'([^']+)'/g)) {
     if (!llms.includes(value)) priceProblems.push(`public/llms.txt does not state the ${label} ${value}`);

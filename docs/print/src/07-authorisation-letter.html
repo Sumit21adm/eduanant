@@ -10,7 +10,7 @@
    number the school can ring that is not the rep's own, is what makes that
    possible — and it is also the cheapest way to look like a real company. */
 .letter { font-size: 10pt; color: var(--ink-soft); line-height: 1.65; }
-.letter p { margin-bottom: 2.2mm; }
+.letter p { margin-bottom: 1.8mm; }
 .letter b { color: var(--navy-mid); }
 .fld-i { border-bottom: 0.3mm solid #94A3B8; display: inline-block;
          min-width: 58mm; height: 4.6mm; }
@@ -21,7 +21,7 @@
 .may li::before { position: absolute; left: 0; top: 0; font-weight: 800; }
 .may--can li::before { content: '✓'; color: #2e7d32; }
 .may--cant li::before { content: '✕'; color: #b02020; }
-.photo-box { width: 27mm; height: 31mm; border: 0.3mm dashed #94A3B8; border-radius: 1.5mm;
+.photo-box { width: 27mm; height: 29mm; border: 0.3mm dashed #94A3B8; border-radius: 1.5mm;
              display: flex; align-items: center; justify-content: center; text-align: center;
              font-size: 7pt; color: var(--ink-mute); line-height: 1.4; padding: 2mm; }
 </style></head>
@@ -61,7 +61,8 @@
     <p><b>Please verify this person before discussing anything about your school.</b> Call
     <b>{{PHONE}}</b> and quote the authorisation number above. That number reaches us, not the
     representative. If the person in front of you cannot produce this letter and a photo identity
-    card, they do not represent us.</p>
+    card, they do not represent us. <b>Payments to us are made only to the bank account named {{PAYEE}}</b> —
+    never to a representative, and never to any other name.</p>
   </div>
 
   <div class="may">
@@ -81,7 +82,7 @@
       <ul class="may--cant">
         <li>Offer any discount or rate not on the price card</li>
         <li>Promise a feature that is not already working</li>
-        <li>Collect cash, cheques or any payment from your school</li>
+        <li>Collect any payment from your school</li>
         <li>Ask for passwords to any system you currently use</li>
         <li>Take away original student or staff records</li>
         <li>Commit us to a date without our written confirmation</li>
@@ -106,13 +107,13 @@
 
   <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8mm;margin-top:4mm">
     <div style="flex:1">
-      <div style="height:10mm"></div>
+      <div style="height:8mm"></div>
       <div style="border-top:0.3mm solid #94A3B8;padding-top:1.6mm;font-size:8pt;color:var(--ink-soft)">
         <b style="color:var(--navy-mid)">Sumit Kumar</b> · Founder<br>
         <span style="font-size:7.4pt;color:var(--ink-mute)">For and on behalf of {{LEGAL_NAME}}</span></div>
     </div>
     <div style="text-align:center">
-      <div style="width:24mm;height:24mm">{{QR_SITE}}</div>
+      <div style="width:20mm;height:20mm">{{QR_SITE}}</div>
       <div class="qr-cap">Verify us at<br>{{SITE}}</div>
     </div>
   </div>

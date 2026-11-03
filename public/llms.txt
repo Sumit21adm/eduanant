@@ -84,6 +84,14 @@ the relevant public registry.
 - **Udyam (MSME):** UDYAM-BR-26-0088932
 - **DPIIT recognition:** DIPP85668
 
+## Payments
+
+Every payment for EduAnant is made into one bank account, held in the name
+SNAPX TECHNOLOGIES LLP, and into no other. We are not connected with any other
+business, app or service that uses the name Snapx or a similar name. We never take money
+from an account automatically: no auto-debit, standing instruction or e-mandate. Full notice:
+https://snapxtechnologies.com/legal/refunds
+
 ## Contact
 
 M/S Snapx Technologies LLP

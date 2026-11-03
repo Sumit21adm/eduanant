@@ -148,7 +148,7 @@ async function loadData() {
         export { CHANGELOG, RELEASE_COUNT } from ${JSON.stringify(join(ROOT, 'src/data/changelog.ts'))};
         export { LIVE_SINCE_LABEL, monthsSince } from ${JSON.stringify(join(ROOT, 'src/lib/timeline.ts'))};
         export { PRODUCT_VERSION } from ${JSON.stringify(join(ROOT, 'src/lib/version.ts'))};
-        export { COMPANY, REGISTRATIONS, registrationLine, GSTIN } from ${JSON.stringify(join(ROOT, 'src/data/company.ts'))};
+        export { COMPANY, REGISTRATIONS, registrationLine, GSTIN, PAYMENT } from ${JSON.stringify(join(ROOT, 'src/data/company.ts'))};
     `);
     await esbuild({
         entryPoints: [entry], bundle: true, format: 'esm', outfile: out,
@@ -433,6 +433,8 @@ async function main() {
 
         /* Registry identifiers. REG_LINE is the compact one-liner for a footer;
          * REG_ROWS is the table a school's accountant reads off the order form. */
+        // The name on the bank account, exactly — no "M/S". See PAYMENT in src/data/company.ts.
+        PAYEE: P.PAYMENT.payee,
         REG_LINE: P.registrationLine,
         GSTIN: P.GSTIN,
         // One token per identifier — REG_LLPIN, REG_GSTIN, REG_UDYAM, REG_DPIIT —

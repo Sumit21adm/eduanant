@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Seo from '../lib/seo';
 import { PAGE_SEO } from '../lib/seoConfig';
+import { PAYMENT } from '../data/company';
 
 export default function RefundPolicyPage() {
     return (
@@ -24,10 +25,22 @@ export default function RefundPolicyPage() {
 
                         <div className="bg-white/80 dark:bg-white/[0.02] border border-gray-200/50 dark:border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl backdrop-blur-sm">
                             <p className="text-sm text-text-secondary mb-10 pb-4 border-b border-gray-200 dark:border-white/10">
-                                <strong className="text-text-primary">Last updated:</strong> 7 September 2026
+                                <strong className="text-text-primary">Last updated:</strong> 3 November 2026
                             </p>
                         
                             <div className="space-y-10 text-text-secondary leading-relaxed text-base md:text-lg">
+                                {/* Who to pay — first, before the trial and billing terms it applies to. The
+                                    full notice about other businesses called Snapx is on the parent company's
+                                    site; this is the part a school needs in order to pay the right account. */}
+                                <section className="bg-amber-50 dark:bg-amber-900/10 p-6 rounded-2xl border border-amber-300/60 dark:border-amber-500/25"
+                                    data-testid="payment-statement">
+                                    <h3 className="text-xl md:text-2xl font-bold text-amber-900 dark:text-amber-300 mb-3">{PAYMENT.heading}</h3>
+                                    <p>{PAYMENT.body}{' '}
+                                        <a href={PAYMENT.fullNoticeUrl} target="_blank" rel="noopener noreferrer"
+                                            className="font-bold underline underline-offset-4 text-text-primary">Read the full notice</a>.
+                                    </p>
+                                </section>
+
                                 <section className="bg-emerald-50 dark:bg-emerald-900/10 p-6 rounded-2xl border border-emerald-200/50 dark:border-emerald-500/20">
                                     <h3 className="text-xl md:text-2xl font-bold text-emerald-800 dark:text-emerald-400 mb-4 flex items-center gap-3">
                                         <span className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-sm font-black shrink-0">1</span>

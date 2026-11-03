@@ -42,7 +42,7 @@ const PROOF = [
     {
         icon: Handshake,
         title: 'Founding school terms, in writing',
-        body: 'The first ten schools get a locked price, a paid pilot they can walk away from, and direct influence on what gets built next. All of it stated on the pricing page, not left to a conversation.',
+        body: 'The first ten schools get a locked price, a 30-day trial with no invoice, and direct influence on what gets built next. All of it stated on the pricing page, not left to a conversation.',
         cta: 'See founding terms', to: '/pricing',
         color: 'from-amber-700 to-amber-500', border: 'border-amber-500/25', bg: 'bg-amber-500/5',
     },

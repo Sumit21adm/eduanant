@@ -69,6 +69,35 @@ export const COMPANY = {
     siteUrl: 'https://eduanant.cloud',
 } as const;
 
+/**
+ * Who the money goes to.
+ *
+ * Another business trades under the name Snapx, and people charged by it search for a
+ * refund policy, land on pages like ours, and ring us instead. The full notice lives on
+ * the parent company's site, which is where those searches arrive; this is the short,
+ * self-contained form for the pages and papers where a school actually pays.
+ *
+ * It is repeated here rather than only linked because a policy a customer relies on
+ * should not have to send them to another website to learn who to pay. The name is
+ * kept in one place so the copies cannot drift: it is the bank's name for the account,
+ * exactly, and it has no "M/S" — that is an honorific, not part of the account.
+ *
+ * The wording is about us. It does not name the other business or say what it does:
+ * "we are not connected with it" is true and enough.
+ */
+export const PAYMENT = {
+    payee: 'SNAPX TECHNOLOGIES LLP',
+    heading: 'Pay only to SNAPX TECHNOLOGIES LLP',
+    body:
+        'Every payment for EduAnant goes into one bank account, held in the name SNAPX TECHNOLOGIES LLP, '
+        + 'and into no other. Before you confirm a payment, check that the name your bank or UPI app '
+        + 'shows reads exactly that. We never take money from your account automatically — there is no '
+        + 'auto-debit, standing instruction or e-mandate; every payment is one you make yourself. We are '
+        + 'not connected with any other business or app that uses the name Snapx.',
+    /** The canonical, full notice — kept once, on the site those searches reach. */
+    fullNoticeUrl: 'https://snapxtechnologies.com/legal/refunds',
+} as const;
+
 export interface Registration {
     /** What a reader needs to recognise it, e.g. "GSTIN". */
     label: string;
