@@ -70,25 +70,36 @@ export default function Header() {
                 <div className="container mx-auto px-4 sm:px-6 flex justify-between items-center gap-2 py-3 w-full min-w-0">
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 shrink-0">
-                        {/* Two lockups: the navy half of the mark disappears on a dark
-                            ground, so dark mode gets a variant with that half in light
-                            slate. Only one is ever rendered, so only one reaches the
-                            accessibility tree. */}
-                        <motion.div className="flex items-center"
-                            animate={{ filter: ['drop-shadow(0 0 6px rgba(0,182,213,0.25))', 'drop-shadow(0 0 16px rgba(0,182,213,0.5))', 'drop-shadow(0 0 6px rgba(0,182,213,0.25))'] }}
-                            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}>
-                            <img src="/eduanant-logo.svg" alt="EduAnant" className="h-8 sm:h-10 w-auto object-contain dark:hidden" />
-                            <img src="/eduanant-logo-dark.svg" alt="EduAnant" className="h-8 sm:h-10 w-auto object-contain hidden dark:block" />
-                        </motion.div>
+                        {/* The full logo — mark and name. The mark alone never said
+                            "EduAnant": a visitor saw a symbol and had to read the tab
+                            title to learn what the product was called.
+
+                            Two versions: the navy of the mark's left loop and the whole
+                            wordmark disappears on a dark ground, so dark mode gets a
+                            variant with those in light slate and white. Only one is ever
+                            rendered, so only one reaches the accessibility tree. Both
+                            are derived from the master by scripts/derive-logo.mjs.
+
+                            The width and height are the file's own, so the browser
+                            reserves the space before the image arrives and the nav does
+                            not shift when it does. The height steps down between 1024 and
+                            1280 because the full logo is about three and a half times
+                            wider than the mark was, and the baseline nav fitted that
+                            width with no room to spare — so there the nav tightens and
+                            the button reads "Book Demo" instead. */}
+                        <img src="/eduanant-logo-full.svg" alt="EduAnant" width={1406} height={254}
+                            className="h-7 sm:h-8 lg:h-7 xl:h-10 w-auto object-contain dark:hidden" />
+                        <img src="/eduanant-logo-full-dark.svg" alt="EduAnant" width={1406} height={254}
+                            className="h-7 sm:h-8 lg:h-7 xl:h-10 w-auto object-contain hidden dark:block" />
                     </Link>
 
                     {/* Desktop Nav */}
-                    <nav className="hidden lg:flex items-center gap-1">
+                    <nav className="hidden lg:flex items-center gap-0 xl:gap-1">
                         {NAV_LINKS.map((link) => {
                             const isActive = link.href === '/' ? pathname === '/' : pathname === link.href;
                             return (
                                 <Link key={link.label} to={link.href}
-                                    className={`relative px-2.5 xl:px-4 py-2 text-sm font-semibold font-display tracking-tight transition-colors group ${isActive ? 'text-[var(--primary-main)] dark:text-white' : 'text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white'}`}>
+                                    className={`relative px-2 xl:px-4 py-2 text-sm font-semibold font-display tracking-tight transition-colors group ${isActive ? 'text-[var(--primary-main)] dark:text-white' : 'text-text-secondary hover:text-[var(--primary-main)] dark:hover:text-white'}`}>
                                     {link.label}
                                     <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 transition-all duration-300 rounded-full ${isActive ? 'w-3/4' : 'w-0 group-hover:w-3/4'}`}
                                         style={{ background: 'linear-gradient(90deg, #F59E0B, #EA580C)' }} />
@@ -115,7 +126,8 @@ export default function Header() {
                         <Link to="/contact"
                             className="flex items-center gap-2 btn-primary text-xs sm:text-sm px-3.5 sm:px-5 py-2.5 rounded-xl font-bold whitespace-nowrap transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
                             <PhoneCall className="w-4 h-4 shrink-0" strokeWidth={1.5} />
-                            <span className="hidden sm:inline">Book On-Site Demo</span>
+                            <span className="hidden sm:inline lg:hidden xl:inline">Book On-Site Demo</span>
+                            <span className="hidden lg:inline xl:hidden">Book Demo</span>
                             <span className="sm:hidden">Book Visit</span>
                         </Link>
                         <button onClick={() => setMobileOpen(true)} type="button"
@@ -150,8 +162,8 @@ export default function Header() {
 
                         <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200/80 dark:border-white/10 shrink-0">
                             <Link to="/" onClick={() => setMobileOpen(false)} className="flex items-center shrink-0">
-                                <img src="/eduanant-logo.svg" alt="EduAnant" className="h-8 w-auto object-contain dark:hidden" />
-                                <img src="/eduanant-logo-dark.svg" alt="EduAnant" className="h-8 w-auto object-contain hidden dark:block" />
+                                <img src="/eduanant-logo-full.svg" alt="EduAnant" width={1406} height={254} className="h-7 w-auto object-contain dark:hidden" />
+                                <img src="/eduanant-logo-full-dark.svg" alt="EduAnant" width={1406} height={254} className="h-7 w-auto object-contain hidden dark:block" />
                             </Link>
                             <div className="flex items-center gap-1">
                                 <button type="button" onClick={toggleDarkMode}

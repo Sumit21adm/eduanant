@@ -79,35 +79,34 @@ h1, h2, h3, h4, .display {
     letter-spacing: 0;
 }
 
-/* ── The logo lockup ─────────────────────────────────────────────────────────
- * The mark on its own does not say "EduAnant". On screen that is survivable,
- * because the name is in the address bar and the page title. On paper it is not:
- * a director who likes the leaflet has to be able to ask for us by name.
+/* ── The logo ────────────────────────────────────────────────────────────────
+ * One artwork: the mark and the name drawn together, the name as outlines in the
+ * logo's own typeface (Open Sans Bold). It is placed, never rebuilt.
  *
- * So the printed logo is always a lockup — mark plus name — in one of the three
- * forms below, and never the bare mark except as a watermark or a cover motif.
+ * It used to be assembled here — the mark, plus "EduAnant" typed in Plus Jakarta
+ * Sans — because the mark alone does not say the name and no full logo existed
+ * yet. That was a different logo that happened to look similar, and it disagreed
+ * with the one the website now uses. Setting the name in any other face beside the
+ * mark makes a third.
+ *
+ * The artwork is 1406 x 254, a ratio of 5.535, so each width below is its height
+ * times that. They are stated rather than left to `auto`: an inline <svg> in a flex
+ * row that aligns to an edge collapsed to a sliver when it was left to work it out.
  */
-.lockup { display: inline-flex; align-items: center; gap: 2.6mm; }
-/* The width is stated, not left to `auto`. The artwork is 830.2 x 500, so width
- * is height x 1.6604 — computed here once rather than by the layout engine,
- * which collapsed the mark to a sliver whenever a lockup sat inside a flex row
- * that aligned its items to an edge. */
-.lockup-mark { height: 9mm; width: 14.94mm; flex-shrink: 0; }
-.lockup-name {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: 16pt;
-    letter-spacing: -0.025em;
-    color: var(--navy-mid);
-    line-height: 1;
-    display: block;
-}
+.lockup { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 1mm; }
+.lockup-logo { display: block; height: 9mm; width: 49.82mm; flex-shrink: 0; }
+
+/* Minimum size is 7mm tall — the whole logo, cap included. Below that the tassel
+ * and the book's page lines fill in on press and the mark reads as a grey blob. */
+.lockup--sm .lockup-logo { height: 7mm;  width: 38.75mm; }
+.lockup--lg .lockup-logo { height: 14mm; width: 77.49mm; }
+
+/* An optional line beneath: what the product is, on covers where there is room. */
 .lockup-sub {
     font-size: var(--t-caption);
     font-weight: 700;
     color: var(--ink-mute);
     letter-spacing: 0.02em;
-    margin-top: 0.9mm;
     display: block;
 }
 /* Devanagari reading of the name, for Hindi pieces and for any audience that has
@@ -120,16 +119,12 @@ h1, h2, h3, h4, .display {
     display: block;
     line-height: 1.4;
 }
-.on-dark .lockup-name { color: #fff; }
 .on-dark .lockup-sub,
 .on-dark .lockup-hi  { color: rgba(255,255,255,0.72); }
 
-/* Minimum sizes. Below these the cap tassel and the book's page lines fill in on
- * press and the mark reads as a grey blob. */
-.lockup--sm .lockup-mark { height: 7mm; width: 11.62mm; }
-.lockup--sm .lockup-name { font-size: 12.5pt; }
-.lockup--lg .lockup-mark { height: 14mm; width: 23.25mm; }
-.lockup--lg .lockup-name { font-size: 24pt; }
+/* The bare mark: an app icon, an avatar, a favicon. It is shown on the brand sheet
+ * to say what the symbol is, and is never the logo on a piece of paper. */
+.lockup-mark { height: 9mm; width: 14.94mm; flex-shrink: 0; }
 
 /* ── Page geometry ───────────────────────────────────────────────────────────
  * Each piece sets its own @page size; these are the shared shells. `.sheet` is

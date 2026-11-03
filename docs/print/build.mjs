@@ -198,13 +198,33 @@ async function loadLogo(file, className, scope) {
     return svg;
 }
 
-/** The printed logo is always mark + name. See brand.css for why. */
-function lockup(mark, { size = '', sub = 'School Management System', hindi = false } = {}) {
-    return `<span class="lockup ${size}">${mark}<span class="lockup-text">` +
-        `<span class="lockup-name">EduAnant</span>` +
+/** The official full logo, inlined. Both variants come out of
+ *  scripts/derive-logo.mjs with their own gradient ids (eal-* and ead-*), so any
+ *  number of either can share a page without painting each other's colours.
+ *
+ *  The width and height attributes are stripped: brand.css sizes the logo in
+ *  millimetres, and an inline <svg> that carries pixel dimensions of its own
+ *  fights that sizing. */
+async function loadFullLogo(file) {
+    return (await readFile(join(ROOT, 'public', file), 'utf8'))
+        .replace(/<!--[\s\S]*?-->/g, '')
+        .replace(/(<svg[^>]*?)\swidth="[^"]*"/, '$1')
+        .replace(/(<svg[^>]*?)\sheight="[^"]*"/, '$1')
+        .replace('<svg', '<svg class="lockup-logo"')
+        .trim();
+}
+
+/** The printed logo is the official artwork — mark and name drawn together, with
+ *  the name as outlines in the logo's own typeface. It used to be assembled here
+ *  from the mark plus "EduAnant" typed in Plus Jakarta Sans, which was a different
+ *  logo that happened to look similar. The descriptor line is optional and sits
+ *  beneath: it appears on covers, where there is room to say what the product is,
+ *  and is left off the mastheads, where the headline already does. */
+function lockup(logo, { size = '', sub = '', hindi = false } = {}) {
+    return `<span class="lockup ${size}">${logo}` +
         (sub ? `<span class="lockup-sub">${sub}</span>` : '') +
         (hindi ? `<span class="lockup-hi">एडुअनंत · स्कूल प्रबंधन सिस्टम</span>` : '') +
-        `</span></span>`;
+        `</span>`;
 }
 
 /* ── QR codes ────────────────────────────────────────────────────────────────
@@ -260,6 +280,11 @@ async function main() {
     const qr = makeQrFactory();
     const css = await readFile(join(HERE, 'brand.css'), 'utf8');
 
+    const logoColour = await loadFullLogo('eduanant-logo-full.svg');
+    const logoDark = await loadFullLogo('eduanant-logo-full-dark.svg');
+    // The mark on its own is still wanted for the brand sheet, which shows what the
+    // symbol is and where it may stand alone (an app icon, an avatar) — never on paper
+    // as the logo itself.
     const markDark = await loadLogo('eduanant-logo.svg', 'lockup-mark', 'mk-colour');
     const markLight = await loadLogo('Logo/Logo_logo1.svg', 'lockup-mark', 'mk-white');
 
@@ -321,7 +346,7 @@ async function main() {
         <div><div class="mod-t">${m.title}</div><div class="mod-s">${m.tagline}</div></div>
     </div>`).join('\n');
 
-    const LOCK_SM = lockup(markDark, { size: 'lockup--sm', sub: '' });
+    const LOCK_SM = lockup(logoColour, { size: 'lockup--sm' });
 
     /* One appendix slide per module, so a rep can flip to the exact page a
      * question lands on instead of scrolling a deck in front of the buyer. */
@@ -346,13 +371,15 @@ async function main() {
 
     const tokens = {
         CSS: css,
-        LOCKUP: lockup(markDark),
-        LOCKUP_HI: lockup(markDark, { hindi: true }),
-        LOCKUP_LG: lockup(markDark, { size: 'lockup--lg' }),
+        LOCKUP: lockup(logoColour),
+        LOCKUP_HI: lockup(logoColour, { hindi: true }),
+        LOCKUP_LG: lockup(logoColour, { size: 'lockup--lg', sub: 'School Management System' }),
         LOCKUP_SM: LOCK_SM,
-        LOCKUP_DARK: `<span class="on-dark">${lockup(markLight)}</span>`,
-        LOCKUP_DARK_LG: `<span class="on-dark">${lockup(markLight, { size: 'lockup--lg' })}</span>`,
-        LOCKUP_DARK_SM: `<span class="on-dark">${lockup(markLight, { size: 'lockup--sm', sub: '' })}</span>`,
+        LOGO_LG: lockup(logoColour, { size: 'lockup--lg' }),
+        LOGO_DARK_LG: `<span class="on-dark">${lockup(logoDark, { size: 'lockup--lg' })}</span>`,
+        LOCKUP_DARK: `<span class="on-dark">${lockup(logoDark)}</span>`,
+        LOCKUP_DARK_LG: `<span class="on-dark">${lockup(logoDark, { size: 'lockup--lg', sub: 'School Management System' })}</span>`,
+        LOCKUP_DARK_SM: `<span class="on-dark">${lockup(logoDark, { size: 'lockup--sm' })}</span>`,
         MARK: markDark,
         MARK_WHITE: markLight,
 

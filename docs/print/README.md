@@ -51,14 +51,17 @@ so the download the website serves can never fall behind this build.
 
 The full version is `dist/00-brand-sheet.pdf`. The three that get broken most:
 
-1. **The mark never appears alone on paper.** It is an infinity drawn as an open book wearing a
-   graduation cap, and it does not say "EduAnant". On screen the name is in the address bar; on paper
-   there is nothing. Always use a lockup — mark + name.
+1. **The logo is one artwork, placed — never rebuilt.** It is the mark and the name drawn together,
+   the name as outlines in the logo's own typeface (Open Sans Bold). The master is
+   `public/Logo/EduAnant_Trademark_Logo.svg`; `scripts/derive-logo.mjs` crops it and writes the two
+   files everything uses: `public/eduanant-logo-full.svg` (light) and `eduanant-logo-full-dark.svg`
+   (dark grounds). Typing "EduAnant" beside the mark in any other font makes a different logo — the
+   first version of this kit did exactly that.
 2. **The name is `EduAnant`.** One word, capital E, capital A. Not Eduanant, EDUANANT, Edu Anant or
    Edu-Anant. In Devanagari, एडुअनंत.
-3. **White mark on dark, colour mark on light.** `public/eduanant-logo.svg` is the colour artwork,
-   `public/Logo/Logo_logo1.svg` is the white one. Retire `public/logo.png` — it is an older,
-   differently coloured rendering. Minimum printed mark height is 7 mm.
+3. **Colour on light, reversed on dark — and never the bare mark as the logo.** The colour logo
+   disappears on navy, so dark grounds get the reversed file. The mark alone (`eduanant-logo.svg`) is
+   for app icons, favicons and avatars. Minimum printed logo height is 7 mm.
 
 Amber text on white must be `#B45309`, never `#F59E0B`: at 9 pt the brighter amber fails contrast.
 

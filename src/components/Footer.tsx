@@ -20,7 +20,8 @@ export default function Footer() {
                     style={{ background: 'linear-gradient(135deg, #0F172A 0%, #1E1B4B 55%, #312E81 100%)' }}>
                     <div className="absolute inset-0 opacity-10"
                         style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='1' fill='white'/%3E%3C/svg%3E\")" }} />
-                    <img src="/eduanant-logo-dark.svg" alt="" aria-hidden className="w-24 mx-auto mb-5 opacity-90" />
+                    <img src="/eduanant-logo-full-dark.svg" alt="" aria-hidden width={1406} height={254}
+                        className="w-52 sm:w-60 mx-auto mb-6 opacity-95" />
                     <h2 className="font-display text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-3">Ready to modernise your school?</h2>
                     <p className="text-white/80 mb-8 max-w-xl mx-auto text-base">
                         Join the growing list of Indian schools that have left behind registers, Excel sheets, and fragmented software — for one complete system.
@@ -45,8 +46,8 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12 pb-12 border-b border-gray-200/50 dark:border-white/10">
                     {/* Brand */}
                     <div className="lg:col-span-2">
-                        <img src="/eduanant-logo.svg" alt="EduAnant" className="w-36 mb-5 dark:hidden" />
-                        <img src="/eduanant-logo-dark.svg" alt="EduAnant" className="w-36 mb-5 hidden dark:block" />
+                        <img src="/eduanant-logo-full.svg" alt="EduAnant" width={1406} height={254} className="w-52 mb-5 dark:hidden" />
+                        <img src="/eduanant-logo-full-dark.svg" alt="EduAnant" width={1406} height={254} className="w-52 mb-5 hidden dark:block" />
                         <p className="text-text-secondary text-sm leading-relaxed max-w-sm mb-5">
                             India's most complete school management application — built from scratch for Indian schools, by an Indian team.
                         </p>

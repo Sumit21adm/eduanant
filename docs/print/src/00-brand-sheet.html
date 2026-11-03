@@ -50,43 +50,43 @@
     disagrees with this page, the piece is wrong. Everything in <b>docs/print</b> is generated from it.
   </p>
 
-  <div class="eyebrow">The mark</div>
-  <div class="two" style="margin-bottom:5mm">
+  <div class="eyebrow">The logo</div>
+  <div class="two" style="margin-bottom:3.5mm">
     <div class="demo" style="text-align:center">
-      <div style="height:26mm;display:flex;align-items:center;justify-content:center">{{MARK}}</div>
-      <div class="sw-u" style="margin-top:2mm">An infinity drawn as an open book, wearing a graduation
-      cap. <b>Anant</b> means endless. Use on white and on any light wash.</div>
+      <div style="height:20mm;display:flex;align-items:center;justify-content:center">{{LOGO_LG}}</div>
+      <div class="sw-u" style="margin-top:2mm">An infinity drawn as an open book, wearing a graduation cap — and the
+      name, drawn with it. <b>Anant</b> means endless. For white paper and any light wash.</div>
     </div>
     <div class="demo demo--navy" style="text-align:center">
-      <div style="height:26mm;display:flex;align-items:center;justify-content:center">{{MARK_WHITE}}</div>
-      <div class="sw-u" style="margin-top:2mm;color:rgba(255,255,255,0.75)">The white mark is the only
-      one permitted on navy. The gradient version loses its left loop against a dark ground.</div>
+      <div style="height:20mm;display:flex;align-items:center;justify-content:center">{{LOGO_DARK_LG}}</div>
+      <div class="sw-u" style="margin-top:2mm;color:rgba(255,255,255,0.75)">The reversed version, for navy. Its left loop and
+      the name go light — the colour version disappears on a dark ground.</div>
     </div>
   </div>
 
-  <div class="eyebrow">The lockup — what actually gets printed</div>
-  <div class="panel panel--amber" style="margin-bottom:4mm">
-    <div class="spec-v"><b>The mark never appears alone on paper.</b> On screen the name is in the
-    address bar and the page title; on paper there is nothing to tell a principal what we are called.
-    A director who likes the leaflet has to be able to ask for us by name, so the printed logo is
-    always mark&nbsp;+&nbsp;name, in one of the three forms below.</div>
+  <div class="panel panel--amber" style="margin-bottom:3.5mm">
+    <div class="spec-v"><b>One artwork, placed — never rebuilt.</b> The name is drawn as outlines in the logo's own
+    typeface, so it looks the same on every machine. Typing &ldquo;EduAnant&rdquo; beside the mark in any other
+    font makes a different logo. Use the files: <b>eduanant-logo-full.svg</b> (light) and
+    <b>eduanant-logo-full-dark.svg</b> (dark), derived from the master by <b>scripts/derive-logo.mjs</b>.</div>
   </div>
 
-  <div class="three" style="margin-bottom:5mm">
+  <div class="eyebrow">Versions</div>
+  <div class="three" style="margin-bottom:4mm">
     <div class="demo">
       <div style="margin-bottom:3mm">{{LOCKUP}}</div>
       <div class="sw-n">Primary</div>
-      <div class="sw-u">Default for every piece. Masthead, covers, letterhead, invoices.</div>
+      <div class="sw-u">Mastheads, covers, letterhead, invoices.</div>
     </div>
     <div class="demo demo--navy">
       <div style="margin-bottom:3mm">{{LOCKUP_DARK}}</div>
       <div class="sw-n" style="color:#fff">Reversed</div>
-      <div class="sw-u" style="color:rgba(255,255,255,0.75)">On navy panels, slide covers and the back of the visiting card.</div>
+      <div class="sw-u" style="color:rgba(255,255,255,0.75)">Navy panels, slide covers, the back of the visiting card, the site's dark theme.</div>
     </div>
     <div class="demo">
       <div style="margin-bottom:3mm">{{LOCKUP_HI}}</div>
       <div class="sw-n">Bilingual</div>
-      <div class="sw-u">Hindi pieces, and anywhere the reader has never met the word &ldquo;EduAnant&rdquo;.</div>
+      <div class="sw-u">Hindi pieces, and wherever the reader has never met the word &ldquo;EduAnant&rdquo;.</div>
     </div>
   </div>
 
@@ -98,30 +98,31 @@
       </div>
       <div class="spec-v" style="margin-top:2.5mm">
         Keep clear on all four sides by the height of the graduation cap. Nothing — no rule, no photo
-        edge, no other logo — enters that band. <b>Minimum printed height of the mark: 7&nbsp;mm.</b>
-        Below that the cap tassel and the page lines of the book fill in on press and it reads as a grey blob.
+        edge, no other logo — enters that band. <b>Minimum printed height of the logo: 7&nbsp;mm.</b>
+        Below that the tassel and the book's page lines fill in on press.
+        The bare mark is for app icons, favicons and avatars only.
       </div>
     </div>
     <div>
       <div class="eyebrow">Never do this</div>
-      <div class="no" style="margin-bottom:2.4mm">
-        <div class="no-t">Never substitute a letter</div>
-        <div class="no-b">The first brochure used a navy square with an &ldquo;E&rdquo; in it because the
-        real logo was not to hand. We have a logo.</div>
+      <div class="no" style="margin-bottom:2.2mm">
+        <div class="no-t">Never retype the name</div>
+        <div class="no-b">The first brochure used a navy square with an &ldquo;E&rdquo;; the first print kit
+        set the name in another font beside the real mark. Use the artwork file.</div>
       </div>
-      <div class="no" style="margin-bottom:2.4mm">
-        <div class="no-t">Never use public/logo.png</div>
-        <div class="no-b">An older, differently coloured rendering that survives in the repo. Retire it.
-        The SVGs are the only approved artwork.</div>
+      <div class="no" style="margin-bottom:2.2mm">
+        <div class="no-t">Never use the mark alone as the logo</div>
+        <div class="no-b">On paper a symbol does not say what we are called. A director who likes the
+        leaflet has to be able to ask for us by name.</div>
       </div>
-      <div class="no" style="margin-bottom:2.4mm">
+      <div class="no" style="margin-bottom:2.2mm">
         <div class="no-t">Never recolour, outline, rotate or stretch</div>
         <div class="no-b">Scale proportionally only. No drop shadows, no glow, no box around it.</div>
       </div>
       <div class="no">
         <div class="no-t">Never write the name any other way</div>
-        <div class="no-b">It is <b>EduAnant</b> — one word, capital E, capital A, no space, no hyphen.
-        Not Eduanant, EDUANANT, Edu Anant or Edu-Anant. In Devanagari: एडुअनंत.</div>
+        <div class="no-b">It is <b>EduAnant</b> — one word, capital E, capital A. Not Eduanant, EDUANANT,
+        Edu Anant or Edu-Anant. In Devanagari: एडुअनंत.</div>
       </div>
     </div>
   </div>
@@ -165,7 +166,7 @@
     <div class="panel panel--plain">
       <div class="sw-n" style="margin-bottom:1.2mm">Plus Jakarta Sans — 800</div>
       <div class="display" style="font-size:14pt;color:var(--navy-mid)">Run your school</div>
-      <div class="sw-u" style="margin-top:1.2mm">Everything you <b>scan</b>: the name, headlines, stat figures.</div>
+      <div class="sw-u" style="margin-top:1.2mm">Everything you <b>scan</b>: headlines, stat figures. Not the name — that is the logo.</div>
     </div>
     <div class="panel panel--plain">
       <div class="sw-n" style="margin-bottom:1.2mm">Inter — 400 / 600</div>
