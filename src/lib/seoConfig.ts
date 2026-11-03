@@ -1,6 +1,6 @@
 import { SITE } from './seo';
 import { PRODUCT_VERSION } from './version';
-import { REGISTRATIONS, GSTIN } from '../data/company';
+import { COMPANY, REGISTRATIONS, GSTIN } from '../data/company';
 import {
     annualRateLabel, monthlyRateLabel,
     RATE_ANNUAL, ANNUAL_SAVING_PCT,
@@ -156,6 +156,10 @@ export const organizationSchema = {
         postalCode: SITE.postalCode,
         addressCountry: SITE.country,
     },
+    /* Ties the site to the Google Business listing and the place behind it,
+       rather than leaving a search engine to geocode the address text. */
+    hasMap: COMPANY.mapsUrl,
+    geo: { '@type': 'GeoCoordinates', ...COMPANY.geo },
     /* The statutory identifiers, machine-readable — the same block the parent
        company's site carries, so the two agree about one legal entity. */
     taxID: GSTIN,

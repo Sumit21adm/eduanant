@@ -51,6 +51,14 @@ export const COMPANY = {
     pin: '804453',
     country: 'India',
 
+    /**
+     * Google Business Profile place link, for a "Get directions" action.
+     * Resolves to SNAPX TECHNOLOGIES at the coordinates below. A school that
+     * wants to know we exist somewhere real can look at the building.
+     */
+    mapsUrl: 'https://maps.app.goo.gl/BswrvWnHqwzLauWXA',
+    geo: { latitude: 25.5555642, longitude: 85.1217201 },
+
     phone: '+91 79036 12979',
     /** Same handset as the phone; kept separate so one can change alone. */
     whatsapp: '+91 79036 12979',

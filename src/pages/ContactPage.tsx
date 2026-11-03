@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useRef } from 'react';
-import { PhoneCall, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { PhoneCall, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle, AlertCircle, ArrowUpRight } from 'lucide-react';
 import Seo from '../lib/seo';
 import { PAGE_SEO, organizationSchema } from '../lib/seoConfig';
 import { SCHOOL_SIZE_OPTIONS } from '../data/pricing';
@@ -173,6 +173,13 @@ export default function ContactPage() {
                                     {COMPANY.addressLines.map(line => (
                                         <span key={line} className="block">{line}</span>
                                     ))}
+                                    {/* A printed address proves nothing; the listing shows the
+                                        building. Cheapest reassurance on the page. */}
+                                    <a href={COMPANY.mapsUrl} target="_blank" rel="noopener noreferrer"
+                                        className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold hover:gap-2.5 transition-all"
+                                        style={{ color: 'var(--accent-text)' }}>
+                                        Get directions <ArrowUpRight className="w-3.5 h-3.5" />
+                                    </a>
                                 </span>
                             </motion.div>
                         </div>

@@ -57,6 +57,11 @@ export default function Footer() {
                                 {COMPANY.addressLines.map(line => (
                                     <span key={line} className="block">{line}</span>
                                 ))}
+                                <a href={COMPANY.mapsUrl} target="_blank" rel="noopener noreferrer"
+                                    className="mt-1.5 inline-block text-xs font-bold hover:underline"
+                                    style={{ color: 'var(--accent-text)' }}>
+                                    Get directions
+                                </a>
                             </span>
                         </address>
                         {/* Registry identifiers. A director's unspoken question is whether
