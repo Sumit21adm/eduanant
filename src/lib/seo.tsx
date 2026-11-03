@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { PRODUCT_VERSION } from './version';
+import { COMPANY } from '../data/company';
 
 export const SITE = {
     name: 'EduAnant',
@@ -9,10 +10,14 @@ export const SITE = {
     ogImage: 'https://eduanant.cloud/og-whatsapp-preview.png',
     phone: '+91-79036-12979',
     email: 'hello@eduanant.cloud',
-    locality: 'Patna',
-    region: 'Bihar',
-    postalCode: '804453',
-    country: 'IN',
+    /* Postal fields come from the registered office in data/company.ts, so the
+       address a search engine indexes is the one on the incorporation document
+       rather than a city and a PIN. */
+    streetAddress: COMPANY.postal.streetAddress,
+    locality: COMPANY.postal.addressLocality,
+    region: COMPANY.postal.addressRegion,
+    postalCode: COMPANY.postal.postalCode,
+    country: COMPANY.postal.addressCountry,
     /** The product's released version — not the website build. */
     version: PRODUCT_VERSION,
 } as const;

@@ -45,7 +45,7 @@
 .prob-a { font-size: 7.5pt; color: var(--ink-soft); line-height: 1.4;
           padding-top: 1.2mm; border-top: 0.2mm solid #F1F5F9; }
 .prob-a b { color: var(--amber-text); }
-.steps .step { margin-bottom: 1mm; }
+.steps .step { margin-bottom: 0.4mm; }
 </style></head>
 <body>
 
@@ -56,7 +56,7 @@
     <div class="masthead-right">
       <span class="pill">Live in a Patna school since {{LIVE_SINCE}}</span>
       <div style="font-size:var(--t-caption);color:var(--ink-mute);margin-top:1.2mm">
-        {{LEGAL_NAME}} · {{ADDRESS}} · Release {{VERSION}}</div>
+        {{LEGAL_NAME}} · Release {{VERSION}}</div>
     </div>
   </div>
 
@@ -194,7 +194,7 @@
     </div>
   </div>
 
-  <div class="cols" style="grid-template-columns:1.5fr 1fr">
+  <div class="cols" style="grid-template-columns:1.5fr 1fr;gap:2.4mm">
     <div>
       <div class="eyebrow">How we get you live</div>
       <div class="steps">
@@ -216,7 +216,7 @@
       </div>
     </div>
 
-    <div class="panel panel--amber">
+    <div class="panel panel--amber" style="padding:2.4mm 3mm">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:2.5mm">
         <div>
           <div style="font-size:var(--t-small);font-weight:800;color:var(--navy-mid);margin-bottom:0.8mm">
@@ -240,9 +240,9 @@
   <div class="footer" style="flex-direction:column;align-items:stretch;gap:0.9mm">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <span>Page 2 of 2 · <b>EduAnant</b> School Overview · Release {{VERSION}}</span>
-      <span>{{LEGAL_NAME}} · {{ADDRESS}} · {{EMAIL}}</span>
+      <span>{{LEGAL_NAME}} · {{EMAIL}} · {{PHONE}}</span>
     </div>
-    <div style="font-size:6.6pt;color:var(--ink-mute)">{{REG_LINE}}</div>
+    <div style="font-size:6.4pt;color:var(--ink-mute);line-height:1.4">{{ADDRESS}}<br>{{REG_LINE}}</div>
   </div>
 </section>
 

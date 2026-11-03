@@ -182,7 +182,6 @@
   <div class="eyebrow">Type scale — print</div>
   <div style="margin-bottom:3mm">
     <div class="scale-row"><span class="scale-lab">H1 · 25pt</span><span class="display" style="font-size:25pt;color:var(--navy-mid)">Headline</span></div>
-    <div class="scale-row"><span class="scale-lab">H2 · 17pt</span><span class="display" style="font-size:17pt;color:var(--navy-mid)">Section heading</span></div>
     <div class="scale-row"><span class="scale-lab">Body · 9.5pt</span><span style="font-size:9.5pt;color:var(--ink-soft)">Running text — the floor for anything a director reads</span></div>
     <div class="scale-row"><span class="scale-lab">Caption · 7.5pt</span><span style="font-size:7.5pt;color:var(--ink-mute)">Footers, labels, legal — the absolute floor</span></div>
   </div>
@@ -194,8 +193,7 @@
         <li><b>Say what it does, not what it is.</b> &ldquo;Mark a whole class in 60 seconds&rdquo;, not &ldquo;attendance module&rdquo;.</li>
         <li><b>Rupees, not adjectives.</b> Print the number.</li>
         <li><b>Never promise what is not shipped.</b> Every claim traces to src/data/modules.ts or to running code.</li>
-        <li><b>Name the role, not the technology.</b> Accountant, class teacher, front desk.</li>
-        <li><b>Hindi is written, not translated.</b> Always proofed by a native speaker before press.</li>
+        <li><b>Hindi is written, not translated.</b> Proofed by a native speaker before press.</li>
       </ul>
     </div>
     <div>
@@ -206,12 +204,10 @@
       <div class="spec"><div class="spec-k">Email</div><div class="spec-v">{{EMAIL}}</div></div>
       <div class="spec"><div class="spec-k">Website</div><div class="spec-v">{{SITE}}</div></div>
       <div class="spec"><div class="spec-k">Registered as</div><div class="spec-v">{{REG_LINE}}</div></div>
-      <div class="spec"><div class="spec-k">Product</div><div class="spec-v">EduAnant — School Management System, Release {{VERSION}}, {{MODULE_COUNT}} modules</div></div>
-      <div class="panel panel--amber" style="margin-top:1mm">
-        <div class="sw-u" style="font-size:var(--t-caption);line-height:1.5">These values live in
-        <b>docs/print/build.mjs</b> and are substituted into every piece at build time. Changing a phone
-        number is one edit, then <b>npm run print</b> — not nine files and a card that still shows the old one.</div>
-      </div>
+      <div class="spec"><div class="spec-k">Product</div><div class="spec-v">EduAnant — Release {{VERSION}}, {{MODULE_COUNT}} modules</div></div>
+      <div class="sw-u" style="font-size:6.6pt;line-height:1.45;margin-top:1mm">Defined once in
+      <b>src/data/company.ts</b> and substituted into every piece at build time — change one, run
+      <b>npm run print</b>, and nothing is left showing the old value.</div>
     </div>
   </div>
 

@@ -395,6 +395,10 @@ async function main() {
 
         LEGAL_NAME: P.COMPANY.legalName,
         ADDRESS: P.COMPANY.addressLine,
+        /** The same registered office set as a postal block, for a letterhead
+         *  or anywhere it is the company's address rather than a line of
+         *  furniture. */
+        ADDRESS_BLOCK: P.COMPANY.addressLines.join('<br>'),
         PHONE: P.COMPANY.phone,
         WHATSAPP: P.COMPANY.whatsapp,
         EMAIL: P.COMPANY.email,

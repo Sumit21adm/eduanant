@@ -4,6 +4,7 @@ import { PhoneCall, Mail, MessageCircle, MapPin, Clock, Send, CheckCircle, Alert
 import Seo from '../lib/seo';
 import { PAGE_SEO, organizationSchema } from '../lib/seoConfig';
 import { SCHOOL_SIZE_OPTIONS } from '../data/pricing';
+import { COMPANY } from '../data/company';
 
 const ADMIN_PORTAL_API = 'https://admin.eduanant.cloud/api/v1/contact';
 
@@ -169,7 +170,9 @@ export default function ContactPage() {
                                 <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--accent-text)' }} />
                                 <span className="not-italic leading-snug">
                                     <span className="block font-semibold text-text-primary">M/S SNAPX TECHNOLOGIES LLP</span>
-                                    <span className="block">Patna 804453, INDIA</span>
+                                    {COMPANY.addressLines.map(line => (
+                                        <span key={line} className="block">{line}</span>
+                                    ))}
                                 </span>
                             </motion.div>
                         </div>

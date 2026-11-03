@@ -1,6 +1,6 @@
 import { Mail, Phone, MessageCircle, MapPin, FileDown } from 'lucide-react';
 import { APP_VERSION, APP_COMMIT, PRODUCT_VERSION, buildDateLabel } from '../lib/version';
-import { REGISTRATIONS } from '../data/company';
+import { COMPANY, REGISTRATIONS } from '../data/company';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -54,7 +54,9 @@ export default function Footer() {
                             <MapPin className="w-4 h-4 shrink-0 mt-0.5" style={{ color: 'var(--accent-text)' }} />
                             <span className="not-italic leading-snug">
                                 <span className="block font-semibold text-text-primary">M/S SNAPX TECHNOLOGIES LLP</span>
-                                <span className="block">Patna 804453, INDIA</span>
+                                {COMPANY.addressLines.map(line => (
+                                    <span key={line} className="block">{line}</span>
+                                ))}
                             </span>
                         </address>
                         {/* Registry identifiers. A director's unspoken question is whether

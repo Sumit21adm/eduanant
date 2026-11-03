@@ -30,7 +30,7 @@ body:not(.draft) .draft-stamp, body:not(.draft) .draft-note { display: none; }
 .ba-card { border: 0.2mm solid var(--rule); border-radius: 2.5mm; overflow: hidden; }
 .ba-h { background: var(--navy-mid); color: #fff; font-size: 7.6pt; font-weight: 800;
         padding: 1.8mm 2.4mm; letter-spacing: 0.02em; }
-.ba-b { padding: 2.6mm 2.4mm; }
+.ba-b { padding: 2mm 2.4mm; }
 .ba-row { display: flex; justify-content: space-between; align-items: baseline;
           font-size: 8pt; color: var(--ink-soft); margin-bottom: 1mm; }
 .ba-row b { font-family: 'Plus Jakarta Sans'; font-size: 11pt; color: var(--navy-mid); }
@@ -76,7 +76,7 @@ body:not(.draft) .draft-stamp, body:not(.draft) .draft-note { display: none; }
     every working day since {{LIVE_SINCE}} — through a full admission cycle, a full fee cycle and a
     full exam cycle.</p>
 
-  <div class="panel panel--navy" style="margin-bottom:4.5mm">
+  <div class="panel panel--navy" style="margin-bottom:3mm">
     <div class="stat4">
       <div class="stat"><div class="stat-v">{{REF_STUDENTS}}</div><div class="stat-l">Active students</div></div>
       <div class="stat"><div class="stat-v">{{REF_STAFF}}</div><div class="stat-l">School staff using it</div></div>
@@ -156,8 +156,13 @@ body:not(.draft) .draft-stamp, body:not(.draft) .draft-note { display: none; }
     </div>
   </div>
 
-  <div class="footer"><span><b>EduAnant</b> · {{REF_NAME}} case sheet · Release {{VERSION}}</span>
-    <span>{{LEGAL_NAME}} · {{ADDRESS}}</span></div>
+  <div class="footer" style="flex-direction:column;align-items:stretch;gap:0.9mm">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <span><b>EduAnant</b> · {{REF_NAME}} case sheet · Release {{VERSION}}</span>
+      <span>{{LEGAL_NAME}}</span>
+    </div>
+    <div style="font-size:6.4pt;color:var(--ink-mute)">{{ADDRESS}}</div>
+  </div>
 </section>
 
 </body></html>

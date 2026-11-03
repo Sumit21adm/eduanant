@@ -16,7 +16,36 @@ export const COMPANY = {
     legalName: 'M/S Snapx Technologies LLP',
     /** Used where the full legal form would crowd a line. */
     shortName: 'Snapx Technologies LLP',
-    addressLine: 'Patna 804453, Bihar, India',
+
+    /* The registered office exactly as it reads on the incorporation document,
+     * which is the only version that belongs on anything a school files — an
+     * order form, an invoice, a letter of authorisation. The site used to say
+     * "Patna 804453, Bihar, India", which is where we are but not an address
+     * anyone could serve a notice at, and it disagreed with the parent
+     * company's own site.
+     *
+     * The company name is deliberately not part of these: every caller prints
+     * it alongside, and folding it in here produced it twice. */
+    addressLine:
+        'Shushila Shadan, Kamla Sharan Colony, NH-83, Nathupur Road, beside S.D.V. Public School, '
+        + 'Kurthoul, Patna, Nathupur, Bihar 804453, India',
+    /** Broken for display, so it sets as a postal block rather than a run-on line. */
+    addressLines: [
+        'Shushila Shadan, Kamla Sharan Colony',
+        'NH-83, Nathupur Road',
+        'Beside S.D.V. Public School, Kurthoul',
+        'Patna, Nathupur, Bihar 804453, India',
+    ],
+    /** Structured, for PostalAddress schema. */
+    postal: {
+        streetAddress:
+            'Shushila Shadan, Kamla Sharan Colony, NH-83, Nathupur Rd, '
+            + 'beside S.D.V. Public School, Kurthoul, Nathupur',
+        addressLocality: 'Patna',
+        addressRegion: 'Bihar',
+        postalCode: '804453',
+        addressCountry: 'IN',
+    },
     city: 'Patna',
     state: 'Bihar',
     pin: '804453',

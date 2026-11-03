@@ -1,5 +1,6 @@
 import { SITE } from './seo';
 import { PRODUCT_VERSION } from './version';
+import { REGISTRATIONS, GSTIN } from '../data/company';
 import {
     annualRateLabel, monthlyRateLabel,
     RATE_ANNUAL, ANNUAL_SAVING_PCT,
@@ -149,11 +150,21 @@ export const organizationSchema = {
     telephone: SITE.phone,
     address: {
         '@type': 'PostalAddress',
+        streetAddress: SITE.streetAddress,
         addressLocality: SITE.locality,
         addressRegion: SITE.region,
         postalCode: SITE.postalCode,
         addressCountry: SITE.country,
     },
+    /* The statutory identifiers, machine-readable — the same block the parent
+       company's site carries, so the two agree about one legal entity. */
+    taxID: GSTIN,
+    identifier: REGISTRATIONS.map(r => ({
+        '@type': 'PropertyValue',
+        propertyID: r.label,
+        value: r.value,
+        description: r.note,
+    })),
     sameAs: ['https://play.google.com/store/apps/details?id=cloud.eduanant.app', 'https://snapxtechnologies.com'],
 };
 
