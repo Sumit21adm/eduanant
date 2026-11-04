@@ -1,21 +1,45 @@
 name: Application-Website Build and Deploy
 
 on:
-  # Tagging is the release: `git tag v1.1.0 && git push origin v1.1.0` builds,
-  # deploys, and stamps that exact version into the footer. Manual runs stay
-  # available for hotfixes and re-deploys.
+  # Two ways to release. Both stamp the footer with the version they publish, and
+  # both end in a tag and a GitHub Release whose notes come from the commit history.
+  #
+  #   1. Actions -> Run workflow. The version is worked out for you from the
+  #      commits since the last release (see scripts/next-version.mjs): a feat is a
+  #      minor bump, a breaking change a major, anything else a patch. Choose a
+  #      bump to override that, or type an exact version.
+  #   2. Push a tag yourself: `git tag v1.4.0 && git push origin v1.4.0`.
+  #
+  # Every deploy from April to November was the button with the version box left
+  # empty, which fell through to package.json and stamped "v1.0.0" each time.
   push:
     tags:
       - 'v*'
   workflow_dispatch:
     inputs:
+      bump:
+        description: 'How to number this release (auto: feat = minor, breaking = major, else patch)'
+        type: choice
+        required: false
+        default: auto
+        options:
+          - auto
+          - patch
+          - minor
+          - major
       version:
-        description: 'Version to stamp (e.g. v1.1.0). Defaults to package.json.'
+        description: 'Or an exact version, e.g. v1.4.0 (overrides the bump). Leave blank to number it automatically.'
         required: false
         default: ''
 
 permissions:
   contents: write
+
+# Two releases running together would each work out the same next number. The second
+# waits for the first rather than cancelling it: a deploy half-done is worse than late.
+concurrency:
+  group: deploy-app-website
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -26,18 +50,20 @@ jobs:
         with:
           fetch-depth: 0        # tags and history, so the build can describe itself
 
-      - name: Resolve release version
+      - name: Work out the release version
         id: version
+        # The form inputs go through env, never into the script text: pasting
+        # ${{ github.event.inputs.version }} into a shell command lets whatever was
+        # typed into the box run as a command.
+        env:
+          BUMP: ${{ github.event.inputs.bump }}
+          EXACT: ${{ github.event.inputs.version }}
         run: |
-          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
-            VERSION="${GITHUB_REF_NAME}"
-          elif [ -n "${{ github.event.inputs.version }}" ]; then
-            VERSION="${{ github.event.inputs.version }}"
-          else
-            VERSION="v$(node -p "require('./package.json').version")"
-          fi
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Releasing $VERSION ($(git rev-parse --short HEAD))"
+          set -euo pipefail
+          args=(--github-output "$GITHUB_OUTPUT" --notes "$RUNNER_TEMP/release-notes.md")
+          if [ -n "${BUMP:-}" ];  then args+=(--bump "$BUMP");     fi
+          if [ -n "${EXACT:-}" ]; then args+=(--version "$EXACT"); fi
+          node scripts/next-version.mjs "${args[@]}"
 
       - name: Prepare Deployment Directory on VPS
         uses: appleboy/ssh-action@v1.0.3
@@ -79,10 +105,19 @@ jobs:
             docker compose up -d
             docker image prune -f
 
+      # After the deploy, not before: a build that fails must not use up a version number.
+      # `release` is false when the commit already has a release (a redeploy), so a
+      # re-run reuses its number instead of inventing one for code that has one.
+      #
+      # Tags created here use GITHUB_TOKEN, and GitHub does not start a workflow from
+      # an event that token causes — so this does not trigger a second deploy through
+      # the `push: tags` rule above.
       - name: Publish GitHub Release
-        if: github.ref_type == 'tag'
+        if: success() && steps.version.outputs.release == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
+          # The commit that was built — not whatever main has moved on to by now.
+          target_commitish: ${{ github.sha }}
           name: EduAnant Website ${{ steps.version.outputs.version }}
-          generate_release_notes: true
+          body_path: ${{ runner.temp }}/release-notes.md
