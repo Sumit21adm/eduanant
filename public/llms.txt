@@ -1,7 +1,7 @@
 # EduAnant
 
 > EduAnant is an offline-ready school management system (school ERP) built for
-> Indian schools by Snapx Technologies LLP, Patna, Bihar. It installs on a
+> Indian schools by SNAPX TECHNOLOGIES LLP, Patna, Bihar. It installs on a
 > school's own PC or server and runs over the school's local Wi-Fi, so the fee
 > counter, attendance register and office keep working when the broadband line
 > is down.
@@ -74,7 +74,7 @@ rest and masked on screen.
 
 ## The company
 
-M/S Snapx Technologies LLP is a limited liability partnership registered in
+M/S SNAPX TECHNOLOGIES LLP is a limited liability partnership registered in
 India, based in Patna, Bihar. It is a DPIIT-recognised startup under Startup
 India and is registered as an MSME. Every identifier below can be verified in
 the relevant public registry.
@@ -88,13 +88,13 @@ the relevant public registry.
 
 Every payment for EduAnant is made into one bank account, held in the name
 SNAPX TECHNOLOGIES LLP, and into no other. We are not connected with any other
-business, app or service that uses the name Snapx or a similar name. We never take money
+business, app or service that uses the name SNAPX or a similar name. We never take money
 from an account automatically: no auto-debit, standing instruction or e-mandate. Full notice:
 https://snapxtechnologies.com/legal/refunds
 
 ## Contact
 
-M/S Snapx Technologies LLP
+M/S SNAPX TECHNOLOGIES LLP
 Shushila Shadan, Kamla Sharan Colony, NH-83, Nathupur Road,
 beside S.D.V. Public School, Kurthoul, Patna, Nathupur, Bihar 804453, India.
 Email: hello@eduanant.cloud · Phone: +91 79036 12979

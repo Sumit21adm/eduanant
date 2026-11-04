@@ -13,9 +13,9 @@
  */
 
 export const COMPANY = {
-    legalName: 'M/S Snapx Technologies LLP',
+    legalName: 'M/S SNAPX TECHNOLOGIES LLP',
     /** Used where the full legal form would crowd a line. */
-    shortName: 'Snapx Technologies LLP',
+    shortName: 'SNAPX TECHNOLOGIES LLP',
 
     /* The registered office exactly as it reads on the incorporation document,
      * which is the only version that belongs on anything a school files — an
@@ -93,7 +93,7 @@ export const PAYMENT = {
         + 'and into no other. Before you confirm a payment, check that the name your bank or UPI app '
         + 'shows reads exactly that. We never take money from your account automatically — there is no '
         + 'auto-debit, standing instruction or e-mandate; every payment is one you make yourself. We are '
-        + 'not connected with any other business or app that uses the name Snapx.',
+        + 'not connected with any other business or app that uses the name SNAPX.',
     /** The canonical, full notice — kept once, on the site those searches reach. */
     fullNoticeUrl: 'https://snapxtechnologies.com/legal/refunds',
 } as const;

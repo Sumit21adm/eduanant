@@ -33,7 +33,7 @@ export default function TermsOfServicePage() {
                                         <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">1</span>
                                         Acceptance of Terms
                                     </h3>
-                                    <p>By registering, accessing, or using the EduAnant School Management System ("Service"), the subscribing institution ("Client", "School") agrees to be bound by these Terms of Service. This constitutes a binding commercial B2B agreement between Snapx Technologies LLP and the subscribing School.</p>
+                                    <p>By registering, accessing, or using the EduAnant School Management System ("Service"), the subscribing institution ("Client", "School") agrees to be bound by these Terms of Service. This constitutes a binding commercial B2B agreement between SNAPX TECHNOLOGIES LLP and the subscribing School.</p>
                                 </section>
                             
                                 <section>
@@ -41,7 +41,7 @@ export default function TermsOfServicePage() {
                                         <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">2</span>
                                         License & Intellectual Property
                                     </h3>
-                                    <p>EduAnant grants the School a limited, non-exclusive, non-transferable, and revocable subscription license to use the Service solely for its internal administrative purposes. Snapx Technologies LLP retains all intellectual property rights to the software, codebase, architecture, and branding. The School retains all ownership rights to the data they upload.</p>
+                                    <p>EduAnant grants the School a limited, non-exclusive, non-transferable, and revocable subscription license to use the Service solely for its internal administrative purposes. SNAPX TECHNOLOGIES LLP retains all intellectual property rights to the software, codebase, architecture, and branding. The School retains all ownership rights to the data they upload.</p>
                                 </section>
                             
                                 <section>
@@ -57,7 +57,7 @@ export default function TermsOfServicePage() {
                                         <span className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-600 dark:text-orange-400 flex items-center justify-center text-sm font-black shrink-0">4</span>
                                         Limitation of Liability
                                     </h3>
-                                    <p>To the maximum extent permitted by Indian law, Snapx Technologies LLP shall not be liable for any indirect, incidental, consequential, or punitive damages (including but not limited to loss of profits, admissions, or data). <strong className="text-text-primary">Our total cumulative liability to the School for any claims arising out of this agreement shall be strictly limited to the amount actually paid by the School for the Service in the three (3) months preceding the claim.</strong></p>
+                                    <p>To the maximum extent permitted by Indian law, SNAPX TECHNOLOGIES LLP shall not be liable for any indirect, incidental, consequential, or punitive damages (including but not limited to loss of profits, admissions, or data). <strong className="text-text-primary">Our total cumulative liability to the School for any claims arising out of this agreement shall be strictly limited to the amount actually paid by the School for the Service in the three (3) months preceding the claim.</strong></p>
                                 </section>
                             
                                 <section>
@@ -109,7 +109,7 @@ export default function TermsOfServicePage() {
                                             'Scrape, crawl, or use automated tools to extract data from the platform without written authorization',
                                             'Attempt to circumvent authentication, security controls, or rate limits',
                                             'Use the platform to store, transmit, or process data unrelated to school management',
-                                            'Resell, sublicense, or white-label the service without a formal reseller agreement with Snapx Technologies LLP',
+                                            'Resell, sublicense, or white-label the service without a formal reseller agreement with SNAPX TECHNOLOGIES LLP',
                                             'Violate any applicable Indian law, including the IT Act 2000, DPDP Act 2023, or any state-level regulations',
                                         ].map((item) => (
                                             <li key={item} className="flex gap-3 items-start">

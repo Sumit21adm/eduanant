@@ -30,7 +30,7 @@ export default function RefundPolicyPage() {
                         
                             <div className="space-y-10 text-text-secondary leading-relaxed text-base md:text-lg">
                                 {/* Who to pay — first, before the trial and billing terms it applies to. The
-                                    full notice about other businesses called Snapx is on the parent company's
+                                    full notice about other businesses called SNAPX is on the parent company's
                                     site; this is the part a school needs in order to pay the right account. */}
                                 <section className="bg-amber-50 dark:bg-amber-900/10 p-6 rounded-2xl border border-amber-300/60 dark:border-amber-500/25"
                                     data-testid="payment-statement">

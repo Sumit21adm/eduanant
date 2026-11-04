@@ -144,7 +144,7 @@ export default function Footer() {
                             © {year} EduAnant ·{' '}
                             <a href="https://snapxtechnologies.com" target="_blank" rel="noopener noreferrer"
                                 className="hover:text-[var(--brand-cyan-deep)] transition-colors underline-offset-2 hover:underline">
-                                Snapx Technologies LLP
+                                SNAPX TECHNOLOGIES LLP
                             </a>
                         </span>
                         <span className="hidden sm:inline opacity-30">·</span>

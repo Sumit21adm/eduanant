@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
                                         <span className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 text-text-primary flex items-center justify-center text-sm font-black shrink-0">1</span>
                                         Introduction and Role
                                     </h3>
-                                    <p>This Privacy Policy outlines how EduAnant (operated by Snapx Technologies LLP) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary break-words">Data Processor</strong> for the schools (the <strong className="text-text-primary break-words">Data Fiduciary</strong>) that use our platform.</p>
+                                    <p>This Privacy Policy outlines how EduAnant (operated by SNAPX TECHNOLOGIES LLP) collects, uses, and protects data across our web platform and our mobile application ("EduAnant", available on Google Play and Apple App Store). Under the Digital Personal Data Protection (DPDP) Act, 2023, EduAnant primarily acts as a <strong className="text-text-primary break-words">Data Processor</strong> for the schools (the <strong className="text-text-primary break-words">Data Fiduciary</strong>) that use our platform.</p>
                                 </section>
                             
                                 <section>
