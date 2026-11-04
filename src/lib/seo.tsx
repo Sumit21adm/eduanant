@@ -4,10 +4,10 @@ import { COMPANY } from '../data/company';
 
 export const SITE = {
     name: 'EduAnant',
-    legalName: 'Snapx Technologies LLP',
+    legalName: 'SNAPX TECHNOLOGIES LLP',
     url: 'https://eduanant.cloud',
     logo: 'https://eduanant.cloud/icon-512.png',
-    ogImage: 'https://eduanant.cloud/og-whatsapp-preview-v2.jpg',
+    ogImage: 'https://eduanant.cloud/og-whatsapp-preview-v3.jpg',
     phone: '+91-79036-12979',
     email: 'hello@eduanant.cloud',
     /* Postal fields come from the registered office in data/company.ts, so the
@@ -32,7 +32,18 @@ export interface SeoProps {
     /** Breadcrumb trail after Home, e.g. [{ name: 'Pricing', path: '/pricing' }]. */
     crumbs?: { name: string; path: string }[];
     noindex?: boolean;
+    /** What a shared link shows (WhatsApp, LinkedIn, X) when that should read differently
+     *  from the browser tab and the search snippet. The <title> exists to be found by
+     *  someone searching; the share title exists to be tapped by someone who was just
+     *  sent the link, and "Home: …" or a keyword string does neither job well there. */
+    ogTitle?: string;
+    ogDescription?: string;
 }
+
+/** Head text is written plainly: a spaced em dash reads as machine-made in a browser tab, a
+ *  search result or a WhatsApp card, where a hyphen is how people actually type. Applied here,
+ *  once, to everything that goes into <head>, so no page title can bring one back. */
+export const plain = (text: string) => text.replace(/\s+—\s+/g, ' - ').replace(/—/g, '-');
 
 /** Create or update a <meta> by name or property. */
 function upsertMeta(key: 'name' | 'property', value: string, content: string) {
@@ -66,18 +77,18 @@ function upsertLink(rel: string, href: string) {
  * receive fully-formed markup. Keep the two in step: a route added to the router
  * must also be added to ROUTES there.
  */
-export default function Seo({ title, description, path, keywords, schema = [], crumbs = [], noindex }: SeoProps) {
+export default function Seo({ title, description, path, keywords, schema = [], crumbs = [], noindex, ogTitle, ogDescription }: SeoProps) {
     useEffect(() => {
         const url = `${SITE.url}${path === '/' ? '/' : path}`;
 
-        document.title = title;
-        upsertMeta('name', 'description', description);
+        document.title = plain(title);
+        upsertMeta('name', 'description', plain(description));
         if (keywords) upsertMeta('name', 'keywords', keywords);
         upsertMeta('name', 'robots', noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
         upsertLink('canonical', url);
 
-        upsertMeta('property', 'og:title', title);
-        upsertMeta('property', 'og:description', description);
+        upsertMeta('property', 'og:title', plain(ogTitle ?? title));
+        upsertMeta('property', 'og:description', plain(ogDescription ?? description));
         upsertMeta('property', 'og:url', url);
         upsertMeta('property', 'og:type', 'website');
         upsertMeta('property', 'og:site_name', SITE.name);
@@ -85,8 +96,8 @@ export default function Seo({ title, description, path, keywords, schema = [], c
         upsertMeta('property', 'og:image', SITE.ogImage);
 
         upsertMeta('name', 'twitter:card', 'summary_large_image');
-        upsertMeta('name', 'twitter:title', title);
-        upsertMeta('name', 'twitter:description', description);
+        upsertMeta('name', 'twitter:title', plain(ogTitle ?? title));
+        upsertMeta('name', 'twitter:description', plain(ogDescription ?? description));
         upsertMeta('name', 'twitter:image', SITE.ogImage);
 
         const breadcrumb = {
@@ -107,7 +118,7 @@ export default function Seo({ title, description, path, keywords, schema = [], c
         s.id = id;
         s.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
         document.head.appendChild(s);
-    }, [title, description, path, keywords, noindex, schema, crumbs]);
+    }, [title, description, path, keywords, noindex, schema, crumbs, ogTitle, ogDescription]);
 
     return null;
 }

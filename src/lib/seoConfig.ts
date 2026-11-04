@@ -22,6 +22,15 @@ export const PAGE_SEO = {
         description:
             `Offline-ready school ERP for Indian schools. 16 modules — admissions, fees, attendance, exams, HR, library, transport. Your PC, your network, or hosted by us. From ${annualRateLabel}/student.`,
         path: '/',
+        /* The link as it arrives in WhatsApp, where nobody is searching: someone
+         * has been sent it and decides in a second whether to tap. The title above
+         * is for the browser tab and the search result, and stays as it is.
+         * Everything claimed here is something the product does by itself today
+         * (fee reminders on a daily schedule, absence alerts to parents), not a
+         * hope — and the proof is a live school, not a module count. */
+        ogTitle: 'EduAnant - School management that follows up for you',
+        ogDescription:
+            'Fee reminders and absence alerts reach parents on their own, so your staff stop chasing. Live in a 1,300+ student Patna school. Free 30-day trial.',
         keywords:
             'school management software India, school ERP, offline school software, fee management software, student attendance software, school administration software, CBSE school software, Hindi school software',
     },
@@ -89,7 +98,7 @@ export const PAGE_SEO = {
     terms: {
         title: 'Terms of Service: Subscription Terms | EduAnant',
         description:
-            'The subscription terms between your school and Snapx Technologies LLP for the EduAnant school management system and its Android application.',
+            'The subscription terms between your school and SNAPX TECHNOLOGIES LLP for the EduAnant school management system and its Android application.',
         path: '/terms-of-service',
     },
     refund: {
