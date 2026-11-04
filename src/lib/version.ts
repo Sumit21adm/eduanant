@@ -4,8 +4,9 @@
  * Two different version numbers exist in this project and they must never be
  * confused on screen:
  *
- *   APP_VERSION     — this marketing site. Starts at v1.0.0, bumped by tagging
- *                     this repo. Of interest to us, not to a school director.
+ *   APP_VERSION     — this marketing site. Numbered by the release workflow
+ *                     (scripts/next-version.mjs) and shown as "dev" on a local
+ *                     build. Of interest to us, not to a school director.
  *   PRODUCT_VERSION — EduAnant, the school management system being sold here.
  *                     This is the number that appears in copy, structured data,
  *                     llms.txt and every printed piece in docs/print.
@@ -14,9 +15,9 @@
  * "v1.0.0" as the product and a mature 16-module system looks like a first
  * release. See the footer for how it is presented.
  *
- * On a tag push the version comes from the tag itself, so what the footer shows
- * is exactly what was released — it cannot drift from the deployed artefact the
- * way a hand-edited constant would.
+ * Every release is tagged with the version it stamps, so what the footer shows is
+ * exactly what was released — it cannot drift from the deployed artefact the way a
+ * hand-edited constant (or package.json, which nothing bumps) would.
  */
 declare const __APP_VERSION__: string;
 declare const __APP_COMMIT__: string;

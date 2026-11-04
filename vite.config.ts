@@ -1,11 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { execSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
 import type { Plugin } from 'vite'
 import { RATE_ANNUAL, RATE_MONTHLY, RATE_FLOOR_ANNUAL, CONTACT_SALES_ABOVE, inr } from './src/data/pricing'
-
-const pkg = JSON.parse(readFileSync('./package.json', 'utf8'))
 
 /**
  * index.html is the one place pricing cannot be imported at runtime, and it is the
@@ -39,11 +36,19 @@ function pricingTokens(): Plugin {
   }
 }
 
-/** A tag push sets the version; otherwise fall back to package.json. */
+/**
+ * The release workflow works the version out (scripts/next-version.mjs) and hands it to
+ * the build as APP_VERSION; a pushed tag sets it directly.
+ *
+ * A local build has no release behind it, so it says "dev". It used to borrow
+ * package.json's version, which nothing ever bumped — so every build, local or deployed,
+ * read "v1.0.0" and looked like a real release number.
+ */
 function resolveVersion(): string {
   const ref = process.env.GITHUB_REF ?? ''
   const tag = ref.startsWith('refs/tags/') ? ref.replace('refs/tags/', '') : ''
-  return (tag || process.env.APP_VERSION || `v${pkg.version}`).replace(/^v?/, 'v')
+  const version = tag || process.env.APP_VERSION || ''
+  return version ? version.replace(/^v?/, 'v') : 'dev'
 }
 
 function resolveCommit(): string {
